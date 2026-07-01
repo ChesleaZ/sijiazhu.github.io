@@ -4,6 +4,8 @@ Personal portfolio built with Gatsby, React, and styled-components.
 
 This site is adapted from Brittany Chiang's open-source v4 portfolio template. Please keep attribution if you publish it publicly.
 
+Live site: https://chesleaz.github.io/sijiazhu.github.io/
+
 ## Develop
 
 ```bash
