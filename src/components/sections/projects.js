@@ -171,7 +171,7 @@ const Projects = () => {
       projects: allMarkdownRemark(
         filter: {
           fileAbsolutePath: { regex: "/content/projects/" }
-          frontmatter: { showInProjects: { ne: false } }
+          frontmatter: { personalized: { eq: true }, showInProjects: { ne: false } }
         }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
@@ -265,10 +265,10 @@ const Projects = () => {
 
   return (
     <StyledProjectsSection>
-      <h2 ref={revealTitle}>Other Noteworthy Projects</h2>
+      <h2 ref={revealTitle}>更多项目</h2>
 
       <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
-        view the archive
+        查看归档
       </Link>
 
       <ul className="projects-grid">
@@ -303,7 +303,7 @@ const Projects = () => {
       </ul>
 
       <button className="more-button" onClick={() => setShowMore(!showMore)}>
-        Show {showMore ? 'Less' : 'More'}
+        {showMore ? '收起' : '显示更多'}
       </button>
     </StyledProjectsSection>
   );

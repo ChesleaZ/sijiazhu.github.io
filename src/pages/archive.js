@@ -152,19 +152,19 @@ const ArchivePage = ({ location, data }) => {
 
       <main>
         <header ref={revealTitle}>
-          <h1 className="big-heading">Archive</h1>
-          <p className="subtitle">A big list of things I’ve worked on</p>
+          <h1 className="big-heading">项目归档</h1>
+          <p className="subtitle">所有展示项目的列表</p>
         </header>
 
         <StyledTableContainer ref={revealTable}>
           <table>
             <thead>
               <tr>
-                <th>Year</th>
-                <th>Title</th>
-                <th className="hide-on-mobile">Made at</th>
-                <th className="hide-on-mobile">Built with</th>
-                <th>Link</th>
+                <th>年份</th>
+                <th>名称</th>
+                <th className="hide-on-mobile">来源</th>
+                <th className="hide-on-mobile">技术</th>
+                <th>链接</th>
               </tr>
             </thead>
             <tbody>
@@ -245,7 +245,10 @@ export default ArchivePage;
 export const pageQuery = graphql`
   {
     allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/content/projects/" } }
+      filter: {
+        fileAbsolutePath: { regex: "/content/projects/" }
+        frontmatter: { personalized: { eq: true } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {

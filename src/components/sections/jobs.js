@@ -168,7 +168,10 @@ const Jobs = () => {
   const data = useStaticQuery(graphql`
     query {
       jobs: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/jobs/" } }
+        filter: {
+          fileAbsolutePath: { regex: "/content/jobs/" }
+          frontmatter: { personalized: { eq: true } }
+        }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
@@ -244,7 +247,7 @@ const Jobs = () => {
 
   return (
     <StyledJobsSection id="jobs" ref={revealContainer}>
-      <h2 className="numbered-heading">Where I’ve Worked</h2>
+      <h2 className="numbered-heading">经历</h2>
 
       <div className="inner">
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>

@@ -307,7 +307,10 @@ const Featured = () => {
   const data = useStaticQuery(graphql`
     {
       featured: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/featured/" } }
+        filter: {
+          fileAbsolutePath: { regex: "/content/featured/" }
+          frontmatter: { personalized: { eq: true } }
+        }
         sort: { fields: [frontmatter___date], order: ASC }
       ) {
         edges {
@@ -348,7 +351,7 @@ const Featured = () => {
   return (
     <section id="projects">
       <h2 className="numbered-heading" ref={revealTitle}>
-        Some Things I’ve Built
+        重点项目
       </h2>
 
       <StyledProjectsGrid>

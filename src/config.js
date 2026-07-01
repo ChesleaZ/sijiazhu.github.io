@@ -1,44 +1,32 @@
 module.exports = {
-  email: 'brittany.chiang@gmail.com',
+  email: 'hello@example.com',
 
   socialMedia: [
     {
       name: 'GitHub',
-      url: 'https://github.com/bchiang7',
-    },
-    {
-      name: 'Instagram',
-      url: 'https://www.instagram.com/bchiang7',
-    },
-    {
-      name: 'Twitter',
-      url: 'https://twitter.com/bchiang7',
+      url: 'https://github.com/sijiazhu',
     },
     {
       name: 'Linkedin',
-      url: 'https://www.linkedin.com/in/bchiang7',
-    },
-    {
-      name: 'Codepen',
-      url: 'https://codepen.io/bchiang7',
+      url: 'https://www.linkedin.com/in/sijiazhu',
     },
   ],
 
   navLinks: [
     {
-      name: 'About',
+      name: '关于',
       url: '/#about',
     },
     {
-      name: 'Experience',
+      name: '经历',
       url: '/#jobs',
     },
     {
-      name: 'Work',
+      name: '项目',
       url: '/#projects',
     },
     {
-      name: 'Contact',
+      name: '联系',
       url: '/#contact',
     },
   ],

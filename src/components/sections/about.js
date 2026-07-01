@@ -125,43 +125,31 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
+  const skills = ['JavaScript', 'React', 'Gatsby', 'Python', 'Data Analysis', 'Product Thinking'];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">About Me</h2>
+      <h2 className="numbered-heading">关于我</h2>
 
       <div className="inner">
         <StyledText>
           <div>
             <p>
-              Hello! My name is Brittany and I enjoy creating things that live on the internet. My
-              interest in web development started back in 2012 when I decided to try editing custom
-              Tumblr themes — turns out hacking together a custom reblog button taught me a lot
-              about HTML &amp; CSS!
+              你好，我是 Sijia。我喜欢把想法变成可以被真实使用的东西，从网站、数据工具到
+              小型产品原型，都希望它们清楚、可靠、好维护。
             </p>
 
             <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">an advertising agency</a>,{' '}
-              <a href="https://starry.com/">a start-up</a>,{' '}
-              <a href="https://www.apple.com/">a huge corporation</a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://upstatement.com/">Upstatement</a> for a variety of
-              clients.
+              这个网站基于 Brittany Chiang 的开源 Gatsby 模板改造，保留了干净的交互、
+              深色视觉和项目展示结构，同时把内容整理成更适合个人作品集的版本。
             </p>
 
             <p>
-              I also recently{' '}
-              <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                launched a course
-              </a>{' '}
-              that covers everything you need to build a web app with the Spotify API using Node
-              &amp; React.
+              接下来可以继续把这里换成你的真实经历、照片、项目链接和简历。内容位置我已经写在
+              CUSTOMIZE.md 里，之后维护会很直接。
             </p>
 
-            <p>Here are a few technologies I’ve been working with recently:</p>
+            <p>最近关注和使用的方向：</p>
           </div>
 
           <ul className="skills-list">
