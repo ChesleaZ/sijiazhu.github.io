@@ -171,7 +171,7 @@ const Projects = () => {
       projects: allMarkdownRemark(
         filter: {
           fileAbsolutePath: { regex: "/content/projects/" }
-          frontmatter: { personalized: { eq: true }, showInProjects: { ne: false } }
+          frontmatter: { personalized: { eq: true } }
         }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
@@ -180,8 +180,6 @@ const Projects = () => {
             frontmatter {
               title
               tech
-              github
-              external
             }
             html
           }
@@ -213,7 +211,7 @@ const Projects = () => {
 
   const projectInner = node => {
     const { frontmatter, html } = node;
-    const { github, external, title, tech } = frontmatter;
+    const { title, tech } = frontmatter;
 
     return (
       <div className="project-inner">
@@ -222,29 +220,11 @@ const Projects = () => {
             <div className="folder">
               <Icon name="Folder" />
             </div>
-            <div className="project-links">
-              {github && (
-                <a href={github} aria-label="GitHub Link" target="_blank" rel="noreferrer">
-                  <Icon name="GitHub" />
-                </a>
-              )}
-              {external && (
-                <a
-                  href={external}
-                  aria-label="External Link"
-                  className="external"
-                  target="_blank"
-                  rel="noreferrer">
-                  <Icon name="External" />
-                </a>
-              )}
-            </div>
+            <div className="project-links" />
           </div>
 
           <h3 className="project-title">
-            <a href={external} target="_blank" rel="noreferrer">
-              {title}
-            </a>
+            <span>{title}</span>
           </h3>
 
           <div className="project-description" dangerouslySetInnerHTML={{ __html: html }} />
