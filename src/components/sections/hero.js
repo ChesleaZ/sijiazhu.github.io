@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
-  ${({ theme }) => theme.mixins.flexCenter};
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.75fr);
+  align-items: center;
+  gap: 70px;
   min-height: 100vh;
   height: 100vh;
   padding: 0;
@@ -15,6 +17,51 @@ const StyledHeroSection = styled.section`
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
     height: auto;
     padding-top: var(--nav-height);
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    height: auto;
+    padding: var(--nav-height) 0 70px;
+  }
+
+  .hero-content {
+    max-width: 760px;
+  }
+
+  .hero-photo {
+    justify-self: end;
+    width: min(330px, 100%);
+
+    @media (max-width: 900px) {
+      justify-self: start;
+      width: min(260px, 72vw);
+    }
+  }
+
+  .hero-photo-inner {
+    ${({ theme }) => theme.mixins.boxShadow};
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--lightest-navy);
+    border-radius: 16px;
+    background-color: var(--white);
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border: 2px solid var(--green);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+  }
+
+  .hero-img {
+    display: block;
+    filter: none;
+    mix-blend-mode: normal;
   }
 
   h1 {
@@ -45,6 +92,21 @@ const StyledHeroSection = styled.section`
     margin-top: 50px;
   }
 `;
+
+const StyledHeroPhoto = () => (
+  <div className="hero-photo">
+    <div className="hero-photo-inner">
+      <StaticImage
+        className="hero-img"
+        src="../../images/me.jpg"
+        width={520}
+        quality={95}
+        formats={['AUTO', 'WEBP', 'AVIF']}
+        alt="Sijia Zhu portrait"
+      />
+    </div>
+  </div>
+);
 
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -81,20 +143,36 @@ const Hero = () => {
 
   return (
     <StyledHeroSection>
+      <div className="hero-content">
+        {prefersReducedMotion ? (
+          <>
+            {items.map((item, i) => (
+              <div key={i}>{item}</div>
+            ))}
+          </>
+        ) : (
+          <TransitionGroup component={null}>
+            {isMounted &&
+              items.map((item, i) => (
+                <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
+                  <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
+                </CSSTransition>
+              ))}
+          </TransitionGroup>
+        )}
+      </div>
+
       {prefersReducedMotion ? (
-        <>
-          {items.map((item, i) => (
-            <div key={i}>{item}</div>
-          ))}
-        </>
+        <StyledHeroPhoto />
       ) : (
         <TransitionGroup component={null}>
-          {isMounted &&
-            items.map((item, i) => (
-              <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-                <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
-              </CSSTransition>
-            ))}
+          {isMounted && (
+            <CSSTransition classNames="fadeup" timeout={loaderDelay}>
+              <div style={{ transitionDelay: '600ms' }}>
+                <StyledHeroPhoto />
+              </div>
+            </CSSTransition>
+          )}
         </TransitionGroup>
       )}
     </StyledHeroSection>

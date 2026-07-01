@@ -4,31 +4,26 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
-import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledProjectsGrid = styled.ul`
   ${({ theme }) => theme.mixins.resetList};
-
-  a {
-    position: relative;
-    z-index: 1;
-  }
 `;
 
 const StyledProject = styled.li`
   position: relative;
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 34px;
   grid-template-columns: repeat(12, 1fr);
-  align-items: center;
-
-  @media (max-width: 768px) {
-    ${({ theme }) => theme.mixins.boxShadow};
-  }
+  align-items: stretch;
+  padding: 28px;
+  border: 1px solid var(--lightest-navy);
+  border-radius: 12px;
+  background-color: var(--white);
+  box-shadow: 0 14px 35px -24px var(--navy-shadow);
 
   &:not(:last-of-type) {
-    margin-bottom: 100px;
+    margin-bottom: 48px;
 
     @media (max-width: 768px) {
       margin-bottom: 70px;
@@ -42,10 +37,10 @@ const StyledProject = styled.li`
   &:nth-of-type(odd) {
     .project-content {
       grid-column: 7 / -1;
-      text-align: right;
+      text-align: left;
 
       @media (max-width: 1080px) {
-        grid-column: 5 / -1;
+        grid-column: 7 / -1;
       }
       @media (max-width: 768px) {
         grid-column: 1 / -1;
@@ -57,18 +52,10 @@ const StyledProject = styled.li`
       }
     }
     .project-tech-list {
-      justify-content: flex-end;
-
-      @media (max-width: 768px) {
-        justify-content: flex-start;
-      }
+      justify-content: flex-start;
 
       li {
-        margin: 0 0 5px 20px;
-
-        @media (max-width: 768px) {
-          margin: 0 10px 5px 0;
-        }
+        margin: 0 10px 5px 0;
       }
     }
     .project-links {
@@ -83,7 +70,7 @@ const StyledProject = styled.li`
       }
     }
     .project-image {
-      grid-column: 1 / 8;
+      grid-column: 1 / 7;
 
       @media (max-width: 768px) {
         grid-column: 1 / -1;
@@ -94,24 +81,25 @@ const StyledProject = styled.li`
   .project-content {
     position: relative;
     grid-column: 1 / 7;
-    grid-row: 1 / -1;
+    grid-row: auto;
+    display: flex;
+    align-items: center;
 
     @media (max-width: 1080px) {
-      grid-column: 1 / 9;
+      grid-column: 1 / 7;
     }
 
     @media (max-width: 768px) {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      height: 100%;
       grid-column: 1 / -1;
-      padding: 40px 40px 30px;
+      padding: 0;
       z-index: 5;
     }
 
     @media (max-width: 480px) {
-      padding: 30px 25px 20px;
+      padding: 0;
     }
   }
 
@@ -155,14 +143,15 @@ const StyledProject = styled.li`
     ${({ theme }) => theme.mixins.boxShadow};
     position: relative;
     z-index: 2;
-    padding: 25px;
+    padding: 0;
     border-radius: var(--border-radius);
-    background-color: var(--light-navy);
+    background-color: transparent;
     color: var(--light-slate);
     font-size: var(--fz-lg);
+    box-shadow: none;
 
     @media (max-width: 768px) {
-      padding: 20px 0;
+      padding: 0;
       background-color: transparent;
       box-shadow: none;
 
@@ -241,63 +230,33 @@ const StyledProject = styled.li`
   }
 
   .project-image {
-    ${({ theme }) => theme.mixins.boxShadow};
-    grid-column: 6 / -1;
-    grid-row: 1 / -1;
+    grid-column: 7 / -1;
+    grid-row: auto;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+    border: 1px solid var(--lightest-navy);
+    border-radius: 10px;
+    background-color: var(--navy);
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
-      height: 100%;
-      opacity: 0.25;
-    }
-
-    a {
-      width: 100%;
-      height: 100%;
-      background-color: var(--green);
-      border-radius: var(--border-radius);
-      vertical-align: middle;
-
-      &:hover,
-      &:focus {
-        background: transparent;
-        outline: 0;
-
-        &:before,
-        .img {
-          background: transparent;
-          filter: none;
-        }
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 3;
-        transition: var(--transition);
-      background-color: rgba(247, 244, 238, 0.3);
-      mix-blend-mode: normal;
-      }
+      height: auto;
+      opacity: 1;
     }
 
     .img {
-      border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: saturate(90%) contrast(0.95) brightness(100%);
+      height: 100%;
+      min-height: 320px;
+      border-radius: 0;
+      mix-blend-mode: normal;
+      filter: none;
 
       @media (max-width: 768px) {
         object-fit: cover;
-        width: auto;
-        height: 100%;
-        filter: saturate(80%) contrast(0.95) brightness(104%);
+        width: 100%;
+        min-height: 220px;
+        filter: none;
       }
     }
   }
