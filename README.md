@@ -14,3 +14,7 @@ yarn develop
 ## Customize
 
 See `CUSTOMIZE.md` for the main files to edit.
+
+## Deploy
+
+This repository includes a GitHub Actions workflow that builds Gatsby and deploys the generated `public` folder to GitHub Pages whenever `main` is updated.
