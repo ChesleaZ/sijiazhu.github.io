@@ -61,7 +61,7 @@ const StyledPic = styled.div`
     position: relative;
     width: 100%;
     border-radius: var(--border-radius);
-    background-color: var(--green);
+    background-color: var(--green-tint);
 
     &:hover,
     &:focus {
@@ -100,7 +100,7 @@ const StyledPic = styled.div`
     &:before {
       top: 0;
       left: 0;
-      background-color: var(--navy);
+      background-color: var(--white);
       mix-blend-mode: screen;
     }
 
@@ -125,31 +125,43 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript', 'React', 'Gatsby', 'Python', 'Data Analysis', 'Product Thinking'];
+  const skills = [
+    'Python',
+    'PyTorch',
+    'R',
+    'MATLAB',
+    'Bayesian Modeling',
+    'Single-cell Analysis',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">关于我</h2>
+      <h2 className="numbered-heading">About Me</h2>
 
       <div className="inner">
         <StyledText>
           <div>
             <p>
-              你好，我是 Sijia。我喜欢把想法变成可以被真实使用的东西，从网站、数据工具到
-              小型产品原型，都希望它们清楚、可靠、好维护。
+              I am a graduate student at Johns Hopkins University working at the intersection of
+              biostatistics, machine learning, and biomedical data science. I am especially
+              interested in methods that make high-dimensional biomedical data more interpretable
+              and statistically reliable.
             </p>
 
             <p>
-              这个网站基于 Brittany Chiang 的开源 Gatsby 模板改造，保留了干净的交互、
-              深色视觉和项目展示结构，同时把内容整理成更适合个人作品集的版本。
+              My current research spans single-cell representation learning, survival analysis in
+              oncology clinical trials, and genetic signals in type 2 diabetes clusters. I enjoy
+              both methodological work and applied analyses where careful statistical modeling can
+              clarify biological questions.
             </p>
 
             <p>
-              接下来可以继续把这里换成你的真实经历、照片、项目链接和简历。内容位置我已经写在
-              CUSTOMIZE.md 里，之后维护会很直接。
+              I also publish work on fuzzy-set methods, clustering, medical diagnosis, risk
+              assessment, and image segmentation. This page collects selected research, publications,
+              and service in one place.
             </p>
 
-            <p>最近关注和使用的方向：</p>
+            <p>Tools and topics I work with:</p>
           </div>
 
           <ul className="skills-list">

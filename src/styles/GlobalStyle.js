@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background-color: var(--lightest-navy);
+    background-color: var(--green-tint);
     color: var(--lightest-slate);
   }
 
@@ -53,7 +53,7 @@ const GlobalStyle = createGlobalStyle`
   /* Scrollbar Styles */
   html {
     scrollbar-width: thin;
-    scrollbar-color: var(--dark-slate) var(--navy);
+    scrollbar-color: var(--light-slate) var(--navy);
   }
   ::-webkit-scrollbar {
     width: 12px;
@@ -62,7 +62,7 @@ const GlobalStyle = createGlobalStyle`
     background: var(--navy);
   }
   ::-webkit-scrollbar-thumb {
-    background-color: var(--dark-slate);
+    background-color: var(--light-slate);
     border: 3px solid var(--navy);
     border-radius: 10px;
   }
@@ -96,7 +96,7 @@ const GlobalStyle = createGlobalStyle`
       }
 
       #content > * {
-        filter: blur(5px) brightness(0.7);
+        filter: blur(5px) brightness(0.95);
         transition: var(--transition);
         pointer-events: none;
         user-select: none;

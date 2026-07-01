@@ -1,13 +1,12 @@
 ---
-date: '2026-06-01'
-title: 'Data Notes'
-github: 'https://github.com/sijiazhu'
-external: 'https://github.com/sijiazhu'
+date: '2025-01-01'
+title: 'Auto Feature Weighted c-Means Type Clustering Methods for Color Image Segmentation'
+company: 'Engineering Applications of Artificial Intelligence'
 personalized: true
 tech:
-  - Python
-  - Pandas
-  - Notes
+  - Clustering
+  - Image segmentation
+  - Feature weighting
 ---
 
-A placeholder project for short technical notes, notebooks, or data explorations. Swap in a real repository when it is ready.
+Published in 2025. This paper studies feature-weighted c-means type clustering methods for color image segmentation.

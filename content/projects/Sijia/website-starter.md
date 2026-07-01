@@ -1,13 +1,12 @@
 ---
-date: '2026-07-01'
-title: 'Portfolio Starter'
-github: 'https://github.com/sijiazhu/sijiazhu.github.io'
-external: 'https://sijiazhu.github.io'
+date: '2026-01-01'
+title: 'Bayesian Hierarchical Modeling and Clustering for Malignant Cancer Diagnosis'
+company: 'Bayesian Analysis'
 personalized: true
 tech:
-  - Gatsby
-  - React
-  - Markdown
+  - Bayesian modeling
+  - Clustering
+  - Medical diagnosis
 ---
 
-A cleaned-up portfolio starter with personalized navigation, project sections, contact details, and content filters so only Sijia's work appears on the site.
+Under review. This work develops Bayesian hierarchical modeling and clustering approaches for malignant cancer diagnosis.

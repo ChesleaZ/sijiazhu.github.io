@@ -59,20 +59,21 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1>Hi, my name is</h1>;
+  const one = <h1>Hello, my name is</h1>;
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
-  const three = <h3 className="big-heading">I build useful things with code.</h3>;
+  const three = <h3 className="big-heading">I study biomedical data with statistics.</h3>;
   const four = (
     <>
       <p>
-        I’m a builder interested in software, data, and product design. This site is my small home
-        on the internet: a place for selected projects, notes, and the work I am growing toward.
+        I’m an M.S. student in Applied Mathematics and Statistics with a biostatistics focus at
+        Johns Hopkins University. My research interests include high-dimensional inference,
+        Bayesian modeling, statistical machine learning, and single-cell multi-omics.
       </p>
     </>
   );
   const five = (
     <a className="email-link" href="#projects">
-      View My Work
+      View Research
     </a>
   );
 

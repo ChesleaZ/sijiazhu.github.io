@@ -1,40 +1,36 @@
 module.exports = {
-  email: 'hello@example.com',
+  email: 'szhu62@jh.edu',
 
   socialMedia: [
     {
       name: 'GitHub',
-      url: 'https://github.com/sijiazhu',
-    },
-    {
-      name: 'Linkedin',
-      url: 'https://www.linkedin.com/in/sijiazhu',
+      url: 'https://github.com/ChesleaZ',
     },
   ],
 
   navLinks: [
     {
-      name: '关于',
+      name: 'About',
       url: '/#about',
     },
     {
-      name: '经历',
+      name: 'Research',
       url: '/#jobs',
     },
     {
-      name: '项目',
+      name: 'Publications',
       url: '/#projects',
     },
     {
-      name: '联系',
+      name: 'Contact',
       url: '/#contact',
     },
   ],
 
   colors: {
-    green: '#64ffda',
-    navy: '#0a192f',
-    darkNavy: '#020c1b',
+    green: '#2f6f73',
+    navy: '#f7f4ee',
+    darkNavy: '#ebe3d6',
   },
 
   srConfig: (delay = 200, viewFactor = 0.25) => ({

@@ -83,7 +83,7 @@ const Footer = () => {
       </StyledSocialLinks>
 
       <StyledCredit tabIndex="-1">
-        <a href="https://github.com/sijiazhu/sijiazhu.github.io">
+        <a href="https://github.com/ChesleaZ/sijiazhu.github.io">
           <div>Built by Sijia Zhu. Original design by Brittany Chiang.</div>
         </a>
       </StyledCredit>

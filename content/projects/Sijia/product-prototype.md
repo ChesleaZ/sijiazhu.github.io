@@ -1,13 +1,12 @@
 ---
-date: '2026-05-01'
-title: 'Product Prototype'
-github: 'https://github.com/sijiazhu'
-external: 'https://github.com/sijiazhu'
+date: '2024-01-01'
+title: 'ProNet: Adaptive Retinal Vessel Segmentation Algorithm Based on Improved UperNet Network'
+company: 'CMC-Computers, Materials & Continua'
 personalized: true
 tech:
-  - Figma
-  - React
-  - Product
+  - Medical imaging
+  - Retinal segmentation
+  - Deep learning
 ---
 
-A placeholder for a product prototype or case study. Add the problem, constraints, decisions, and outcome when the project is ready to publish.
+Published in 2024. This work proposes an adaptive retinal vessel segmentation algorithm based on an improved UperNet network.

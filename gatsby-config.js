@@ -5,7 +5,7 @@ module.exports = {
   siteMetadata: {
     title: 'Sijia Zhu',
     description:
-      'Sijia Zhu is building thoughtful, reliable digital products across software, data, and design.',
+      'Sijia Zhu studies biostatistical methods for high-dimensional biomedical data, Bayesian modeling, statistical machine learning, and single-cell multi-omics.',
     siteUrl: 'https://chesleaz.github.io/sijiazhu.github.io', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@sijiazhu',

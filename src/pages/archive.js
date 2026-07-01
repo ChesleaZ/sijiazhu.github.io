@@ -152,19 +152,19 @@ const ArchivePage = ({ location, data }) => {
 
       <main>
         <header ref={revealTitle}>
-          <h1 className="big-heading">项目归档</h1>
-          <p className="subtitle">所有展示项目的列表</p>
+          <h1 className="big-heading">Archive</h1>
+          <p className="subtitle">Selected publications, service, and research outputs</p>
         </header>
 
         <StyledTableContainer ref={revealTable}>
           <table>
             <thead>
               <tr>
-                <th>年份</th>
-                <th>名称</th>
-                <th className="hide-on-mobile">来源</th>
-                <th className="hide-on-mobile">技术</th>
-                <th>链接</th>
+                <th>Year</th>
+                <th>Title</th>
+                <th className="hide-on-mobile">Venue</th>
+                <th className="hide-on-mobile">Keywords</th>
+                <th>Link</th>
               </tr>
             </thead>
             <tbody>

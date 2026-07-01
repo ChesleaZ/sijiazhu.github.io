@@ -132,7 +132,7 @@ const StyledProject = styled.li`
     }
 
     @media (max-width: 768px) {
-      color: var(--white);
+      color: var(--lightest-slate);
 
       a {
         position: static;
@@ -283,21 +283,21 @@ const StyledProject = styled.li`
         bottom: 0;
         z-index: 3;
         transition: var(--transition);
-        background-color: var(--navy);
-        mix-blend-mode: screen;
+      background-color: rgba(247, 244, 238, 0.3);
+      mix-blend-mode: normal;
       }
     }
 
     .img {
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
+      filter: saturate(90%) contrast(0.95) brightness(100%);
 
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
         height: 100%;
-        filter: grayscale(100%) contrast(1) brightness(50%);
+        filter: saturate(80%) contrast(0.95) brightness(104%);
       }
     }
   }
@@ -351,7 +351,7 @@ const Featured = () => {
   return (
     <section id="projects">
       <h2 className="numbered-heading" ref={revealTitle}>
-        重点项目
+        Research Projects
       </h2>
 
       <StyledProjectsGrid>
@@ -365,7 +365,7 @@ const Featured = () => {
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
                 <div className="project-content">
                   <div>
-                    <p className="project-overline">Featured Project</p>
+                    <p className="project-overline">Selected Research</p>
 
                     <h3 className="project-title">
                       <a href={external}>{title}</a>

@@ -265,10 +265,10 @@ const Projects = () => {
 
   return (
     <StyledProjectsSection>
-      <h2 ref={revealTitle}>更多项目</h2>
+      <h2 ref={revealTitle}>Selected Publications & Service</h2>
 
       <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
-        查看归档
+        view all
       </Link>
 
       <ul className="projects-grid">
@@ -302,9 +302,11 @@ const Projects = () => {
         )}
       </ul>
 
-      <button className="more-button" onClick={() => setShowMore(!showMore)}>
-        {showMore ? '收起' : '显示更多'}
-      </button>
+      {projects.length > GRID_LIMIT && (
+        <button className="more-button" onClick={() => setShowMore(!showMore)}>
+          {showMore ? 'Show Less' : 'Show More'}
+        </button>
+      )}
     </StyledProjectsSection>
   );
 };

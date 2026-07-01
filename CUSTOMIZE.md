@@ -12,12 +12,12 @@ This is Sijia's personalized version of Brittany Chiang's Gatsby portfolio templ
 - `content/jobs/*/index.md`: experience entries.
 - `content/featured/*/index.md`: large featured project entries.
 - `content/projects/Sijia/*.md`: smaller project cards and archive entries.
-- `static/resume.pdf`: replace this with your real resume PDF.
+- If you want a public CV button later, add your current CV PDF under `static/` and re-enable the nav link.
 - `src/images/me.jpg`: replace this with your headshot.
 
 ## Important content rule
 
-Only markdown files with `personalized: true` appear in the homepage project and experience sections. The original template content is still in the repository as reference, but it is filtered out.
+Only markdown files with `personalized: true` appear in the homepage project and experience sections.
 
 ## Run locally
 
