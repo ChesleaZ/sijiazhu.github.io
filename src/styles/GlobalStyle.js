@@ -172,6 +172,7 @@ const GlobalStyle = createGlobalStyle`
   .big-heading {
     margin: 0;
     font-size: clamp(40px, 8vw, 80px);
+    line-height: 1.08;
   }
 
   .medium-heading {
@@ -186,9 +187,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 10px 0 40px;
     width: 100%;
     font-size: clamp(26px, 5vw, var(--fz-heading));
-    white-space: nowrap;
+    white-space: normal;
 
     &:before {
+      flex: 0 0 auto;
       position: relative;
       bottom: 4px;
       counter-increment: section;
@@ -208,6 +210,7 @@ const GlobalStyle = createGlobalStyle`
     &:after {
       content: '';
       display: block;
+      flex: 1 1 auto;
       position: relative;
       top: -5px;
       width: 300px;

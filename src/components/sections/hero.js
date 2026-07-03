@@ -7,36 +7,42 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.75fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 320px);
   align-items: center;
-  gap: 70px;
+  gap: clamp(32px, 5vw, 64px);
   min-height: 100vh;
-  height: 100vh;
+  height: auto;
   padding: 0;
 
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
-    height: auto;
     padding-top: var(--nav-height);
   }
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    gap: 40px;
-    height: auto;
-    padding: var(--nav-height) 0 70px;
+    gap: 28px;
+    min-height: auto;
+    padding: var(--nav-height) 0 80px;
   }
 
   .hero-content {
     max-width: 760px;
+    min-width: 0;
   }
 
   .hero-photo {
     justify-self: end;
-    width: min(330px, 100%);
+    width: min(320px, 100%);
+    max-width: 100%;
 
     @media (max-width: 900px) {
-      justify-self: start;
-      width: min(260px, 72vw);
+      justify-self: center;
+      width: min(220px, 58vw);
+      order: -1;
+    }
+
+    @media (max-width: 480px) {
+      width: min(180px, 60vw);
     }
   }
 
@@ -79,18 +85,16 @@ const StyledHeroSection = styled.section`
   h3 {
     margin-top: 5px;
     color: var(--slate);
-    line-height: 1;
+    line-height: 1.08;
+    max-width: 760px;
   }
 
   .rotating-topic {
-    display: inline-block;
+    display: inline;
     color: var(--green);
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
     animation: topicFade 3.2s ease-in-out infinite;
-
-    @media (max-width: 768px) {
-      white-space: normal;
-    }
   }
 
   @keyframes topicFade {
