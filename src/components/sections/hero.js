@@ -7,15 +7,16 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 320px);
+  grid-template-columns: minmax(0, 680px) minmax(220px, 300px);
   align-items: center;
-  gap: clamp(32px, 5vw, 64px);
+  justify-content: center;
+  gap: clamp(36px, 5vw, 72px);
   min-height: 100vh;
   height: auto;
-  padding: 0;
+  padding: calc(var(--nav-height) + 24px) 0 80px;
 
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
-    padding-top: var(--nav-height);
+    padding-top: calc(var(--nav-height) + 18px);
   }
 
   @media (max-width: 900px) {
@@ -30,9 +31,18 @@ const StyledHeroSection = styled.section`
     min-width: 0;
   }
 
+  h2.big-heading {
+    font-size: clamp(46px, 6vw, 68px);
+    line-height: 1.03;
+
+    @media (max-width: 900px) {
+      font-size: clamp(42px, 10vw, 60px);
+    }
+  }
+
   .hero-photo {
     justify-self: end;
-    width: min(320px, 100%);
+    width: min(300px, 100%);
     max-width: 100%;
 
     @media (max-width: 900px) {
@@ -83,17 +93,27 @@ const StyledHeroSection = styled.section`
   }
 
   h3 {
-    margin-top: 5px;
+    margin-top: 12px;
     color: var(--slate);
-    line-height: 1.08;
-    max-width: 760px;
+    line-height: 1.12;
+    max-width: 680px;
+    font-size: clamp(34px, 4.5vw, 52px);
+
+    @media (max-width: 900px) {
+      max-width: 620px;
+      font-size: clamp(34px, 9vw, 52px);
+    }
+
+    @media (max-width: 480px) {
+      font-size: clamp(32px, 11vw, 44px);
+    }
   }
 
   .rotating-topic {
     display: inline;
     color: var(--green);
     white-space: normal;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
     animation: topicFade 3.2s ease-in-out infinite;
   }
 
@@ -145,8 +165,8 @@ const Hero = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const researchTopics = [
-    'high-dimensional biomedical data',
-    'single-cell multi-omics',
+    'high\u2011dimensional biomedical data',
+    'single\u2011cell multi\u2011omics',
     'Bayesian modeling',
     'statistical machine learning',
   ];
