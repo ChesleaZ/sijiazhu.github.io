@@ -96,23 +96,23 @@ const StyledHeroSection = styled.section`
     margin-top: 12px;
     color: var(--slate);
     line-height: 1.12;
-    max-width: 680px;
-    font-size: clamp(34px, 4.5vw, 52px);
+    max-width: 780px;
+    font-size: clamp(34px, 4.1vw, 52px);
 
     @media (max-width: 900px) {
-      max-width: 620px;
-      font-size: clamp(34px, 9vw, 52px);
+      max-width: 760px;
+      font-size: clamp(32px, 7.2vw, 48px);
     }
 
     @media (max-width: 480px) {
-      font-size: clamp(32px, 11vw, 44px);
+      font-size: clamp(24px, 7vw, 32px);
     }
   }
 
   .rotating-topic {
-    display: inline;
+    display: block;
     color: var(--green);
-    white-space: normal;
+    white-space: nowrap;
     overflow-wrap: normal;
     animation: topicFade 3.2s ease-in-out infinite;
   }
