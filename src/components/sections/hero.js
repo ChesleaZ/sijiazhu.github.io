@@ -123,7 +123,11 @@ const Hero = () => {
 
   const one = <h1>Hello, my name is</h1>;
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
-  const three = <h3 className="big-heading">I study biomedical data with statistics.</h3>;
+  const three = (
+    <h3 className="big-heading">
+      I develop statistical methods for high-dimensional biomedical data.
+    </h3>
+  );
   const four = (
     <>
       <p>
