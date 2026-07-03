@@ -165,9 +165,9 @@ const Hero = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const researchTopics = [
-    'high\u2011dimensional biomedical data',
+    'complex biomedical data',
     'single\u2011cell multi\u2011omics',
-    'Bayesian modeling',
+    'genomic mechanisms of disease',
   ];
 
   useEffect(() => {
@@ -205,8 +205,14 @@ const Hero = () => {
   const four = (
     <>
       <p>
-        I’m an M.S. student in Applied Mathematics and Statistics with a biostatistics focus at
-        Johns Hopkins University.
+        I am an M.S. student in Applied Mathematics and Statistics (Biostatistics) at Johns
+        Hopkins University.
+      </p>
+      <p>
+        My research focuses on high-dimensional inference, Bayesian modeling, and representation
+        learning for biomedical data. I am particularly interested in single-cell multi-omics,
+        genetic risk stratification, pathway-based analyses, and statistical methods to understand
+        biological heterogeneity and disease mechanisms.
       </p>
     </>
   );
