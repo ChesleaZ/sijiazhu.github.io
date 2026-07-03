@@ -79,7 +79,34 @@ const StyledHeroSection = styled.section`
   h3 {
     margin-top: 5px;
     color: var(--slate);
-    line-height: 0.9;
+    line-height: 1;
+  }
+
+  .rotating-topic {
+    display: inline-block;
+    color: var(--green);
+    white-space: nowrap;
+    animation: topicFade 3.2s ease-in-out infinite;
+
+    @media (max-width: 768px) {
+      white-space: normal;
+    }
+  }
+
+  @keyframes topicFade {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    14%,
+    82% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
   }
 
   p {
@@ -110,7 +137,15 @@ const StyledHeroPhoto = () => (
 
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const [topicIndex, setTopicIndex] = useState(0);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  const researchTopics = [
+    'high-dimensional biomedical data',
+    'single-cell multi-omics',
+    'Bayesian modeling',
+    'statistical machine learning',
+  ];
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -121,11 +156,27 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setTopicIndex(index => (index + 1) % researchTopics.length);
+    }, 3200);
+
+    return () => clearInterval(interval);
+  }, [prefersReducedMotion, researchTopics.length]);
+
   const one = <h1>Hello, my name is</h1>;
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
   const three = (
     <h3 className="big-heading">
-      I develop statistical methods for high-dimensional biomedical data.
+      I develop statistical methods for{' '}
+      <span key={researchTopics[topicIndex]} className="rotating-topic">
+        {researchTopics[topicIndex]}
+      </span>
+      .
     </h3>
   );
   const four = (
