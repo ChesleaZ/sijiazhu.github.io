@@ -168,7 +168,6 @@ const Hero = () => {
     'high\u2011dimensional biomedical data',
     'single\u2011cell multi\u2011omics',
     'Bayesian modeling',
-    'statistical machine learning',
   ];
 
   useEffect(() => {
@@ -207,8 +206,7 @@ const Hero = () => {
     <>
       <p>
         I’m an M.S. student in Applied Mathematics and Statistics with a biostatistics focus at
-        Johns Hopkins University. My research interests include high-dimensional inference,
-        Bayesian modeling, statistical machine learning, and single-cell multi-omics.
+        Johns Hopkins University.
       </p>
     </>
   );
