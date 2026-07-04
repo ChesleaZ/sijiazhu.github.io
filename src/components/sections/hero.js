@@ -7,7 +7,7 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
   display: grid;
-  grid-template-columns: minmax(0, 680px) minmax(220px, 300px);
+  grid-template-columns: minmax(0, 760px) minmax(220px, 280px);
   align-items: center;
   justify-content: center;
   gap: clamp(36px, 5vw, 72px);
@@ -27,7 +27,7 @@ const StyledHeroSection = styled.section`
   }
 
   .hero-content {
-    max-width: 760px;
+    max-width: 860px;
     min-width: 0;
   }
 
@@ -96,17 +96,22 @@ const StyledHeroSection = styled.section`
     margin-top: 12px;
     color: var(--slate);
     line-height: 1.12;
-    max-width: 780px;
-    font-size: clamp(34px, 4.1vw, 52px);
+    max-width: 860px;
+    font-size: clamp(34px, 3.65vw, 46px);
 
     @media (max-width: 900px) {
       max-width: 760px;
-      font-size: clamp(32px, 7.2vw, 48px);
+      font-size: clamp(30px, 6.6vw, 44px);
     }
 
     @media (max-width: 480px) {
       font-size: clamp(24px, 7vw, 32px);
     }
+  }
+
+  .hero-title-prefix {
+    display: block;
+    white-space: nowrap;
   }
 
   .rotating-topic {
@@ -195,11 +200,10 @@ const Hero = () => {
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
   const three = (
     <h3 className="big-heading">
-      I develop statistical methods for{' '}
+      <span className="hero-title-prefix">I develop statistical methods for</span>
       <span key={researchTopics[topicIndex]} className="rotating-topic">
-        {researchTopics[topicIndex]}
+        {researchTopics[topicIndex]}.
       </span>
-      .
     </h3>
   );
   const four = (
