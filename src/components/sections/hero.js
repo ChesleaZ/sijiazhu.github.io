@@ -207,26 +207,12 @@ const Hero = () => {
     </h3>
   );
   const four = (
-    <>
-      <p>
-        I am an M.S. student in Applied Mathematics and Statistics (Biostatistics) at Johns
-        Hopkins University.
-      </p>
-      <p>
-        My research focuses on high-dimensional inference, Bayesian modeling, and representation
-        learning for biomedical data. I am particularly interested in single-cell multi-omics,
-        genetic risk stratification, pathway-based analyses, and statistical methods to understand
-        biological heterogeneity and disease mechanisms.
-      </p>
-    </>
-  );
-  const five = (
-    <a className="email-link" href="#projects">
+    <a className="email-link" href="/research/">
       View Research
     </a>
   );
 
-  const items = [one, two, three, four, five];
+  const items = [one, two, three, four];
 
   return (
     <StyledHeroSection>
