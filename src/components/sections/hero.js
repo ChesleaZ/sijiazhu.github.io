@@ -45,16 +45,24 @@ const StyledHeroSection = styled.section`
     justify-self: center;
     width: min(300px, 44vw);
     max-width: 100%;
-    order: -1;
 
     @media (min-width: 1800px) {
       justify-self: end;
       width: min(360px, 100%);
-      order: 0;
     }
 
     @media (max-width: 480px) {
       width: min(210px, 64vw);
+    }
+  }
+
+  .hero-photo-slot {
+    justify-self: center;
+    order: -1;
+
+    @media (min-width: 1800px) {
+      justify-self: end;
+      order: 0;
     }
   }
 
@@ -233,12 +241,14 @@ const Hero = () => {
       </div>
 
       {prefersReducedMotion ? (
-        <StyledHeroPhoto />
+        <div className="hero-photo-slot">
+          <StyledHeroPhoto />
+        </div>
       ) : (
         <TransitionGroup component={null}>
           {isMounted && (
             <CSSTransition classNames="fadeup" timeout={loaderDelay}>
-              <div style={{ transitionDelay: '600ms' }}>
+              <div className="hero-photo-slot" style={{ transitionDelay: '600ms' }}>
                 <StyledHeroPhoto />
               </div>
             </CSSTransition>
