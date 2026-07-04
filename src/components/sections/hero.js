@@ -7,7 +7,7 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
   display: grid;
-  grid-template-columns: minmax(0, 760px) minmax(220px, 280px);
+  grid-template-columns: minmax(0, 820px) minmax(220px, 260px);
   align-items: center;
   justify-content: center;
   gap: clamp(36px, 5vw, 72px);
@@ -32,11 +32,11 @@ const StyledHeroSection = styled.section`
   }
 
   h2.big-heading {
-    font-size: clamp(46px, 6vw, 68px);
+    font-size: clamp(54px, 7vw, 82px);
     line-height: 1.03;
 
     @media (max-width: 900px) {
-      font-size: clamp(42px, 10vw, 60px);
+      font-size: clamp(46px, 11vw, 68px);
     }
   }
 
@@ -84,7 +84,7 @@ const StyledHeroSection = styled.section`
     margin: 0 0 30px 4px;
     color: var(--green);
     font-family: var(--font-mono);
-    font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
+    font-size: clamp(var(--fz-md), 5vw, var(--fz-lg));
     font-weight: 400;
 
     @media (max-width: 480px) {
@@ -96,16 +96,16 @@ const StyledHeroSection = styled.section`
     margin-top: 12px;
     color: var(--slate);
     line-height: 1.12;
-    max-width: 860px;
-    font-size: clamp(34px, 3.65vw, 46px);
+    max-width: 940px;
+    font-size: clamp(38px, 4vw, 50px);
 
     @media (max-width: 900px) {
       max-width: 760px;
-      font-size: clamp(30px, 6.6vw, 44px);
+      font-size: clamp(34px, 7.2vw, 48px);
     }
 
     @media (max-width: 480px) {
-      font-size: clamp(24px, 7vw, 32px);
+      font-size: clamp(26px, 7.8vw, 36px);
     }
   }
 
@@ -145,6 +145,7 @@ const StyledHeroSection = styled.section`
 
   .email-link {
     ${({ theme }) => theme.mixins.bigButton};
+    font-size: var(--fz-sm);
     margin-top: 50px;
   }
 `;
