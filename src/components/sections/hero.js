@@ -7,10 +7,10 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
   display: grid;
-  grid-template-columns: minmax(0, 880px) minmax(260px, 340px);
+  grid-template-columns: minmax(0, 790px) minmax(280px, 360px);
   align-items: center;
   justify-content: center;
-  gap: clamp(36px, 5vw, 72px);
+  gap: clamp(34px, 4vw, 56px);
   min-height: 100vh;
   height: auto;
   padding: calc(var(--nav-height) + 24px) 0 80px;
@@ -27,12 +27,12 @@ const StyledHeroSection = styled.section`
   }
 
   .hero-content {
-    max-width: 920px;
+    max-width: 790px;
     min-width: 0;
   }
 
   h2.big-heading {
-    font-size: clamp(64px, 7.5vw, 96px);
+    font-size: clamp(64px, 6.8vw, 90px);
     line-height: 1.03;
 
     @media (max-width: 900px) {
@@ -42,7 +42,7 @@ const StyledHeroSection = styled.section`
 
   .hero-photo {
     justify-self: end;
-    width: min(380px, 100%);
+    width: min(360px, 100%);
     max-width: 100%;
 
     @media (max-width: 900px) {
@@ -96,8 +96,8 @@ const StyledHeroSection = styled.section`
     margin-top: 12px;
     color: var(--slate);
     line-height: 1.12;
-    max-width: 940px;
-    font-size: clamp(44px, 4.35vw, 58px);
+    max-width: 790px;
+    font-size: clamp(42px, 3.95vw, 54px);
 
     @media (max-width: 900px) {
       max-width: 760px;
@@ -207,13 +207,7 @@ const Hero = () => {
       </span>
     </h3>
   );
-  const four = (
-    <a className="email-link" href="/research/">
-      View Experience
-    </a>
-  );
-
-  const items = [one, two, three, four];
+  const items = [one, two, three];
 
   return (
     <StyledHeroSection>

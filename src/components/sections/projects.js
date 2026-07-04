@@ -18,11 +18,14 @@ const StyledProjectsSection = styled.section`
   }
 
   .archive-link {
+    ${({ theme }) => theme.mixins.button};
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
-    &:after {
-      bottom: 0.1em;
-    }
+    line-height: 1;
   }
 
   .projects-grid {
@@ -200,7 +203,7 @@ const Projects = () => {
   const projectsToShow = publications.filter(publication => publication.selected).slice(0, GRID_LIMIT);
 
   const projectInner = publication => {
-    const { title, authors, venue, status, keywords, url } = publication;
+    const { title, authors, venue, keywords, url } = publication;
 
     return (
       <div className="project-inner">
@@ -223,10 +226,7 @@ const Projects = () => {
           </h3>
 
           <p className="project-authors">{authors}</p>
-          <p className="project-venue">
-            {venue}
-            {status ? `, ${status}` : ''}
-          </p>
+          <p className="project-venue">{venue}</p>
         </header>
 
         <footer>
@@ -246,7 +246,7 @@ const Projects = () => {
     <StyledProjectsSection>
       <h2 ref={revealTitle}>Selected Publication</h2>
 
-      <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
+      <Link className="archive-link" to="/archive" ref={revealArchiveLink}>
         View all
       </Link>
 

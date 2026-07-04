@@ -174,7 +174,6 @@ const StyledResearchSection = styled.section`
 `;
 
 const Research = () => {
-  const revealTitle = useRef(null);
   const revealItems = useRef([]);
   const revealAcademicItems = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -184,17 +183,12 @@ const Research = () => {
       return;
     }
 
-    sr.reveal(revealTitle.current, srConfig());
     revealItems.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
     revealAcademicItems.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
   }, []);
 
   return (
     <StyledResearchSection id="research">
-      <h2 className="numbered-heading" ref={revealTitle}>
-        Experience
-      </h2>
-
       <div className="experience-group">
         <h3 className="section-heading">Research</h3>
         <ul className="research-list">
