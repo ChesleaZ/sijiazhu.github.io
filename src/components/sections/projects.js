@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'gatsby';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
+import publications from '../../data/publications';
 
 const StyledProjectsSection = styled.section`
   display: flex;
@@ -144,6 +145,20 @@ const StyledProject = styled.li`
     }
   }
 
+  .project-authors {
+    margin: 0 0 12px;
+    color: var(--light-slate);
+    font-size: var(--fz-sm);
+    line-height: 1.35;
+  }
+
+  .project-venue {
+    margin: 0;
+    color: var(--slate);
+    font-size: var(--fz-md);
+    line-height: 1.35;
+  }
+
   .project-tech-list {
     display: flex;
     align-items: flex-end;
@@ -166,29 +181,6 @@ const StyledProject = styled.li`
 `;
 
 const Projects = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      projects: allMarkdownRemark(
-        filter: {
-          fileAbsolutePath: { regex: "/content/projects/" }
-          frontmatter: { personalized: { eq: true } }
-        }
-        sort: { fields: [frontmatter___date], order: DESC }
-      ) {
-        edges {
-          node {
-            frontmatter {
-              title
-              tech
-            }
-            html
-          }
-        }
-      }
-    }
-  `);
-
-  const [showMore, setShowMore] = useState(false);
   const revealTitle = useRef(null);
   const revealArchiveLink = useRef(null);
   const revealProjects = useRef([]);
@@ -205,13 +197,10 @@ const Projects = () => {
   }, []);
 
   const GRID_LIMIT = 6;
-  const projects = data.projects.edges.filter(({ node }) => node);
-  const firstSix = projects.slice(0, GRID_LIMIT);
-  const projectsToShow = showMore ? projects : firstSix;
+  const projectsToShow = publications.filter(publication => publication.selected).slice(0, GRID_LIMIT);
 
-  const projectInner = node => {
-    const { frontmatter, html } = node;
-    const { title, tech } = frontmatter;
+  const projectInner = publication => {
+    const { title, authors, venue, status, keywords, url } = publication;
 
     return (
       <div className="project-inner">
@@ -220,21 +209,31 @@ const Projects = () => {
             <div className="folder">
               <Icon name="Folder" />
             </div>
-            <div className="project-links" />
+            <div className="project-links">
+              <a href={url} aria-label="External Link" className="external" target="_blank" rel="noreferrer">
+                <Icon name="External" />
+              </a>
+            </div>
           </div>
 
           <h3 className="project-title">
-            <span>{title}</span>
+            <a href={url} target="_blank" rel="noreferrer">
+              {title}
+            </a>
           </h3>
 
-          <div className="project-description" dangerouslySetInnerHTML={{ __html: html }} />
+          <p className="project-authors">{authors}</p>
+          <p className="project-venue">
+            {venue}
+            {status ? `, ${status}` : ''}
+          </p>
         </header>
 
         <footer>
-          {tech && (
+          {keywords && (
             <ul className="project-tech-list">
-              {tech.map((tech, i) => (
-                <li key={i}>{tech}</li>
+              {keywords.map((keyword, i) => (
+                <li key={i}>{keyword}</li>
               ))}
             </ul>
           )}
@@ -245,48 +244,42 @@ const Projects = () => {
 
   return (
     <StyledProjectsSection>
-      <h2 ref={revealTitle}>Selected Publications & Service</h2>
+      <h2 ref={revealTitle}>Selected Publication</h2>
 
       <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
-        view all
+        View all
       </Link>
 
       <ul className="projects-grid">
         {prefersReducedMotion ? (
           <>
             {projectsToShow &&
-              projectsToShow.map(({ node }, i) => (
-                <StyledProject key={i}>{projectInner(node)}</StyledProject>
+              projectsToShow.map((publication, i) => (
+                <StyledProject key={publication.title}>{projectInner(publication)}</StyledProject>
               ))}
           </>
         ) : (
           <TransitionGroup component={null}>
             {projectsToShow &&
-              projectsToShow.map(({ node }, i) => (
+              projectsToShow.map((publication, i) => (
                 <CSSTransition
-                  key={i}
+                  key={publication.title}
                   classNames="fadeup"
-                  timeout={i >= GRID_LIMIT ? (i - GRID_LIMIT) * 300 : 300}
+                  timeout={300}
                   exit={false}>
                   <StyledProject
-                    key={i}
+                    key={publication.title}
                     ref={el => (revealProjects.current[i] = el)}
                     style={{
-                      transitionDelay: `${i >= GRID_LIMIT ? (i - GRID_LIMIT) * 100 : 0}ms`,
+                      transitionDelay: `${i * 100}ms`,
                     }}>
-                    {projectInner(node)}
+                    {projectInner(publication)}
                   </StyledProject>
                 </CSSTransition>
               ))}
           </TransitionGroup>
         )}
       </ul>
-
-      {projects.length > GRID_LIMIT && (
-        <button className="more-button" onClick={() => setShowMore(!showMore)}>
-          {showMore ? 'Show Less' : 'Show More'}
-        </button>
-      )}
     </StyledProjectsSection>
   );
 };

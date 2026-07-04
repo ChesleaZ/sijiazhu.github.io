@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
@@ -8,6 +7,7 @@ import sr from '@utils/sr';
 import { Layout } from '@components';
 import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
+import publications from '../data/publications';
 
 const StyledTableContainer = styled.div`
   margin: 100px -20px;
@@ -129,8 +129,8 @@ const StyledTableContainer = styled.div`
   }
 `;
 
-const ArchivePage = ({ location, data }) => {
-  const projects = data.allMarkdownRemark.edges;
+const ArchivePage = ({ location }) => {
+  const projects = publications;
   const revealTitle = useRef(null);
   const revealTable = useRef(null);
   const revealProjects = useRef([]);
@@ -152,8 +152,8 @@ const ArchivePage = ({ location, data }) => {
 
       <main>
         <header ref={revealTitle}>
-          <h1 className="big-heading">Archive</h1>
-          <p className="subtitle">Selected publications, service, and research outputs</p>
+          <h1 className="big-heading">All Publications</h1>
+          <p className="subtitle">Complete publication list</p>
         </header>
 
         <StyledTableContainer ref={revealTable}>
@@ -168,41 +168,41 @@ const ArchivePage = ({ location, data }) => {
               </tr>
             </thead>
             <tbody>
-              {projects.length > 0 &&
-                projects.map(({ node }, i) => {
-                  const {
-                    date,
-                    title,
-                    tech,
-                    company,
-                  } = node.frontmatter;
-                  return (
-                    <tr key={i} ref={el => (revealProjects.current[i] = el)}>
-                      <td className="overline year">{`${new Date(date).getFullYear()}`}</td>
+              {projects.map((publication, i) => {
+                const { year, title, keywords, venue, url } = publication;
+                return (
+                  <tr key={i} ref={el => (revealProjects.current[i] = el)}>
+                    <td className="overline year">{year}</td>
 
-                      <td className="title">{title}</td>
+                    <td className="title">{title}</td>
 
-                      <td className="company hide-on-mobile">
-                        {company ? <span>{company}</span> : <span>—</span>}
-                      </td>
+                    <td className="company hide-on-mobile">
+                      {venue ? <span>{venue}</span> : <span>-</span>}
+                    </td>
 
-                      <td className="tech hide-on-mobile">
-                        {tech?.length > 0 &&
-                          tech.map((item, i) => (
-                            <span key={i}>
-                              {item}
-                              {''}
-                              {i !== tech.length - 1 && <span className="separator">&middot;</span>}
-                            </span>
-                          ))}
-                      </td>
+                    <td className="tech hide-on-mobile">
+                      {keywords?.length > 0 &&
+                        keywords.map((item, i) => (
+                          <span key={i}>
+                            {item}
+                            {''}
+                            {i !== keywords.length - 1 && (
+                              <span className="separator">&middot;</span>
+                            )}
+                          </span>
+                        ))}
+                    </td>
 
-                      <td className="links">
-                        <div>—</div>
-                      </td>
-                    </tr>
-                  );
-                })}
+                    <td className="links">
+                      <div>
+                        <a href={url} aria-label="External Link" target="_blank" rel="noreferrer">
+                          <Icon name="External" />
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </StyledTableContainer>
@@ -212,31 +212,6 @@ const ArchivePage = ({ location, data }) => {
 };
 ArchivePage.propTypes = {
   location: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
 };
 
 export default ArchivePage;
-
-export const pageQuery = graphql`
-  {
-    allMarkdownRemark(
-      filter: {
-        fileAbsolutePath: { regex: "/content/projects/" }
-        frontmatter: { personalized: { eq: true } }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            date
-            title
-            tech
-            company
-          }
-          html
-        }
-      }
-    }
-  }
-`;

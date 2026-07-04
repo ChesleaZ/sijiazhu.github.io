@@ -158,7 +158,6 @@ const Contact = () => {
             </span>
             <span>
               <span className="label">Email</span>
-              <span className="value">{email}</span>
             </span>
             <span className="arrow" aria-hidden="true">
               &rarr;

@@ -7,7 +7,7 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
   display: grid;
-  grid-template-columns: minmax(0, 820px) minmax(220px, 260px);
+  grid-template-columns: minmax(0, 880px) minmax(260px, 340px);
   align-items: center;
   justify-content: center;
   gap: clamp(36px, 5vw, 72px);
@@ -27,12 +27,12 @@ const StyledHeroSection = styled.section`
   }
 
   .hero-content {
-    max-width: 860px;
+    max-width: 920px;
     min-width: 0;
   }
 
   h2.big-heading {
-    font-size: clamp(54px, 7vw, 82px);
+    font-size: clamp(64px, 7.5vw, 96px);
     line-height: 1.03;
 
     @media (max-width: 900px) {
@@ -42,17 +42,17 @@ const StyledHeroSection = styled.section`
 
   .hero-photo {
     justify-self: end;
-    width: min(300px, 100%);
+    width: min(380px, 100%);
     max-width: 100%;
 
     @media (max-width: 900px) {
       justify-self: center;
-      width: min(220px, 58vw);
+      width: min(260px, 62vw);
       order: -1;
     }
 
     @media (max-width: 480px) {
-      width: min(180px, 60vw);
+      width: min(210px, 64vw);
     }
   }
 
@@ -84,7 +84,7 @@ const StyledHeroSection = styled.section`
     margin: 0 0 30px 4px;
     color: var(--green);
     font-family: var(--font-mono);
-    font-size: clamp(var(--fz-md), 5vw, var(--fz-lg));
+    font-size: clamp(var(--fz-lg), 5vw, var(--fz-xl));
     font-weight: 400;
 
     @media (max-width: 480px) {
@@ -97,11 +97,11 @@ const StyledHeroSection = styled.section`
     color: var(--slate);
     line-height: 1.12;
     max-width: 940px;
-    font-size: clamp(38px, 4vw, 50px);
+    font-size: clamp(44px, 4.35vw, 58px);
 
     @media (max-width: 900px) {
       max-width: 760px;
-      font-size: clamp(34px, 7.2vw, 48px);
+      font-size: clamp(36px, 7.4vw, 50px);
     }
 
     @media (max-width: 480px) {
@@ -145,7 +145,7 @@ const StyledHeroSection = styled.section`
 
   .email-link {
     ${({ theme }) => theme.mixins.bigButton};
-    font-size: var(--fz-sm);
+    font-size: var(--fz-md);
     margin-top: 50px;
   }
 `;
@@ -156,7 +156,7 @@ const StyledHeroPhoto = () => (
       <StaticImage
         className="hero-img"
         src="../../images/me.jpg"
-        width={520}
+        width={680}
         quality={95}
         formats={['AUTO', 'WEBP', 'AVIF']}
         alt="Sijia Zhu portrait"
