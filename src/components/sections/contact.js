@@ -172,7 +172,6 @@ const Contact = () => {
             </span>
             <span>
               <span className="label">LinkedIn</span>
-              <span className="value">Sijia Zhu</span>
             </span>
             <span className="arrow" aria-hidden="true">
               &rarr;
@@ -188,7 +187,6 @@ const Contact = () => {
             </span>
             <span>
               <span className="label">Google Scholar</span>
-              <span className="value">Google Scholar Profile</span>
             </span>
             <span className="arrow" aria-hidden="true">
               &rarr;

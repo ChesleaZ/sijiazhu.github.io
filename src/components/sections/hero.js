@@ -209,7 +209,7 @@ const Hero = () => {
   );
   const four = (
     <a className="email-link" href="/research/">
-      View Research
+      View Experience
     </a>
   );
 

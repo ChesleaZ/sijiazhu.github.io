@@ -55,8 +55,37 @@ const researchItems = [
   },
 ];
 
+const academicItems = [
+  {
+    title: 'Teaching Assistant',
+    institution: 'Johns Hopkins University',
+    details: ['Bayesian Statistics'],
+  },
+  {
+    title: 'Peer Reviewer',
+    institution: 'Academic Service',
+    details: [
+      'Current Medical Imaging',
+      'CMC-Computers, Materials & Continua',
+      'Journal of Intelligent & Fuzzy Systems',
+      'Journal of Computer Science',
+      'Journal of Fuzzy Logic and Modeling in Engineering',
+    ],
+  },
+];
+
 const StyledResearchSection = styled.section`
   max-width: 960px;
+
+  .section-heading {
+    margin: 0 0 24px;
+    color: var(--lightest-slate);
+    font-size: clamp(28px, 4vw, 38px);
+  }
+
+  .experience-group:not(:last-of-type) {
+    margin-bottom: 72px;
+  }
 
   .research-list {
     ${({ theme }) => theme.mixins.resetList};
@@ -119,11 +148,35 @@ const StyledResearchSection = styled.section`
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
   }
+
+  .academic-list {
+    ${({ theme }) => theme.mixins.resetList};
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .academic-card {
+    padding: 28px;
+    border: 1px solid var(--lightest-navy);
+    border-radius: 10px;
+    background-color: var(--white);
+    box-shadow: 0 14px 35px -24px var(--navy-shadow);
+
+    @media (max-width: 600px) {
+      padding: 22px;
+    }
+  }
 `;
 
 const Research = () => {
   const revealTitle = useRef(null);
   const revealItems = useRef([]);
+  const revealAcademicItems = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -133,35 +186,62 @@ const Research = () => {
 
     sr.reveal(revealTitle.current, srConfig());
     revealItems.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
+    revealAcademicItems.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
   }, []);
 
   return (
     <StyledResearchSection id="research">
       <h2 className="numbered-heading" ref={revealTitle}>
-        Research
+        Experience
       </h2>
 
-      <ul className="research-list">
-        {researchItems.map(({ institution, role, range, topic, tags, bullets }, i) => (
-          <li className="research-card" key={institution} ref={el => (revealItems.current[i] = el)}>
-            <p className="research-meta">{range}</p>
-            <h3>{topic}</h3>
-            <p className="institution">
-              <strong>{role}</strong>, {institution}
-            </p>
-            <ul className="details">
-              {bullets.map(bullet => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-            <ul className="tag-list">
-              {tags.map(tag => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+      <div className="experience-group">
+        <h3 className="section-heading">Research</h3>
+        <ul className="research-list">
+          {researchItems.map(({ institution, role, range, topic, tags, bullets }, i) => (
+            <li
+              className="research-card"
+              key={institution}
+              ref={el => (revealItems.current[i] = el)}>
+              <p className="research-meta">{range}</p>
+              <h3>{topic}</h3>
+              <p className="institution">
+                <strong>{role}</strong>, {institution}
+              </p>
+              <ul className="details">
+                {bullets.map(bullet => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+              <ul className="tag-list">
+                {tags.map(tag => (
+                  <li key={tag}>{tag}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="experience-group">
+        <h3 className="section-heading">Academic</h3>
+        <ul className="academic-list">
+          {academicItems.map(({ title, institution, details }, i) => (
+            <li
+              className="academic-card"
+              key={title}
+              ref={el => (revealAcademicItems.current[i] = el)}>
+              <p className="research-meta">{institution}</p>
+              <h3>{title}</h3>
+              <ul className="details">
+                {details.map(detail => (
+                  <li key={detail}>{detail}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
     </StyledResearchSection>
   );
 };
