@@ -7,53 +7,50 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
   display: grid;
-  grid-template-columns: minmax(0, 790px) minmax(280px, 360px);
+  grid-template-columns: 1fr;
   align-items: center;
   justify-content: center;
-  gap: clamp(34px, 4vw, 56px);
+  gap: 26px;
   min-height: 100vh;
   height: auto;
-  padding: calc(var(--nav-height) + 24px) 0 80px;
+  padding: calc(var(--nav-height) + 12px) 0 72px;
 
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
     padding-top: calc(var(--nav-height) + 18px);
   }
 
-  @media (max-width: 1500px) {
-    grid-template-columns: 1fr;
-    gap: 26px;
-    min-height: 100vh;
-    padding: calc(var(--nav-height) + 12px) 0 72px;
+  @media (min-width: 1800px) {
+    grid-template-columns: minmax(0, 790px) minmax(280px, 360px);
+    gap: clamp(34px, 4vw, 56px);
+    padding: calc(var(--nav-height) + 24px) 0 80px;
   }
 
   .hero-content {
+    justify-self: center;
+    width: min(790px, 82vw);
     max-width: 790px;
     min-width: 0;
-
-    @media (max-width: 1500px) {
-      justify-self: center;
-      width: min(790px, 82vw);
-    }
   }
 
   h2.big-heading {
-    font-size: clamp(64px, 6.8vw, 90px);
+    font-size: clamp(46px, 9vw, 68px);
     line-height: 1.03;
 
-    @media (max-width: 1500px) {
-      font-size: clamp(46px, 11vw, 68px);
+    @media (min-width: 1800px) {
+      font-size: clamp(64px, 6.8vw, 90px);
     }
   }
 
   .hero-photo {
-    justify-self: end;
-    width: min(360px, 100%);
+    justify-self: center;
+    width: min(300px, 44vw);
     max-width: 100%;
+    order: -1;
 
-    @media (max-width: 1500px) {
-      justify-self: center;
-      width: min(300px, 44vw);
-      order: -1;
+    @media (min-width: 1800px) {
+      justify-self: end;
+      width: min(360px, 100%);
+      order: 0;
     }
 
     @media (max-width: 480px) {
@@ -101,12 +98,12 @@ const StyledHeroSection = styled.section`
     margin-top: 12px;
     color: var(--slate);
     line-height: 1.12;
-    max-width: 790px;
-    font-size: clamp(42px, 3.95vw, 54px);
+    max-width: min(760px, 82vw);
+    font-size: clamp(34px, 4.6vw, 48px);
 
-    @media (max-width: 1500px) {
-      max-width: min(760px, 82vw);
-      font-size: clamp(36px, 5.4vw, 50px);
+    @media (min-width: 1800px) {
+      max-width: 790px;
+      font-size: clamp(42px, 3.95vw, 54px);
     }
 
     @media (max-width: 480px) {
