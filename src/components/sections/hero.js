@@ -19,23 +19,28 @@ const StyledHeroSection = styled.section`
     padding-top: calc(var(--nav-height) + 18px);
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1500px) {
     grid-template-columns: 1fr;
-    gap: 28px;
-    min-height: auto;
-    padding: var(--nav-height) 0 80px;
+    gap: 26px;
+    min-height: 100vh;
+    padding: calc(var(--nav-height) + 12px) 0 72px;
   }
 
   .hero-content {
     max-width: 790px;
     min-width: 0;
+
+    @media (max-width: 1500px) {
+      justify-self: center;
+      width: min(790px, 82vw);
+    }
   }
 
   h2.big-heading {
     font-size: clamp(64px, 6.8vw, 90px);
     line-height: 1.03;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1500px) {
       font-size: clamp(46px, 11vw, 68px);
     }
   }
@@ -45,9 +50,9 @@ const StyledHeroSection = styled.section`
     width: min(360px, 100%);
     max-width: 100%;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1500px) {
       justify-self: center;
-      width: min(260px, 62vw);
+      width: min(300px, 44vw);
       order: -1;
     }
 
@@ -99,9 +104,9 @@ const StyledHeroSection = styled.section`
     max-width: 790px;
     font-size: clamp(42px, 3.95vw, 54px);
 
-    @media (max-width: 900px) {
-      max-width: 760px;
-      font-size: clamp(36px, 7.4vw, 50px);
+    @media (max-width: 1500px) {
+      max-width: min(760px, 82vw);
+      font-size: clamp(36px, 5.4vw, 50px);
     }
 
     @media (max-width: 480px) {
