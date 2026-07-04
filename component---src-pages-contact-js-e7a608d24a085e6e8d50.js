@@ -1,0 +1,2 @@
+(self.webpackChunksijia_personal_site=self.webpackChunksijia_personal_site||[]).push([[501],{262:function(e,n,t){"use strict";t.r(n);var a=t(7294),i=t(9),l=t(5802),r=i.ZP.main.withConfig({displayName:"contact__StyledMainContainer",componentId:"w4exfj-0"})(["counter-reset:section;"]);n.default=function(e){var n=e.location;return a.createElement(l.Ar,{location:n},a.createElement(r,null,a.createElement(l.r8,null)))}}}]);
+//# sourceMappingURL=component---src-pages-contact-js-e7a608d24a085e6e8d50.js.map

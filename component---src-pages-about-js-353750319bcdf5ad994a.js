@@ -1,0 +1,2 @@
+(self.webpackChunksijia_personal_site=self.webpackChunksijia_personal_site||[]).push([[682],{5518:function(e,n,t){"use strict";t.r(n);var a=t(7294),i=t(9),l=t(5802),o=i.ZP.main.withConfig({displayName:"about__StyledMainContainer",componentId:"moc8ju-0"})(["counter-reset:section;"]);n.default=function(e){var n=e.location;return a.createElement(l.Ar,{location:n},a.createElement(o,null,a.createElement(l.CL,null)))}}}]);
+//# sourceMappingURL=component---src-pages-about-js-353750319bcdf5ad994a.js.map

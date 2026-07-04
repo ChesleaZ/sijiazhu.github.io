@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://chesleaz.github.io/sitemap.xml
+Host: https://chesleaz.github.io
