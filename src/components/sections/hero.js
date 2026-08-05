@@ -19,25 +19,31 @@ const StyledHeroSection = styled.section`
     padding-top: calc(var(--nav-height) + 18px);
   }
 
-  @media (min-width: 1800px) {
-    grid-template-columns: minmax(0, 790px) minmax(280px, 360px);
-    gap: clamp(34px, 4vw, 56px);
+  @media (min-width: 1100px) {
+    grid-template-columns: minmax(0, 700px) minmax(280px, 340px);
+    gap: clamp(40px, 5vw, 72px);
     padding: calc(var(--nav-height) + 24px) 0 80px;
   }
 
   .hero-content {
     justify-self: center;
-    width: min(790px, 82vw);
-    max-width: 790px;
+    width: min(760px, 82vw);
+    max-width: 760px;
     min-width: 0;
+
+    @media (min-width: 1100px) {
+      justify-self: end;
+      width: 100%;
+      max-width: 700px;
+    }
   }
 
   h2.big-heading {
     font-size: clamp(46px, 9vw, 68px);
     line-height: 1.03;
 
-    @media (min-width: 1800px) {
-      font-size: clamp(64px, 6.8vw, 90px);
+    @media (min-width: 1100px) {
+      font-size: clamp(56px, 5vw, 76px);
     }
   }
 
@@ -46,9 +52,8 @@ const StyledHeroSection = styled.section`
     width: min(300px, 44vw);
     max-width: 100%;
 
-    @media (min-width: 1800px) {
-      justify-self: end;
-      width: min(360px, 100%);
+    @media (min-width: 1100px) {
+      width: min(340px, 100%);
     }
 
     @media (max-width: 480px) {
@@ -60,8 +65,8 @@ const StyledHeroSection = styled.section`
     justify-self: center;
     order: -1;
 
-    @media (min-width: 1800px) {
-      justify-self: end;
+    @media (min-width: 1100px) {
+      justify-self: start;
       order: 0;
     }
   }
@@ -109,9 +114,9 @@ const StyledHeroSection = styled.section`
     max-width: min(760px, 82vw);
     font-size: clamp(34px, 4.6vw, 48px);
 
-    @media (min-width: 1800px) {
-      max-width: 790px;
-      font-size: clamp(42px, 3.95vw, 54px);
+    @media (min-width: 1100px) {
+      max-width: 700px;
+      font-size: clamp(36px, 3.4vw, 46px);
     }
 
     @media (max-width: 480px) {

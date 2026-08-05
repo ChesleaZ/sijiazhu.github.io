@@ -142,23 +142,21 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I am a graduate student at Johns Hopkins University working at the intersection of
-              biostatistics, machine learning, and biomedical data science. I am especially
-              interested in methods that make high-dimensional biomedical data more interpretable
-              and statistically reliable.
+              I am an M.S. student in Applied Mathematics and Statistics (Biostatistics) at Johns
+              Hopkins University. My work sits at the intersection of statistics, machine learning,
+              and biomedical science.
             </p>
 
             <p>
-              My current research spans single-cell representation learning, survival analysis in
-              oncology clinical trials, and genetic signals in type 2 diabetes clusters. I enjoy
-              both methodological work and applied analyses where careful statistical modeling can
-              clarify biological questions.
+              I develop statistical methods for high-dimensional biomedical data, with a focus on
+              interpretable modeling, single-cell multi-omics, genomic mechanisms of disease, and
+              patient risk. I am interested in tools that connect complex molecular data to clear
+              biological and clinical insight.
             </p>
 
             <p>
-              I also publish work on fuzzy-set methods, clustering, medical diagnosis, risk
-              assessment, and image segmentation. This page collects selected research, publications,
-              and service in one place.
+              My current projects span single-cell representation learning, pathway-based genetic
+              analysis, and survival modeling in oncology clinical trials.
             </p>
 
             <p>Tools and topics I work with:</p>

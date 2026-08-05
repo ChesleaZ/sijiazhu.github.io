@@ -7,8 +7,7 @@ import { usePrefersReducedMotion } from '@hooks';
 const researchItems = [
   {
     institution: 'Massachusetts General Hospital',
-    role: 'Research Collaborator',
-    range: 'June 2026 - Present',
+    role: 'Student Researcher',
     topic: 'Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters',
     tags: ['Type 2 diabetes', 'Polygenic scores', 'Genetic clustering'],
     bullets: [
@@ -19,8 +18,7 @@ const researchItems = [
   },
   {
     institution: 'Harvard T.H. Chan School of Public Health',
-    role: 'Research Assistant',
-    range: 'February 2026 - Present',
+    role: 'Student Researcher',
     topic: 'Scaling Laws in Single-Cell Representation Learning',
     tags: ['Single-cell multi-omics', 'Random Matrix Theory', 'Representation learning'],
     bullets: [
@@ -31,8 +29,7 @@ const researchItems = [
   },
   {
     institution: 'Johns Hopkins University',
-    role: 'Research Assistant',
-    range: 'October 2025 - February 2026',
+    role: 'Student Researcher',
     topic: 'Survival Analysis in Oncology Clinical Trials',
     tags: ['Survival analysis', 'Cox modeling', 'Clinical trials'],
     bullets: [
@@ -43,8 +40,7 @@ const researchItems = [
   },
   {
     institution: 'The Chinese University of Hong Kong',
-    role: 'Research Assistant',
-    range: 'May 2022 - January 2023',
+    role: 'Student Researcher',
     topic: 'Single-Cell Sequencing Analysis of Blood Tissue Samples',
     tags: ['Single-cell analysis', 'Leiden clustering', 'Cell annotation'],
     bullets: [
@@ -192,12 +188,11 @@ const Research = () => {
       <div className="experience-group">
         <h3 className="section-heading">Research</h3>
         <ul className="research-list">
-          {researchItems.map(({ institution, role, range, topic, tags, bullets }, i) => (
+          {researchItems.map(({ institution, role, topic, tags, bullets }, i) => (
             <li
               className="research-card"
               key={institution}
               ref={el => (revealItems.current[i] = el)}>
-              <p className="research-meta">{range}</p>
               <h3>{topic}</h3>
               <p className="institution">
                 <strong>{role}</strong>, {institution}

@@ -1,9 +1,8 @@
 ---
 date: '2026-06-01'
-title: 'Research Collaborator'
+title: 'Student Researcher'
 company: 'Massachusetts General Hospital'
 location: 'Boston, MA'
-range: 'June 2026 - Present'
 url: 'https://www.massgeneral.org/'
 personalized: true
 ---

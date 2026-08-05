@@ -1,9 +1,8 @@
 ---
 date: '2022-05-01'
-title: 'Research Assistant'
+title: 'Student Researcher'
 company: 'The Chinese University of Hong Kong'
 location: 'Hong Kong'
-range: 'May 2022 - January 2023'
 url: 'https://www.cuhk.edu.hk/'
 personalized: true
 ---

@@ -1,9 +1,8 @@
 ---
 date: '2025-10-01'
-title: 'Research Assistant'
+title: 'Student Researcher'
 company: 'Johns Hopkins University'
 location: 'Baltimore, MD'
-range: 'October 2025 - February 2026'
 url: 'https://www.jhu.edu/'
 personalized: true
 ---

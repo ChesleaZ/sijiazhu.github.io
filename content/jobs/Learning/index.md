@@ -1,9 +1,8 @@
 ---
 date: '2026-02-01'
-title: 'Research Assistant'
+title: 'Student Researcher'
 company: 'Harvard T.H. Chan School of Public Health'
 location: 'Boston, MA'
-range: 'February 2026 - Present'
 url: 'https://www.hsph.harvard.edu/'
 personalized: true
 ---
