@@ -72,7 +72,7 @@ const StyledContactSection = styled.section`
     padding: 22px 24px;
     border: 1px solid var(--lightest-navy);
     border-radius: 8px;
-    background-color: var(--white);
+    background-color: var(--surface);
     color: var(--slate);
     text-decoration: none;
     transition: var(--transition);

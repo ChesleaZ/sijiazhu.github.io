@@ -6,9 +6,10 @@ import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
 
 const RESEARCH_TOPICS = [
-  'complex biomedical data',
-  'single\u2011cell multi\u2011omics',
-  'genomic mechanisms of disease',
+  'biological foundation models',
+  'scaling laws and generalization',
+  'multimodal learning for biology',
+  'cell-to-text generation',
 ];
 
 const StyledHeroSection = styled.section`
@@ -83,13 +84,13 @@ const StyledHeroSection = styled.section`
     overflow: hidden;
     border: 1px solid var(--lightest-navy);
     border-radius: 16px;
-    background-color: var(--white);
+    background-color: var(--surface);
 
     &:after {
       content: '';
       position: absolute;
       inset: 14px;
-      border: 2px solid var(--green);
+      border: 1px solid rgba(122, 216, 199, 0.4);
       border-radius: 12px;
       pointer-events: none;
     }
@@ -184,6 +185,14 @@ const StyledHeroSection = styled.section`
     max-width: 540px;
   }
 
+  .hero-description {
+    margin-top: 24px;
+    color: var(--light-slate);
+    font-size: clamp(18px, 1.6vw, 21px);
+    line-height: 1.5;
+    max-width: 500px;
+  }
+
   .email-link {
     ${({ theme }) => theme.mixins.bigButton};
     font-size: var(--fz-md);
@@ -253,14 +262,14 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [isMounted, prefersReducedMotion]);
 
-  const one = <h1>Hello, my name is</h1>;
+  const one = <h1>AI for Biology</h1>;
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
   const three = (
     <h3
       className="big-heading"
-      aria-label={`I develop statistical methods for ${RESEARCH_TOPICS.join(', ')}.`}>
+      aria-label={`I work on ${RESEARCH_TOPICS.join(', ')}.`}>
       <span className="hero-title-prefix" aria-hidden="true">
-        I develop statistical methods for
+        I work on
       </span>
       <span className="rotating-topic" aria-hidden="true">
         {RESEARCH_TOPICS.map(topic => (
@@ -296,6 +305,10 @@ const Hero = () => {
               ))}
           </TransitionGroup>
         )}
+        <p className="hero-description">
+          I study how single-cell models learn biological information and connect cellular
+          representations with language.
+        </p>
       </div>
 
       {prefersReducedMotion ? (

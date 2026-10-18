@@ -129,8 +129,8 @@ const About = () => {
     'Python',
     'PyTorch',
     'R',
-    'MATLAB',
-    'Bayesian Modeling',
+    'Representation Learning',
+    'Scaling Laws',
     'Single-cell Analysis',
   ];
 
@@ -142,21 +142,21 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I am an M.S. student in Applied Mathematics and Statistics (Biostatistics) at Johns
-              Hopkins University. My work sits at the intersection of statistics, machine learning,
-              and biomedical science.
+              I am an M.S. student in Applied Mathematics and Statistics at Johns Hopkins University
+              and a visiting graduate student in Biostatistics at Harvard. My research focuses on
+              AI for biology, supported by a background in mathematics and statistics.
             </p>
 
             <p>
-              I develop statistical methods for high-dimensional biomedical data, with a focus on
-              interpretable modeling, single-cell multi-omics, genomic mechanisms of disease, and
-              patient risk. I am interested in tools that connect complex molecular data to clear
-              biological and clinical insight.
+              I study scaling laws for single-cell representation models, examining how cell
+              number, sequencing depth, and batch structure shape biological information recovery
+              and experimental design.
             </p>
 
             <p>
-              My current projects span single-cell representation learning, pathway-based genetic
-              analysis, and survival modeling in oncology clinical trials.
+              I also build pipelines that connect cellular representations with large language
+              models for cell-to-text generation and interpretation. I am interested in extending
+              this work to multimodal foundation models for biology.
             </p>
 
             <p>Tools and topics I work with:</p>

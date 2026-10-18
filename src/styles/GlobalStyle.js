@@ -75,6 +75,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: var(--navy);
+    background-image: radial-gradient(ellipse at 80% 10%, rgba(122, 216, 199, 0.035), transparent 50%);
     color: var(--slate);
     font-family: var(--font-sans);
     font-size: var(--fz-xl);

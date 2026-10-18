@@ -5,7 +5,7 @@ module.exports = {
   siteMetadata: {
     title: 'Sijia Zhu',
     description:
-      'Sijia Zhu studies biostatistical methods for high-dimensional biomedical data, Bayesian modeling, statistical machine learning, and single-cell multi-omics.',
+      'Sijia Zhu studies AI for biology, with a focus on single-cell foundation models, scaling laws, multimodal learning, and cell-to-text interpretation.',
     siteUrl: 'https://chesleaz.github.io/sijiazhu.github.io', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@sijiazhu',

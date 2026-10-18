@@ -93,7 +93,7 @@ const StyledResearchSection = styled.section`
     padding: 28px;
     border: 1px solid var(--lightest-navy);
     border-radius: 10px;
-    background-color: var(--white);
+    background-color: var(--surface);
     box-shadow: 0 14px 35px -24px var(--navy-shadow);
 
     @media (max-width: 600px) {
@@ -160,7 +160,7 @@ const StyledResearchSection = styled.section`
     padding: 28px;
     border: 1px solid var(--lightest-navy);
     border-radius: 10px;
-    background-color: var(--white);
+    background-color: var(--surface);
     box-shadow: 0 14px 35px -24px var(--navy-shadow);
 
     @media (max-width: 600px) {
