@@ -273,7 +273,7 @@ const Hero = () => {
     if (preview) {
       window.parent.postMessage({ type: 'homepage-editor-ready' }, window.location.origin);
     } else {
-      fetch(withPrefix('/homepage-config.json'))
+      fetch(withPrefix('/homepage-config.json'), { cache: 'no-store' })
         .then(response => response.ok ? response.json() : null)
         .then(value => { if (!cancelled && value) setSettings(normalizeSettings(value)); })
         .catch(() => {});
