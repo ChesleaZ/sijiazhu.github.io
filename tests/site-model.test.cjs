@@ -100,3 +100,32 @@ test('Existing homepage preferences and published user edits survive the new sch
   assert.equal(result.about.title, 'An edited title');
   assert.equal(result.archive.backgroundEnabled, true);
 });
+test('Moving one motif on one page survives export without moving other motifs or pages', () => {
+  const site = model.clone(model.defaults);
+  model.setPath(site, 'about.backgroundPositions.cells.x', 12.3);
+  model.setPath(site, 'about.backgroundPositions.cells.y', -7.2);
+  const result = model.normalize(JSON.parse(JSON.stringify(site)));
+  assert.deepEqual(result.about.backgroundPositions.cells, {x:12.3,y:-7.2});
+  assert.deepEqual(result.about.backgroundPositions.surface, {x:0,y:0});
+  assert.deepEqual(result.home.backgroundPositions.cells, {x:0,y:0});
+  assert.deepEqual(result.archive.backgroundPositions.cells, {x:0,y:0});
+});
+test('Older drafts preserve published edits while gaining default motif positions', () => {
+  const old = model.clone(model.defaults);
+  for (const page of ['home','about','research','publications','archive','contact','paper']) delete old[page].backgroundPositions;
+  old.paper.status = 'Submitted to Cell';
+  old.home.backgroundOpacity = 21;
+  const result = model.normalize(old);
+  assert.equal(result.paper.status, 'Submitted to Cell');
+  assert.equal(result.home.backgroundOpacity, 21);
+  assert.deepEqual(result.paper.backgroundPositions, model.defaults.paper.backgroundPositions);
+});
+test('Position data is bounded and malformed or unknown fields cannot reach rendered CSS', () => {
+  const site = model.clone(model.defaults);
+  site.paper.backgroundPositions.robot = {x:99999,y:-99999,css:'url(example)'};
+  site.home.backgroundPositions.surface = {x:'calc(1px)',y:NaN};
+  const result = model.normalize(site);
+  assert.deepEqual(result.paper.backgroundPositions.robot,{x:100,y:-100});
+  assert.deepEqual(result.home.backgroundPositions.surface,{x:0,y:0});
+  assert.throws(()=>model.setPath(site,'home.backgroundPositions.missing.x',12));
+});

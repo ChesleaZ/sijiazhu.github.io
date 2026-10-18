@@ -6,8 +6,10 @@ const frame = el('preview');
 const rootURL = new URL('../', location.href);
 const key = 'sijia-site-draft-v2';
 const pages = { home: ['', '首页'], about: ['about/', 'About'], research: ['research/', 'Experience'], publications: ['publications/', '精选论文'], archive: ['archive/', '完整论文列表'], contact: ['contact/', 'Contact'], paper: ['papers/single-cell-scaling/', '论文介绍'] };
-const labels = { backgroundEnabled: '显示本页科学背景', backgroundOpacity: '线稿浓淡', backgroundAnimated: '启用缓慢动画', greeting: '问候语', name: '姓名', prefix: '研究引导语', topics: '轮播主题 · 每行一项', photoSide: '照片位置', photoWidth: '照片宽度', titleSize: '姓名字号', topicSize: '轮播字号', title: '标题', paragraphs: '正文段落 · 空行分段', skillsLabel: '技能列表引导语', skills: '技能与主题 · 每行一项', width: '页面内容宽度', photoVisible: '显示照片', heading: '研究部分标题', academicHeading: '学术服务部分标题', items: '条目', academicItems: '教学与学术服务', institution: '机构', role: '角色', topic: '研究课题', tags: '标签 · 每行一项', bullets: '研究内容 · 每行一项', details: '内容 · 每行一项', archiveLabel: '完整列表按钮', archiveTitle: '完整列表标题', archiveDescription: '完整列表简介', columns: '桌面论文列数', year: '年份', authors: '作者', venue: '期刊 / 会议 / 稿件状态', status: '论文状态', keywords: '关键词 · 每行一项', url: '链接', selected: '显示在精选论文中（最多前六篇）', intro: '简介', links: '联系链接', label: '显示名称', icon: '图标', eyebrow: '页面上方标签', overviewTitle: '研究概述标题', availabilityTitle: '稿件可用性标题', availabilityText: '稿件可用性说明', preprintLabel: '预印本链接文字', preprintURL: '预印本链接 · 未上线可留空', background: '背景颜色', text: '标题文字', muted: '正文文字', accent: '强调色', surface: '卡片背景', fontSize: '正文字号', cardRadius: '卡片圆角' };
-const ranges = { backgroundOpacity: [0, 40, 1], width: [520, 1200, 20], photoWidth: [240, 400, 10], titleSize: [46, 80, 1], topicSize: [26, 46, 1], columns: [1, 3, 1], fontSize: [16, 24, 1], cardRadius: [0, 24, 1] };
+const labels = { x: '横向移动 · 右为正', y: '纵向移动 · 下为正', backgroundEnabled: '显示本页科学背景', backgroundOpacity: '线稿浓淡', backgroundAnimated: '启用缓慢动画', greeting: '问候语', name: '姓名', prefix: '研究引导语', topics: '轮播主题 · 每行一项', photoSide: '照片位置', photoWidth: '照片宽度', titleSize: '姓名字号', topicSize: '轮播字号', title: '标题', paragraphs: '正文段落 · 空行分段', skillsLabel: '技能列表引导语', skills: '技能与主题 · 每行一项', width: '页面内容宽度', photoVisible: '显示照片', heading: '研究部分标题', academicHeading: '学术服务部分标题', items: '条目', academicItems: '教学与学术服务', institution: '机构', role: '角色', topic: '研究课题', tags: '标签 · 每行一项', bullets: '研究内容 · 每行一项', details: '内容 · 每行一项', archiveLabel: '完整列表按钮', archiveTitle: '完整列表标题', archiveDescription: '完整列表简介', columns: '桌面论文列数', year: '年份', authors: '作者', venue: '期刊 / 会议 / 稿件状态', status: '论文状态', keywords: '关键词 · 每行一项', url: '链接', selected: '显示在精选论文中（最多前六篇）', intro: '简介', links: '联系链接', label: '显示名称', icon: '图标', eyebrow: '页面上方标签', overviewTitle: '研究概述标题', availabilityTitle: '稿件可用性标题', availabilityText: '稿件可用性说明', preprintLabel: '预印本链接文字', preprintURL: '预印本链接 · 未上线可留空', background: '背景颜色', text: '标题文字', muted: '正文文字', accent: '强调色', surface: '卡片背景', fontSize: '正文字号', cardRadius: '卡片圆角' };
+const artworkLabels = { network: 'Network', cells: '细胞群', surface: '三维曲面', umap: 'UMAP', objective: '优化目标公式', attention: 'Attention 公式', robot: '机器人', tubes: '试管' };
+let artworkMode = false, selectedArtwork = 'network', draggingArtwork = null;
+const ranges = { x: [-100,100,.1], y: [-100,100,.1], backgroundOpacity: [0, 40, 1], width: [520, 1200, 20], photoWidth: [240, 400, 10], titleSize: [46, 80, 1], topicSize: [26, 46, 1], columns: [1, 3, 1], fontSize: [16, 24, 1], cardRadius: [0, 24, 1] };
 let config = model.clone(model.defaults), published = model.clone(model.defaults), baseSha = null;
 let page = new URLSearchParams(location.search).get('page') || 'home';
 if (!pages[page] && page !== 'theme') page = 'home';
@@ -17,7 +19,28 @@ let watchTimer, watchId = 0, lastPublish;
 const undoHistory = [];
 function status(text) { el('status').textContent = text; }
 function datasetPage() { return page === 'archive' ? 'publications' : page; }
-function send() { if (ready) frame.contentWindow.postMessage({ type: 'site-config', settings: model.normalize(config) }, location.origin); }
+function sendArtworkMode() {
+  if (ready) frame.contentWindow.postMessage({ type: 'site-artwork-mode', enabled: artworkMode && page !== 'theme' && config[previewPage].backgroundEnabled, selected: selectedArtwork }, location.origin);
+}
+function send() { if (ready) { frame.contentWindow.postMessage({ type: 'site-config', settings: model.normalize(config) }, location.origin); sendArtworkMode(); } }
+function artworkControls() {
+  const box = document.createElement('div'); box.className = 'artwork-controls';
+  const toggleLabel = document.createElement('label'); toggleLabel.htmlFor = 'artwork-mode'; toggleLabel.textContent = '拖动图案 · 位置编辑模式';
+  const toggle = document.createElement('input'); toggle.type = 'checkbox'; toggle.id = 'artwork-mode'; toggle.checked = artworkMode; toggle.disabled = !config[page].backgroundEnabled;
+  toggle.onchange = () => { artworkMode = toggle.checked; sendArtworkMode(); };
+  const hint = document.createElement('p'); hint.className = 'hint'; hint.textContent = '开启后拖动右侧图案。也可选中图案，用下方滑块微调。位置仅作用于当前页；完成后关闭此模式。';
+  const itemLabel = document.createElement('label'); itemLabel.htmlFor = 'artwork-item'; itemLabel.textContent = '选择图案';
+  const select = document.createElement('select'); select.className = 'field-input'; select.id = 'artwork-item';
+  Object.entries(artworkLabels).forEach(([id, label]) => { const option = document.createElement('option'); option.value = id; option.textContent = label; select.appendChild(option); }); select.value = selectedArtwork;
+  select.onchange = () => { selectedArtwork = select.value; renderControls(); sendArtworkMode(); };
+  const reset = document.createElement('button'); reset.type = 'button'; reset.textContent = '恢复此图案默认位置';
+  reset.onclick = () => { checkpoint(); config[page].backgroundPositions[selectedArtwork] = {x:0,y:0}; changed(); renderControls(); };
+  const resetAll = document.createElement('button'); resetAll.type = 'button'; resetAll.textContent = '恢复本页全部图案位置';
+  resetAll.onclick = () => { checkpoint(); config[page].backgroundPositions = model.clone(model.defaults[page].backgroundPositions); changed(); renderControls(); };
+  box.append(toggleLabel, toggle, hint, itemLabel, select);
+  ['x','y'].forEach(axis => box.appendChild(createField(page + '.backgroundPositions.' + selectedArtwork + '.' + axis, 0)));
+  box.append(reset, resetAll); return box;
+}
 function checkpoint() { undoHistory.push(model.clone(config)); if (undoHistory.length > 30) undoHistory.shift(); }
 function changed() { dirty = true; version++; status('有未保存的全站修改'); send(); }
 function update(path, value) { checkpoint(); model.setPath(config, path, value); changed(); }
@@ -63,12 +86,12 @@ function createField(path, template) {
     input = document.createElement('textarea'); input.value = value.join(fieldKey === 'paragraphs' ? '\n\n' : '\n');
     input.oninput = () => update(path, input.value.split(fieldKey === 'paragraphs' ? /\n\s*\n/ : /\n/).map(x => x.trim()).filter(Boolean));
   } else if (typeof template === 'boolean') {
-    input = document.createElement('input'); input.type = 'checkbox'; input.checked = value; input.onchange = () => update(path, input.checked);
+    input = document.createElement('input'); input.type = 'checkbox'; input.checked = value; input.onchange = () => { update(path, input.checked); if (fieldKey === 'backgroundEnabled') renderControls(); };
   } else if (typeof template === 'number') {
     input = document.createElement('input'); input.type = fieldKey === 'year' ? 'number' : 'range';
     const range = ranges[fieldKey] || [1900, 2200, 1]; [input.min, input.max, input.step] = range;
-    input.value = value; const output = document.createElement('output'); output.textContent = String(value) + (fieldKey === 'backgroundOpacity' ? '%' : ['columns', 'year'].includes(fieldKey) ? '' : 'px');
-    input.oninput = () => { if (input.value === '') return; const number = Number(input.value); if (!Number.isFinite(number)) return; output.textContent = String(number) + (fieldKey === 'backgroundOpacity' ? '%' : ['columns', 'year'].includes(fieldKey) ? '' : 'px'); update(path, number); }; label.appendChild(output);
+    input.value = value; const output = document.createElement('output'); output.textContent = String(value) + (['backgroundOpacity', 'x', 'y'].includes(fieldKey) ? '%' : ['columns', 'year'].includes(fieldKey) ? '' : 'px');
+    input.oninput = () => { if (input.value === '') return; const number = Number(input.value); if (!Number.isFinite(number)) return; output.textContent = String(number) + (['backgroundOpacity', 'x', 'y'].includes(fieldKey) ? '%' : ['columns', 'year'].includes(fieldKey) ? '' : 'px'); update(path, number); }; label.appendChild(output);
   } else if (fieldKey === 'photoSide' || fieldKey === 'icon') {
     input = document.createElement('select'); input.className = 'field-input';
     const options = fieldKey === 'photoSide' ? [['left', '左侧'], ['right', '右侧']] : [['email', 'Email'], ['linkedin', 'LinkedIn'], ['scholar', 'Google Scholar']];
@@ -91,17 +114,18 @@ function renderControls() {
   if (page !== 'theme') {
     const heading = document.createElement('h2'); heading.textContent = '科学线稿背景'; el('controls').appendChild(heading);
     backgroundKeys.forEach(field => el('controls').appendChild(createField(page + '.' + field, model.defaults[page][field])));
+    el('controls').appendChild(artworkControls());
     const textHeading = document.createElement('h2'); textHeading.textContent = '文字与布局'; el('controls').appendChild(textHeading);
   }
-  Object.keys(template).filter(field => !backgroundKeys.includes(field)).forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
+  Object.keys(template).filter(field => !backgroundKeys.includes(field) && field !== 'backgroundPositions').forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
   el('controls').querySelectorAll('details').forEach(node => { node.open = open.has(node.dataset.itemPath); });
   el('controls').parentElement.scrollTop = scrollTop;
-  el('page').value = page;
+  el('page').value = page; sendArtworkMode();
   el('page-note').textContent = page === 'theme' ? '这些设置同时作用于所有页面。右侧保留当前页面预览。' : page === 'archive' || page === 'publications' ? '本页背景独立设置；精选论文和完整列表共用论文数据。勾选精选后，前六篇显示为卡片。' : '可点击预览中的文字直接编辑，也可在下方修改内容。保存草稿包含所有页面。';
 }
 function navigate(next) {
   if (!pages[next] && next !== 'theme') return;
-  page = next; renderControls();
+  draggingArtwork = null; page = next; renderControls();
   const url = new URL(location.href); url.searchParams.set('page', page); window.history.replaceState(null, '', url);
   if (page !== 'theme') {
     previewPage = page; ready = false;
@@ -114,7 +138,7 @@ el('page').onchange = () => navigate(el('page').value);
 function saveDraft() { localStorage.setItem(key, JSON.stringify({ config: model.normalize(config), baseSha, baseConfig: published })); dirty = false; }
 el('save').onclick = () => { try { saveDraft(); status('全站草稿已保存到本浏览器'); } catch (error) { status('无法保存，请导出配置备份'); } };
 el('undo').onclick = () => { if (!undoHistory.length) { status('没有可撤销的修改'); return; } config = undoHistory.pop(); changed(); renderControls(); };
-el('reset-page').onclick = () => { checkpoint(); const previousBackground = Object.fromEntries(['backgroundEnabled', 'backgroundOpacity', 'backgroundAnimated'].map(k => [k, config.publications[k]])); config[datasetPage()] = model.clone(published[datasetPage()]); if (page === 'archive') { Object.assign(config.publications, previousBackground); config.archive = model.clone(published.archive); } changed(); renderControls(); };
+el('reset-page').onclick = () => { checkpoint(); const previousBackground = Object.fromEntries(['backgroundEnabled', 'backgroundOpacity', 'backgroundAnimated', 'backgroundPositions'].map(k => [k, config.publications[k]])); config[datasetPage()] = model.clone(published[datasetPage()]); if (page === 'archive') { Object.assign(config.publications, previousBackground); config.archive = model.clone(published.archive); } changed(); renderControls(); };
 el('reset-all').onclick = async () => { try { const latest = await publisher.readLatest(); checkpoint(); config = model.normalize(latest.config); published = model.clone(config); baseSha = latest.sha; if (!publishing) el('publish-panel').hidden = true; changed(); renderControls(); status('已读取全部官网内容 · 可撤销'); } catch (error) { status('读取失败，当前草稿已保留'); } };
 el('export').onclick = () => { const blob = new Blob([JSON.stringify(model.normalize(config), null, 2) + '\n'], { type: 'application/json' }), url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'site-config.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); status('已导出全站配置备份'); };
 el('import').onclick = () => el('file').click();
@@ -124,7 +148,25 @@ new ResizeObserver(resizePreview).observe(el('stage').parentElement);
 el('viewport').onclick = () => { mobile = !mobile; el('viewport').textContent = mobile ? '切换桌面预览' : '切换手机预览'; resizePreview(); };
 window.addEventListener('message', event => {
   if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
-  if (event.data?.type === 'site-preview-ready') { ready = true; send(); }
+  if (event.data?.type === 'site-artwork-ready') { sendArtworkMode(); }
+  else if (event.data?.type === 'site-artwork-select' && page !== 'theme' && event.data.page === previewPage && Object.hasOwnProperty.call(artworkLabels, event.data.id)) {
+    selectedArtwork = event.data.id; renderControls();
+  }
+  else if (event.data?.type === 'site-artwork-drag-start' && artworkMode && event.data.page === previewPage && Object.hasOwnProperty.call(artworkLabels, event.data.id)) {
+    checkpoint(); draggingArtwork = event.data.id;
+  }
+  else if (event.data?.type === 'site-artwork-move' && artworkMode && event.data.page === previewPage && Object.hasOwnProperty.call(artworkLabels, event.data.id) && Number.isFinite(event.data.x) && Number.isFinite(event.data.y)) {
+    const data = event.data;
+    if (data.phase !== 'commit' && draggingArtwork !== data.id) return;
+    if (data.phase === 'commit') checkpoint();
+    const target = previewPage + '.backgroundPositions.' + data.id;
+    ['x','y'].forEach(axis => model.setPath(config, target + '.' + axis, Math.round(Math.max(-100, Math.min(100, data[axis])) * 10) / 10));
+    if (data.phase === 'preview') {
+      dirty = true; version++; status('图案位置已修改 · 尚未保存');
+      ['x','y'].forEach(axis => { const input = el('field-' + (target + '.' + axis).replaceAll('.', '-')); if (input) { input.value = data[axis]; input.previousElementSibling.querySelector('output').textContent = data[axis] + '%'; } });
+    } else { draggingArtwork = null; changed(); renderControls(); }
+  }
+  else if (event.data?.type === 'site-preview-ready') { ready = true; send(); }
   else if (event.data?.type === 'site-navigate') navigate(event.data.page);
   else if (event.data?.type === 'site-text-edit' && typeof event.data.value === 'string' && typeof event.data.path === 'string' && typeof model.getPath(config, event.data.path) === 'string') {
     try { update(event.data.path, event.data.value); renderControls(); } catch (error) { status('此字段不能直接编辑'); }
@@ -187,4 +229,5 @@ el('publish').onclick = async () => {
   if (page === 'theme') { const target = new URL(pages.home[0], rootURL); target.searchParams.set('preview', '1'); target.searchParams.set('studio', String(Date.now())); frame.src = target.href; }
   navigate(page);
 })();
+
 

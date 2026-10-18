@@ -25,7 +25,41 @@
     "topicSize": 43,
     "backgroundEnabled": true,
     "backgroundOpacity": 14,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "about": {
     "title": "About Me",
@@ -48,7 +82,41 @@
     "photoSide": "right",
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "research": {
     "heading": "Research",
@@ -139,7 +207,41 @@
     "width": 960,
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "publications": {
     "title": "Selected Publication",
@@ -357,7 +459,41 @@
     ],
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "contact": {
     "title": "Get In Touch",
@@ -382,7 +518,41 @@
     ],
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "paper": {
     "eyebrow": "Research paper",
@@ -401,11 +571,79 @@
     "width": 900,
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "archive": {
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   }
 }

@@ -27,7 +27,41 @@ const defaults = {
     "topicSize": 43,
     "backgroundEnabled": true,
     "backgroundOpacity": 14,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "about": {
     "title": "About Me",
@@ -50,7 +84,41 @@ const defaults = {
     "photoSide": "right",
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "research": {
     "heading": "Research",
@@ -140,7 +208,41 @@ const defaults = {
     "width": 960,
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "publications": {
     "title": "Selected Publication",
@@ -358,7 +460,41 @@ const defaults = {
     ],
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "contact": {
     "title": "Get In Touch",
@@ -383,7 +519,41 @@ const defaults = {
     ],
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "paper": {
     "eyebrow": "Research paper",
@@ -402,12 +572,80 @@ const defaults = {
     "width": 900,
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "archive": {
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
-    "backgroundAnimated": true
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
   }
 };
 const clone=value=>JSON.parse(JSON.stringify(value));
@@ -418,7 +656,7 @@ function normalize(input){
   if(Array.isArray(template)){if(!Array.isArray(value))return clone(template);return value.slice(0,100).map(item=>read(item,template[0]===undefined?'':template[0],path+'.item'));}
   if(template&&typeof template==='object'){const out={};Object.keys(template).forEach(k=>{out[k]=read(value&&typeof value==='object'?value[k]:undefined,template[k],path?path+'.'+k:k);});return out;}
   if(typeof template==='boolean')return typeof value==='boolean'?value:template;
-  if(typeof template==='number'){if(typeof value!=='number'||!Number.isFinite(value))return template;const ranges={width:[520,1200],photoWidth:[240,400],titleSize:[46,80],topicSize:[26,46],backgroundOpacity:[0,40],fontSize:[16,24],cardRadius:[0,24],columns:[1,3],year:[1900,2200],version:[2,2]};const [min,max]=ranges[key]||[-100000,100000];return Math.round(Math.min(max,Math.max(min,value)));}
+  if(typeof template==='number'){if(typeof value!=='number'||!Number.isFinite(value))return template;const ranges={width:[520,1200],photoWidth:[240,400],titleSize:[46,80],topicSize:[26,46],x:[-100,100],y:[-100,100],backgroundOpacity:[0,40],fontSize:[16,24],cardRadius:[0,24],columns:[1,3],year:[1900,2200],version:[2,2]};const [min,max]=ranges[key]||[-100000,100000];const clipped=Math.min(max,Math.max(min,value));return key==='x'||key==='y'?Math.round(clipped*10)/10:Math.round(clipped);}
   if(typeof value!=='string')return template;
   if(['background','text','muted','accent','surface'].includes(key))return /^#[0-9a-f]{6}$/i.test(value)?value:template;
   if(key==='photoSide')return value==='left'?'left':'right';
@@ -435,5 +673,6 @@ function setPath(object,path,value){const parts=String(path).split('.');if(parts
 function getPath(object,path){return String(path).split('.').reduce((value,key)=>value&&Object.prototype.hasOwnProperty.call(value,key)?value[key]:undefined,object);}
 return {defaults,normalize,clone,safeURL,setPath,getPath};
 });
+
 
 

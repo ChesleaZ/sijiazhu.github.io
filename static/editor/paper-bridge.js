@@ -10,15 +10,21 @@
   const backdrop = document.createElement('div');
   backdrop.className = 'science-backdrop'; backdrop.dataset.page = 'paper'; backdrop.setAttribute('aria-hidden', 'true');
   [['network','0 0 230 150'], ['cells','0 0 175 145'], ['surface','0 0 245 195'], ['umap','0 0 214 186'], ['objective','0 0 586 86'], ['attention','0 0 566 102'], ['robot','0 0 125 143'], ['tubes','0 0 133 148']].forEach(([id, viewBox]) => {
-    const motif = document.createElement('div'); motif.className = 'science-motif science-' + id;
+    const motif = document.createElement('div'); motif.className = 'science-motif science-' + id; motif.dataset.artwork = id;
     const svg = document.createElementNS(svgNS, 'svg'); svg.setAttribute('viewBox', viewBox); svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor'); svg.setAttribute('stroke-width', '1.4'); svg.setAttribute('focusable', 'false');
     const use = document.createElementNS(svgNS, 'use'); use.setAttribute('href', '../../science/motifs.svg?v=curves-20261018#' + id);
     svg.appendChild(use); motif.appendChild(svg); backdrop.appendChild(motif);
   });
   document.body.prepend(backdrop);
+  if (preview) window.SciencePositionEditor.attach(backdrop);
   function apply(value) {
     const config = model.normalize(value), data = config.paper, theme = config.theme;
     for (const [name, color] of Object.entries({ '--paper': theme.background, '--ink': theme.text, '--muted': theme.muted, '--accent': theme.accent, '--surface': theme.surface })) document.documentElement.style.setProperty(name, color);
+    backdrop.querySelectorAll('[data-artwork]').forEach(node => {
+      const point = data.backgroundPositions[node.dataset.artwork];
+      node.dataset.positionX = point.x; node.dataset.positionY = point.y;
+      node.style.setProperty('--science-dx', point.x + 'vw'); node.style.setProperty('--science-dy', point.y + 'vh');
+    });
     backdrop.hidden = !data.backgroundEnabled;
     backdrop.style.setProperty('--science-opacity', data.backgroundOpacity / 100);
     backdrop.dataset.animated = String(data.backgroundAnimated && data.backgroundOpacity > 0);
@@ -60,3 +66,4 @@
   if (preview) parent.postMessage({ type: 'site-preview-ready' }, location.origin);
   else fetch('../../site-config.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(value => { if (value) apply(value); }).catch(() => {});
 })();
+
