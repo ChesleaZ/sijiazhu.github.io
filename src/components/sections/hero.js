@@ -1,18 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { StaticImage } from 'gatsby-plugin-image';
+import { withPrefix } from 'gatsby';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
 
-const RESEARCH_TOPICS = [
-  'AI for biology',
-  'biological foundation models',
-  'multimodal learning for biology',
-  'cell-to-text generation',
-];
+const DEFAULT_SETTINGS = {
+  greeting: 'Hello, my name is',
+  name: 'Sijia Zhu.',
+  prefix: 'My research explores',
+  topics: ['AI for biology', 'biological foundation models', 'multimodal learning for biology', 'cell-to-text generation'],
+  background: '#0b1220', text: '#e6edf4', accent: '#7ad8c7',
+  photoSide: 'right', photoWidth: 340, titleSize: 64, topicSize: 43,
+};
+
+const normalizeSettings = value => {
+  const input = value && typeof value === 'object' ? value : {};
+  const settings = { ...DEFAULT_SETTINGS };
+  ['greeting', 'name', 'prefix'].forEach(key => {
+    if (typeof input[key] === 'string') settings[key] = input[key].slice(0, 120);
+  });
+  if (Array.isArray(input.topics)) {
+    const topics = input.topics.filter(x => typeof x === 'string' && x.trim()).slice(0, 8).map(x => x.trim().slice(0, 120));
+    if (topics.length) settings.topics = topics;
+  }
+  ['background', 'text', 'accent'].forEach(key => {
+    if (/^#[0-9a-f]{6}$/i.test(input[key])) settings[key] = input[key];
+  });
+  if (input.photoSide === 'left') settings.photoSide = 'left';
+  [['photoWidth', 240, 400], ['titleSize', 46, 80], ['topicSize', 26, 46]].forEach(([key, min, max]) => {
+    if (typeof input[key] === 'number' && Number.isFinite(input[key])) settings[key] = Math.min(max, Math.max(min, input[key]));
+  });
+  return settings;
+};
 
 const StyledHeroSection = styled.section`
+  --hero-name-size: 64px;
+  --hero-topic-size: 43px;
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
@@ -27,7 +52,7 @@ const StyledHeroSection = styled.section`
   }
 
   @media (min-width: 1100px) {
-    grid-template-columns: minmax(0, 700px) minmax(280px, 340px);
+    grid-template-columns: minmax(0, 700px) minmax(240px, var(--hero-photo-width, 340px));
     gap: clamp(40px, 5vw, 72px);
     padding: calc(var(--nav-height) + 24px) 0 80px;
   }
@@ -50,7 +75,7 @@ const StyledHeroSection = styled.section`
     line-height: 1.03;
 
     @media (min-width: 1100px) {
-      font-size: clamp(56px, 5vw, 76px);
+      font-size: var(--hero-name-size);
     }
   }
 
@@ -60,7 +85,7 @@ const StyledHeroSection = styled.section`
     max-width: 100%;
 
     @media (min-width: 1100px) {
-      width: min(340px, 100%);
+      width: min(var(--hero-photo-width, 340px), 100%);
     }
 
     @media (max-width: 480px) {
@@ -76,6 +101,18 @@ const StyledHeroSection = styled.section`
       justify-self: start;
       order: 0;
     }
+  }
+
+  @media (min-width: 1100px) {
+    &.photo-left {
+      grid-template-columns: minmax(240px, var(--hero-photo-width, 340px)) minmax(0, 700px);
+    }
+    &.photo-left .hero-photo-slot { order: -1; }
+  }
+
+  [contenteditable='true']:focus {
+    outline: 1px dashed var(--green);
+    outline-offset: 6px;
   }
 
   .hero-photo-inner {
@@ -123,7 +160,7 @@ const StyledHeroSection = styled.section`
 
     @media (min-width: 1100px) {
       max-width: 700px;
-      font-size: clamp(36px, 3.4vw, 46px);
+      font-size: var(--hero-topic-size);
     }
 
     @media (max-width: 480px) {
@@ -160,7 +197,8 @@ const StyledHeroSection = styled.section`
   .typewriter-cursor,
   .cursor-space {
     display: inline-block;
-    margin-left: 0.06em;
+    margin-left: 0;
+    width: 0;
     font-weight: 400;
   }
 
@@ -219,6 +257,50 @@ const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [typedTopic, setTypedTopic] = useState('');
   const prefersReducedMotion = usePrefersReducedMotion();
+  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [isPreview, setIsPreview] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const preview = new URLSearchParams(window.location.search).get('preview') === '1' && window.parent !== window;
+    setIsPreview(preview);
+    const receive = event => {
+      if (preview && event.origin === window.location.origin && event.source === window.parent && event.data?.type === 'homepage-config') {
+        setSettings(normalizeSettings(event.data.settings));
+      }
+    };
+    window.addEventListener('message', receive);
+    if (preview) {
+      window.parent.postMessage({ type: 'homepage-editor-ready' }, window.location.origin);
+    } else {
+      fetch(withPrefix('/homepage-config.json'))
+        .then(response => response.ok ? response.json() : null)
+        .then(value => { if (!cancelled && value) setSettings(normalizeSettings(value)); })
+        .catch(() => {});
+    }
+    return () => { cancelled = true; window.removeEventListener('message', receive); };
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const values = {
+      '--navy': settings.background, '--dark-navy': settings.background,
+      '--green': settings.accent, '--lightest-slate': settings.text,
+      '--slate': settings.text, '--light-slate': settings.text,
+    };
+    const previous = {};
+    Object.keys(values).forEach(key => { previous[key] = root.style.getPropertyValue(key); root.style.setProperty(key, values[key]); });
+    return () => Object.keys(values).forEach(key => {
+      if (previous[key]) root.style.setProperty(key, previous[key]); else root.style.removeProperty(key);
+    });
+  }, [settings.background, settings.text, settings.accent]);
+
+  const editText = key => isPreview ? {
+    contentEditable: true, suppressContentEditableWarning: true,
+    onBlur: event => window.parent.postMessage({
+      type: 'homepage-text-edit', key, value: event.currentTarget.textContent,
+    }, window.location.origin),
+  } : {};
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -240,7 +322,7 @@ const Hero = () => {
     let timeout;
 
     const tick = () => {
-      const phrase = RESEARCH_TOPICS[topicIndex] + '.';
+      const phrase = settings.topics[topicIndex] + '.';
       characterCount += deleting ? -1 : 1;
       setTypedTopic(phrase.slice(0, characterCount));
 
@@ -250,7 +332,7 @@ const Hero = () => {
         delay = 1700;
       } else if (deleting && characterCount === 0) {
         deleting = false;
-        topicIndex = (topicIndex + 1) % RESEARCH_TOPICS.length;
+        topicIndex = (topicIndex + 1) % settings.topics.length;
         delay = 400;
       }
 
@@ -260,25 +342,25 @@ const Hero = () => {
     setTypedTopic('');
     timeout = setTimeout(tick, 700);
     return () => clearTimeout(timeout);
-  }, [isMounted, prefersReducedMotion]);
+  }, [isMounted, prefersReducedMotion, settings.topics]);
 
-  const one = <h1>Hello, my name is</h1>;
-  const two = <h2 className="big-heading">Sijia Zhu.</h2>;
+  const one = <h1 {...editText('greeting')}>{settings.greeting}</h1>;
+  const two = <h2 className="big-heading" {...editText('name')}>{settings.name}</h2>;
   const three = (
     <h3
       className="big-heading"
-      aria-label={`My research explores ${RESEARCH_TOPICS.join(', ')}.`}>
-      <span className="hero-title-prefix" aria-hidden="true">
-        My research explores
+      aria-label={`${settings.prefix} ${settings.topics.join(', ')}.`}>
+      <span className="hero-title-prefix" aria-hidden="true" {...editText('prefix')}>
+        {settings.prefix}
       </span>
       <span className="rotating-topic" aria-hidden="true">
-        {RESEARCH_TOPICS.map(topic => (
+        {settings.topics.map(topic => (
           <span className="topic-sizer" key={topic}>
             {topic}.<span className="cursor-space">|</span>
           </span>
         ))}
         <span className="topic-text">
-          {prefersReducedMotion ? RESEARCH_TOPICS[0] + '.' : typedTopic}
+          {prefersReducedMotion ? settings.topics[0] + '.' : typedTopic}
           {!prefersReducedMotion && <span className="typewriter-cursor">|</span>}
         </span>
       </span>
@@ -287,7 +369,7 @@ const Hero = () => {
   const items = [one, two, three];
 
   return (
-    <StyledHeroSection>
+    <StyledHeroSection className={settings.photoSide === 'left' ? 'photo-left' : ''} style={{ '--hero-photo-width': `${settings.photoWidth}px`, '--hero-name-size': `${settings.titleSize}px`, '--hero-topic-size': `${settings.topicSize}px` }}>
       <div className="hero-content">
         {prefersReducedMotion ? (
           <>
@@ -327,3 +409,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
