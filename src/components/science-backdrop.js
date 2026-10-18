@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSite } from '../context/site';
 
@@ -6,7 +6,7 @@ const StyledBackdrop = styled.div`
   position: absolute;
   left: 50%;
   top: 0;
-  width: 100vw;
+  width: var(--science-width, 100vw);
   height: 100%;
   transform: translateX(-50%);
   overflow: hidden;
@@ -20,14 +20,14 @@ const StyledBackdrop = styled.div`
   .motif { position: absolute; }
   svg { display: block; width: 100%; height: auto; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
   svg text { fill: currentColor; stroke: none; font-family: Georgia, 'Times New Roman', serif; }
-  .network { left: 2.5%; top: 9%; width: clamp(150px, 17vw, 220px); }
-  .cells { left: 2.5%; bottom: 12%; width: clamp(125px, 14vw, 180px); }
-  .formula-one { left: 33%; top: 10%; width: 185px; color: var(--light-slate); transform: rotate(-5deg); }
-  .axes-three { right: 2%; top: 12%; width: 145px; color: var(--light-slate); }
+  .network { left: 2.5%; top: 14%; width: clamp(150px, 17vw, 220px); }
+  .cells { left: 5.5%; bottom: 12%; width: clamp(125px, 14vw, 180px); }
+  .formula-one { left: 33%; top: 17%; width: 185px; color: var(--light-slate); transform: rotate(-5deg); }
+  .axes-three { right: 2%; top: 17%; width: 145px; color: var(--light-slate); }
   .axes-two { left: 24%; bottom: 5%; width: 170px; color: var(--light-slate); }
   .tubes { left: 57%; bottom: 5%; width: 105px; transform: rotate(9deg); }
-  .robot { right: 3%; bottom: 9%; width: 118px; }
-  .formula-two { right: 30%; bottom: 2%; width: 145px; color: var(--light-slate); transform: rotate(3deg); }
+  .robot { right: 6%; bottom: 9%; width: 118px; }
+  .formula-two { right: 44%; bottom: 2%; width: 145px; color: var(--light-slate); transform: rotate(3deg); }
 
   &[data-animated='true'] .network .drift,
   &[data-animated='true'] .cells .drift,
@@ -53,7 +53,7 @@ const StyledBackdrop = styled.div`
   @media (max-width: 600px) {
     mask-image: radial-gradient(ellipse 50% 36% at 50% 45%, transparent 20%, #000 88%);
     .network { left: -40px; width: 140px; }
-    .axes-three { right: -30px; width: 112px; }
+    .axes-three { right: -30px; top: 14%; width: 112px; }
     .formula-one { left: -16px; top: 40%; width: 130px; }
     .cells { left: -30px; bottom: 5%; width: 125px; }
     .axes-two { left: -30px; bottom: 28%; width: 115px; }
@@ -67,13 +67,23 @@ const StyledBackdrop = styled.div`
 const ScienceBackdrop = () => {
   const { config } = useSite();
   const settings = config.home;
+  const [viewportWidth, setViewportWidth] = useState(null);
+  useEffect(() => {
+    if (!settings.backgroundEnabled) return undefined;
+    const measure = () => setViewportWidth(document.documentElement.clientWidth);
+    measure();
+    window.addEventListener('resize', measure);
+    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    if (observer) observer.observe(document.documentElement);
+    return () => { window.removeEventListener('resize', measure); if (observer) observer.disconnect(); };
+  }, [settings.backgroundEnabled]);
   if (!settings.backgroundEnabled) return null;
   return (
     <StyledBackdrop
       className="science-backdrop"
       aria-hidden="true"
       data-animated={settings.backgroundAnimated && settings.backgroundOpacity > 0 ? 'true' : 'false'}
-      style={{ '--science-opacity': settings.backgroundOpacity / 100 }}>
+      style={{ '--science-opacity': settings.backgroundOpacity / 100, '--science-width': viewportWidth ? `${viewportWidth}px` : undefined }}>
       <div className="motif network">
         <svg viewBox="0 0 220 165" focusable="false">
           <g className="drift">
