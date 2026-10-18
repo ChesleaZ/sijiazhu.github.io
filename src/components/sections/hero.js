@@ -5,6 +5,12 @@ import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
 
+const RESEARCH_TOPICS = [
+  'complex biomedical data',
+  'single\u2011cell multi\u2011omics',
+  'genomic mechanisms of disease',
+];
+
 const StyledHeroSection = styled.section`
   display: grid;
   grid-template-columns: 1fr;
@@ -126,30 +132,50 @@ const StyledHeroSection = styled.section`
 
   .hero-title-prefix {
     display: block;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .rotating-topic {
-    display: block;
+    display: grid;
+    min-width: 0;
+    max-width: 100%;
     color: var(--green);
-    white-space: nowrap;
-    overflow-wrap: normal;
-    animation: topicFade 3.2s ease-in-out infinite;
   }
 
-  @keyframes topicFade {
-    0% {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    14%,
-    82% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-8px);
+  .topic-sizer,
+  .topic-text {
+    grid-area: 1 / 1;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Reserve the largest phrase at the current width to avoid layout shifts. */
+  .topic-sizer {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .typewriter-cursor,
+  .cursor-space {
+    display: inline-block;
+    margin-left: 0.06em;
+    font-weight: 400;
+  }
+
+  .typewriter-cursor {
+    animation: cursorBlink 1s steps(1, end) infinite;
+  }
+
+  @keyframes cursorBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typewriter-cursor {
+      display: none;
+      animation: none;
     }
   }
 
@@ -182,14 +208,8 @@ const StyledHeroPhoto = () => (
 
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [topicIndex, setTopicIndex] = useState(0);
+  const [typedTopic, setTypedTopic] = useState('');
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  const researchTopics = [
-    'complex biomedical data',
-    'single\u2011cell multi\u2011omics',
-    'genomic mechanisms of disease',
-  ];
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -198,27 +218,60 @@ const Hero = () => {
 
     const timeout = setTimeout(() => setIsMounted(true), navDelay);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || !isMounted) {
       return;
     }
 
-    const interval = setInterval(() => {
-      setTopicIndex(index => (index + 1) % researchTopics.length);
-    }, 3200);
+    let topicIndex = 0;
+    let characterCount = 0;
+    let deleting = false;
+    let timeout;
 
-    return () => clearInterval(interval);
-  }, [prefersReducedMotion, researchTopics.length]);
+    const tick = () => {
+      const phrase = RESEARCH_TOPICS[topicIndex] + '.';
+      characterCount += deleting ? -1 : 1;
+      setTypedTopic(phrase.slice(0, characterCount));
+
+      let delay = deleting ? 35 : 75;
+      if (!deleting && characterCount === phrase.length) {
+        deleting = true;
+        delay = 1700;
+      } else if (deleting && characterCount === 0) {
+        deleting = false;
+        topicIndex = (topicIndex + 1) % RESEARCH_TOPICS.length;
+        delay = 400;
+      }
+
+      timeout = setTimeout(tick, delay);
+    };
+
+    setTypedTopic('');
+    timeout = setTimeout(tick, 700);
+    return () => clearTimeout(timeout);
+  }, [isMounted, prefersReducedMotion]);
 
   const one = <h1>Hello, my name is</h1>;
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
   const three = (
-    <h3 className="big-heading">
-      <span className="hero-title-prefix">I develop statistical methods for</span>
-      <span key={researchTopics[topicIndex]} className="rotating-topic">
-        {researchTopics[topicIndex]}.
+    <h3
+      className="big-heading"
+      aria-label={`I develop statistical methods for ${RESEARCH_TOPICS.join(', ')}.`}>
+      <span className="hero-title-prefix" aria-hidden="true">
+        I develop statistical methods for
+      </span>
+      <span className="rotating-topic" aria-hidden="true">
+        {RESEARCH_TOPICS.map(topic => (
+          <span className="topic-sizer" key={topic}>
+            {topic}.<span className="cursor-space">|</span>
+          </span>
+        ))}
+        <span className="topic-text">
+          {prefersReducedMotion ? RESEARCH_TOPICS[0] + '.' : typedTopic}
+          {!prefersReducedMotion && <span className="typewriter-cursor">|</span>}
+        </span>
       </span>
     </h3>
   );
