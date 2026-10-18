@@ -3,72 +3,7 @@ import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
 import { usePrefersReducedMotion } from '@hooks';
-
-const researchItems = [
-  {
-    institution: 'Massachusetts General Hospital',
-    role: 'Student Researcher',
-    topic: 'Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters',
-    tags: ['Type 2 diabetes', 'Polygenic scores', 'Genetic clustering'],
-    bullets: [
-      'Investigating whether data-driven genetic clusters in type 2 diabetes capture biological information beyond curated pathway-based polygenic scores.',
-      'Constructing individual-level cluster-specific scores from variant-level disease clusters and comparing them with pathway-based pPGS derived from Reactome and KEGG.',
-      'Studying whether residual cluster signals can reveal novel or cross-pathway disease mechanisms.',
-    ],
-  },
-  {
-    institution: 'Harvard T.H. Chan School of Public Health',
-    role: 'Student Researcher',
-    topic: 'Scaling Laws in Single-Cell Representation Learning',
-    tags: ['Single-cell multi-omics', 'Random Matrix Theory', 'Representation learning'],
-    bullets: [
-      'Applying Random Matrix Theory to derive mutual-information-based measures for biological signal recovery in single-cell multi-omics data.',
-      'Developing theoretical scaling laws for cell number, sequencing depth, and batch effects in single-cell data.',
-      'Conducting real-data analyses to evaluate how representation learning embeddings recover biological information.',
-    ],
-  },
-  {
-    institution: 'Johns Hopkins University',
-    role: 'Student Researcher',
-    topic: 'Survival Analysis in Oncology Clinical Trials',
-    tags: ['Survival analysis', 'Cox modeling', 'Clinical trials'],
-    bullets: [
-      'Performed survival analysis on multi-arm oncology clinical trial data.',
-      'Constructed time-to-event endpoints for staggered therapy initiation, treatment discontinuation, and right-censoring.',
-      'Conducted Kaplan-Meier analysis, median survival estimation, and Cox proportional hazards modeling with clinical covariates.',
-    ],
-  },
-  {
-    institution: 'The Chinese University of Hong Kong',
-    role: 'Student Researcher',
-    topic: 'Single-Cell Sequencing Analysis of Blood Tissue Samples',
-    tags: ['Single-cell analysis', 'Leiden clustering', 'Cell annotation'],
-    bullets: [
-      'Analyzed single-cell sequencing data from blood tissue samples to study cellular-level molecular profiles.',
-      'Used PCA and Leiden clustering to identify heterogeneous cell populations and annotate cells with marker genes.',
-      'Applied cellular enrichment analysis to connect marker genes with disease-related biological signals.',
-    ],
-  },
-];
-
-const academicItems = [
-  {
-    title: 'Teaching Assistant',
-    institution: 'Johns Hopkins University',
-    details: ['Bayesian Statistics'],
-  },
-  {
-    title: 'Peer Reviewer',
-    institution: 'Academic Service',
-    details: [
-      'Current Medical Imaging',
-      'CMC-Computers, Materials & Continua',
-      'Journal of Intelligent & Fuzzy Systems',
-      'Journal of Computer Science',
-      'Journal of Fuzzy Logic and Modeling in Engineering',
-    ],
-  },
-];
+import { useSite } from '../../context/site';
 
 const StyledResearchSection = styled.section`
   max-width: 960px;
@@ -170,6 +105,9 @@ const StyledResearchSection = styled.section`
 `;
 
 const Research = () => {
+  const { config, edit } = useSite();
+  const researchItems = config.research.items;
+  const academicItems = config.research.academicItems;
   const revealItems = useRef([]);
   const revealAcademicItems = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -186,25 +124,25 @@ const Research = () => {
   return (
     <StyledResearchSection id="research">
       <div className="experience-group">
-        <h3 className="section-heading">Research</h3>
+        <h3 className="section-heading" {...edit('research.heading')}>{config.research.heading}</h3>
         <ul className="research-list">
           {researchItems.map(({ institution, role, topic, tags, bullets }, i) => (
             <li
               className="research-card"
-              key={institution}
+              key={i}
               ref={el => (revealItems.current[i] = el)}>
-              <h3>{topic}</h3>
+              <h3 {...edit('research.items.' + i + '.topic')}>{topic}</h3>
               <p className="institution">
-                <strong>{role}</strong>, {institution}
+                <strong {...edit('research.items.' + i + '.role')}>{role}</strong>, <span {...edit('research.items.' + i + '.institution')}>{institution}</span>
               </p>
               <ul className="details">
-                {bullets.map(bullet => (
-                  <li key={bullet}>{bullet}</li>
+                {bullets.map((bullet, j) => (
+                  <li key={j} {...edit('research.items.' + i + '.bullets.' + j)}>{bullet}</li>
                 ))}
               </ul>
               <ul className="tag-list">
-                {tags.map(tag => (
-                  <li key={tag}>{tag}</li>
+                {tags.map((tag, j) => (
+                  <li key={j} {...edit('research.items.' + i + '.tags.' + j)}>{tag}</li>
                 ))}
               </ul>
             </li>
@@ -213,18 +151,18 @@ const Research = () => {
       </div>
 
       <div className="experience-group">
-        <h3 className="section-heading">Academic</h3>
+        <h3 className="section-heading" {...edit('research.academicHeading')}>{config.research.academicHeading}</h3>
         <ul className="academic-list">
           {academicItems.map(({ title, institution, details }, i) => (
             <li
               className="academic-card"
-              key={title}
+              key={i}
               ref={el => (revealAcademicItems.current[i] = el)}>
-              <p className="research-meta">{institution}</p>
-              <h3>{title}</h3>
+              <p className="research-meta" {...edit('research.academicItems.' + i + '.institution')}>{institution}</p>
+              <h3 {...edit('research.academicItems.' + i + '.title')}>{title}</h3>
               <ul className="details">
-                {details.map(detail => (
-                  <li key={detail}>{detail}</li>
+                {details.map((detail, j) => (
+                  <li key={j} {...edit('research.academicItems.' + i + '.details.' + j)}>{detail}</li>
                 ))}
               </ul>
             </li>
@@ -236,3 +174,4 @@ const Research = () => {
 };
 
 export default Research;
+

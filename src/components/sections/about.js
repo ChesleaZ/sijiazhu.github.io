@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
+import { useSite } from '../../context/site';
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -114,6 +115,8 @@ const StyledPic = styled.div`
 `;
 
 const About = () => {
+  const { config, edit } = useSite();
+  const content = config.about;
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -125,49 +128,25 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = [
-    'Python',
-    'PyTorch',
-    'R',
-    'Representation Learning',
-    'Scaling Laws',
-    'Single-cell Analysis',
-  ];
+  const skills = content.skills;
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">About Me</h2>
+      <h2 className="numbered-heading" {...edit('about.title')}>{content.title}</h2>
 
       <div className="inner">
         <StyledText>
           <div>
-            <p>
-              I am an M.S. student in Applied Mathematics and Statistics at Johns Hopkins University
-              and a visiting graduate student in Biostatistics at Harvard. My research focuses on
-              AI for biology, supported by a background in mathematics and statistics.
-            </p>
-
-            <p>
-              I study scaling laws for single-cell representation models, examining how cell
-              number, sequencing depth, and batch structure shape biological information recovery
-              and experimental design.
-            </p>
-
-            <p>
-              I also build pipelines that connect cellular representations with large language
-              models for cell-to-text generation and interpretation. I am interested in extending
-              this work to multimodal foundation models for biology.
-            </p>
-
-            <p>Tools and topics I work with:</p>
+            {content.paragraphs.map((paragraph, i) => <p key={i} {...edit('about.paragraphs.' + i)}>{paragraph}</p>)}
+            <p {...edit('about.skillsLabel')}>{content.skillsLabel}</p>
           </div>
 
           <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            {skills && skills.map((skill, i) => <li key={i} {...edit('about.skills.' + i)}>{skill}</li>)}
           </ul>
         </StyledText>
 
-        <StyledPic>
+        <StyledPic className="about-photo">
           <div className="wrapper">
             <StaticImage
               className="img"
@@ -185,3 +164,4 @@ const About = () => {
 };
 
 export default About;
+

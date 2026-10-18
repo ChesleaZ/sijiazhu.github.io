@@ -7,7 +7,7 @@ import sr from '@utils/sr';
 import { Layout } from '@components';
 import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
-import publications from '../data/publications';
+import { useSite } from '../context/site';
 
 const StyledTableContainer = styled.div`
   margin: 100px -20px;
@@ -129,8 +129,9 @@ const StyledTableContainer = styled.div`
   }
 `;
 
-const ArchivePage = ({ location }) => {
-  const projects = publications;
+const ArchiveContent = () => {
+  const { config, edit } = useSite();
+  const projects = config.publications.items;
   const revealTitle = useRef(null);
   const revealTable = useRef(null);
   const revealProjects = useRef([]);
@@ -147,13 +148,13 @@ const ArchivePage = ({ location }) => {
   }, []);
 
   return (
-    <Layout location={location}>
+    <>
       <Helmet title="Archive" />
 
-      <main>
+      <main id="publication-archive">
         <header ref={revealTitle}>
-          <h1 className="big-heading">All Publications</h1>
-          <p className="subtitle">Complete publication list</p>
+          <h1 className="big-heading" {...edit('publications.archiveTitle')}>{config.publications.archiveTitle}</h1>
+          <p className="subtitle" {...edit('publications.archiveDescription')}>{config.publications.archiveDescription}</p>
         </header>
 
         <StyledTableContainer ref={revealTable}>
@@ -174,7 +175,7 @@ const ArchivePage = ({ location }) => {
                   <tr key={i} ref={el => (revealProjects.current[i] = el)}>
                     <td className="overline year">{year}</td>
 
-                    <td className="title">{title}</td>
+                    <td className="title" {...edit('publications.items.' + i + '.title')}>{title}</td>
 
                     <td className="company hide-on-mobile">
                       {venue ? <span>{venue}</span> : <span>-</span>}
@@ -207,11 +208,13 @@ const ArchivePage = ({ location }) => {
           </table>
         </StyledTableContainer>
       </main>
-    </Layout>
+    </>
   );
 };
+const ArchivePage = ({ location }) => <Layout location={location}><ArchiveContent /></Layout>;
 ArchivePage.propTypes = {
   location: PropTypes.object.isRequired,
 };
 
 export default ArchivePage;
+

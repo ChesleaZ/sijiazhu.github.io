@@ -28,7 +28,7 @@ test('Publishes Unicode configuration using current SHA, without altering other 
   assert.equal(result.commit, 'new-commit');
   const writes = io.calls.filter(c => c.init.method === 'PUT');
   assert.equal(writes.length, 1);
-  assert.equal(writes[0].url, 'https://api.github.com/repos/ChesleaZ/sijiazhu.github.io/contents/static/homepage-config.json');
+  assert.equal(writes[0].url, 'https://api.github.com/repos/ChesleaZ/sijiazhu.github.io/contents/static/site-config.json');
   const body = JSON.parse(writes[0].init.body);
   assert.equal(body.branch, 'main');
   assert.equal(body.sha, 'base');
@@ -85,4 +85,10 @@ test('Reports build failure without sending the token to polling requests', asyn
   const p = createPublisher(io); await p.connect(fakeToken);
   await assert.rejects(p.buildState('commit-id'), e => e.code === 'BUILD');
   assert.equal(io.calls[1].init.headers.Authorization, undefined);
+});
+
+test('Compares nested page fields instead of treating different site configurations as equal', () => {
+  assert.equal(same({home:{greeting:'A'},about:{paragraphs:['one']}},{about:{paragraphs:['one']},home:{greeting:'A'}}),true);
+  assert.equal(same({home:{greeting:'A'}},{home:{greeting:'B'}}),false);
+  assert.equal(same({publications:{items:[{title:'A',url:'https://example.com'}]}},{publications:{items:[{title:'B',url:'https://example.com'}]}}),false);
 });

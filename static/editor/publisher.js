@@ -6,10 +6,10 @@
   'use strict';
   const REPO = 'ChesleaZ/sijiazhu.github.io';
   const API = 'https://api.github.com/repos/' + REPO;
-  const FILE = '/contents/static/homepage-config.json';
+  const FILE = '/contents/static/site-config.json';
   const ACTIONS = 'https://github.com/' + REPO + '/actions';
   const failure = (code, message) => Object.assign(new Error(message), { code, publishError: true });
-  const canonical = value => JSON.stringify(value, Object.keys(value).sort());
+  const canonical = value => JSON.stringify((function stable(item) { if (Array.isArray(item)) return item.map(stable); if (item && typeof item === 'object') return Object.fromEntries(Object.keys(item).sort().map(key => [key, stable(item[key])])); return item; })(value));
   const same = (a, b) => canonical(a) === canonical(b);
   const encode = text => {
     const bytes = new TextEncoder().encode(text);
@@ -72,7 +72,7 @@
         let result;
         try {
           result = await request(FILE, { method: 'PUT', body: {
-            branch: 'main', sha: latest.sha, message: 'Update homepage from Homepage Studio',
+            branch: 'main', sha: latest.sha, message: 'Update website from Site Studio',
             content: encode(JSON.stringify(config, null, 2) + '\n'),
           } });
         } catch (error) {

@@ -1,39 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { StaticImage } from 'gatsby-plugin-image';
-import { withPrefix } from 'gatsby';
+import { useSite } from '../../context/site';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
-
-const DEFAULT_SETTINGS = {
-  greeting: 'Hello, my name is',
-  name: 'Sijia Zhu.',
-  prefix: 'My research explores',
-  topics: ['AI for biology', 'biological foundation models', 'multimodal learning for biology', 'cell-to-text generation'],
-  background: '#0b1220', text: '#e6edf4', accent: '#7ad8c7',
-  photoSide: 'right', photoWidth: 340, titleSize: 64, topicSize: 43,
-};
-
-const normalizeSettings = value => {
-  const input = value && typeof value === 'object' ? value : {};
-  const settings = { ...DEFAULT_SETTINGS };
-  ['greeting', 'name', 'prefix'].forEach(key => {
-    if (typeof input[key] === 'string') settings[key] = input[key].slice(0, 120);
-  });
-  if (Array.isArray(input.topics)) {
-    const topics = input.topics.filter(x => typeof x === 'string' && x.trim()).slice(0, 8).map(x => x.trim().slice(0, 120));
-    if (topics.length) settings.topics = topics;
-  }
-  ['background', 'text', 'accent'].forEach(key => {
-    if (/^#[0-9a-f]{6}$/i.test(input[key])) settings[key] = input[key];
-  });
-  if (input.photoSide === 'left') settings.photoSide = 'left';
-  [['photoWidth', 240, 400], ['titleSize', 46, 80], ['topicSize', 26, 46]].forEach(([key, min, max]) => {
-    if (typeof input[key] === 'number' && Number.isFinite(input[key])) settings[key] = Math.min(max, Math.max(min, input[key]));
-  });
-  return settings;
-};
 
 const StyledHeroSection = styled.section`
   --hero-name-size: 64px;
@@ -257,50 +228,9 @@ const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [typedTopic, setTypedTopic] = useState('');
   const prefersReducedMotion = usePrefersReducedMotion();
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
-  const [isPreview, setIsPreview] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    const preview = new URLSearchParams(window.location.search).get('preview') === '1' && window.parent !== window;
-    setIsPreview(preview);
-    const receive = event => {
-      if (preview && event.origin === window.location.origin && event.source === window.parent && event.data?.type === 'homepage-config') {
-        setSettings(normalizeSettings(event.data.settings));
-      }
-    };
-    window.addEventListener('message', receive);
-    if (preview) {
-      window.parent.postMessage({ type: 'homepage-editor-ready' }, window.location.origin);
-    } else {
-      fetch(withPrefix('/homepage-config.json'), { cache: 'no-store' })
-        .then(response => response.ok ? response.json() : null)
-        .then(value => { if (!cancelled && value) setSettings(normalizeSettings(value)); })
-        .catch(() => {});
-    }
-    return () => { cancelled = true; window.removeEventListener('message', receive); };
-  }, []);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const values = {
-      '--navy': settings.background, '--dark-navy': settings.background,
-      '--green': settings.accent, '--lightest-slate': settings.text,
-      '--slate': settings.text, '--light-slate': settings.text,
-    };
-    const previous = {};
-    Object.keys(values).forEach(key => { previous[key] = root.style.getPropertyValue(key); root.style.setProperty(key, values[key]); });
-    return () => Object.keys(values).forEach(key => {
-      if (previous[key]) root.style.setProperty(key, previous[key]); else root.style.removeProperty(key);
-    });
-  }, [settings.background, settings.text, settings.accent]);
-
-  const editText = key => isPreview ? {
-    contentEditable: true, suppressContentEditableWarning: true,
-    onBlur: event => window.parent.postMessage({
-      type: 'homepage-text-edit', key, value: event.currentTarget.textContent,
-    }, window.location.origin),
-  } : {};
+  const { config, edit } = useSite();
+  const settings = config.home;
+  const editText = key => edit('home.' + key);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -409,4 +339,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { srConfig, email } from '@config';
+import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 import { IconLinkedin } from '@components/icons';
+import { useSite } from '../../context/site';
 
 const IconMail = () => (
   <svg
@@ -130,6 +131,8 @@ const StyledContactSection = styled.section`
 `;
 
 const Contact = () => {
+  const { config, edit } = useSite();
+  const content = config.contact;
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -143,58 +146,24 @@ const Contact = () => {
 
   return (
     <StyledContactSection id="contact" ref={revealContainer}>
-      <h2 className="title">Get In Touch</h2>
+      <h2 className="title" {...edit('contact.title')}>{content.title}</h2>
 
-      <p>
-        I am happy to connect about biostatistics, biomedical data science, research collaborations,
-        and graduate study.
-      </p>
+      <p {...edit('contact.intro')}>{content.intro}</p>
 
       <ul className="contact-list">
-        <li>
-          <a className="contact-card" href={`mailto:${email}`}>
-            <span className="icon">
-              <IconMail />
-            </span>
-            <span>
-              <span className="label">Email</span>
-            </span>
-            <span className="arrow" aria-hidden="true">
-              &rarr;
-            </span>
-          </a>
-        </li>
-        <li>
-          <a className="contact-card" href="https://www.linkedin.com/in/sijia-zhu-66862a307/">
-            <span className="icon">
-              <IconLinkedin />
-            </span>
-            <span>
-              <span className="label">LinkedIn</span>
-            </span>
-            <span className="arrow" aria-hidden="true">
-              &rarr;
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            className="contact-card"
-            href="https://scholar.google.com/citations?user=hN1J4bUAAAAJ&hl=en">
-            <span className="icon">
-              <IconScholar />
-            </span>
-            <span>
-              <span className="label">Google Scholar</span>
-            </span>
-            <span className="arrow" aria-hidden="true">
-              &rarr;
-            </span>
-          </a>
-        </li>
+        {content.links.map((link, i) => (
+          <li key={i}>
+            <a className="contact-card" href={link.url}>
+              <span className="icon">{link.icon === 'linkedin' ? <IconLinkedin /> : link.icon === 'scholar' ? <IconScholar /> : <IconMail />}</span>
+              <span><span className="label" {...edit('contact.links.' + i + '.label')}>{link.label}</span></span>
+              <span className="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        ))}
       </ul>
     </StyledContactSection>
   );
 };
 
 export default Contact;
+

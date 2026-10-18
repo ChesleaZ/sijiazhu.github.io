@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
 import { Head, Loader, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
+import { SiteProvider, EditPageLink, pageForPath } from '../context/site';
 
 const StyledContent = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const Layout = ({ children, location }) => {
   }, [isLoading]);
 
   return (
-    <>
+    <SiteProvider>
       <Head />
 
       <div id="root">
@@ -69,12 +70,13 @@ const Layout = ({ children, location }) => {
               <div id="content">
                 {children}
                 <Footer />
+                <EditPageLink page={pageForPath(location.pathname)} />
               </div>
             </StyledContent>
           )}
         </ThemeProvider>
       </div>
-    </>
+    </SiteProvider>
   );
 };
 
@@ -84,3 +86,4 @@ Layout.propTypes = {
 };
 
 export default Layout;
+

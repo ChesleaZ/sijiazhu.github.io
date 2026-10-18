@@ -6,7 +6,7 @@ import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
-import publications from '../../data/publications';
+import { useSite } from '../../context/site';
 
 const StyledProjectsSection = styled.section`
   display: flex;
@@ -131,6 +131,7 @@ const StyledProject = styled.li`
         display: block;
         position: absolute;
         z-index: 0;
+        pointer-events: none;
         width: 100%;
         height: 100%;
         top: 0;
@@ -184,6 +185,8 @@ const StyledProject = styled.li`
 `;
 
 const Projects = () => {
+  const { config, edit, preview } = useSite();
+  const publications = config.publications.items;
   const revealTitle = useRef(null);
   const revealArchiveLink = useRef(null);
   const revealProjects = useRef([]);
@@ -200,10 +203,10 @@ const Projects = () => {
   }, []);
 
   const GRID_LIMIT = 6;
-  const projectsToShow = publications.filter(publication => publication.selected).slice(0, GRID_LIMIT);
+  const projectsToShow = publications.map((publication, index) => ({ ...publication, index })).filter(publication => publication.selected).slice(0, GRID_LIMIT);
 
   const projectInner = publication => {
-    const { title, authors, venue, keywords, url } = publication;
+    const { title, authors, venue, keywords, url, index } = publication;
 
     return (
       <div className="project-inner">
@@ -221,19 +224,19 @@ const Projects = () => {
 
           <h3 className="project-title">
             <a href={url} target="_blank" rel="noreferrer">
-              {title}
+              <span {...edit('publications.items.' + index + '.title')}>{title}</span>
             </a>
           </h3>
 
-          <p className="project-authors">{authors}</p>
-          <p className="project-venue">{venue}</p>
+          <p className="project-authors" {...edit('publications.items.' + index + '.authors')}>{authors}</p>
+          <p className="project-venue" {...edit('publications.items.' + index + '.venue')}>{venue}</p>
         </header>
 
         <footer>
           {keywords && (
             <ul className="project-tech-list">
               {keywords.map((keyword, i) => (
-                <li key={i}>{keyword}</li>
+                <li key={i} {...edit('publications.items.' + index + '.keywords.' + i)}>{keyword}</li>
               ))}
             </ul>
           )}
@@ -243,19 +246,19 @@ const Projects = () => {
   };
 
   return (
-    <StyledProjectsSection>
-      <h2 ref={revealTitle}>Selected Publication</h2>
+    <StyledProjectsSection id="publications">
+      <h2 ref={revealTitle} {...edit('publications.title')}>{config.publications.title}</h2>
 
       <Link className="archive-link" to="/archive" ref={revealArchiveLink}>
-        View all
+        <span {...edit('publications.archiveLabel')}>{config.publications.archiveLabel}</span>
       </Link>
 
       <ul className="projects-grid">
-        {prefersReducedMotion ? (
+        {prefersReducedMotion || preview ? (
           <>
             {projectsToShow &&
               projectsToShow.map((publication, i) => (
-                <StyledProject key={publication.title}>{projectInner(publication)}</StyledProject>
+                <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>
               ))}
           </>
         ) : (
@@ -285,3 +288,4 @@ const Projects = () => {
 };
 
 export default Projects;
+

@@ -37,6 +37,8 @@
     footer { padding-block: 24px 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
     @media (max-width: 540px) { header, main, footer { width: calc(100% - 36px); } header { padding-block: 22px; } main { padding-block: 42px; } .overview { margin-top: 34px; } .availability { padding: 20px; } body { font-size: 17px; } }
     @media print { :root { color-scheme: light; --paper: #fff; --ink: #111; --muted: #333; --accent: #194f52; --line: #ccc; --surface: #fff; } body { background: var(--surface); font-size: 11pt; } header, main, footer { width: 100%; } main { padding-block: 24px; } h1 { font-size: 28pt; } .skip { display: none; } }
+      @media print { :root { --paper: #fff !important; --ink: #111 !important; --muted: #333 !important; --accent: #194f52 !important; --surface: #fff !important; } body { font-size: 11pt !important; } header, main, footer { width: 100% !important; } }
+    [contenteditable=true]:focus { outline: 1px dashed var(--accent); outline-offset: 4px; }
   </style>
 </head>
 <body>
@@ -59,10 +61,13 @@
       <section class="availability" aria-labelledby="availability-title">
         <h2 id="availability-title">Manuscript availability</h2>
         <p>The manuscript is currently under review. A link to the preprint will be added here when it becomes publicly available.</p>
-        <!-- Add the verified public preprint link here once available. Keep this page URL unchanged so existing CV links continue to work. -->
+<p><a id="preprint-link" hidden rel="noopener noreferrer" target="_blank"></a></p>
       </section>
     </article>
   </main>
-  <footer><a href="../../">Back to Sijia Zhu's homepage</a></footer>
+  <footer><a href="../../">Back to Sijia Zhu's homepage</a> · <a href="../../editor/?page=paper">编辑本页 · Edit this page</a></footer>
+  <script src="../../editor/site-model.js"></script>
+  <script src="../../editor/paper-bridge.js"></script>
 </body>
 </html>
+
