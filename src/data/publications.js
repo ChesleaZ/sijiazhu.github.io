@@ -1,6 +1,16 @@
 const publications = [
   {
     year: 2026,
+    title: 'Random Matrix Scaling Laws in Single-Cell Representation Learning',
+    venue: 'Manuscript under review',
+    status: 'Under review',
+    authors: 'S. Zhu, J. Hu, R. Ma, A. Klein, G. Gowri',
+    keywords: ['Single-cell representation learning', 'Scaling laws', 'Random matrix theory'],
+    url: 'https://chesleaz.github.io/sijiazhu.github.io/papers/single-cell-scaling/',
+    selected: true,
+  },
+  {
+    year: 2026,
     title: 'Bayesian Hierarchical Modeling and Clustering for Malignant Cancer Diagnosis',
     venue: 'Bayesian Analysis',
     status: 'Under review',

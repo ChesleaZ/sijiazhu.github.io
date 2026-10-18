@@ -10,3 +10,5 @@ tech:
 ---
 
 This project studies how cell number, sequencing depth, and batch effects shape biological signal recovery in single-cell representation learning. The work uses mutual-information-based measures and real-data evaluation to connect theory with embedding performance.
+
+[Paper overview — Manuscript under review](https://chesleaz.github.io/sijiazhu.github.io/papers/single-cell-scaling/)
