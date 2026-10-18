@@ -15,7 +15,7 @@
 }
 .science-backdrop[hidden] { display: none; }
 .science-motif { position: absolute; transform-origin: center; }
-.science-motif svg { display: block; width: 100%; height: auto; overflow: visible; stroke-linecap: round; stroke-linejoin: round; }
+.science-motif svg { display: block; width: 100%; height: auto; overflow: visible; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
 .science-network { width: clamp(155px, 17vw, 235px); left: 1.8%; top: 17%; }
 .science-cells { width: clamp(130px, 14vw, 185px); left: 3.4%; bottom: 12%; }
 .science-surface { width: clamp(175px, 19vw, 255px); right: 1.8%; top: 17%; }
