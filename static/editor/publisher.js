@@ -53,6 +53,12 @@
       if (!file.sha || file.encoding !== 'base64' || typeof file.content !== 'string') throw failure('FORMAT', '无法读取网站配置。');
       return { sha: file.sha, config: JSON.parse(decode(file.content)) };
     }
+    async function readVersion(sha) {
+      if (typeof sha !== 'string' || !/^[a-f0-9]{40,64}$/i.test(sha)) throw failure('FORMAT', '无法识别草稿的原始版本。');
+      const file = await request('/git/blobs/' + sha);
+      if (file.encoding !== 'base64' || typeof file.content !== 'string') throw failure('FORMAT', '无法读取草稿的原始配置。');
+      return { sha, config: JSON.parse(decode(file.content)) };
+    }
     async function connect(value) {
       if (busy) throw failure('BUSY', '正在发布，请稍候。');
       if (typeof value !== 'string' || !/^github_pat_[A-Za-z0-9_]+$/.test(value.trim())) throw failure('TOKEN_FORMAT', '请使用 GitHub fine-grained personal access token。');
@@ -96,7 +102,7 @@
       return run ? { status: run.status, conclusion: run.conclusion } : null;
     }
     return {
-      connect, readLatest, publish, buildState,
+      connect, readLatest, readVersion, publish, buildState,
       disconnect() { if (!busy) token = ''; },
       isConnected() { return Boolean(token); },
       isBusy() { return busy; },
@@ -105,3 +111,4 @@
   }
   return { createPublisher, same, encode, decode };
 });
+

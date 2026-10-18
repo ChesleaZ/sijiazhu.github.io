@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { StaticImage } from 'gatsby-plugin-image';
 import { useSite } from '../../context/site';
+import ScienceBackdrop from '../science-backdrop';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
+  position: relative;
+  isolation: isolate;
   --hero-name-size: 64px;
   --hero-topic-size: 43px;
   display: grid;
@@ -27,6 +30,9 @@ const StyledHeroSection = styled.section`
     gap: clamp(40px, 5vw, 72px);
     padding: calc(var(--nav-height) + 24px) 0 80px;
   }
+
+  .hero-content,
+  .hero-photo-slot { position: relative; z-index: 1; }
 
   .hero-content {
     justify-self: center;
@@ -300,6 +306,7 @@ const Hero = () => {
 
   return (
     <StyledHeroSection className={settings.photoSide === 'left' ? 'photo-left' : ''} style={{ '--hero-photo-width': `${settings.photoWidth}px`, '--hero-name-size': `${settings.titleSize}px`, '--hero-topic-size': `${settings.topicSize}px` }}>
+      <ScienceBackdrop />
       <div className="hero-content">
         {prefersReducedMotion ? (
           <>
@@ -339,5 +346,6 @@ const Hero = () => {
 };
 
 export default Hero;
+
 
 

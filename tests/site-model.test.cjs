@@ -46,3 +46,24 @@ test('Recovers malformed configuration without losing safe default content', () 
   assert.deepEqual(site.home.topics, model.defaults.home.topics);
   assert.deepEqual(site.publications.items, []);
 });
+test('Background controls survive round trips, including disabled and zero intensity', () => {
+  const site = model.clone(model.defaults);
+  site.home.backgroundEnabled = false;
+  site.home.backgroundOpacity = 0;
+  site.home.backgroundAnimated = false;
+  const normalized = model.normalize(JSON.parse(JSON.stringify(site)));
+  assert.equal(normalized.home.backgroundEnabled, false);
+  assert.equal(normalized.home.backgroundOpacity, 0);
+  assert.equal(normalized.home.backgroundAnimated, false);
+  site.home.backgroundOpacity = 900;
+  assert.equal(model.normalize(site).home.backgroundOpacity, 40);
+});
+test('Older site configs gain background defaults without changing existing content', () => {
+  const old = model.clone(model.defaults);
+  delete old.home.backgroundEnabled;
+  delete old.home.backgroundOpacity;
+  delete old.home.backgroundAnimated;
+  assert.deepEqual(model.normalize(old), model.defaults);
+  old.about.title = 'An actual concurrent edit';
+  assert.notDeepEqual(model.normalize(old), model.defaults);
+});

@@ -22,7 +22,10 @@
     "photoSide": "right",
     "photoWidth": 340,
     "titleSize": 64,
-    "topicSize": 43
+    "topicSize": 43,
+    "backgroundEnabled": true,
+    "backgroundOpacity": 14,
+    "backgroundAnimated": true
   },
   "about": {
     "title": "About Me",
@@ -386,3 +389,4 @@
     "width": 900
   }
 }
+

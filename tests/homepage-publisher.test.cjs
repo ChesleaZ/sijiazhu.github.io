@@ -92,3 +92,13 @@ test('Compares nested page fields instead of treating different site configurati
   assert.equal(same({home:{greeting:'A'}},{home:{greeting:'B'}}),false);
   assert.equal(same({publications:{items:[{title:'A',url:'https://example.com'}]}},{publications:{items:[{title:'B',url:'https://example.com'}]}}),false);
 });
+test('Reads the original draft version to distinguish schema upgrades from content conflicts', async () => {
+  const sha = 'a'.repeat(40);
+  const io = transport([[200, file(original, sha)]]);
+  const p = createPublisher(io);
+  const result = await p.readVersion(sha);
+  assert.deepEqual(result.config, original);
+  assert.equal(io.calls[0].url, 'https://api.github.com/repos/ChesleaZ/sijiazhu.github.io/git/blobs/' + sha);
+  await assert.rejects(p.readVersion('../other-repository'), error => error.code === 'FORMAT');
+  assert.equal(io.calls.length, 1);
+});
