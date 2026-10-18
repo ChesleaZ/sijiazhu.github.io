@@ -6,8 +6,8 @@ import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
 
 const RESEARCH_TOPICS = [
+  'AI for biology',
   'biological foundation models',
-  'scaling laws and generalization',
   'multimodal learning for biology',
   'cell-to-text generation',
 ];
@@ -262,14 +262,14 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [isMounted, prefersReducedMotion]);
 
-  const one = <h1>AI for Biology</h1>;
+  const one = <h1>Hello, my name is...</h1>;
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
   const three = (
     <h3
       className="big-heading"
-      aria-label={`I work on ${RESEARCH_TOPICS.join(', ')}.`}>
+      aria-label={`My research explores ${RESEARCH_TOPICS.join(', ')}.`}>
       <span className="hero-title-prefix" aria-hidden="true">
-        I work on
+        My research explores
       </span>
       <span className="rotating-topic" aria-hidden="true">
         {RESEARCH_TOPICS.map(topic => (
