@@ -105,7 +105,7 @@ function navigate(next) {
   const url = new URL(location.href); url.searchParams.set('page', page); window.history.replaceState(null, '', url);
   if (page !== 'theme') {
     previewPage = page; ready = false;
-    const target = new URL(pages[page][0], rootURL); target.searchParams.set('preview', '1'); frame.src = target.href;
+    const target = new URL(pages[page][0], rootURL); target.searchParams.set('preview', '1'); target.searchParams.set('studio', String(Date.now())); frame.src = target.href;
   }
   el('preview-name').textContent = '实时预览 · ' + pages[previewPage][1];
   el('open-page').href = new URL(pages[previewPage][0], rootURL).href;
@@ -184,7 +184,7 @@ el('publish').onclick = async () => {
     } else status('已载入正式网站配置');
   } catch (error) { status('已载入正式网站配置'); }
   renderControls(); el('controls').disabled = false;
-  if (page === 'theme') { const target = new URL(pages.home[0], rootURL); target.searchParams.set('preview', '1'); frame.src = target.href; }
+  if (page === 'theme') { const target = new URL(pages.home[0], rootURL); target.searchParams.set('preview', '1'); target.searchParams.set('studio', String(Date.now())); frame.src = target.href; }
   navigate(page);
 })();
 
