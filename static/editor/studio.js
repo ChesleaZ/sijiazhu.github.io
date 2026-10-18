@@ -6,7 +6,7 @@ const frame = el('preview');
 const rootURL = new URL('../', location.href);
 const key = 'sijia-site-draft-v2';
 const pages = { home: ['', '首页'], about: ['about/', 'About'], research: ['research/', 'Experience'], publications: ['publications/', '精选论文'], archive: ['archive/', '完整论文列表'], contact: ['contact/', 'Contact'], paper: ['papers/single-cell-scaling/', '论文介绍'] };
-const labels = { backgroundEnabled: '显示科学线稿背景（首页）', backgroundOpacity: '线稿浓淡', backgroundAnimated: '启用缓慢动画', greeting: '问候语', name: '姓名', prefix: '研究引导语', topics: '轮播主题 · 每行一项', photoSide: '照片位置', photoWidth: '照片宽度', titleSize: '姓名字号', topicSize: '轮播字号', title: '标题', paragraphs: '正文段落 · 空行分段', skillsLabel: '技能列表引导语', skills: '技能与主题 · 每行一项', width: '页面内容宽度', photoVisible: '显示照片', heading: '研究部分标题', academicHeading: '学术服务部分标题', items: '条目', academicItems: '教学与学术服务', institution: '机构', role: '角色', topic: '研究课题', tags: '标签 · 每行一项', bullets: '研究内容 · 每行一项', details: '内容 · 每行一项', archiveLabel: '完整列表按钮', archiveTitle: '完整列表标题', archiveDescription: '完整列表简介', columns: '桌面论文列数', year: '年份', authors: '作者', venue: '期刊 / 会议 / 稿件状态', status: '论文状态', keywords: '关键词 · 每行一项', url: '链接', selected: '显示在精选论文中（最多前六篇）', intro: '简介', links: '联系链接', label: '显示名称', icon: '图标', eyebrow: '页面上方标签', overviewTitle: '研究概述标题', availabilityTitle: '稿件可用性标题', availabilityText: '稿件可用性说明', preprintLabel: '预印本链接文字', preprintURL: '预印本链接 · 未上线可留空', background: '背景颜色', text: '标题文字', muted: '正文文字', accent: '强调色', surface: '卡片背景', fontSize: '正文字号', cardRadius: '卡片圆角' };
+const labels = { backgroundEnabled: '显示本页科学背景', backgroundOpacity: '线稿浓淡', backgroundAnimated: '启用缓慢动画', greeting: '问候语', name: '姓名', prefix: '研究引导语', topics: '轮播主题 · 每行一项', photoSide: '照片位置', photoWidth: '照片宽度', titleSize: '姓名字号', topicSize: '轮播字号', title: '标题', paragraphs: '正文段落 · 空行分段', skillsLabel: '技能列表引导语', skills: '技能与主题 · 每行一项', width: '页面内容宽度', photoVisible: '显示照片', heading: '研究部分标题', academicHeading: '学术服务部分标题', items: '条目', academicItems: '教学与学术服务', institution: '机构', role: '角色', topic: '研究课题', tags: '标签 · 每行一项', bullets: '研究内容 · 每行一项', details: '内容 · 每行一项', archiveLabel: '完整列表按钮', archiveTitle: '完整列表标题', archiveDescription: '完整列表简介', columns: '桌面论文列数', year: '年份', authors: '作者', venue: '期刊 / 会议 / 稿件状态', status: '论文状态', keywords: '关键词 · 每行一项', url: '链接', selected: '显示在精选论文中（最多前六篇）', intro: '简介', links: '联系链接', label: '显示名称', icon: '图标', eyebrow: '页面上方标签', overviewTitle: '研究概述标题', availabilityTitle: '稿件可用性标题', availabilityText: '稿件可用性说明', preprintLabel: '预印本链接文字', preprintURL: '预印本链接 · 未上线可留空', background: '背景颜色', text: '标题文字', muted: '正文文字', accent: '强调色', surface: '卡片背景', fontSize: '正文字号', cardRadius: '卡片圆角' };
 const ranges = { backgroundOpacity: [0, 40, 1], width: [520, 1200, 20], photoWidth: [240, 400, 10], titleSize: [46, 80, 1], topicSize: [26, 46, 1], columns: [1, 3, 1], fontSize: [16, 24, 1], cardRadius: [0, 24, 1] };
 let config = model.clone(model.defaults), published = model.clone(model.defaults), baseSha = null;
 let page = new URLSearchParams(location.search).get('page') || 'home';
@@ -88,16 +88,16 @@ function renderControls() {
   el('controls').replaceChildren();
   const dataPage = datasetPage(), template = model.defaults[dataPage];
   const backgroundKeys = ['backgroundEnabled', 'backgroundOpacity', 'backgroundAnimated'];
-  if (dataPage === 'home') {
+  if (page !== 'theme') {
     const heading = document.createElement('h2'); heading.textContent = '科学线稿背景'; el('controls').appendChild(heading);
-    backgroundKeys.forEach(field => el('controls').appendChild(createField('home.' + field, template[field])));
+    backgroundKeys.forEach(field => el('controls').appendChild(createField(page + '.' + field, model.defaults[page][field])));
     const textHeading = document.createElement('h2'); textHeading.textContent = '文字与布局'; el('controls').appendChild(textHeading);
   }
-  Object.keys(template).filter(field => dataPage !== 'home' || !backgroundKeys.includes(field)).forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
+  Object.keys(template).filter(field => !backgroundKeys.includes(field)).forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
   el('controls').querySelectorAll('details').forEach(node => { node.open = open.has(node.dataset.itemPath); });
   el('controls').parentElement.scrollTop = scrollTop;
   el('page').value = page;
-  el('page-note').textContent = page === 'theme' ? '这些设置同时作用于所有页面。右侧保留当前页面预览。' : page === 'archive' || page === 'publications' ? '精选论文和完整列表共用数据；勾选精选后，前六篇显示为卡片。可展开条目修改链接、作者和状态。' : '可点击预览中的文字直接编辑，也可在下方修改内容。保存草稿包含所有页面。';
+  el('page-note').textContent = page === 'theme' ? '这些设置同时作用于所有页面。右侧保留当前页面预览。' : page === 'archive' || page === 'publications' ? '本页背景独立设置；精选论文和完整列表共用论文数据。勾选精选后，前六篇显示为卡片。' : '可点击预览中的文字直接编辑，也可在下方修改内容。保存草稿包含所有页面。';
 }
 function navigate(next) {
   if (!pages[next] && next !== 'theme') return;
@@ -114,7 +114,7 @@ el('page').onchange = () => navigate(el('page').value);
 function saveDraft() { localStorage.setItem(key, JSON.stringify({ config: model.normalize(config), baseSha, baseConfig: published })); dirty = false; }
 el('save').onclick = () => { try { saveDraft(); status('全站草稿已保存到本浏览器'); } catch (error) { status('无法保存，请导出配置备份'); } };
 el('undo').onclick = () => { if (!undoHistory.length) { status('没有可撤销的修改'); return; } config = undoHistory.pop(); changed(); renderControls(); };
-el('reset-page').onclick = () => { checkpoint(); config[datasetPage()] = model.clone(published[datasetPage()]); changed(); renderControls(); };
+el('reset-page').onclick = () => { checkpoint(); const previousBackground = Object.fromEntries(['backgroundEnabled', 'backgroundOpacity', 'backgroundAnimated'].map(k => [k, config.publications[k]])); config[datasetPage()] = model.clone(published[datasetPage()]); if (page === 'archive') { Object.assign(config.publications, previousBackground); config.archive = model.clone(published.archive); } changed(); renderControls(); };
 el('reset-all').onclick = async () => { try { const latest = await publisher.readLatest(); checkpoint(); config = model.normalize(latest.config); published = model.clone(config); baseSha = latest.sha; if (!publishing) el('publish-panel').hidden = true; changed(); renderControls(); status('已读取全部官网内容 · 可撤销'); } catch (error) { status('读取失败，当前草稿已保留'); } };
 el('export').onclick = () => { const blob = new Blob([JSON.stringify(model.normalize(config), null, 2) + '\n'], { type: 'application/json' }), url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'site-config.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); status('已导出全站配置备份'); };
 el('import').onclick = () => el('file').click();

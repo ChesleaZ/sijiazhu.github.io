@@ -1,0 +1,56 @@
+/* Shared by Gatsby pages and the standalone manuscript page. */
+.science-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  color: var(--green, var(--accent, #7ad8c7));
+  opacity: var(--science-opacity, .12);
+  contain: layout paint;
+  /* Keep the reading column quiet while preserving complete edge drawings. */
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, #0008 24%, #0004 40%, #0004 60%, #0008 76%, #000 88%, #000 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 12%, #0008 24%, #0004 40%, #0004 60%, #0008 76%, #000 88%, #000 100%);
+}
+.science-backdrop[hidden] { display: none; }
+.science-motif { position: absolute; transform-origin: center; }
+.science-motif svg { display: block; width: 100%; height: auto; overflow: visible; stroke-linecap: round; stroke-linejoin: round; }
+.science-network { width: clamp(155px, 17vw, 235px); left: 1.8%; top: 17%; }
+.science-cells { width: clamp(130px, 14vw, 185px); left: 3.4%; bottom: 12%; }
+.science-surface { width: clamp(175px, 19vw, 255px); right: 1.8%; top: 17%; }
+.science-umap { width: clamp(145px, 15vw, 205px); right: 3.8%; bottom: 10%; }
+.science-objective { width: clamp(280px, 28vw, 400px); left: 26%; top: 17%; transform: rotate(-6deg); }
+.science-attention { width: clamp(270px, 28vw, 390px); left: 35%; bottom: 6%; transform: rotate(4deg); }
+.science-robot { width: 94px; right: 22%; bottom: 9%; }
+.science-tubes { width: 95px; left: 23%; bottom: 6%; }
+.science-backdrop[data-animated=true] .science-network,
+.science-backdrop[data-animated=true] .science-surface,
+.science-backdrop[data-animated=true] .science-robot { animation: science-float 25s ease-in-out infinite; }
+.science-backdrop[data-animated=true] .science-cells,
+.science-backdrop[data-animated=true] .science-umap,
+.science-backdrop[data-animated=true] .science-tubes { animation: science-float 29s ease-in-out -9s infinite reverse; }
+@keyframes science-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@media (max-width: 1099px) {
+  .science-objective { left: 23%; top: 13%; width: 300px; }
+  .science-attention { left: 34%; bottom: 4%; width: 300px; }
+  .science-network { left: -28px; top: 25%; width: 165px; }
+  .science-cells { left: -12px; bottom: 14%; width: 140px; }
+  .science-surface { right: -26px; top: 28%; width: 190px; }
+  .science-umap { right: -15px; bottom: 10%; width: 155px; }
+  .science-robot { right: 19%; bottom: 11%; width: 74px; }
+  .science-tubes { left: 20%; bottom: 5%; width: 75px; }
+}
+@media (max-width: 600px) {
+  .science-backdrop { -webkit-mask-image: linear-gradient(90deg, #000 0%, #0005 25%, #0003 50%, #0005 75%, #000 100%); mask-image: linear-gradient(90deg, #000 0%, #0005 25%, #0003 50%, #0005 75%, #000 100%); }
+  .science-objective { width: 260px; left: 16%; top: 15%; }
+  .science-attention { width: 270px; left: 13%; bottom: 3%; }
+  .science-network { width: 135px; left: -38px; top: 30%; }
+  .science-surface { width: 150px; right: -33px; top: 30%; }
+  .science-cells { width: 118px; left: -28px; bottom: 20%; }
+  .science-umap { width: 125px; right: -23px; bottom: 15%; }
+  .science-robot { width: 56px; right: 27%; bottom: 12%; }
+  .science-tubes { width: 60px; left: 20%; bottom: 10%; }
+}
+@media (prefers-reduced-motion: reduce) { .science-backdrop .science-motif { animation: none !important; } }
+@media print { .science-backdrop { display: none !important; } }

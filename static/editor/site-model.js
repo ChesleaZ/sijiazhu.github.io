@@ -47,7 +47,10 @@ const defaults = {
     ],
     "width": 900,
     "photoVisible": true,
-    "photoSide": "right"
+    "photoSide": "right",
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true
   },
   "research": {
     "heading": "Research",
@@ -134,7 +137,10 @@ const defaults = {
         ]
       }
     ],
-    "width": 960
+    "width": 960,
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true
   },
   "publications": {
     "title": "Selected Publication",
@@ -349,7 +355,10 @@ const defaults = {
         "url": "https://doi.org/10.3934/math.20231525",
         "selected": false
       }
-    ]
+    ],
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true
   },
   "contact": {
     "title": "Get In Touch",
@@ -371,7 +380,10 @@ const defaults = {
         "url": "https://scholar.google.com/citations?user=hN1J4bUAAAAJ&hl=en",
         "icon": "scholar"
       }
-    ]
+    ],
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true
   },
   "paper": {
     "eyebrow": "Research paper",
@@ -387,7 +399,15 @@ const defaults = {
     "availabilityText": "The manuscript is currently under review. A link to the preprint will be added here when it becomes publicly available.",
     "preprintLabel": "Read the preprint",
     "preprintURL": "",
-    "width": 900
+    "width": 900,
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true
+  },
+  "archive": {
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true
   }
 };
 const clone=value=>JSON.parse(JSON.stringify(value));

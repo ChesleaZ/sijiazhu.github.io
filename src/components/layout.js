@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ScienceBackdrop from './science-backdrop';
 import styled, { ThemeProvider } from 'styled-components';
 import { Head, Loader, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
 import { SiteProvider, EditPageLink, pageForPath } from '../context/site';
 
 const StyledContent = styled.div`
+  position: relative;
+  isolation: isolate;
+  #content { position: relative; z-index: 1; }
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -63,6 +67,7 @@ const Layout = ({ children, location }) => {
             <Loader finishLoading={() => setIsLoading(false)} />
           ) : (
             <StyledContent>
+              <ScienceBackdrop page={pageForPath(location.pathname)} />
               <Nav isHome={isHome} />
               <Social isHome={isHome} />
               <Email isHome={isHome} />

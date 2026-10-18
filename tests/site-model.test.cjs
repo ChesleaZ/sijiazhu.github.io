@@ -67,3 +67,36 @@ test('Older site configs gain background defaults without changing existing cont
   old.about.title = 'An actual concurrent edit';
   assert.notDeepEqual(model.normalize(old), model.defaults);
 });
+test('Every content page has independent background settings, including the archive', () => {
+  const site = model.clone(model.defaults);
+  for (const page of ['home', 'about', 'research', 'publications', 'archive', 'contact', 'paper']) {
+    const edited = model.clone(site);
+    model.setPath(edited, page + '.backgroundEnabled', false);
+    model.setPath(edited, page + '.backgroundOpacity', 0);
+    model.setPath(edited, page + '.backgroundAnimated', false);
+    const normalized = model.normalize(edited);
+    assert.equal(normalized[page].backgroundEnabled, false);
+    assert.equal(normalized[page].backgroundOpacity, 0);
+    assert.equal(normalized[page].backgroundAnimated, false);
+    for (const other of Object.keys(site).filter(key => key !== page)) assert.deepEqual(normalized[other], site[other]);
+  }
+});
+test('Existing homepage preferences and published user edits survive the new schema', () => {
+  const old = model.clone(model.defaults);
+  delete old.archive;
+  for (const page of ['about', 'research', 'publications', 'contact', 'paper']) {
+    for (const key of ['backgroundEnabled', 'backgroundOpacity', 'backgroundAnimated']) delete old[page][key];
+  }
+  old.home.backgroundEnabled = false;
+  old.home.backgroundOpacity = 7;
+  old.home.backgroundAnimated = false;
+  old.paper.status = 'Submitted to Cell';
+  old.about.title = 'An edited title';
+  const result = model.normalize(old);
+  assert.equal(result.home.backgroundOpacity, 7);
+  assert.equal(result.home.backgroundEnabled, false);
+  assert.equal(result.home.backgroundAnimated, false);
+  assert.equal(result.paper.status, 'Submitted to Cell');
+  assert.equal(result.about.title, 'An edited title');
+  assert.equal(result.archive.backgroundEnabled, true);
+});
