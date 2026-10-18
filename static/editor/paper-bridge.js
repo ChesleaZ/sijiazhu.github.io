@@ -12,7 +12,7 @@
   [['network','0 0 230 150'], ['cells','0 0 175 145'], ['surface','0 0 245 195'], ['umap','0 0 214 186'], ['objective','0 0 586 86'], ['attention','0 0 566 102'], ['robot','0 0 125 143'], ['tubes','0 0 133 148']].forEach(([id, viewBox]) => {
     const motif = document.createElement('div'); motif.className = 'science-motif science-' + id; motif.dataset.artwork = id;
     const svg = document.createElementNS(svgNS, 'svg'); svg.setAttribute('viewBox', viewBox); svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor'); svg.setAttribute('stroke-width', '1.4'); svg.setAttribute('focusable', 'false');
-    const use = document.createElementNS(svgNS, 'use'); use.setAttribute('href', '../../science/motifs.svg?v=curves-20261018#' + id);
+    const use = document.createElementNS(svgNS, 'use'); use.setAttribute('href', '../../science/motifs.svg?v=neural-20261018#' + id);
     svg.appendChild(use); motif.appendChild(svg); backdrop.appendChild(motif);
   });
   document.body.prepend(backdrop);

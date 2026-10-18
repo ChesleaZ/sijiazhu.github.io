@@ -31,7 +31,7 @@ const ScienceBackdrop = ({ page }) => {
           data-position-x={settings.backgroundPositions[id].x} data-position-y={settings.backgroundPositions[id].y}
           style={{ '--science-dx': settings.backgroundPositions[id].x + 'vw', '--science-dy': settings.backgroundPositions[id].y + 'vh' }}>
           <svg viewBox={viewBox} fill="none" stroke="currentColor" strokeWidth="1.4" focusable="false">
-            <use href={withPrefix('/science/motifs.svg?v=curves-20261018#' + id)} />
+            <use href={withPrefix('/science/motifs.svg?v=neural-20261018#' + id)} />
           </svg>
         </div>
       ))}
