@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { createGlobalStyle } from 'styled-components';
 import model from '../../static/editor/site-model';
+import publishedContent from '../../static/site-config.json';
 
-const Context = createContext({ config: model.defaults, preview: false, edit: () => ({}) });
+const initialContent = model.normalize(publishedContent);
+const Context = createContext({ config: initialContent, preview: false, edit: () => ({}) });
 const SiteStyle = createGlobalStyle`
   html:root {
     --navy: ${p => p.content.theme.background};
@@ -49,7 +51,7 @@ export const pageForPath = path => {
 };
 
 export const SiteProvider = ({ children }) => {
-  const [config, setConfig] = useState(model.defaults);
+  const [config, setConfig] = useState(initialContent);
   const [preview, setPreview] = useState(false);
   useEffect(() => {
     let cancelled = false;
