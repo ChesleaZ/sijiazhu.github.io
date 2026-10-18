@@ -284,7 +284,13 @@ const Hero = () => {
       </span>
     </h3>
   );
-  const items = [one, two, three];
+  const four = (
+    <p className="hero-description">
+      I study how single-cell models learn biological information and connect cellular
+      representations with language.
+    </p>
+  );
+  const items = [one, two, three, four];
 
   return (
     <StyledHeroSection>
@@ -305,10 +311,6 @@ const Hero = () => {
               ))}
           </TransitionGroup>
         )}
-        <p className="hero-description">
-          I study how single-cell models learn biological information and connect cellular
-          representations with language.
-        </p>
       </div>
 
       {prefersReducedMotion ? (
