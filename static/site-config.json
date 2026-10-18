@@ -49,7 +49,7 @@
     "academicHeading": "Academic",
     "items": [
       {
-        "institution": "Massachusetts General Hospital",
+        "institution": "Broad institute of Harvard of MIT",
         "role": "Student Researcher",
         "topic": "Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters",
         "tags": [
@@ -114,7 +114,8 @@
         "title": "Teaching Assistant",
         "institution": "Johns Hopkins University",
         "details": [
-          "Bayesian Statistics"
+          "Bayesian Statistics",
+          "Time Series Analysis"
         ]
       },
       {
@@ -371,8 +372,8 @@
   "paper": {
     "eyebrow": "Research paper",
     "title": "Random Matrix Scaling Laws in Single-Cell Representation Learning",
-    "authors": "S. Zhu, J. Hu, R. Ma, A. Klein, and G. Gowri",
-    "status": "Manuscript under review",
+    "authors": "Sijia Zhu, Jingyuan Hu, Gokul Gowri, Allon M. Klein*, and Rong Ma**",
+    "status": "Submitted to Cell",
     "overviewTitle": "Research overview",
     "paragraphs": [
       "This work studies how cell number, sequencing depth, and batch structure shape biological information recovery in single-cell representation learning. It connects a random matrix theory framework with empirical evaluation of single-cell representations, including scVI, Geneformer, and scGPT.",
