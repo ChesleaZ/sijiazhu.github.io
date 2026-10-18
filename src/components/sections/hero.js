@@ -262,7 +262,7 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [isMounted, prefersReducedMotion]);
 
-  const one = <h1>Hello, my name is...</h1>;
+  const one = <h1>Hello, my name is</h1>;
   const two = <h2 className="big-heading">Sijia Zhu.</h2>;
   const three = (
     <h3
@@ -284,13 +284,7 @@ const Hero = () => {
       </span>
     </h3>
   );
-  const four = (
-    <p className="hero-description">
-      I study how single-cell models learn biological information and connect cellular
-      representations with language.
-    </p>
-  );
-  const items = [one, two, three, four];
+  const items = [one, two, three];
 
   return (
     <StyledHeroSection>
