@@ -24,31 +24,31 @@
     "titleSize": 64,
     "topicSize": 43,
     "backgroundEnabled": true,
-    "backgroundOpacity": 14,
+    "backgroundOpacity": 36,
     "backgroundAnimated": true,
     "backgroundPositions": {
       "network": {
-        "x": 0,
+        "x": 40.3,
         "y": 0
       },
       "cells": {
         "x": 0,
-        "y": 0
+        "y": 0.9
       },
       "surface": {
         "x": 0,
-        "y": 0
+        "y": -6.4
       },
       "umap": {
-        "x": 0,
-        "y": 0
+        "x": -40.9,
+        "y": -16.3
       },
       "objective": {
-        "x": 0,
+        "x": -22.2,
         "y": 0
       },
       "attention": {
-        "x": 0,
+        "x": -0.1,
         "y": 0
       },
       "robot": {
