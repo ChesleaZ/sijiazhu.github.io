@@ -4,7 +4,7 @@ import ScienceBackdrop from './science-backdrop';
 import styled, { ThemeProvider } from 'styled-components';
 import { Head, Loader, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
-import { SiteProvider, EditPageLink, pageForPath } from '../context/site';
+import { SiteProvider, pageForPath } from '../context/site';
 
 const StyledContent = styled.div`
   position: relative;
@@ -19,7 +19,6 @@ const StyledContent = styled.div`
     header { height: 80px; }
     footer { min-height: 40px; padding: 8px 15px; }
     footer a { padding: 6px 10px; }
-    .site-edit-entry { margin-bottom: 8px; }
   }
 `;
 
@@ -83,9 +82,7 @@ const Layout = ({ children, location }) => {
 
               <div id="content">
                 {children}
-                {page === 'home' && <EditPageLink page={page} />}
-                {page !== 'about' && <Footer isHome={page === 'home'} />}
-                {page !== 'home' && <EditPageLink page={page} />}
+                <Footer isHome={page === 'home'} />
               </div>
             </StyledContent>
           )}

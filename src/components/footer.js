@@ -84,11 +84,7 @@ const Footer = ({ isHome = false }) => {
       </StyledSocialLinks>}
 
       <StyledCredit tabIndex="-1">
-        {isHome ? <div>© 2026 Sijia Zhu</div> : (
-          <a href="https://github.com/ChesleaZ/sijiazhu.github.io">
-            <div>Built by Sijia Zhu. Original design by Brittany Chiang and Jonathon Ma.</div>
-          </a>
-        )}
+        <div>© 2026 Sijia Zhu</div>
       </StyledCredit>
     </StyledFooter>
   );
