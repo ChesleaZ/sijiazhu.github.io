@@ -84,7 +84,7 @@ const Footer = () => {
 
       <StyledCredit tabIndex="-1">
         <a href="https://github.com/ChesleaZ/sijiazhu.github.io">
-          <div>Built by Sijia Zhu. Original design by Brittany Chiang.</div>
+          <div>Built by Sijia Zhu. Original design by Brittany Chiang and Jonathon Ma.</div>
         </a>
       </StyledCredit>
     </StyledFooter>
