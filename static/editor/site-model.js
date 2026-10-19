@@ -73,18 +73,47 @@ const defaults = {
           "M.S in Applied Mathematics and Statistics",
           "Research Assistant",
           "Teaching Assistant"
+        ],
+        "advisorLabel": "Advisor:",
+        "advisors": [
+          {
+            "name": "Prof. Yanxun Xu",
+            "url": "https://www.ams.jhu.edu/~yxu70/"
+          }
         ]
       },
       {
         "institution": "Harvard T.H. Chan School of Public Health",
         "details": [
           "Visiting Graduate Student in Biostatistics"
+        ],
+        "advisorLabel": "Advisors:",
+        "advisors": [
+          {
+            "name": "Prof. Rong Ma",
+            "url": "https://sites.google.com/site/rongmastat/home"
+          },
+          {
+            "name": "Prof. Allon Klein",
+            "url": "https://kleinlab.bio/"
+          }
         ]
       },
       {
         "institution": "Broad Institute of MIT and Harvard / Massachusetts General Hospital",
         "details": [
           "Research Assistant"
+        ],
+        "advisorLabel": "Advisors:",
+        "advisors": [
+          {
+            "name": "Prof. Kenneth Westerman",
+            "url": "https://westerman-lab.github.io/"
+          },
+          {
+            "name": "Prof. Miriam Udler",
+            "url": "https://www.udlerlab.org/"
+          }
         ]
       }
     ],
@@ -706,7 +735,16 @@ function normalize(input){
   if(key==='url'||key==='preprintURL')return safeURL(value,template);
   return value.slice(0,12000);
  };
- const out=read(input,defaults,'');
+ const migrated=input&&typeof input==='object'?clone(input):input;
+ if(migrated&&migrated.about&&Array.isArray(migrated.about.backgroundGroups)){
+  migrated.about.backgroundGroups.forEach(group=>{
+   if(!group||typeof group!=='object')return;
+   const matching=defaults.about.backgroundGroups.find(item=>item.institution===group.institution);
+   if(!Array.isArray(group.advisors))group.advisors=matching?clone(matching.advisors):[];
+   if(typeof group.advisorLabel!=='string')group.advisorLabel=matching?matching.advisorLabel:'Advisors:';
+  });
+ }
+ const out=read(migrated,defaults,'');
  out.home.topics=out.home.topics.map(x=>x.trim().replace(/\\.$/,'')).filter(Boolean).slice(0,8);
  if(!out.home.topics.length)out.home.topics=clone(defaults.home.topics);
  return out;

@@ -71,18 +71,47 @@
           "M.S in Applied Mathematics and Statistics",
           "Research Assistant",
           "Teaching Assistant"
+        ],
+        "advisorLabel": "Advisor:",
+        "advisors": [
+          {
+            "name": "Prof. Yanxun Xu",
+            "url": "https://www.ams.jhu.edu/~yxu70/"
+          }
         ]
       },
       {
         "institution": "Harvard T.H. Chan School of Public Health",
         "details": [
           "Visiting Graduate Student in Biostatistics"
+        ],
+        "advisorLabel": "Advisors:",
+        "advisors": [
+          {
+            "name": "Prof. Rong Ma",
+            "url": "https://sites.google.com/site/rongmastat/home"
+          },
+          {
+            "name": "Prof. Allon Klein",
+            "url": "https://kleinlab.bio/"
+          }
         ]
       },
       {
         "institution": "Broad Institute of MIT and Harvard / Massachusetts General Hospital",
         "details": [
           "Research Assistant"
+        ],
+        "advisorLabel": "Advisors:",
+        "advisors": [
+          {
+            "name": "Prof. Kenneth Westerman",
+            "url": "https://westerman-lab.github.io/"
+          },
+          {
+            "name": "Prof. Miriam Udler",
+            "url": "https://www.udlerlab.org/"
+          }
         ]
       }
     ],
@@ -120,7 +149,7 @@
     "paragraphs": [
       "My research interests lie in AI for Science, particularly biological foundation models, representation learning, and multimodal generative AI for biology. I am also interested in statistical machine learning, high-dimensional inference, and scaling laws."
     ],
-    "width": 1080,
+    "width": 1000,
     "photoVisible": false,
     "photoSide": "right",
     "backgroundEnabled": true,

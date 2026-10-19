@@ -35,6 +35,11 @@ const StyledAboutSection = styled.section`
   .background-group h4 { margin: 0 0 12px; font-size: var(--fz-lg); font-weight: 600; line-height: 1.45; }
   .interest-item { text-align: left; }
   .interest-item strong { color: var(--lightest-slate); font-weight: 700; }
+  .advisor-list { list-style: none; margin: 4px 0 2px 12px; padding: 0; }
+  .background-list .advisor-list li { font-size: .92em; line-height: 1.4; padding-left: 13px; margin: 0; }
+  .background-list .advisor-list li:before { content: '•'; font-size: .8em; top: .2em; }
+  .advisor-list a { display: inline; color: var(--light-slate); text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .advisor-list a:hover, .advisor-list a:focus-visible { color: var(--green); }
   .background-list { list-style: none; padding: 0; margin: 0; }
   .background-list li { position: relative; padding-left: 20px; margin: 0 0 14px; line-height: 1.65; overflow-wrap: break-word; }
   .background-list li:before { content: '▹'; position: absolute; left: 0; color: var(--green); }
@@ -175,7 +180,24 @@ const About = () => {
               <div className="background-group" key={i}>
                 <h4 {...edit('about.backgroundGroups.' + i + '.institution')}>{group.institution}</h4>
                 <ul className="background-list">
-                  {group.details.map((item, j) => <li key={j} {...edit('about.backgroundGroups.' + i + '.details.' + j)}>{item}</li>)}
+                  {group.details.map((item, j) => (
+                    <li key={j}>
+                      <span {...edit('about.backgroundGroups.' + i + '.details.' + j)}>{item}</span>
+                      {j === 0 && group.advisors.length > 0 && (
+                        <ul className="advisor-list">
+                          <li>
+                            <span {...edit('about.backgroundGroups.' + i + '.advisorLabel')}>{group.advisorLabel}</span>{' '}
+                            {group.advisors.map((advisor, k) => (
+                              <React.Fragment key={k}>
+                                {k > 0 && ' and '}
+                                <a href={advisor.url} target="_blank" rel="noopener noreferrer" {...edit('about.backgroundGroups.' + i + '.advisors.' + k + '.name')}>{advisor.name}</a>
+                              </React.Fragment>
+                            ))}
+                          </li>
+                        </ul>
+                      )}
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
