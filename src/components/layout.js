@@ -13,10 +13,19 @@ const StyledContent = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  &.page-home, &.page-about {
+    #content { display: flex; flex-direction: column; min-height: 100svh; }
+    header { height: 80px; }
+    footer { min-height: 40px; padding: 8px 15px; }
+    footer a { padding: 6px 10px; }
+    .site-edit-entry { margin-bottom: 8px; }
+  }
 `;
 
 const Layout = ({ children, location }) => {
   const isHome = location.pathname === '/';
+  const page = pageForPath(location.pathname);
   const [isLoading, setIsLoading] = useState(isHome);
 
   // Sets target="_blank" rel="noopener noreferrer" on external links
@@ -66,7 +75,7 @@ const Layout = ({ children, location }) => {
           {isLoading && isHome ? (
             <Loader finishLoading={() => setIsLoading(false)} />
           ) : (
-            <StyledContent>
+            <StyledContent className={'page-' + page}>
               <ScienceBackdrop page={pageForPath(location.pathname)} />
               <Nav isHome={isHome} />
               <Social isHome={isHome} />
@@ -74,8 +83,9 @@ const Layout = ({ children, location }) => {
 
               <div id="content">
                 {children}
-                <Footer />
-                <EditPageLink page={pageForPath(location.pathname)} />
+                {page === 'home' && <EditPageLink page={page} />}
+                <Footer isHome={page === 'home'} />
+                {page !== 'home' && <EditPageLink page={page} />}
               </div>
             </StyledContent>
           )}

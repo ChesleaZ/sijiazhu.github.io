@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
@@ -66,10 +67,10 @@ const StyledCredit = styled.div`
   }
 `;
 
-const Footer = () => {
+const Footer = ({ isHome = false }) => {
   return (
     <StyledFooter>
-      <StyledSocialLinks>
+      {!isHome && <StyledSocialLinks>
         <ul>
           {socialMedia &&
             socialMedia.map(({ name, url }, i) => (
@@ -80,15 +81,19 @@ const Footer = () => {
               </li>
             ))}
         </ul>
-      </StyledSocialLinks>
+      </StyledSocialLinks>}
 
       <StyledCredit tabIndex="-1">
-        <a href="https://github.com/ChesleaZ/sijiazhu.github.io">
-          <div>Built by Sijia Zhu. Original design by Brittany Chiang and Jonathon Ma.</div>
-        </a>
+        {isHome ? <div>© 2026 Sijia Zhu</div> : (
+          <a href="https://github.com/ChesleaZ/sijiazhu.github.io">
+            <div>Built by Sijia Zhu. Original design by Brittany Chiang and Jonathon Ma.</div>
+          </a>
+        )}
       </StyledCredit>
     </StyledFooter>
   );
 };
+
+Footer.propTypes = { isHome: PropTypes.bool };
 
 export default Footer;
