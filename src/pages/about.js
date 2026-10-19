@@ -29,7 +29,7 @@ const StyledMainContainer = styled.main`
     #about {
       .numbered-heading { margin-bottom: 14px; font-size: 28px; }
       &.text-only .about-text { font-size: 16.5px; line-height: 1.4; }
-      .about-block + .about-block { margin-top: 24px; padding-top: 16px; }
+      .about-block + .about-block { margin-top: 20px; padding-top: 16px; }
       .about-block h3 { font-size: 24px; margin-bottom: 12px; }
       .background-group + .background-group { margin-top: 12px; }
       .background-group h4 { margin-bottom: 5px; line-height: 1.4; }
