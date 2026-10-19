@@ -69,7 +69,16 @@ export const SiteProvider = ({ children }) => {
       if (!link) return;
       event.preventDefault();
       if (event.target.closest('[contenteditable=true]')) return;
-      if (link.origin === window.location.origin) window.parent.postMessage({ type: 'site-navigate', page: pageForPath(link.pathname) }, window.location.origin);
+      if (link.origin === window.location.origin) {
+        const section = link.hash.slice(1);
+        const target = section && document.getElementById(section);
+        if (target && link.pathname === window.location.pathname) {
+          target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+          return;
+        }
+        const sectionPages = { home: 'home', about: 'about', research: 'research', publications: 'publications', contact: 'contact' };
+        window.parent.postMessage({ type: 'site-navigate', page: sectionPages[section] || pageForPath(link.pathname) }, window.location.origin);
+      }
     };
     window.addEventListener('message', receive);
     document.addEventListener('click', navigate, true);

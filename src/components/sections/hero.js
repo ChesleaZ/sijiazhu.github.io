@@ -304,7 +304,7 @@ const Hero = () => {
   const items = [one, two, three];
 
   return (
-    <StyledHeroSection className={settings.photoSide === 'left' ? 'photo-left' : ''} style={{ '--hero-photo-width': `${settings.photoWidth}px`, '--hero-name-size': `${settings.titleSize}px`, '--hero-topic-size': `${settings.topicSize}px` }}>
+    <StyledHeroSection id="home" className={settings.photoSide === 'left' ? 'photo-left' : ''} style={{ '--hero-photo-width': `${settings.photoWidth}px`, '--hero-name-size': `${settings.titleSize}px`, '--hero-topic-size': `${settings.topicSize}px` }}>
       <div className="hero-content">
         {prefersReducedMotion ? (
           <>

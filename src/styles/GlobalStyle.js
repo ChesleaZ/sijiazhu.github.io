@@ -144,6 +144,9 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  section[id] { scroll-margin-top: calc(var(--nav-scroll-height, 70px) + 16px); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
   section {
     margin: 0 auto;
     padding: 100px 0;
