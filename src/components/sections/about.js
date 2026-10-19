@@ -159,8 +159,6 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = content.skills;
-
   return (
     <StyledAboutSection id="about" ref={revealContainer} className={content.photoVisible ? 'with-photo' : 'text-only'}>
       <h2 className="numbered-heading" {...edit('about.title')}>{content.title}</h2>
@@ -176,13 +174,6 @@ const About = () => {
             {content.researchExperienceTitle && <h4 {...edit('about.researchExperienceTitle')}>{content.researchExperienceTitle}</h4>}
             <ul className="background-list">
               {content.researchExperience.map((item, i) => <li key={i} {...edit('about.researchExperience.' + i)}>{item}</li>)}
-            </ul>
-          </div>
-
-          <div className="about-block" aria-labelledby="about-skills">
-            <h3 id="about-skills" {...edit('about.skillsLabel')}>{content.skillsLabel}</h3>
-            <ul className="skills-list">
-              {skills && skills.map((skill, i) => <li key={i} {...edit('about.skills.' + i)}>{skill}</li>)}
             </ul>
           </div>
 

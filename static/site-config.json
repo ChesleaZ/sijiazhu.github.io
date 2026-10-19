@@ -66,7 +66,7 @@
     "backgroundTitle": "Background",
     "educationTitle": "",
     "education": [
-      "M.S.E. in Applied Mathematics and Statistics (Biostatistics) — Johns Hopkins University",
+      "M.S in Applied Mathematics and Statistics— Johns Hopkins University",
       "Visiting Graduate Student in Biostatistics — Harvard T.H. Chan School of Public Health"
     ],
     "researchExperienceTitle": "",
@@ -86,8 +86,7 @@
     ],
     "researchInterestsTitle": "Research Interests",
     "paragraphs": [
-      "My research focuses on biological foundation models. I study scaling laws for single-cell representation models, focusing on how data scale and sequencing depth shape biological signal recovery and generalization.",
-      "I also work on cell-to-text generation, linking single-cell representations with large language models to describe and interpret cellular states."
+      "My research interests lie in AI for Science, particularly biological foundation models, representation learning, and multimodal generative AI for biology. I am also interested in statistical machine learning, high-dimensional inference, and scaling laws."
     ],
     "width": 800,
     "photoVisible": false,

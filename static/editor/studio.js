@@ -117,7 +117,7 @@ function renderControls() {
     el('controls').appendChild(artworkControls());
     const textHeading = document.createElement('h2'); textHeading.textContent = '文字与布局'; el('controls').appendChild(textHeading);
   }
-  Object.keys(template).filter(field => !backgroundKeys.includes(field) && field !== 'backgroundPositions').forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
+  Object.keys(template).filter(field => !backgroundKeys.includes(field) && field !== 'backgroundPositions' && !(dataPage === 'about' && ['skillsLabel', 'skills'].includes(field))).forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
   el('controls').querySelectorAll('details').forEach(node => { node.open = open.has(node.dataset.itemPath); });
   el('controls').parentElement.scrollTop = scrollTop;
   el('page').value = page; sendArtworkMode();
