@@ -84,7 +84,7 @@ const Layout = ({ children, location }) => {
               <div id="content">
                 {children}
                 {page === 'home' && <EditPageLink page={page} />}
-                <Footer isHome={page === 'home'} />
+                {page !== 'about' && <Footer isHome={page === 'home'} />}
                 {page !== 'home' && <EditPageLink page={page} />}
               </div>
             </StyledContent>

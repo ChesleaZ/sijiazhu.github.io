@@ -37,12 +37,12 @@ const StyledAboutSection = styled.section`
   .interest-item strong { color: var(--lightest-slate); font-weight: 700; }
   .advisor-list { list-style: none; margin: 4px 0 2px 12px; padding: 0; }
   .background-list .advisor-list li { font-size: .92em; line-height: 1.4; padding-left: 13px; margin: 0; }
-  .background-list .advisor-list li:before { content: '•'; font-size: .8em; top: .2em; }
-  .advisor-list a { display: inline; color: var(--light-slate); text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  .advisor-list a:hover, .advisor-list a:focus-visible { color: var(--green); }
+  .background-list .advisor-list li:before { content: ''; width: 3px; height: 3px; left: 2px; top: .65em; opacity: .65; background-color: var(--slate); }
+  .advisor-list a { display: inline; color: var(--light-slate); text-decoration: underline; text-decoration-color: rgba(178, 192, 208, .35); text-underline-offset: 4px; text-decoration-thickness: .7px; transition: color .2s ease, text-decoration-color .2s ease; }
+  .advisor-list a:hover, .advisor-list a:focus-visible { color: var(--green); text-decoration-color: var(--green); }
   .background-list { list-style: none; padding: 0; margin: 0; }
   .background-list li { position: relative; padding-left: 20px; margin: 0 0 14px; line-height: 1.65; overflow-wrap: break-word; }
-  .background-list li:before { content: '▹'; position: absolute; left: 0; color: var(--green); }
+  .background-list li:before { content: ''; position: absolute; left: 2px; top: .65em; width: 4px; height: 4px; border-radius: 50%; background-color: var(--green); opacity: .85; }
   .about-block .skills-list { margin-top: 0; }
   @media (max-width: 640px) {
     .about-block + .about-block { margin-top: 30px; padding-top: 26px; }
