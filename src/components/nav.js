@@ -7,7 +7,6 @@ import { navLinks } from '@config';
 import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
-import scrollToSection from '../utils/scroll-to-section';
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -163,7 +162,7 @@ const Nav = ({ isHome }) => {
 
   const Logo = (
     <div className="logo" tabIndex="-1">
-      <Link to="/#home" onClick={scrollToSection} aria-label="Homepage">Homepage</Link>
+      <Link to="/" aria-label="Homepage">Homepage</Link>
     </div>
   );
 
@@ -179,7 +178,7 @@ const Nav = ({ isHome }) => {
                 {navLinks &&
                   navLinks.map(({ url, name }, i) => (
                     <li key={i}>
-                      <Link to={url} onClick={scrollToSection}>{name}</Link>
+                      <Link to={url}>{name}</Link>
                     </li>
                   ))}
               </ol>
@@ -205,7 +204,7 @@ const Nav = ({ isHome }) => {
                     navLinks.map(({ url, name }, i) => (
                       <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
                         <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
-                          <Link to={url} onClick={scrollToSection}>{name}</Link>
+                          <Link to={url}>{name}</Link>
                         </li>
                       </CSSTransition>
                     ))}

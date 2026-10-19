@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { navLinks } from '@config';
 import { KEY_CODES } from '@utils';
 import { useOnClickOutside } from '@hooks';
-import scrollToSection from '../utils/scroll-to-section';
 
 const StyledMenu = styled.div`
   display: none;
@@ -259,7 +258,7 @@ const Menu = () => {
               <ol>
                 {navLinks.map(({ url, name }, i) => (
                   <li key={i}>
-                    <Link to={url} onClick={event => { setMenuOpen(false); scrollToSection(event); }}>
+                    <Link to={url} onClick={() => setMenuOpen(false)}>
                       {name}
                     </Link>
                   </li>
