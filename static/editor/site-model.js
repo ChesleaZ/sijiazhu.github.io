@@ -100,7 +100,7 @@ const defaults = {
         ]
       },
       {
-        "institution": "Broad Institute of MIT and Harvard / Massachusetts General Hospital",
+        "institution": "Broad Institute of MIT and Harvard",
         "details": [
           "Research Assistant"
         ],
@@ -124,7 +124,7 @@ const defaults = {
     ],
     "researchExperienceTitle": "Research Experience",
     "researchExperience": [
-      "Research Assistant — Broad Institute of MIT and Harvard / Massachusetts General Hospital"
+      "Research Assistant — Broad Institute of MIT and Harvard"
     ],
     "skillsLabel": "Skills",
     "skills": [
