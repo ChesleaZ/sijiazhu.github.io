@@ -10,6 +10,7 @@ const StyledAboutSection = styled.section`
   max-width: 800px;
 
   &.text-only {
+    .numbered-heading:after { flex-basis: 0; min-width: 0; width: auto; }
     .inner { grid-template-columns: minmax(0, 1fr); gap: 0; }
     .about-text { width: 100%; min-width: 0; line-height: 1.65; }
     .about-text p { margin: 0 0 22px; }
