@@ -28,6 +28,18 @@ const StyledAboutSection = styled.section`
     }
   }
 
+  .about-block + .about-block { margin-top: 36px; padding-top: 30px; border-top: 1px solid var(--lightest-navy); }
+  .about-block h3 { color: var(--lightest-slate); font-size: 24px; margin: 0 0 22px; }
+  .about-block h4 { color: var(--green); font-size: var(--fz-md); font-weight: 500; margin: 24px 0 12px; }
+  .background-list { list-style: none; padding: 0; margin: 0; }
+  .background-list li { position: relative; padding-left: 20px; margin: 0 0 14px; line-height: 1.65; overflow-wrap: break-word; }
+  .background-list li:before { content: '▹'; position: absolute; left: 0; color: var(--green); }
+  .about-block .skills-list { margin-top: 0; }
+  @media (max-width: 640px) {
+    .about-block + .about-block { margin-top: 30px; padding-top: 26px; }
+    .about-block h3 { font-size: 22px; }
+  }
+
   .inner {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -155,14 +167,29 @@ const About = () => {
 
       <div className="inner">
         <StyledText className="about-text">
-          <div>
-            {content.paragraphs.map((paragraph, i) => <p key={i} {...edit('about.paragraphs.' + i)}>{paragraph}</p>)}
-            <p className="skills-label" {...edit('about.skillsLabel')}>{content.skillsLabel}</p>
+          <div className="about-block" aria-labelledby="about-background">
+            <h3 id="about-background" {...edit('about.backgroundTitle')}>{content.backgroundTitle}</h3>
+            <h4 {...edit('about.educationTitle')}>{content.educationTitle}</h4>
+            <ul className="background-list">
+              {content.education.map((item, i) => <li key={i} {...edit('about.education.' + i)}>{item}</li>)}
+            </ul>
+            <h4 {...edit('about.researchExperienceTitle')}>{content.researchExperienceTitle}</h4>
+            <ul className="background-list">
+              {content.researchExperience.map((item, i) => <li key={i} {...edit('about.researchExperience.' + i)}>{item}</li>)}
+            </ul>
           </div>
 
-          <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i} {...edit('about.skills.' + i)}>{skill}</li>)}
-          </ul>
+          <div className="about-block" aria-labelledby="about-skills">
+            <h3 id="about-skills" {...edit('about.skillsLabel')}>{content.skillsLabel}</h3>
+            <ul className="skills-list">
+              {skills && skills.map((skill, i) => <li key={i} {...edit('about.skills.' + i)}>{skill}</li>)}
+            </ul>
+          </div>
+
+          <div className="about-block" aria-labelledby="about-interests">
+            <h3 id="about-interests" {...edit('about.researchInterestsTitle')}>{content.researchInterestsTitle}</h3>
+            {content.paragraphs.map((paragraph, i) => <p key={i} {...edit('about.paragraphs.' + i)}>{paragraph}</p>)}
+          </div>
         </StyledText>
 
         {content.photoVisible && <StyledPic className="about-photo">

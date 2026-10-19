@@ -63,12 +63,17 @@
   },
   "about": {
     "title": "About Me",
-    "paragraphs": [
-      "I am a master's student in Applied Mathematics and Statistics at Johns Hopkins University and a visiting graduate student in Biostatistics at Harvard. My research focuses on biological foundation models.",
-      "I study scaling laws for single-cell representation models, focusing on how data scale and sequencing depth shape biological signal recovery and generalization.",
-      "I also work on cell-to-text generation, linking single-cell representations with large language models to describe and interpret cellular states."
+    "backgroundTitle": "Background",
+    "educationTitle": "Education",
+    "education": [
+      "M.S.E. in Applied Mathematics and Statistics (Biostatistics) — Johns Hopkins University",
+      "Visiting Graduate Student in Biostatistics — Harvard T.H. Chan School of Public Health"
     ],
-    "skillsLabel": "Tools and topics I work with:",
+    "researchExperienceTitle": "Research Experience",
+    "researchExperience": [
+      "Research Assistant — Broad Institute of MIT and Harvard / Massachusetts General Hospital"
+    ],
+    "skillsLabel": "Skills",
     "skills": [
       "Python",
       "PyTorch",
@@ -76,6 +81,11 @@
       "Representation Learning",
       "Scaling Laws",
       "Single-cell Analysis"
+    ],
+    "researchInterestsTitle": "Research Interests",
+    "paragraphs": [
+      "My research focuses on biological foundation models. I study scaling laws for single-cell representation models, focusing on how data scale and sequencing depth shape biological signal recovery and generalization.",
+      "I also work on cell-to-text generation, linking single-cell representations with large language models to describe and interpret cellular states."
     ],
     "width": 800,
     "photoVisible": false,

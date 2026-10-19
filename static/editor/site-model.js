@@ -65,12 +65,17 @@ const defaults = {
   },
   "about": {
     "title": "About Me",
-    "paragraphs": [
-      "I am an M.S. student in Applied Mathematics and Statistics at Johns Hopkins University and a visiting graduate student in Biostatistics at Harvard. My research focuses on AI for biology, supported by a background in mathematics and statistics.",
-      "I study scaling laws for single-cell representation models, examining how cell number, sequencing depth, and batch structure shape biological information recovery and experimental design.",
-      "I also build pipelines that connect cellular representations with large language models for cell-to-text generation and interpretation. I am interested in extending this work to multimodal foundation models for biology."
+    "backgroundTitle": "Background",
+    "educationTitle": "Education",
+    "education": [
+      "M.S.E. in Applied Mathematics and Statistics (Biostatistics) — Johns Hopkins University",
+      "Visiting Graduate Student in Biostatistics — Harvard T.H. Chan School of Public Health"
     ],
-    "skillsLabel": "Tools and topics I work with:",
+    "researchExperienceTitle": "Research Experience",
+    "researchExperience": [
+      "Research Assistant — Broad Institute of MIT and Harvard / Massachusetts General Hospital"
+    ],
+    "skillsLabel": "Skills",
     "skills": [
       "Python",
       "PyTorch",
@@ -78,6 +83,11 @@ const defaults = {
       "Representation Learning",
       "Scaling Laws",
       "Single-cell Analysis"
+    ],
+    "researchInterestsTitle": "Research Interests",
+    "paragraphs": [
+      "My research focuses on biological foundation models. I study scaling laws for single-cell representation models, focusing on how data scale and sequencing depth shape biological signal recovery and generalization.",
+      "I also work on cell-to-text generation, linking single-cell representations with large language models to describe and interpret cellular states."
     ],
     "width": 800,
     "photoVisible": false,
