@@ -31,6 +31,10 @@ const StyledAboutSection = styled.section`
   .about-block + .about-block { margin-top: 36px; padding-top: 30px; border-top: 1px solid var(--lightest-navy); }
   .about-block h3 { color: var(--lightest-slate); font-size: 24px; margin: 0 0 22px; }
   .about-block h4 { color: var(--green); font-size: var(--fz-md); font-weight: 500; margin: 24px 0 12px; }
+  .background-group + .background-group { margin-top: 26px; }
+  .background-group h4 { margin: 0 0 12px; font-size: var(--fz-lg); font-weight: 600; line-height: 1.45; }
+  .interest-item { text-align: left; }
+  .interest-item strong { color: var(--lightest-slate); font-weight: 700; }
   .background-list { list-style: none; padding: 0; margin: 0; }
   .background-list li { position: relative; padding-left: 20px; margin: 0 0 14px; line-height: 1.65; overflow-wrap: break-word; }
   .background-list li:before { content: '▹'; position: absolute; left: 0; color: var(--green); }
@@ -167,19 +171,24 @@ const About = () => {
         <StyledText className="about-text">
           <div className="about-block" aria-labelledby="about-background">
             <h3 id="about-background" {...edit('about.backgroundTitle')}>{content.backgroundTitle}</h3>
-            {content.educationTitle && <h4 {...edit('about.educationTitle')}>{content.educationTitle}</h4>}
-            <ul className="background-list">
-              {content.education.map((item, i) => <li key={i} {...edit('about.education.' + i)}>{item}</li>)}
-            </ul>
-            {content.researchExperienceTitle && <h4 {...edit('about.researchExperienceTitle')}>{content.researchExperienceTitle}</h4>}
-            <ul className="background-list">
-              {content.researchExperience.map((item, i) => <li key={i} {...edit('about.researchExperience.' + i)}>{item}</li>)}
-            </ul>
+            {content.backgroundGroups.map((group, i) => (
+              <div className="background-group" key={i}>
+                <h4 {...edit('about.backgroundGroups.' + i + '.institution')}>{group.institution}</h4>
+                <ul className="background-list">
+                  {group.details.map((item, j) => <li key={j} {...edit('about.backgroundGroups.' + i + '.details.' + j)}>{item}</li>)}
+                </ul>
+              </div>
+            ))}
           </div>
 
           <div className="about-block" aria-labelledby="about-interests">
             <h3 id="about-interests" {...edit('about.researchInterestsTitle')}>{content.researchInterestsTitle}</h3>
-            {content.paragraphs.map((paragraph, i) => <p key={i} {...edit('about.paragraphs.' + i)}>{paragraph}</p>)}
+            {content.interests.map((interest, i) => (
+              <p className="interest-item" key={i}>
+                <strong {...edit('about.interests.' + i + '.title')}>{interest.title}</strong>{' '}
+                <span {...edit('about.interests.' + i + '.description')}>{interest.description}</span>
+              </p>
+            ))}
           </div>
         </StyledText>
 

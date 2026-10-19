@@ -64,6 +64,28 @@
   "about": {
     "title": "About Me",
     "backgroundTitle": "Background",
+    "backgroundGroups": [
+      {
+        "institution": "Johns Hopkins University",
+        "details": [
+          "M.S in Applied Mathematics and Statistics",
+          "Research Assistant",
+          "Teaching Assistant"
+        ]
+      },
+      {
+        "institution": "Harvard T.H. Chan School of Public Health",
+        "details": [
+          "Visiting Graduate Student in Biostatistics"
+        ]
+      },
+      {
+        "institution": "Broad Institute of MIT and Harvard / Massachusetts General Hospital",
+        "details": [
+          "Research Assistant"
+        ]
+      }
+    ],
     "educationTitle": "",
     "education": [
       "M.S in Applied Mathematics and Statistics— Johns Hopkins University",
@@ -85,6 +107,16 @@
       "Single-cell Analysis"
     ],
     "researchInterestsTitle": "Research Interests",
+    "interests": [
+      {
+        "title": "AI for Biology.",
+        "description": "I am interested in biological foundation models, representation learning, and multimodal generative AI. My work focuses on learning cellular representations from single-cell data and connecting them with biological knowledge and natural language for interpretation."
+      },
+      {
+        "title": "Statistical Machine Learning.",
+        "description": "I am interested in high-dimensional inference, scaling laws, and survival analysis. My work examines how data scale and quality shape information recovery from noisy biological data to guide experimental design. I also develop survival analysis methods for clinical studies."
+      }
+    ],
     "paragraphs": [
       "My research interests lie in AI for Science, particularly biological foundation models, representation learning, and multimodal generative AI for biology. I am also interested in statistical machine learning, high-dimensional inference, and scaling laws."
     ],

@@ -66,6 +66,28 @@ const defaults = {
   "about": {
     "title": "About Me",
     "backgroundTitle": "Background",
+    "backgroundGroups": [
+      {
+        "institution": "Johns Hopkins University",
+        "details": [
+          "M.S in Applied Mathematics and Statistics",
+          "Research Assistant",
+          "Teaching Assistant"
+        ]
+      },
+      {
+        "institution": "Harvard T.H. Chan School of Public Health",
+        "details": [
+          "Visiting Graduate Student in Biostatistics"
+        ]
+      },
+      {
+        "institution": "Broad Institute of MIT and Harvard / Massachusetts General Hospital",
+        "details": [
+          "Research Assistant"
+        ]
+      }
+    ],
     "educationTitle": "Education",
     "education": [
       "M.S.E. in Applied Mathematics and Statistics (Biostatistics) — Johns Hopkins University",
@@ -85,6 +107,16 @@ const defaults = {
       "Single-cell Analysis"
     ],
     "researchInterestsTitle": "Research Interests",
+    "interests": [
+      {
+        "title": "AI for Biology.",
+        "description": "I am interested in biological foundation models, representation learning, and multimodal generative AI. My work focuses on learning cellular representations from single-cell data and connecting them with biological knowledge and natural language for interpretation."
+      },
+      {
+        "title": "Statistical Machine Learning.",
+        "description": "I am interested in high-dimensional inference, scaling laws, and survival analysis. My work examines how data scale and quality shape information recovery from noisy biological data to guide experimental design. I also develop survival analysis methods for clinical studies."
+      }
+    ],
     "paragraphs": [
       "My research focuses on biological foundation models. I study scaling laws for single-cell representation models, focusing on how data scale and sequencing depth shape biological signal recovery and generalization.",
       "I also work on cell-to-text generation, linking single-cell representations with large language models to describe and interpret cellular states."
