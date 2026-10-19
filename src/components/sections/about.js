@@ -169,11 +169,11 @@ const About = () => {
         <StyledText className="about-text">
           <div className="about-block" aria-labelledby="about-background">
             <h3 id="about-background" {...edit('about.backgroundTitle')}>{content.backgroundTitle}</h3>
-            <h4 {...edit('about.educationTitle')}>{content.educationTitle}</h4>
+            {content.educationTitle && <h4 {...edit('about.educationTitle')}>{content.educationTitle}</h4>}
             <ul className="background-list">
               {content.education.map((item, i) => <li key={i} {...edit('about.education.' + i)}>{item}</li>)}
             </ul>
-            <h4 {...edit('about.researchExperienceTitle')}>{content.researchExperienceTitle}</h4>
+            {content.researchExperienceTitle && <h4 {...edit('about.researchExperienceTitle')}>{content.researchExperienceTitle}</h4>}
             <ul className="background-list">
               {content.researchExperience.map((item, i) => <li key={i} {...edit('about.researchExperience.' + i)}>{item}</li>)}
             </ul>

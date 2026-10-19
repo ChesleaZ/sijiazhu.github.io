@@ -64,14 +64,15 @@
   "about": {
     "title": "About Me",
     "backgroundTitle": "Background",
-    "educationTitle": "Education",
+    "educationTitle": "",
     "education": [
       "M.S.E. in Applied Mathematics and Statistics (Biostatistics) — Johns Hopkins University",
       "Visiting Graduate Student in Biostatistics — Harvard T.H. Chan School of Public Health"
     ],
-    "researchExperienceTitle": "Research Experience",
+    "researchExperienceTitle": "",
     "researchExperience": [
-      "Research Assistant — Broad Institute of MIT and Harvard / Massachusetts General Hospital"
+      "Research Assistant — Broad Institute of MIT and Harvard / Massachusetts General Hospital",
+      "Teaching Assistant — Johns Hopkins University"
     ],
     "skillsLabel": "Skills",
     "skills": [
