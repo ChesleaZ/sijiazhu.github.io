@@ -7,7 +7,25 @@ import { usePrefersReducedMotion } from '@hooks';
 import { useSite } from '../../context/site';
 
 const StyledAboutSection = styled.section`
-  max-width: 900px;
+  max-width: 800px;
+
+  &.text-only {
+    .inner { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .about-text { width: 100%; min-width: 0; line-height: 1.65; }
+    .about-text p { margin: 0 0 22px; }
+    .about-text .skills-label { margin: 30px 0 0; color: var(--light-slate); }
+    .skills-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px 24px;
+      margin-top: 18px;
+      overflow: visible;
+    }
+    .skills-list li { min-width: 0; margin-bottom: 0; line-height: 1.5; }
+    @media (max-width: 640px) {
+      .skills-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+      .about-text p { margin-bottom: 20px; }
+    }
+  }
 
   .inner {
     display: grid;
@@ -131,14 +149,14 @@ const About = () => {
   const skills = content.skills;
 
   return (
-    <StyledAboutSection id="about" ref={revealContainer}>
+    <StyledAboutSection id="about" ref={revealContainer} className={content.photoVisible ? 'with-photo' : 'text-only'}>
       <h2 className="numbered-heading" {...edit('about.title')}>{content.title}</h2>
 
       <div className="inner">
-        <StyledText>
+        <StyledText className="about-text">
           <div>
             {content.paragraphs.map((paragraph, i) => <p key={i} {...edit('about.paragraphs.' + i)}>{paragraph}</p>)}
-            <p {...edit('about.skillsLabel')}>{content.skillsLabel}</p>
+            <p className="skills-label" {...edit('about.skillsLabel')}>{content.skillsLabel}</p>
           </div>
 
           <ul className="skills-list">
@@ -146,7 +164,7 @@ const About = () => {
           </ul>
         </StyledText>
 
-        <StyledPic className="about-photo">
+        {content.photoVisible && <StyledPic className="about-photo">
           <div className="wrapper">
             <StaticImage
               className="img"
@@ -157,7 +175,7 @@ const About = () => {
               alt="Headshot"
             />
           </div>
-        </StyledPic>
+        </StyledPic>}
       </div>
     </StyledAboutSection>
   );

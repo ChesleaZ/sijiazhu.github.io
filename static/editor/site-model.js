@@ -79,8 +79,8 @@ const defaults = {
       "Scaling Laws",
       "Single-cell Analysis"
     ],
-    "width": 900,
-    "photoVisible": true,
+    "width": 800,
+    "photoVisible": false,
     "photoSide": "right",
     "backgroundEnabled": true,
     "backgroundOpacity": 12,
