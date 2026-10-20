@@ -50,17 +50,75 @@ const StyledResearchSection = styled.section`
   }
 
   .research-card.compact {
-    grid-template-columns: minmax(0, 1fr) 300px;
-    align-items: center;
+    position: relative;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 40px;
+    align-items: stretch;
+    padding: 32px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover,
+    &:focus-within {
+      border-color: var(--green);
+      box-shadow: 0 18px 40px -26px var(--green);
+
+      h3 a {
+        color: var(--green);
+      }
+    }
+
+    .research-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    h3 {
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    /* Make the whole card clickable through the title link. */
+    h3 a::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
 
     .tag-list {
       flex-direction: column;
-      gap: 6px;
-      margin-top: 18px;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .tag-list li {
+      padding: 4px 12px;
+      border: 1px solid rgba(122, 216, 199, 0.35);
+      border-radius: 999px;
+      background-color: rgba(122, 216, 199, 0.08);
+    }
+
+    .research-figure {
+      align-self: center;
+      padding: 8px;
+
+      &:hover,
+      &:focus {
+        transform: none;
+      }
     }
 
     @media (max-width: 760px) {
       grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 22px;
+
+      .research-figure {
+        max-width: 340px;
+      }
     }
   }
 
