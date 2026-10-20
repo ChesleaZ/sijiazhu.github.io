@@ -80,6 +80,10 @@ const StyledResearchSection = styled.section`
     }
 
     /* Make the whole card clickable through the title link. */
+    h3 a {
+      position: static;
+    }
+
     h3 a::after {
       content: '';
       position: absolute;
