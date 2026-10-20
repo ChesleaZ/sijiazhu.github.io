@@ -54,6 +54,8 @@ const StyledResearchSection = styled.section`
     align-items: center;
 
     .tag-list {
+      flex-direction: column;
+      gap: 6px;
       margin-top: 18px;
     }
 
@@ -94,14 +96,6 @@ const StyledResearchSection = styled.section`
     &:focus {
       color: var(--green);
     }
-  }
-
-  .read-more {
-    ${({ theme }) => theme.mixins.inlineLink};
-    display: inline-block;
-    margin-top: 20px;
-    font-family: var(--font-mono);
-    font-size: var(--fz-sm);
   }
 
   .research-meta {
@@ -229,11 +223,6 @@ const Research = () => {
                       <li key={j} {...edit('research.items.' + i + '.tags.' + j)}>{tag}</li>
                     ))}
                   </ul>
-                  {detailHref && (
-                    <a className="read-more" href={detailHref}>
-                      Learn more →
-                    </a>
-                  )}
                 </div>
                 {imageSrc && (
                   <a className="research-figure" href={detailHref || imageSrc} aria-label={'Open ' + topic}>
