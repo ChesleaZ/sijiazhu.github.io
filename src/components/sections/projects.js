@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'gatsby';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { srConfig } from '@config';
@@ -17,46 +16,26 @@ const StyledProjectsSection = styled.section`
     font-size: clamp(24px, 5vw, var(--fz-heading));
   }
 
-  .archive-link {
-    ${({ theme }) => theme.mixins.button};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 18px;
-    font-family: var(--font-mono);
-    font-size: var(--fz-sm);
-    line-height: 1;
-  }
-
-  .projects-grid {
+  .publication-list {
     ${({ theme }) => theme.mixins.resetList};
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 15px;
-    position: relative;
-    margin-top: 50px;
-
-    @media (max-width: 1080px) {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-  }
-
-  .more-button {
-    ${({ theme }) => theme.mixins.button};
-    margin: 80px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 40px;
   }
 `;
 
 const StyledProject = styled.li`
   position: relative;
-  cursor: default;
   transition: var(--transition);
 
   @media (prefers-reduced-motion: no-preference) {
     &:hover,
     &:focus-within {
       .project-inner {
-        transform: translateY(-7px);
+        transform: translateY(-3px);
       }
     }
   }
@@ -68,60 +47,29 @@ const StyledProject = styled.li`
 
   .project-inner {
     ${({ theme }) => theme.mixins.boxShadow};
-    ${({ theme }) => theme.mixins.flexBetween};
-    flex-direction: column;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    column-gap: 20px;
+    align-items: start;
     position: relative;
-    height: 100%;
-    padding: 2rem 1.75rem;
+    padding: 22px 26px;
     border-radius: var(--border-radius);
     background-color: var(--light-navy);
     transition: var(--transition);
-    overflow: auto;
   }
 
-  .project-top {
-    ${({ theme }) => theme.mixins.flexBetween};
-    margin-bottom: 35px;
-
-    .folder {
-      color: var(--green);
-      svg {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    .project-links {
-      display: flex;
-      align-items: center;
-      margin-right: -10px;
-      color: var(--light-slate);
-
-      a {
-        ${({ theme }) => theme.mixins.flexCenter};
-        padding: 5px 7px;
-
-        &.external {
-          svg {
-            width: 22px;
-            height: 22px;
-            margin-top: -4px;
-          }
-        }
-
-        svg {
-          width: 20px;
-          height: 20px;
-        }
-      }
-    }
+  .project-year {
+    padding-top: 3px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
   }
 
   .project-title {
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     color: var(--lightest-slate);
-    font-size: var(--fz-xxl);
+    font-size: var(--fz-xl);
+    line-height: 1.3;
 
     a {
       position: static;
@@ -140,39 +88,30 @@ const StyledProject = styled.li`
     }
   }
 
-  .project-description {
-    color: var(--light-slate);
-    font-size: 17px;
-
-    a {
-      ${({ theme }) => theme.mixins.inlineLink};
-    }
-  }
-
   .project-authors {
-    margin: 0 0 12px;
+    margin: 0 0 4px;
     color: var(--light-slate);
     font-size: var(--fz-sm);
-    line-height: 1.35;
+    line-height: 1.4;
   }
 
   .project-venue {
     margin: 0;
     color: var(--slate);
-    font-size: var(--fz-md);
-    line-height: 1.35;
+    font-size: var(--fz-sm);
+    font-style: italic;
+    line-height: 1.4;
   }
 
   .project-tech-list {
     display: flex;
-    align-items: flex-end;
-    flex-grow: 1;
     flex-wrap: wrap;
     padding: 0;
-    margin: 20px 0 0 0;
+    margin: 12px 0 0 0;
     list-style: none;
 
     li {
+      color: var(--slate);
       font-family: var(--font-mono);
       font-size: var(--fz-xxs);
       line-height: 1.75;
@@ -182,13 +121,57 @@ const StyledProject = styled.li`
       }
     }
   }
+
+  .project-links {
+    display: flex;
+    align-items: center;
+    margin-right: -7px;
+    color: var(--light-slate);
+
+    a {
+      ${({ theme }) => theme.mixins.flexCenter};
+      padding: 2px 7px;
+
+      &:hover,
+      &:focus {
+        color: var(--green);
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .project-inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      row-gap: 6px;
+      padding: 20px;
+    }
+
+    .project-year {
+      grid-column: 1 / 2;
+      grid-row: 1;
+      padding-top: 0;
+    }
+
+    .project-links {
+      grid-column: 2 / 3;
+      grid-row: 1;
+    }
+
+    .project-body {
+      grid-column: 1 / -1;
+    }
+  }
 `;
 
 const Projects = () => {
   const { config, edit, preview } = useSite();
   const publications = config.publications.items;
   const revealTitle = useRef(null);
-  const revealArchiveLink = useRef(null);
   const revealProjects = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -198,49 +181,49 @@ const Projects = () => {
     }
 
     sr.reveal(revealTitle.current, srConfig());
-    sr.reveal(revealArchiveLink.current, srConfig());
-    revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
+    revealProjects.current.forEach((ref, i) => ref && sr.reveal(ref, srConfig(Math.min(i, 5) * 80)));
   }, []);
 
-  const GRID_LIMIT = 6;
-  const projectsToShow = publications.map((publication, index) => ({ ...publication, index })).filter(publication => publication.selected).slice(0, GRID_LIMIT);
+  // Show every publication, in the order they are listed in the site config (newest first).
+  const projectsToShow = publications.map((publication, index) => ({ ...publication, index }));
 
   const projectInner = publication => {
-    const { title, authors, venue, keywords, url, index } = publication;
+    const { year, title, authors, venue, keywords, url, index } = publication;
 
     return (
       <div className="project-inner">
-        <header>
-          <div className="project-top">
-            <div className="folder">
-              <Icon name="Folder" />
-            </div>
-            <div className="project-links">
-              <a href={url} aria-label="External Link" className="external" target="_blank" rel="noreferrer">
-                <Icon name="External" />
-              </a>
-            </div>
-          </div>
+        <div className="project-year">{year}</div>
 
+        <div className="project-body">
           <h3 className="project-title">
-            <a href={url} target="_blank" rel="noreferrer">
+            {url ? (
+              <a href={url} target="_blank" rel="noreferrer">
+                <span {...edit('publications.items.' + index + '.title')}>{title}</span>
+              </a>
+            ) : (
               <span {...edit('publications.items.' + index + '.title')}>{title}</span>
-            </a>
+            )}
           </h3>
 
           <p className="project-authors" {...edit('publications.items.' + index + '.authors')}>{authors}</p>
           <p className="project-venue" {...edit('publications.items.' + index + '.venue')}>{venue}</p>
-        </header>
 
-        <footer>
-          {keywords && (
+          {keywords && keywords.length > 0 && (
             <ul className="project-tech-list">
               {keywords.map((keyword, i) => (
                 <li key={i} {...edit('publications.items.' + index + '.keywords.' + i)}>{keyword}</li>
               ))}
             </ul>
           )}
-        </footer>
+        </div>
+
+        <div className="project-links">
+          {url && (
+            <a href={url} aria-label="External Link" className="external" target="_blank" rel="noreferrer">
+              <Icon name="External" />
+            </a>
+          )}
+        </div>
       </div>
     );
   };
@@ -249,37 +232,26 @@ const Projects = () => {
     <StyledProjectsSection id="publications">
       <h2 ref={revealTitle} {...edit('publications.title')}>{config.publications.title}</h2>
 
-      <Link className="archive-link" to="/archive" ref={revealArchiveLink}>
-        <span {...edit('publications.archiveLabel')}>{config.publications.archiveLabel}</span>
-      </Link>
-
-      <ul className="projects-grid">
+      <ul className="publication-list">
         {prefersReducedMotion || preview ? (
           <>
-            {projectsToShow &&
-              projectsToShow.map((publication, i) => (
-                <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>
-              ))}
+            {projectsToShow.map(publication => (
+              <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>
+            ))}
           </>
         ) : (
           <TransitionGroup component={null}>
-            {projectsToShow &&
-              projectsToShow.map((publication, i) => (
-                <CSSTransition
-                  key={publication.title}
-                  classNames="fadeup"
-                  timeout={300}
-                  exit={false}>
-                  <StyledProject
-                    key={publication.title}
-                    ref={el => (revealProjects.current[i] = el)}
-                    style={{
-                      transitionDelay: `${i * 100}ms`,
-                    }}>
-                    {projectInner(publication)}
-                  </StyledProject>
-                </CSSTransition>
-              ))}
+            {projectsToShow.map((publication, i) => (
+              <CSSTransition key={publication.index} classNames="fadeup" timeout={300} exit={false}>
+                <StyledProject
+                  ref={el => (revealProjects.current[i] = el)}
+                  style={{
+                    transitionDelay: `${Math.min(i, 5) * 80}ms`,
+                  }}>
+                  {projectInner(publication)}
+                </StyledProject>
+              </CSSTransition>
+            ))}
           </TransitionGroup>
         )}
       </ul>
@@ -288,4 +260,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
