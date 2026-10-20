@@ -346,7 +346,7 @@
           "Clustering",
           "Medical diagnosis"
         ],
-        "url": "https://scholar.google.com/scholar?q=Bayesian+Hierarchical+Modeling+and+Clustering+for+Malignant+Cancer+Diagnosis",
+        "url": "https://absj.org/index.php/absj/article/view/114",
         "selected": true
       },
       {
@@ -393,20 +393,6 @@
       },
       {
         "year": 2025,
-        "title": "An Improved Interval-Valued Picture Fuzzy TOPSIS Approach Based on New Divergence Measures for Risk Assessment",
-        "venue": "Computer Modeling in Engineering & Sciences",
-        "status": "Published",
-        "authors": "S. Zhu, Y. Li, P. Balaji, A. Thiyagarajan, R. Aluvalu, Z. Liu",
-        "keywords": [
-          "Risk assessment",
-          "TOPSIS",
-          "Divergence measures"
-        ],
-        "url": "https://doi.org/10.32604/cmes.2025.068734",
-        "selected": true
-      },
-      {
-        "year": 2025,
         "title": "Robust Vector-Weighted and Matrix-Weighted Multi-View Hard-Means Clustering",
         "venue": "Intelligent Systems with Applications",
         "status": "Published",
@@ -418,19 +404,6 @@
         ],
         "url": "https://doi.org/10.1016/j.iswa.2024.200470",
         "selected": true
-      },
-      {
-        "year": 2025,
-        "title": "New Distance and Similarity Measures of Picture Fuzzy Sets and Applications",
-        "venue": "Intelligent Decision Technologies",
-        "status": "Published",
-        "authors": "H. Li, S. Zhu, Z. Liu",
-        "keywords": [
-          "Picture fuzzy sets",
-          "Similarity measures"
-        ],
-        "url": "https://doi.org/10.1177/18724981241295947",
-        "selected": false
       },
       {
         "year": 2025,
@@ -447,33 +420,6 @@
         "selected": false
       },
       {
-        "year": 2025,
-        "title": "A Generalized Hellinger Distance-Based Spherical Fuzzy TOPSIS Method for Sustainable Transport Systems Selection",
-        "venue": "Intelligent Urban Mobility",
-        "status": "Book chapter",
-        "authors": "Z. Liu, S. Zhu",
-        "keywords": [
-          "Spherical fuzzy sets",
-          "TOPSIS",
-          "Sustainable transport"
-        ],
-        "url": "https://doi.org/10.1016/b978-0-443-34160-1.00002-x",
-        "selected": false
-      },
-      {
-        "year": 2025,
-        "title": "Multi-View Alternative Hard c-Means Clustering",
-        "venue": "International Journal of Data Science and Analytics",
-        "status": "Published",
-        "authors": "Z. Liu, S. Zhu, S. Lyu, S. Letchmunan",
-        "keywords": [
-          "Multi-view clustering",
-          "Hard c-means"
-        ],
-        "url": "https://doi.org/10.1007/s41060-024-00685-9",
-        "selected": false
-      },
-      {
         "year": 2024,
         "title": "Novel alpha-Divergence Measures on Picture Fuzzy Sets and Interval-Valued Picture Fuzzy Sets",
         "venue": "Engineering Applications of Artificial Intelligence",
@@ -484,19 +430,6 @@
           "Picture fuzzy sets"
         ],
         "url": "https://doi.org/10.1016/j.engappai.2024.109041",
-        "selected": false
-      },
-      {
-        "year": 2024,
-        "title": "Novel Distance Measures of Picture Fuzzy Sets and Their Applications",
-        "venue": "Arabian Journal for Science and Engineering",
-        "status": "Published",
-        "authors": "S. Zhu, Z. Liu, A. U. Rahman",
-        "keywords": [
-          "Distance measures",
-          "Picture fuzzy sets"
-        ],
-        "url": "https://doi.org/10.1007/s13369-024-08925-7",
         "selected": false
       },
       {
