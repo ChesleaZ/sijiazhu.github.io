@@ -14,7 +14,7 @@ module.exports = {
       url: '/about/',
     },
     {
-      name: 'Experience',
+      name: Research',
       url: '/research/',
     },
     {
