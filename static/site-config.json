@@ -193,21 +193,6 @@
     "academicHeading": "Academic",
     "items": [
       {
-        "institution": "Broad Institute of MIT and Harvard",
-        "role": "Research Assistant",
-        "topic": "Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters",
-        "tags": [
-          "Type 2 diabetes",
-          "Polygenic scores",
-          "Genetic clustering"
-        ],
-        "bullets": [
-          "Investigating whether data-driven genetic clusters in type 2 diabetes capture biological information beyond curated pathway-based polygenic scores.",
-          "Constructing individual-level cluster-specific scores from variant-level disease clusters and comparing them with pathway-based pPGS derived from Reactome and KEGG.",
-          "Studying whether residual cluster signals can reveal novel or cross-pathway disease mechanisms."
-        ]
-      },
-      {
         "institution": "Harvard T.H. Chan School of Public Health",
         "role": "Research Assistant",
         "topic": "Scaling Laws in Single-Cell Representation Learning",
@@ -223,33 +208,18 @@
         ]
       },
       {
-        "institution": "Johns Hopkins University",
+        "institution": "Broad Institute of MIT and Harvard",
         "role": "Research Assistant",
-        "topic": "Survival Analysis in Oncology Clinical Trials",
+        "topic": "Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters",
         "tags": [
-          "Survival analysis",
-          "Cox modeling",
-          "Clinical trials"
+          "Type 2 diabetes",
+          "Polygenic scores",
+          "Genetic clustering"
         ],
         "bullets": [
-          "Performed survival analysis on multi-arm oncology clinical trial data.",
-          "Constructed time-to-event endpoints for staggered therapy initiation, treatment discontinuation, and right-censoring.",
-          "Conducted Kaplan-Meier analysis, median survival estimation, and Cox proportional hazards modeling with clinical covariates."
-        ]
-      },
-      {
-        "institution": "The Chinese University of Hong Kong",
-        "role": "Research Assistant",
-        "topic": "Single-Cell Sequencing Analysis of Blood Tissue Samples",
-        "tags": [
-          "Single-cell analysis",
-          "Leiden clustering",
-          "Cell annotation"
-        ],
-        "bullets": [
-          "Analyzed single-cell sequencing data from blood tissue samples to study cellular-level molecular profiles.",
-          "Used PCA and Leiden clustering to identify heterogeneous cell populations and annotate cells with marker genes.",
-          "Applied cellular enrichment analysis to connect marker genes with disease-related biological signals."
+          "Investigating whether data-driven genetic clusters in type 2 diabetes capture biological information beyond curated pathway-based polygenic scores.",
+          "Constructing individual-level cluster-specific scores from variant-level disease clusters and comparing them with pathway-based pPGS derived from Reactome and KEGG.",
+          "Studying whether residual cluster signals can reveal novel or cross-pathway disease mechanisms."
         ]
       }
     ],
