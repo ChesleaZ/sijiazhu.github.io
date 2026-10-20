@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { withPrefix } from 'gatsby';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
 import { usePrefersReducedMotion } from '@hooks';
@@ -34,6 +35,60 @@ const StyledResearchSection = styled.section`
     @media (max-width: 600px) {
       padding: 22px;
     }
+  }
+
+  .research-card.has-image {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 28px;
+    align-items: start;
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .research-figure {
+    display: block;
+    padding: 10px;
+    border: 1px solid var(--lightest-navy);
+    border-radius: 8px;
+    background-color: #fff;
+    transition: var(--transition);
+
+    &:hover,
+    &:focus {
+      transform: translateY(-2px);
+      border-color: var(--green);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 760px) {
+      max-width: 320px;
+    }
+  }
+
+  h3 a {
+    color: inherit;
+
+    &:hover,
+    &:focus {
+      color: var(--green);
+    }
+  }
+
+  .read-more {
+    ${({ theme }) => theme.mixins.inlineLink};
+    display: inline-block;
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
   }
 
   .research-meta {
@@ -126,27 +181,49 @@ const Research = () => {
       <div className="experience-group">
         <h3 className="section-heading" {...edit('research.heading')}>{config.research.heading}</h3>
         <ul className="research-list">
-          {researchItems.map(({ institution, role, topic, tags, bullets }, i) => (
-            <li
-              className="research-card"
-              key={i}
-              ref={el => (revealItems.current[i] = el)}>
-              <h3 {...edit('research.items.' + i + '.topic')}>{topic}</h3>
-              <p className="institution">
-                <strong {...edit('research.items.' + i + '.role')}>{role}</strong>, <span {...edit('research.items.' + i + '.institution')}>{institution}</span>
-              </p>
-              <ul className="details">
-                {bullets.map((bullet, j) => (
-                  <li key={j} {...edit('research.items.' + i + '.bullets.' + j)}>{bullet}</li>
-                ))}
-              </ul>
-              <ul className="tag-list">
-                {tags.map((tag, j) => (
-                  <li key={j} {...edit('research.items.' + i + '.tags.' + j)}>{tag}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
+          {researchItems.map(({ institution, role, topic, tags, bullets, image, detailUrl }, i) => {
+            const detailHref = detailUrl ? withPrefix('/' + detailUrl.replace(/^\/+/, '')) : '';
+            const imageSrc = image ? withPrefix('/' + image.replace(/^\/+/, '')) : '';
+            return (
+              <li
+                className={'research-card' + (imageSrc ? ' has-image' : '')}
+                key={i}
+                ref={el => (revealItems.current[i] = el)}>
+                <div className="research-body">
+                  <h3>
+                    {detailHref ? (
+                      <a href={detailHref} {...edit('research.items.' + i + '.topic')}>{topic}</a>
+                    ) : (
+                      <span {...edit('research.items.' + i + '.topic')}>{topic}</span>
+                    )}
+                  </h3>
+                  <p className="institution">
+                    <strong {...edit('research.items.' + i + '.role')}>{role}</strong>, <span {...edit('research.items.' + i + '.institution')}>{institution}</span>
+                  </p>
+                  <ul className="details">
+                    {bullets.map((bullet, j) => (
+                      <li key={j} {...edit('research.items.' + i + '.bullets.' + j)}>{bullet}</li>
+                    ))}
+                  </ul>
+                  <ul className="tag-list">
+                    {tags.map((tag, j) => (
+                      <li key={j} {...edit('research.items.' + i + '.tags.' + j)}>{tag}</li>
+                    ))}
+                  </ul>
+                  {detailHref && (
+                    <a className="read-more" href={detailHref}>
+                      Learn more →
+                    </a>
+                  )}
+                </div>
+                {imageSrc && (
+                  <a className="research-figure" href={detailHref || imageSrc} aria-label={'Open ' + topic}>
+                    <img src={imageSrc} alt={'Overview figure for ' + topic} loading="lazy" />
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
 
