@@ -196,6 +196,8 @@ const defaults = {
     "academicHeading": "Academic",
     "items": [
       {
+        "image": "",
+        "detailUrl": "",
         "institution": "Massachusetts General Hospital",
         "role": "Student Researcher",
         "topic": "Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters",
@@ -211,6 +213,8 @@ const defaults = {
         ]
       },
       {
+        "image": "",
+        "detailUrl": "",
         "institution": "Harvard T.H. Chan School of Public Health",
         "role": "Student Researcher",
         "topic": "Scaling Laws in Single-Cell Representation Learning",
@@ -226,6 +230,8 @@ const defaults = {
         ]
       },
       {
+        "image": "",
+        "detailUrl": "",
         "institution": "Johns Hopkins University",
         "role": "Student Researcher",
         "topic": "Survival Analysis in Oncology Clinical Trials",
@@ -241,6 +247,8 @@ const defaults = {
         ]
       },
       {
+        "image": "",
+        "detailUrl": "",
         "institution": "The Chinese University of Hong Kong",
         "role": "Student Researcher",
         "topic": "Single-Cell Sequencing Analysis of Blood Tissue Samples",
