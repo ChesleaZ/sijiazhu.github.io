@@ -4,7 +4,7 @@
   else root.HomepagePublishing = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function() {
   'use strict';
-  const REPO = 'ChesleaZ/sijiazhu.github.io';
+  const REPO = 'sijia-zhu/sijia-zhu.github.io';
   const API = 'https://api.github.com/repos/' + REPO;
   const FILE = '/contents/static/site-config.json';
   const ACTIONS = 'https://github.com/' + REPO + '/actions';
