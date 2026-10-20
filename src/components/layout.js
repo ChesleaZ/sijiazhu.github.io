@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import ScienceBackdrop from './science-backdrop';
@@ -23,12 +23,48 @@ const StyledContent = styled.div`
   }
 `;
 
+// Play the intro logo animation only once per browser session.
+const INTRO_KEY = 'sz-intro-played';
+let introPlayedThisLoad = false;
+const hasPlayedIntro = () => {
+  if (introPlayedThisLoad) {
+    return true;
+  }
+  try {
+    return window.sessionStorage.getItem(INTRO_KEY) === '1';
+  } catch (e) {
+    return false;
+  }
+};
+const markIntroPlayed = () => {
+  introPlayedThisLoad = true;
+  try {
+    window.sessionStorage.setItem(INTRO_KEY, '1');
+  } catch (e) {
+    // Storage can be unavailable (e.g. private mode); the in-memory flag still covers in-site navigation.
+  }
+};
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 const Layout = ({ children, location }) => {
   // The site is served under a path prefix (/sijiazhu.github.io/), so compare against the prefixed root.
   const normalize = path => (path || '/').replace(/\/+$/, '') || '/';
   const isHome = [normalize('/'), normalize(withPrefix('/'))].includes(normalize(location.pathname));
   const page = pageForPath(location.pathname);
   const [isLoading, setIsLoading] = useState(isHome);
+  const [animateIntro, setAnimateIntro] = useState(isHome);
+
+  useIsomorphicLayoutEffect(() => {
+    if (!isHome) {
+      return;
+    }
+    if (hasPlayedIntro()) {
+      setIsLoading(false);
+      setAnimateIntro(false);
+    } else {
+      markIntroPlayed();
+    }
+  }, []);
 
   // Sets target="_blank" rel="noopener noreferrer" on external links
   const handleExternalLinks = () => {
@@ -79,9 +115,9 @@ const Layout = ({ children, location }) => {
           ) : (
             <StyledContent className={'page-' + page}>
               <ScienceBackdrop page={pageForPath(location.pathname)} />
-              <Nav isHome={isHome} />
-              <Social isHome={isHome} />
-              <Email isHome={isHome} />
+              <Nav isHome={animateIntro} />
+              <Social isHome={animateIntro} />
+              <Email isHome={animateIntro} />
 
               <div id="content">
                 {children}
