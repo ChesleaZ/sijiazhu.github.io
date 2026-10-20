@@ -68,7 +68,7 @@
       {
         "institution": "Johns Hopkins University",
         "details": [
-          "M.S in Applied Mathematics and Statistics",
+          "M.S. in Applied Mathematics and Statistics",
           "Research Assistant",
           "Teaching Assistant"
         ],
@@ -117,7 +117,7 @@
     ],
     "educationTitle": "",
     "education": [
-      "M.S in Applied Mathematics and Statistics— Johns Hopkins University",
+      "M.S. in Applied Mathematics and Statistics— Johns Hopkins University",
       "Visiting Graduate Student in Biostatistics — Harvard T.H. Chan School of Public Health"
     ],
     "researchExperienceTitle": "",
@@ -195,8 +195,8 @@
     "academicHeading": "Academic",
     "items": [
       {
-        "institution": "Broad institute of Harvard of MIT",
-        "role": "Student Researcher",
+        "institution": "Broad Institute of MIT and Harvard",
+        "role": "Research Assistant",
         "topic": "Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters",
         "tags": [
           "Type 2 diabetes",
@@ -211,7 +211,7 @@
       },
       {
         "institution": "Harvard T.H. Chan School of Public Health",
-        "role": "Student Researcher",
+        "role": "Research Assistant",
         "topic": "Scaling Laws in Single-Cell Representation Learning",
         "tags": [
           "Single-cell multi-omics",
@@ -226,7 +226,7 @@
       },
       {
         "institution": "Johns Hopkins University",
-        "role": "Student Researcher",
+        "role": "Research Assistant",
         "topic": "Survival Analysis in Oncology Clinical Trials",
         "tags": [
           "Survival analysis",
@@ -241,7 +241,7 @@
       },
       {
         "institution": "The Chinese University of Hong Kong",
-        "role": "Student Researcher",
+        "role": "Research Assistant",
         "topic": "Single-Cell Sequencing Analysis of Blood Tissue Samples",
         "tags": [
           "Single-cell analysis",
@@ -316,7 +316,7 @@
     }
   },
   "publications": {
-    "title": "Selected Publication",
+    "title": "Selected Publications",
     "archiveLabel": "View all",
     "archiveTitle": "All Publications",
     "archiveDescription": "Complete publication list",
