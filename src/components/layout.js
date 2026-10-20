@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
 import ScienceBackdrop from './science-backdrop';
 import styled, { ThemeProvider } from 'styled-components';
 import { Head, Loader, Nav, Social, Email, Footer } from '@components';
@@ -23,7 +24,9 @@ const StyledContent = styled.div`
 `;
 
 const Layout = ({ children, location }) => {
-  const isHome = location.pathname === '/';
+  // The site is served under a path prefix (/sijiazhu.github.io/), so compare against the prefixed root.
+  const normalize = path => (path || '/').replace(/\/+$/, '') || '/';
+  const isHome = [normalize('/'), normalize(withPrefix('/'))].includes(normalize(location.pathname));
   const page = pageForPath(location.pathname);
   const [isLoading, setIsLoading] = useState(isHome);
 
