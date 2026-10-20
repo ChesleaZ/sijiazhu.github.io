@@ -6,7 +6,7 @@ const publications = [
     status: 'Under review',
     authors: 'S. Zhu, J. Hu, R. Ma, A. Klein, G. Gowri',
     keywords: ['Single-cell representation learning', 'Scaling laws', 'Random matrix theory'],
-    url: 'https://sijia-zhu.github.io/papers/single-cell-scaling/',
+    url: 'https://chesleaz.github.io/sijiazhu.github.io/papers/single-cell-scaling/',
     selected: true,
   },
   {
