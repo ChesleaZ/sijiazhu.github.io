@@ -1,11 +1,23 @@
-import React, { useEffect, useRef } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import React from 'react';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
 import { Icon } from '@components/icons';
-import { usePrefersReducedMotion } from '@hooks';
 import { useSite } from '../../context/site';
+
+// Author name to highlight in each publication's author list.
+const MY_NAME = 'S. Zhu';
+
+const highlightName = authors => {
+  if (!authors || !authors.includes(MY_NAME)) {
+    return authors;
+  }
+  const parts = authors.split(MY_NAME);
+  return parts.map((part, i) => (
+    <React.Fragment key={i}>
+      {part}
+      {i < parts.length - 1 && <strong className="my-name">{MY_NAME}</strong>}
+    </React.Fragment>
+  ));
+};
 
 const StyledProjectsSection = styled.section`
   display: flex;
@@ -93,6 +105,11 @@ const StyledProject = styled.li`
     color: var(--light-slate);
     font-size: var(--fz-sm);
     line-height: 1.4;
+
+    .my-name {
+      color: var(--lightest-slate);
+      font-weight: 700;
+    }
   }
 
   .project-venue {
@@ -171,18 +188,6 @@ const StyledProject = styled.li`
 const Projects = () => {
   const { config, edit, preview } = useSite();
   const publications = config.publications.items;
-  const revealTitle = useRef(null);
-  const revealProjects = useRef([]);
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    sr.reveal(revealTitle.current, srConfig());
-    revealProjects.current.forEach((ref, i) => ref && sr.reveal(ref, srConfig(Math.min(i, 5) * 80)));
-  }, []);
 
   // Show every publication, in the order they are listed in the site config (newest first).
   const projectsToShow = publications.map((publication, index) => ({ ...publication, index }));
@@ -205,7 +210,9 @@ const Projects = () => {
             )}
           </h3>
 
-          <p className="project-authors" {...edit('publications.items.' + index + '.authors')}>{authors}</p>
+          <p className="project-authors" {...edit('publications.items.' + index + '.authors')}>
+            {preview ? authors : highlightName(authors)}
+          </p>
           <p className="project-venue" {...edit('publications.items.' + index + '.venue')}>{venue}</p>
 
           {keywords && keywords.length > 0 && (
@@ -230,30 +237,12 @@ const Projects = () => {
 
   return (
     <StyledProjectsSection id="publications">
-      <h2 ref={revealTitle} {...edit('publications.title')}>{config.publications.title}</h2>
+      <h2 {...edit('publications.title')}>{config.publications.title}</h2>
 
       <ul className="publication-list">
-        {prefersReducedMotion || preview ? (
-          <>
-            {projectsToShow.map(publication => (
-              <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>
-            ))}
-          </>
-        ) : (
-          <TransitionGroup component={null}>
-            {projectsToShow.map((publication, i) => (
-              <CSSTransition key={publication.index} classNames="fadeup" timeout={300} exit={false}>
-                <StyledProject
-                  ref={el => (revealProjects.current[i] = el)}
-                  style={{
-                    transitionDelay: `${Math.min(i, 5) * 80}ms`,
-                  }}>
-                  {projectInner(publication)}
-                </StyledProject>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        )}
+        {projectsToShow.map(publication => (
+          <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>
+        ))}
       </ul>
     </StyledProjectsSection>
   );
