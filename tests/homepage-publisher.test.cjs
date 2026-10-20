@@ -11,7 +11,7 @@ function transport(sequence) {
     calls,
     fetchImpl: async (url, init) => {
       calls.push({ url, init });
-      assert.ok(url.startsWith('https://api.github.com/repos/sijia-zhu/sijia-zhu.github.io/'));
+      assert.ok(url.startsWith('https://api.github.com/repos/ChesleaZ/sijiazhu.github.io/'));
       const next = sequence.shift();
       assert.ok(next, 'No unexpected extra requests');
       if (next instanceof Error) throw next;
@@ -28,7 +28,7 @@ test('Publishes Unicode configuration using current SHA, without altering other 
   assert.equal(result.commit, 'new-commit');
   const writes = io.calls.filter(c => c.init.method === 'PUT');
   assert.equal(writes.length, 1);
-  assert.equal(writes[0].url, 'https://api.github.com/repos/sijia-zhu/sijia-zhu.github.io/contents/static/site-config.json');
+  assert.equal(writes[0].url, 'https://api.github.com/repos/ChesleaZ/sijiazhu.github.io/contents/static/site-config.json');
   const body = JSON.parse(writes[0].init.body);
   assert.equal(body.branch, 'main');
   assert.equal(body.sha, 'base');
@@ -98,7 +98,7 @@ test('Reads the original draft version to distinguish schema upgrades from conte
   const p = createPublisher(io);
   const result = await p.readVersion(sha);
   assert.deepEqual(result.config, original);
-  assert.equal(io.calls[0].url, 'https://api.github.com/repos/sijia-zhu/sijia-zhu.github.io/git/blobs/' + sha);
+  assert.equal(io.calls[0].url, 'https://api.github.com/repos/ChesleaZ/sijiazhu.github.io/git/blobs/' + sha);
   await assert.rejects(p.readVersion('../other-repository'), error => error.code === 'FORMAT');
   assert.equal(io.calls.length, 1);
 });
