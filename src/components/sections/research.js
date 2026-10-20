@@ -49,6 +49,19 @@ const StyledResearchSection = styled.section`
     }
   }
 
+  .research-card.compact {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    align-items: center;
+
+    .tag-list {
+      margin-top: 18px;
+    }
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .research-figure {
     display: block;
     padding: 10px;
@@ -184,9 +197,11 @@ const Research = () => {
           {researchItems.map(({ institution, role, topic, tags, bullets, image, detailUrl }, i) => {
             const detailHref = detailUrl ? withPrefix('/' + detailUrl.replace(/^\/+/, '')) : '';
             const imageSrc = image ? withPrefix('/' + image.replace(/^\/+/, '')) : '';
+            // Projects with a detail page show only title, figure and keywords; the full write-up lives on the detail page.
+            const compact = Boolean(detailHref);
             return (
               <li
-                className={'research-card' + (imageSrc ? ' has-image' : '')}
+                className={'research-card' + (imageSrc ? ' has-image' : '') + (compact ? ' compact' : '')}
                 key={i}
                 ref={el => (revealItems.current[i] = el)}>
                 <div className="research-body">
@@ -197,14 +212,18 @@ const Research = () => {
                       <span {...edit('research.items.' + i + '.topic')}>{topic}</span>
                     )}
                   </h3>
-                  <p className="institution">
-                    <strong {...edit('research.items.' + i + '.role')}>{role}</strong>, <span {...edit('research.items.' + i + '.institution')}>{institution}</span>
-                  </p>
-                  <ul className="details">
-                    {bullets.map((bullet, j) => (
-                      <li key={j} {...edit('research.items.' + i + '.bullets.' + j)}>{bullet}</li>
-                    ))}
-                  </ul>
+                  {!compact && (
+                    <>
+                      <p className="institution">
+                        <strong {...edit('research.items.' + i + '.role')}>{role}</strong>, <span {...edit('research.items.' + i + '.institution')}>{institution}</span>
+                      </p>
+                      <ul className="details">
+                        {bullets.map((bullet, j) => (
+                          <li key={j} {...edit('research.items.' + i + '.bullets.' + j)}>{bullet}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                   <ul className="tag-list">
                     {tags.map((tag, j) => (
                       <li key={j} {...edit('research.items.' + i + '.tags.' + j)}>{tag}</li>
