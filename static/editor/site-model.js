@@ -334,7 +334,7 @@ const defaults = {
           "Scaling laws",
           "Random matrix theory"
         ],
-        "url": "https://chesleaz.github.io/sijiazhu.github.io/papers/single-cell-scaling/",
+        "url": "https://sijia-zhu.github.io/papers/single-cell-scaling/",
         "selected": true
       },
       {
@@ -720,7 +720,7 @@ const defaults = {
   }
 };
 const clone=value=>JSON.parse(JSON.stringify(value));
-function safeURL(value,fallback=''){if(typeof value!=='string')return fallback;if(!value.trim())return '';try{const url=new URL(value,'https://chesleaz.github.io/sijiazhu.github.io/');return ['https:','http:','mailto:'].includes(url.protocol)?value.trim().slice(0,2000):fallback;}catch(error){return fallback;}}
+function safeURL(value,fallback=''){if(typeof value!=='string')return fallback;if(!value.trim())return '';try{const url=new URL(value,'https://sijia-zhu.github.io/');return ['https:','http:','mailto:'].includes(url.protocol)?value.trim().slice(0,2000):fallback;}catch(error){return fallback;}}
 function normalize(input){
  const read=(value,template,path)=>{
   const key=path.split('.').pop();
