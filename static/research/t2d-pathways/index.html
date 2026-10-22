@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters | Sijia Zhu</title>
+  <meta name="description" content="Research project: interpreting type 2 diabetes genetic clusters with tissue-specific Reactome pathway polygenic scores in the All of Us Research Program.">
+  <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/research/t2d-pathways/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters">
+  <meta property="og:description" content="Research project overview by Sijia Zhu.">
+  <meta property="og:url" content="https://chesleaz.github.io/sijiazhu.github.io/research/t2d-pathways/">
+  <link rel="stylesheet" href="../../science/backdrop.css?v=positions-20261018">
+  <style>
+    :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #b2c0d0; --accent: #7ad8c7; --line: #26394b; --surface: #111d2e; }
+    * { box-sizing: border-box; }
+    body { isolation: isolate; margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 18px; line-height: 1.7; }
+    a { color: var(--accent); text-underline-offset: 4px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+    .skip { position: absolute; left: -10000px; }
+    .skip:focus { left: 24px; top: 16px; background: var(--surface); padding: 8px 12px; }
+    header, main, footer { position: relative; z-index: 1; width: min(900px, calc(100% - 48px)); margin-inline: auto; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-block: 28px; border-bottom: 1px solid var(--line); }
+    .name { font-weight: 650; text-decoration: none; color: var(--ink); }
+    header nav { display: flex; gap: 20px; font-size: 15px; }
+    main { padding-block: 70px 64px; }
+    .eyebrow { margin: 0 0 18px; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { max-width: 840px; margin: 0 0 20px; font-size: clamp(32px, 5vw, 50px); line-height: 1.13; letter-spacing: -.035em; font-weight: 650; overflow-wrap: break-word; }
+    .meta { margin: 0 0 6px; color: var(--muted); font-size: 17px; }
+    .meta strong { color: var(--ink); font-weight: 600; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+    .tags li { padding: 3px 12px; border: 1px solid rgba(122, 216, 199, .3); border-radius: 5px; color: var(--accent); background: rgba(122, 216, 199, .08); font-size: 14px; }
+    figure { margin: 48px 0 0; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    figure img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 6px; }
+    figcaption { max-width: 640px; margin: 16px auto 0; color: var(--muted); font-size: 15px; line-height: 1.6; text-align: center; }
+    section { margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--line); }
+    h2 { margin: 0 0 14px; font-size: 24px; line-height: 1.3; letter-spacing: -.02em; }
+    p { max-width: 760px; margin: 0 0 16px; }
+    ul.points { max-width: 760px; margin: 0; padding-left: 22px; }
+    ul.points li { margin-bottom: 10px; }
+    ul.points li::marker { color: var(--accent); }
+    .related { margin-top: 44px; padding: 24px 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .related h2 { font-size: 20px; }
+    .related p { margin-bottom: 0; color: var(--muted); font-size: 16px; }
+    footer { padding-block: 24px 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    @media (max-width: 540px) { header, main, footer { width: calc(100% - 36px); } header { padding-block: 22px; } main { padding-block: 42px; } figure { padding: 14px; margin-top: 34px; } section { margin-top: 34px; } .related { padding: 20px; } body { font-size: 17px; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#project">Skip to project overview</a>
+  <header>
+    <a class="name" href="../../">Sijia Zhu</a>
+    <nav aria-label="Site navigation"><a href="../../research/">Research</a><a href="../../publications/">Publications</a></nav>
+  </header>
+  <main id="project">
+    <article aria-labelledby="project-title">
+      <p class="eyebrow">Research project</p>
+      <h1 id="project-title">Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters</h1>
+      <p class="meta"><strong>Research Assistant</strong>, Broad Institute of MIT and Harvard</p>
+      <p class="meta">Advisors: Prof. Kenneth Westerman and Prof. Miriam Udler</p>
+      <ul class="tags" aria-label="Keywords">
+        <li>Type 2 diabetes</li>
+        <li>Polygenic scores</li>
+        <li>Genetic clustering</li>
+        <li>Pathway analysis</li>
+      </ul>
+
+      <figure>
+        <img src="overview.png" alt="Bar charts for the Lipodystrophy 1 and Lipodystrophy 2 clusters: on the left, the five top-weighted variants from each published cluster; on the right, the five pathway&#8211;tissue scores that best predict each cluster score, led by leptin signaling, signal attenuation and growth hormone receptor signaling in visceral adipose tissue." width="1100" height="791">
+        <figcaption>Pathway interpretation of the Lipodystrophy 1 and 2 cluster scores. For each cluster, the left panel shows the five top-weighted published variants and the right panel shows the five top-ranked pathway&#8211;tissue scores used to reconstruct the cluster score. The two clusters have different leading variants but share leptin signaling, signal attenuation and growth hormone receptor signaling in visceral adipose tissue.</figcaption>
+      </figure>
+
+      <section aria-labelledby="motivation-title">
+        <h2 id="motivation-title">Motivation</h2>
+        <p>Data-driven genetic clustering has been used to identify distinct mechanisms and subtypes of type 2 diabetes (T2D). However, cluster definitions depend on the study population, phenotype inputs and clustering method, and interpreting a cluster requires assigning biological meaning to a group of variants. Annotation-based pathway polygenic scores (pPGS) offer a complementary view: within a fixed pathway database, gene-to-pathway mappings give consistent features that can be compared across studies, tissues and diseases.</p>
+      </section>
+
+      <section aria-labelledby="approach-title">
+        <h2 id="approach-title">Approach</h2>
+        <ul class="points">
+          <li>Calculating cluster polygenic scores from published T2D genetic cluster definitions (Kim et al., Smith et al., Suzuki et al.) in the All of Us Research Program.</li>
+          <li>Constructing tissue-specific Reactome pathway polygenic scores from GTEx v8 gene-expression prediction models, and reconstructing each cluster score as a weighted combination of pathway scores.</li>
+          <li>Evaluating how stable cluster scores and assignments are across studies and when the phenotype inputs used for clustering change.</li>
+          <li>Testing pathway&#8211;tissue associations with the original cluster scores and with genetic factor analysis (GFA)&#8211;derived scores.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="relevance-title">
+        <h2 id="relevance-title">Clinical relevance</h2>
+        <p>The project also asks whether pathway-based scores carry clinically relevant information: whether pathway-predicted lipodystrophy scores preserve the ancestry differences in the BMI&#8211;T2D relationship, whether pathway scores improve prediction of incident retinopathy and neuropathy, and whether the same pathway-derived scores are relevant to coronary artery disease.</p>
+      </section>
+
+      <div class="related">
+        <h2>Project status</h2>
+        <p>Ongoing work. Results are preliminary and have not yet been peer reviewed.</p>
+      </div>
+    </article>
+  </main>
+  <footer><a href="../../research/">Back to Research</a> · <a href="../../">Sijia Zhu's homepage</a></footer>
+</body>
+</html>
