@@ -223,8 +223,8 @@
           "Constructing individual-level cluster-specific scores from variant-level disease clusters and comparing them with pathway-based pPGS derived from Reactome and KEGG.",
           "Studying whether residual cluster signals can reveal novel or cross-pathway disease mechanisms."
         ],
-        "image": "",
-        "detailUrl": ""
+        "image": "research/t2d-pathways/overview.png",
+        "detailUrl": "research/t2d-pathways/"
       }
     ],
     "academicItems": [
