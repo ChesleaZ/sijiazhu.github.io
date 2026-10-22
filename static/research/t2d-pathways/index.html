@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters | Sijia Zhu</title>
-  <meta name="description" content="Research project: interpreting type 2 diabetes genetic clusters with tissue-specific Reactome pathway polygenic scores in the All of Us Research Program.">
+  <meta name="description" content="Research project: from type 2 diabetes genetic clusters to shared biological pathways, using tissue-specific Reactome pathway polygenic scores in the All of Us Research Program.">
   <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/research/t2d-pathways/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters">
@@ -14,6 +14,8 @@
   <style>
     :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #b2c0d0; --accent: #7ad8c7; --line: #26394b; --surface: #111d2e; }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body { isolation: isolate; margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 18px; line-height: 1.7; }
     a { color: var(--accent); text-underline-offset: 4px; }
     a:hover { text-decoration-thickness: 2px; }
@@ -26,25 +28,78 @@
     header nav { display: flex; gap: 20px; font-size: 15px; }
     main { padding-block: 70px 64px; }
     .eyebrow { margin: 0 0 18px; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
-    h1 { max-width: 840px; margin: 0 0 20px; font-size: clamp(32px, 5vw, 50px); line-height: 1.13; letter-spacing: -.035em; font-weight: 650; overflow-wrap: break-word; }
+    h1 { max-width: 840px; margin: 0 0 12px; font-size: clamp(32px, 5vw, 50px); line-height: 1.13; letter-spacing: -.035em; font-weight: 650; overflow-wrap: break-word; }
+    .subtitle { margin: 0 0 22px; color: var(--muted); font-size: 20px; font-style: italic; }
     .meta { margin: 0 0 6px; color: var(--muted); font-size: 17px; }
     .meta strong { color: var(--ink); font-weight: 600; }
     .tags { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 22px 0 0; padding: 0; list-style: none; }
     .tags li { padding: 3px 12px; border: 1px solid rgba(122, 216, 199, .3); border-radius: 5px; color: var(--accent); background: rgba(122, 216, 199, .08); font-size: 14px; }
-    figure { margin: 48px 0 0; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
-    figure img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 6px; }
-    figcaption { max-width: 640px; margin: 16px auto 0; color: var(--muted); font-size: 15px; line-height: 1.6; text-align: center; }
-    section { margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--line); }
-    h2 { margin: 0 0 14px; font-size: 24px; line-height: 1.3; letter-spacing: -.02em; }
+
+    .toc { margin-top: 40px; padding: 20px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .toc h2 { margin: 0 0 10px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .toc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 28px; margin: 0; padding-left: 20px; font-size: 16px; }
+    .toc li::marker { color: var(--accent); }
+
+    section { margin-top: 56px; padding-top: 34px; border-top: 1px solid var(--line); scroll-margin-top: 20px; }
+    .section-label { margin: 0 0 6px; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { margin: 0 0 16px; font-size: 28px; line-height: 1.25; letter-spacing: -.02em; }
+    h3 { margin: 34px 0 12px; font-size: 21px; line-height: 1.3; letter-spacing: -.01em; }
     p { max-width: 760px; margin: 0 0 16px; }
-    ul.points { max-width: 760px; margin: 0; padding-left: 22px; }
-    ul.points li { margin-bottom: 10px; }
-    ul.points li::marker { color: var(--accent); }
-    .related { margin-top: 44px; padding: 24px 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
-    .related h2 { font-size: 20px; }
-    .related p { margin-bottom: 0; color: var(--muted); font-size: 16px; }
+    .note { color: var(--muted); font-size: 15px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 22px 0 0; padding: 0; list-style: none; }
+    .cards li { padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .cards h3 { margin: 0 0 8px; font-size: 17px; color: var(--accent); }
+    .cards p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+    .goals { margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .goals li { display: grid; grid-template-columns: 44px 220px minmax(0, 1fr); gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .goals .num { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .goals .goal { font-weight: 600; }
+    .goals .desc { color: var(--muted); }
+
+    .scores { display: grid; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; }
+    .scores li { padding: 16px 20px; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; }
+    .scores li.original { border-left-color: var(--muted); }
+    .scores strong { display: block; margin-bottom: 4px; }
+    .flow { color: var(--muted); font-size: 16px; }
+    .flow span { color: var(--accent); padding-inline: 6px; }
+
+    .aar { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+    .aar li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; max-width: 760px; }
+    .aar .k { color: var(--accent); font-weight: 600; }
+
+    figure { margin: 24px 0 0; padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    figure a { display: block; }
+    figure img { display: block; width: 100%; height: auto; border-radius: 6px; background: #fff; }
+    figcaption { margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    figcaption strong { color: var(--ink); font-weight: 600; }
+
+    table { width: 100%; max-width: 760px; margin: 18px 0 0; border-collapse: collapse; font-size: 16px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+    td:first-child { white-space: nowrap; color: var(--accent); font-weight: 600; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .summary td:first-child { font-family: inherit; white-space: normal; width: 34%; }
+
+    .related { margin-top: 56px; padding: 24px 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .related h2 { font-size: 20px; margin-bottom: 10px; }
+    .related p { margin-bottom: 8px; color: var(--muted); font-size: 16px; }
+    .related p:last-child { margin-bottom: 0; }
+    .refs { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
     footer { padding-block: 24px 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
-    @media (max-width: 540px) { header, main, footer { width: calc(100% - 36px); } header { padding-block: 22px; } main { padding-block: 42px; } figure { padding: 14px; margin-top: 34px; } section { margin-top: 34px; } .related { padding: 20px; } body { font-size: 17px; } }
+
+    @media (max-width: 760px) {
+      .cards { grid-template-columns: 1fr; }
+      .goals li { grid-template-columns: 36px minmax(0, 1fr); }
+      .goals .desc { grid-column: 2; }
+      .toc ol { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      header, main, footer { width: calc(100% - 36px); } header { padding-block: 22px; } main { padding-block: 42px; }
+      figure { padding: 12px; } section { margin-top: 42px; } .related { padding: 20px; } body { font-size: 17px; }
+      .aar li { grid-template-columns: 1fr; gap: 0; }
+      table { font-size: 15px; } th, td { padding: 8px 6px; }
+    }
   </style>
 </head>
 <body>
@@ -57,6 +112,7 @@
     <article aria-labelledby="project-title">
       <p class="eyebrow">Research project</p>
       <h1 id="project-title">Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters</h1>
+      <p class="subtitle">From T2D genetic clusters to shared biological pathways</p>
       <p class="meta"><strong>Research Assistant</strong>, Broad Institute of MIT and Harvard</p>
       <p class="meta">Advisors: Prof. Kenneth Westerman and Prof. Miriam Udler</p>
       <ul class="tags" aria-label="Keywords">
@@ -64,36 +120,176 @@
         <li>Polygenic scores</li>
         <li>Genetic clustering</li>
         <li>Pathway analysis</li>
+        <li>All of Us</li>
       </ul>
 
-      <figure>
-        <img src="overview.png" alt="Bar charts for the Lipodystrophy 1 and Lipodystrophy 2 clusters: on the left, the five top-weighted variants from each published cluster; on the right, the five pathway&#8211;tissue scores that best predict each cluster score, led by leptin signaling, signal attenuation and growth hormone receptor signaling in visceral adipose tissue." width="1100" height="791">
-        <figcaption>Pathway interpretation of the Lipodystrophy 1 and 2 cluster scores. For each cluster, the left panel shows the five top-weighted published variants and the right panel shows the five top-ranked pathway&#8211;tissue scores used to reconstruct the cluster score. The two clusters have different leading variants but share leptin signaling, signal attenuation and growth hormone receptor signaling in visceral adipose tissue.</figcaption>
-      </figure>
+      <nav class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">On this page</h2>
+        <ol>
+          <li><a href="#background">Background</a></li>
+          <li><a href="#goals">Study goals and score types</a></li>
+          <li><a href="#stability">Stability of genetic clusters</a></li>
+          <li><a href="#interpretation">Biological interpretation</a></li>
+          <li><a href="#phenotype">Phenotype and complications</a></li>
+          <li><a href="#diseases">Across diseases</a></li>
+          <li><a href="#summary">Summary</a></li>
+        </ol>
+      </nav>
 
-      <section aria-labelledby="motivation-title">
-        <h2 id="motivation-title">Motivation</h2>
-        <p>Data-driven genetic clustering has been used to identify distinct mechanisms and subtypes of type 2 diabetes (T2D). However, cluster definitions depend on the study population, phenotype inputs and clustering method, and interpreting a cluster requires assigning biological meaning to a group of variants. Annotation-based pathway polygenic scores (pPGS) offer a complementary view: within a fixed pathway database, gene-to-pathway mappings give consistent features that can be compared across studies, tissues and diseases.</p>
-      </section>
-
-      <section aria-labelledby="approach-title">
-        <h2 id="approach-title">Approach</h2>
-        <ul class="points">
-          <li>Calculating cluster polygenic scores from published T2D genetic cluster definitions (Kim et al., Smith et al., Suzuki et al.) in the All of Us Research Program.</li>
-          <li>Constructing tissue-specific Reactome pathway polygenic scores from GTEx v8 gene-expression prediction models, and reconstructing each cluster score as a weighted combination of pathway scores.</li>
-          <li>Evaluating how stable cluster scores and assignments are across studies and when the phenotype inputs used for clustering change.</li>
-          <li>Testing pathway&#8211;tissue associations with the original cluster scores and with genetic factor analysis (GFA)&#8211;derived scores.</li>
+      <section id="background" aria-labelledby="background-title">
+        <p class="section-label">Background</p>
+        <h2 id="background-title">Why look beyond genetic clusters?</h2>
+        <p>Type 2 diabetes (T2D) involves different genetic mechanisms. Genetic clustering groups T2D-associated variants by their patterns of association with metabolic traits, with the aim of identifying distinct disease mechanisms, studying progression and complications, and informing personalized treatment (e.g., Kim et al. 2023; Smith et al. 2024; Suzuki et al. 2024).</p>
+        <p>However, cluster definitions depend on study choices — the population, phenotype inputs and clustering method can all change an individual's scores and assignments — and a cluster label may obscure shared biology or differences between groups of variants. This makes cross-study comparison and biological interpretation difficult.</p>
+        <ul class="cards">
+          <li>
+            <h3>Consistent features</h3>
+            <p>Pathway polygenic scores (pPGS) use fixed gene-to-pathway mappings within a chosen database.</p>
+          </li>
+          <li>
+            <h3>Biological interpretation</h3>
+            <p>Scores are tied to annotated biological processes, rather than cluster labels alone.</p>
+          </li>
+          <li>
+            <h3>Beyond one disease</h3>
+            <p>The same features can be examined for other diseases and organ-specific complications.</p>
+          </li>
         </ul>
       </section>
 
-      <section aria-labelledby="relevance-title">
-        <h2 id="relevance-title">Clinical relevance</h2>
-        <p>The project also asks whether pathway-based scores carry clinically relevant information: whether pathway-predicted lipodystrophy scores preserve the ancestry differences in the BMI&#8211;T2D relationship, whether pathway scores improve prediction of incident retinopathy and neuropathy, and whether the same pathway-derived scores are relevant to coronary artery disease.</p>
+      <section id="goals" aria-labelledby="goals-title">
+        <p class="section-label">Study design</p>
+        <h2 id="goals-title">Study goals and score types</h2>
+        <p>The project evaluates pPGS as a complementary framework for genetic heterogeneity in T2D, using data from the All of Us Research Program.</p>
+        <ol class="goals">
+          <li><span class="num">1</span><span class="goal">Stability</span><span class="desc">Evaluate across-study and within-study stability of genetic clusters.</span></li>
+          <li><span class="num">2</span><span class="goal">Biological interpretation</span><span class="desc">Interpret existing T2D genetic clusters with pathway scores.</span></li>
+          <li><span class="num">3</span><span class="goal">Phenotype and complications</span><span class="desc">Test phenotype patterns and complication prediction.</span></li>
+          <li><span class="num">4</span><span class="goal">Across diseases</span><span class="desc">Assess relevance beyond T2D, using coronary artery disease (CAD).</span></li>
+        </ol>
+
+        <h3>Three score types</h3>
+        <ul class="scores">
+          <li class="original"><strong>Original cluster scores (cPGS)</strong><span class="flow">Genotypes <span>&rarr;</span> published variant weights <span>&rarr;</span> cluster scores</span></li>
+          <li><strong>Direct pathway scores (pPGS)</strong><span class="flow">Genotypes <span>&rarr;</span> predicted tissue expression (GTEx v8) <span>&rarr;</span> Reactome pathways</span></li>
+          <li><strong>Pathway-predicted cluster scores</strong><span class="flow">Direct pPGS <span>&rarr;</span> ridge regression <span>&rarr;</span> reconstructed clusters</span></li>
+        </ul>
+        <p class="note" style="margin-top:14px">Body mass index (BMI) analyses use the reconstructed cluster scores; complication models use the direct pPGS.</p>
+      </section>
+
+      <section id="stability" aria-labelledby="stability-title">
+        <p class="section-label">Result 1 &middot; Stability</p>
+        <h2 id="stability-title">Genetic clusters depend on study choices</h2>
+
+        <h3>Across-study stability</h3>
+        <ul class="aar">
+          <li><span class="k">Aim</span><span>Compare published cluster definitions.</span></li>
+          <li><span class="k">Approach</span><span>Score the same cohort with the Kim, Smith and Suzuki definitions and standardize the scores.</span></li>
+          <li><span class="k">Result</span><span>The same person can sit at very different positions in score space depending on the definition used.</span></li>
+        </ul>
+        <figure>
+          <a href="fig-cross-study.png" target="_blank" rel="noopener"><img src="fig-cross-study.png" alt="Panel A: one participant's standardized Obesity and Liver/lipid cluster scores under the Kim, Smith and Suzuki definitions, shown as three separated points. Panel B: histograms of pairwise cross-study distances for Kim–Smith, Kim–Suzuki and Smith–Suzuki." width="1400" height="729" loading="lazy"></a>
+          <figcaption><strong>Figure 1.</strong> Cross-study differences in cluster scores. (A) Standardized Obesity and Liver/lipid scores for one participant under three published definitions. (B) Distributions of pairwise Euclidean distances across common participants; smaller distances mean more similar scores, and dashed lines mark the participant in Panel A.</figcaption>
+        </figure>
+
+        <h3>Within-study stability</h3>
+        <ul class="aar">
+          <li><span class="k">Aim</span><span>Test whether phenotype inputs change cluster assignments.</span></li>
+          <li><span class="k">Approach</span><span>Change the traits used for clustering while keeping the variants, method and number of clusters fixed.</span></li>
+          <li><span class="k">Result</span><span>Removing adiposity traits reassigned 38.5% of held-out participants in Lipodystrophy 1, and 17.5% overall.</span></li>
+        </ul>
+        <figure>
+          <a href="fig-within-study.png" target="_blank" rel="noopener"><img src="fig-within-study.png" alt="Panel A: flow diagram showing how Lipodystrophy 1 participants are reassigned to other clusters after removing adiposity traits. Panel B: box plots of the percentage of held-out participants reassigned under six phenotype modifications." width="1400" height="602" loading="lazy"></a>
+          <figcaption><strong>Figure 2.</strong> Cluster reassignment under phenotype changes. (A) Reassignment of Lipodystrophy 1 participants after removing adiposity traits. (B) Percentage of held-out participants reassigned under each phenotype modification, by baseline cluster and across all participants.</figcaption>
+        </figure>
+      </section>
+
+      <section id="interpretation" aria-labelledby="interpretation-title">
+        <p class="section-label">Result 2 &middot; Biological interpretation</p>
+        <h2 id="interpretation-title">Lipodystrophy clusters share adipose-signaling pathways</h2>
+        <ul class="aar">
+          <li><span class="k">Aim</span><span>Test whether Lipodystrophy 1 and 2 share biological components.</span></li>
+          <li><span class="k">Approach</span><span>Reconstruct each cluster score from tissue-specific pPGS using ridge regression, and compare leading variants with leading pathways.</span></li>
+          <li><span class="k">Result</span><span>Despite different leading variants, three of the five top pathways are shared, with visceral adipose contributing most. The remaining top annotations differ in transport and membrane organization.</span></li>
+        </ul>
+        <figure>
+          <a href="overview.png" target="_blank" rel="noopener"><img src="overview.png" alt="Bar charts for the Lipodystrophy 1 and Lipodystrophy 2 clusters: on the left, the five top-weighted variants from each published cluster; on the right, the five pathway–tissue scores that best predict each cluster score, led by leptin signaling, signal attenuation and growth hormone receptor signaling in visceral adipose tissue." width="1100" height="791" loading="lazy"></a>
+          <figcaption><strong>Figure 3.</strong> Variants and pathways for Smith's Lipodystrophy 1 and 2 clusters. Each cluster shows its five top-weighted published variants (left) and five top-ranked pathway&ndash;tissue scores (right). Axes differ between clusters, and coefficient signs do not indicate pathway activation.</figcaption>
+        </figure>
+      </section>
+
+      <section id="phenotype" aria-labelledby="phenotype-title">
+        <p class="section-label">Result 3 &middot; Phenotype and complications</p>
+        <h2 id="phenotype-title">Clinical patterns and complication prediction</h2>
+
+        <h3>BMI&ndash;T2D relationships across ancestries</h3>
+        <ul class="aar">
+          <li><span class="k">Aim</span><span>Test whether reconstructed scores retain a known BMI&ndash;T2D pattern.</span></li>
+          <li><span class="k">Approach</span><span>Compare logistic models with no cluster scores, with the original Lipodystrophy 1/2 scores, and with their pathway-predicted counterparts.</span></li>
+          <li><span class="k">Result</span><span>Both original and reconstructed scores narrow the gap in T2D probability between East Asian (EAS) and European (EUR) ancestry at the same BMI.</span></li>
+        </ul>
+        <figure>
+          <a href="fig-bmi-t2d.png" target="_blank" rel="noopener"><img src="fig-bmi-t2d.png" alt="Three line charts of predicted T2D probability against BMI for five genetic ancestry groups, under no cluster-score adjustment, original Lipodystrophy 1/2 adjustment and pathway-predicted Lipodystrophy 1/2 adjustment." width="1400" height="430" loading="lazy"></a>
+          <figcaption><strong>Figure 4.</strong> Predicted T2D probability across BMI and genetic ancestry under the three models. This tests pattern preservation, not prediction accuracy or causal mediation.</figcaption>
+        </figure>
+
+        <h3>Incident complications</h3>
+        <p>Among participants with T2D and no corresponding complication at baseline, three sex-stratified Cox models were compared; only the pathway coefficients were penalized. Models were selected in development and evaluated in validation and in the European-ancestry subgroup without refitting.</p>
+        <table aria-label="Complication prediction models">
+          <thead><tr><th>Model</th><th>Predictors</th></tr></thead>
+          <tbody>
+            <tr><td>M<sub>0</sub></td><td>Age + genetic ancestry</td></tr>
+            <tr><td>M<sub>C</sub></td><td>M<sub>0</sub> + 12 original Smith cluster scores</td></tr>
+            <tr><td>M<sub>P</sub></td><td>M<sub>0</sub> + direct expression-based pathway scores</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="margin-top:12px">Validation: retinopathy, 12,439 participants / 655 events; neuropathy, 11,716 participants / 1,933 events.</p>
+        <ul class="aar">
+          <li><span class="k">Result</span><span>Neither the cluster scores nor the pathway scores gave a substantial improvement in discrimination over the clinical baseline, in all ancestries or in the European-ancestry subgroup.</span></li>
+        </ul>
+        <figure>
+          <a href="fig-complications.png" target="_blank" rel="noopener"><img src="fig-complications.png" alt="Bar charts of validation C-index for models M0, MC and MP, for retinopathy and neuropathy, in all ancestries and in the European-ancestry subgroup. All values lie between about 0.50 and 0.57 with overlapping confidence intervals." width="1400" height="964" loading="lazy"></a>
+          <figcaption><strong>Figure 5.</strong> Validation discrimination for incident retinopathy and neuropathy. Bars show Harrell's C-index (higher = better ranking) with pointwise 95% bootstrap confidence intervals; dashed lines show the baseline M<sub>0</sub>, and arrows indicate intervals extending below 0.5.</figcaption>
+        </figure>
+      </section>
+
+      <section id="diseases" aria-labelledby="diseases-title">
+        <p class="section-label">Result 4 &middot; Across diseases</p>
+        <h2 id="diseases-title">Relevance to coronary artery disease</h2>
+        <ul class="aar">
+          <li><span class="k">Aim</span><span>Test whether the same Lipodystrophy scores are relevant to CAD.</span></li>
+          <li><span class="k">Approach</span><span>Reuse the T2D-derived scores, without learning CAD-specific weights, in three CAD logistic models.</span></li>
+          <li><span class="k">Result</span><span>The original scores widen the EAS&ndash;EUR gap in recorded CAD probability, whereas the pathway-reconstructed scores markedly narrow it.</span></li>
+        </ul>
+        <figure>
+          <a href="fig-bmi-cad.png" target="_blank" rel="noopener"><img src="fig-bmi-cad.png" alt="Three line charts of predicted probability of recorded coronary artery disease against BMI for five genetic ancestry groups, under no adjustment, original Lipodystrophy 1/2 adjustment and pathway-predicted Lipodystrophy 1/2 adjustment." width="1400" height="460" loading="lazy"></a>
+          <figcaption><strong>Figure 6.</strong> Predicted probability of recorded CAD across BMI and genetic ancestry. This is an exploratory adjustment pattern, not evidence of causal mediation.</figcaption>
+        </figure>
+      </section>
+
+      <section id="summary" aria-labelledby="summary-title">
+        <p class="section-label">Summary</p>
+        <h2 id="summary-title">Summary and discussion</h2>
+        <table class="summary" aria-label="Summary of findings">
+          <thead><tr><th>Goal</th><th>Finding</th></tr></thead>
+          <tbody>
+            <tr><td>1. Stability</td><td>Study definitions and phenotype inputs change cluster scores and assignments.</td></tr>
+            <tr><td>2. Biological interpretation</td><td>Lipodystrophy 1 and 2 share visceral-adipose signaling annotations.</td></tr>
+            <tr><td>3. Phenotype and complications</td><td>The BMI&ndash;T2D pattern is retained; complication prediction gains are limited.</td></tr>
+            <tr><td>4. Across diseases</td><td>Original and reconstructed scores differ in their CAD adjustment patterns.</td></tr>
+          </tbody>
+        </table>
       </section>
 
       <div class="related">
         <h2>Project status</h2>
         <p>Ongoing work. Results are preliminary and have not yet been peer reviewed.</p>
+        <p>Cluster definitions from:</p>
+        <ol class="refs">
+          <li>Kim H. et al. High-throughput genetic clustering of type 2 diabetes loci reveals heterogeneous mechanistic pathways of metabolic disease. <em>Diabetologia</em> (2023).</li>
+          <li>Smith K. et al. Multi-ancestry polygenic mechanisms of type 2 diabetes. <em>Nature Medicine</em> (2024).</li>
+          <li>Suzuki K. et al. Genetic drivers of heterogeneity in type 2 diabetes pathophysiology. <em>Nature</em> (2024).</li>
+        </ol>
       </div>
     </article>
   </main>
