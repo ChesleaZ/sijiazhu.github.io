@@ -10,7 +10,11 @@ const motifs = [
   ['surface', '0 0 245 195'], ['umap', '0 0 214 186'],
   ['objective', '0 0 586 86'], ['attention', '0 0 566 102'],
   ['robot', '0 0 125 143'], ['tubes', '0 0 133 148'],
+  // Cell outlines shown on the homepage only (see backdrop.css).
+  ['dendritic', '0 0 160 150'], ['rbc', '0 0 120 84'],
+  ['neutrophil', '0 0 120 120'], ['epithelial', '0 0 70 130'],
 ];
+const origin = { x: 0, y: 0 };
 
 const ScienceBackdrop = ({ page }) => {
   const { config, preview } = useSite();
@@ -26,15 +30,18 @@ const ScienceBackdrop = ({ page }) => {
     <div ref={layer} className="science-backdrop" aria-hidden="true" data-page={page}
       data-animated={String(settings.backgroundAnimated && settings.backgroundOpacity > 0)}
       style={{ '--science-opacity': settings.backgroundOpacity / 100 }}>
-      {motifs.map(([id, viewBox]) => (
+      {motifs.map(([id, viewBox]) => {
+        const position = settings.backgroundPositions[id] || origin;
+        return (
         <div className={'science-motif science-' + id} key={id} data-artwork={id}
-          data-position-x={settings.backgroundPositions[id].x} data-position-y={settings.backgroundPositions[id].y}
-          style={{ '--science-dx': settings.backgroundPositions[id].x + 'vw', '--science-dy': settings.backgroundPositions[id].y + 'vh' }}>
+          data-position-x={position.x} data-position-y={position.y}
+          style={{ '--science-dx': position.x + 'vw', '--science-dy': position.y + 'vh' }}>
           <svg viewBox={viewBox} fill="none" stroke="currentColor" strokeWidth="1.4" focusable="false">
-            <use href={withPrefix('/science/motifs.svg?v=neural-20261018#' + id)} />
+            <use href={withPrefix('/science/motifs.svg?v=cells-20261023#' + id)} />
           </svg>
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
