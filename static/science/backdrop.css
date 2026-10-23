@@ -69,8 +69,8 @@
 .science-backdrop[data-page=home] .science-neutrophil,
 .science-backdrop[data-page=home] .science-epithelial { display: block; }
 .science-dendritic { width: clamp(95px, 9vw, 130px); left: 63%; top: 9%; --science-rotation: 8deg; }
-.science-rbc { width: clamp(70px, 6.5vw, 92px); left: 2.5%; top: 45%; --science-rotation: -12deg; }
-.science-neutrophil { width: clamp(64px, 5.8vw, 84px); right: 4.5%; top: 47%; }
+.science-rbc { width: clamp(70px, 6.5vw, 92px); left: 2.5%; top: 30%; --science-rotation: -12deg; }
+.science-neutrophil { width: clamp(64px, 5.8vw, 80px); left: 58%; bottom: 14%; }
 .science-epithelial { width: clamp(38px, 3.4vw, 48px); right: 11%; bottom: 9%; --science-rotation: 6deg; }
 .science-backdrop[data-animated=true] .science-dendritic,
 .science-backdrop[data-animated=true] .science-neutrophil { animation: science-float 27s ease-in-out -4s infinite; }
@@ -78,8 +78,8 @@
 .science-backdrop[data-animated=true] .science-epithelial { animation: science-float 31s ease-in-out -13s infinite reverse; }
 @media (max-width: 1099px) {
   .science-dendritic { left: 60%; top: 8%; width: 100px; }
-  .science-rbc { left: -10px; top: 50%; width: 72px; }
-  .science-neutrophil { right: -8px; top: 58%; width: 66px; }
+  .science-rbc { left: -10px; top: 30%; width: 72px; }
+  .science-neutrophil { left: 56%; bottom: 16%; width: 64px; }
   .science-epithelial { right: 9%; bottom: 7%; width: 38px; }
 }
 @media (max-width: 600px) {
