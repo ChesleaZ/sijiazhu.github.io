@@ -80,7 +80,7 @@ const StyledProject = styled.li`
   .project-title {
     margin: 0 0 8px;
     color: var(--lightest-slate);
-    font-size: var(--fz-xl);
+    font-size: var(--fz-xxl);
     line-height: 1.3;
 
     a {
@@ -101,10 +101,10 @@ const StyledProject = styled.li`
   }
 
   .project-authors {
-    margin: 0 0 4px;
+    margin: 0 0 6px;
     color: var(--light-slate);
-    font-size: var(--fz-sm);
-    line-height: 1.4;
+    font-size: 17px;
+    line-height: 1.5;
 
     .my-name {
       color: var(--lightest-slate);
@@ -115,28 +115,9 @@ const StyledProject = styled.li`
   .project-venue {
     margin: 0;
     color: var(--slate);
-    font-size: var(--fz-sm);
+    font-size: 15px;
     font-style: italic;
-    line-height: 1.4;
-  }
-
-  .project-tech-list {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 12px 0 0 0;
-    list-style: none;
-
-    li {
-      color: var(--slate);
-      font-family: var(--font-mono);
-      font-size: var(--fz-xxs);
-      line-height: 1.75;
-
-      &:not(:last-of-type) {
-        margin-right: 15px;
-      }
-    }
+    line-height: 1.5;
   }
 
   .project-links {
@@ -193,7 +174,7 @@ const Projects = () => {
   const projectsToShow = publications.map((publication, index) => ({ ...publication, index }));
 
   const projectInner = publication => {
-    const { year, title, authors, venue, keywords, url, index } = publication;
+    const { year, title, authors, venue, url, index } = publication;
 
     return (
       <div className="project-inner">
@@ -214,14 +195,6 @@ const Projects = () => {
             {preview ? authors : highlightName(authors)}
           </p>
           <p className="project-venue" {...edit('publications.items.' + index + '.venue')}>{venue}</p>
-
-          {keywords && keywords.length > 0 && (
-            <ul className="project-tech-list">
-              {keywords.map((keyword, i) => (
-                <li key={i} {...edit('publications.items.' + index + '.keywords.' + i)}>{keyword}</li>
-              ))}
-            </ul>
-          )}
         </div>
 
         <div className="project-links">
