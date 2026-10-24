@@ -23,6 +23,7 @@ const StyledProjectsSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 0;
 
   h2 {
     font-size: clamp(24px, 5vw, var(--fz-heading));
@@ -31,11 +32,16 @@ const StyledProjectsSection = styled.section`
   .publication-years {
     width: 100%;
     max-width: 900px;
-    margin-top: 28px;
+    margin-top: 24px;
+  }
+
+  /* Year groups are <section>s; drop the global section padding. */
+  .publication-year-group {
+    padding: 0;
   }
 
   .publication-year-group + .publication-year-group {
-    margin-top: 26px;
+    margin-top: 22px;
   }
 
   .publication-year-heading {
