@@ -367,20 +367,6 @@
       },
       {
         "year": 2025,
-        "title": "Robust Vector-Weighted and Matrix-Weighted Multi-View Hard-Means Clustering",
-        "venue": "Intelligent Systems with Applications",
-        "status": "Published",
-        "authors": "Z. Liu, S. Aljohani, S. Zhu, T. Senapati, G. Ulutagay, S. Haque, N. Mlaiki",
-        "keywords": [
-          "Multi-view clustering",
-          "Hard c-means",
-          "View weighting"
-        ],
-        "url": "https://doi.org/10.1016/j.iswa.2024.200470",
-        "selected": true
-      },
-      {
-        "year": 2025,
         "title": "A Unified Parametric Divergence Operator for Fermatean Fuzzy Environment and Its Application in Machine Learning and Intelligent Decision-Making",
         "venue": "Computer Modeling in Engineering & Sciences",
         "status": "Published",
@@ -418,19 +404,6 @@
           "Deep learning"
         ],
         "url": "https://doi.org/10.32604/cmc.2023.045506",
-        "selected": false
-      },
-      {
-        "year": 2023,
-        "title": "Distance Measures of Picture Fuzzy Sets and Interval-Valued Picture Fuzzy Sets with Their Applications",
-        "venue": "AIMS Mathematics",
-        "status": "Published",
-        "authors": "S. Zhu, Z. Liu",
-        "keywords": [
-          "Picture fuzzy sets",
-          "Interval-valued fuzzy sets"
-        ],
-        "url": "https://doi.org/10.3934/math.20231525",
         "selected": false
       }
     ],
