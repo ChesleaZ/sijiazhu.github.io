@@ -51,8 +51,8 @@ const StyledProjectsSection = styled.section`
     margin: 0 0 12px;
     color: var(--green);
     font-family: var(--font-mono);
-    font-size: var(--fz-lg);
-    font-weight: 400;
+    font-size: 24px;
+    font-weight: 500;
 
     &:after {
       content: '';
