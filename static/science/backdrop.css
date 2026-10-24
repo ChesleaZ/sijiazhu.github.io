@@ -14,6 +14,7 @@
   mask-image: linear-gradient(90deg, #000 0%, #000 12%, #0008 24%, #0004 40%, #0004 60%, #0008 76%, #000 88%, #000 100%);
 }
 .science-backdrop[hidden] { display: none; }
+html[data-theme=light] .science-backdrop { opacity: calc(var(--science-opacity, .12) * .7); }
 .science-motif { position: absolute; transform-origin: center; transform: translate(var(--science-dx, 0px), var(--science-dy, 0px)) rotate(var(--science-rotation, 0deg)); }
 .science-motif svg { display: block; width: 100%; height: auto; overflow: visible; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
 .science-network { width: clamp(155px, 17vw, 235px); left: 1.8%; top: 17%; }
