@@ -336,7 +336,7 @@ const defaults = {
         "title": "Random Matrix Scaling Laws in Single-Cell Representation Learning",
         "venue": "Manuscript under review",
         "status": "Under review",
-        "authors": "S. Zhu, J. Hu, R. Ma, A. Klein, G. Gowri",
+        "authors": "S. Zhu, J. Hu, G. Gowri, A. M. Klein, R. Ma",
         "keywords": [
           "Single-cell representation learning",
           "Scaling laws",
@@ -637,7 +637,7 @@ const defaults = {
   "paper": {
     "eyebrow": "Research paper",
     "title": "Random Matrix Scaling Laws in Single-Cell Representation Learning",
-    "authors": "S. Zhu, J. Hu, R. Ma, A. Klein, and G. Gowri",
+    "authors": "S. Zhu, J. Hu, G. Gowri, A. M. Klein, and R. Ma",
     "status": "Manuscript under review",
     "overviewTitle": "Research overview",
     "paragraphs": [
