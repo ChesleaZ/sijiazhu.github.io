@@ -7,6 +7,7 @@ import { navLinks } from '@config';
 import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
+import ThemeToggle from './theme-toggle';
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -60,6 +61,11 @@ const StyledNav = styled.nav`
   font-family: var(--font-mono);
   counter-reset: item 0;
   z-index: 12;
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+  }
 
   .logo {
     ${({ theme }) => theme.mixins.flexCenter};
@@ -173,18 +179,21 @@ const Nav = ({ isHome }) => {
           <>
             {Logo}
 
-            <StyledLinks>
-              <ol>
-                {navLinks &&
-                  navLinks.map(({ url, name }, i) => (
-                    <li key={i}>
-                      <Link to={url}>{name}</Link>
-                    </li>
-                  ))}
-              </ol>
-            </StyledLinks>
+            <div className="nav-actions">
+              <StyledLinks>
+                <ol>
+                  {navLinks &&
+                    navLinks.map(({ url, name }, i) => (
+                      <li key={i}>
+                        <Link to={url}>{name}</Link>
+                      </li>
+                    ))}
+                </ol>
+              </StyledLinks>
 
-            <Menu />
+              <ThemeToggle />
+              <Menu />
+            </div>
           </>
         ) : (
           <>
@@ -196,30 +205,34 @@ const Nav = ({ isHome }) => {
               )}
             </TransitionGroup>
 
-            <StyledLinks>
-              <ol>
-                <TransitionGroup component={null}>
-                  {isMounted &&
-                    navLinks &&
-                    navLinks.map(({ url, name }, i) => (
-                      <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
-                        <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
-                          <Link to={url}>{name}</Link>
-                        </li>
-                      </CSSTransition>
-                    ))}
-                </TransitionGroup>
-              </ol>
+            <div className="nav-actions">
+              <StyledLinks>
+                <ol>
+                  <TransitionGroup component={null}>
+                    {isMounted &&
+                      navLinks &&
+                      navLinks.map(({ url, name }, i) => (
+                        <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
+                          <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
+                            <Link to={url}>{name}</Link>
+                          </li>
+                        </CSSTransition>
+                      ))}
+                  </TransitionGroup>
+                </ol>
 
-            </StyledLinks>
+              </StyledLinks>
 
-            <TransitionGroup component={null}>
-              {isMounted && (
-                <CSSTransition classNames={fadeClass} timeout={timeout}>
-                  <Menu />
-                </CSSTransition>
-              )}
-            </TransitionGroup>
+              <ThemeToggle />
+
+              <TransitionGroup component={null}>
+                {isMounted && (
+                  <CSSTransition classNames={fadeClass} timeout={timeout}>
+                    <Menu />
+                  </CSSTransition>
+                )}
+              </TransitionGroup>
+            </div>
           </>
         )}
       </StyledNav>
