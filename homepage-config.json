@@ -1,0 +1,18 @@
+{
+  "greeting": "Hello, my name is",
+  "name": "Sijia Zhu.",
+  "prefix": "My research explores",
+  "topics": [
+    "AI for biology",
+    "biological foundation models",
+    "multimodal learning for biology",
+    "cell-to-text generation"
+  ],
+  "background": "#0b1220",
+  "text": "#e6edf4",
+  "accent": "#7ad8c7",
+  "photoSide": "right",
+  "photoWidth": 340,
+  "titleSize": 64,
+  "topicSize": 43
+}

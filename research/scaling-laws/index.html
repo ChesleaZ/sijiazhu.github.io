@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scaling Laws in Single-Cell Representation Learning | Sijia Zhu</title>
+  <meta name="description" content="Sijia Zhu's project on how data scale and quality shape what single-cell foundation models learn.">
+  <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/research/scaling-laws/">
+  <script>try{if(localStorage.getItem('sz-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+  <style>
+    :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #a9b6c4; --accent: #7ad8c7; --line: #26394b; }
+    :root[data-theme=light] { color-scheme: light; --paper: #f7f9fb; --ink: #142030; --muted: #4a5a6b; --accent: #0d8574; --line: #d6dfe7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.75; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    header, main, footer { width: min(720px, calc(100% - 40px)); margin-inline: auto; }
+    header { display: flex; justify-content: space-between; align-items: baseline; padding-block: 28px; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; }
+    header .name { color: var(--ink); font-weight: 600; text-decoration: none; }
+    header nav a { margin-left: 18px; }
+    main { padding-block: 36px 56px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4.5vw, 38px); line-height: 1.2; font-weight: normal; }
+    .byline { margin: 0 0 36px; color: var(--muted); font-size: 16px; }
+    h2 { margin: 44px 0 10px; font-size: 22px; font-weight: normal; }
+    p { margin: 0 0 16px; }
+    figure { margin: 28px auto 32px; max-width: 480px; }
+    figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 2px; }
+    figcaption { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    footer { padding-block: 20px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    @media (max-width: 540px) { body { font-size: 17px; } main { padding-top: 20px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="name" href="../../">Sijia Zhu</a>
+    <nav aria-label="Site navigation"><a href="../../research/">Research</a><a href="../../publications/">Publications</a></nav>
+  </header>
+  <main>
+    <article>
+      <h1>Scaling Laws in Single-Cell Representation Learning</h1>
+      <p class="byline">Harvard T.H. Chan School of Public Health, with Rong Ma and Allon Klein.</p>
+
+      <p>Single-cell foundation models are being trained on more and more cells, but it is still not clear how much biological information their representations actually capture, or how that depends on the data they were trained on. In this project I study how cell number, sequencing depth and batch effects shape what these representations can recover.</p>
+
+      <figure>
+        <img src="overview.png" alt="Diagram: pretraining data with n cells and external test data feed a single-cell foundation model (examples: Geneformer, scGPT, scVI); its output passes through cell-to-text adapters into a language model." width="598" height="564">
+        <figcaption>A foundation model pretrained on <em>n</em> cells is applied to new data, and its cell representations are passed through cell-to-text adapters into a language model.</figcaption>
+      </figure>
+
+      <h2>Approach</h2>
+      <p>I use random matrix theory to define mutual-information-based measures of how much biological signal a representation recovers from single-cell multi-omics data. From these I derive scaling laws in cell number, sequencing depth and batch effects, and compare them with real-data analyses of representations from models such as scVI, Geneformer and scGPT. Connecting these representations to language models through cell-to-text adapters is one way to read out what they have learned.</p>
+
+      <h2>Experimental design</h2>
+      <p>A practical question behind this work is how to spend a fixed sequencing budget: more cells, or deeper sequencing per cell? I look at this trade-off in systemic lupus erythematosus (SLE) and Perturb-seq datasets.</p>
+
+      <h2>Paper</h2>
+      <p><a href="../../papers/single-cell-scaling/">Random Matrix Scaling Laws in Single-Cell Representation Learning</a>. S. Zhu, J. Hu, G. Gowri, A. M. Klein, R. Ma. Manuscript under review.</p>
+    </article>
+  </main>
+  <footer><a href="../../research/">&larr; Back to Research</a></footer>
+</body>
+</html>
