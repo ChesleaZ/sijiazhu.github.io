@@ -31,18 +31,18 @@ const StyledProjectsSection = styled.section`
   .publication-years {
     width: 100%;
     max-width: 900px;
-    margin-top: 40px;
+    margin-top: 28px;
   }
 
   .publication-year-group + .publication-year-group {
-    margin-top: 44px;
+    margin-top: 26px;
   }
 
   .publication-year-heading {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin: 0 0 16px;
+    margin: 0 0 12px;
     color: var(--green);
     font-family: var(--font-mono);
     font-size: var(--fz-lg);
