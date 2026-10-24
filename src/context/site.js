@@ -20,6 +20,22 @@ const SiteStyle = createGlobalStyle`
     --light-slate: ${p => p.content.theme.muted};
     --border-radius: ${p => p.content.theme.cardRadius}px;
   }
+  html[data-theme='light']:root {
+    color-scheme: light;
+    --dark-navy: #eef2f6;
+    --navy: #f7f9fb;
+    --surface: #ffffff;
+    --light-navy: #ffffff;
+    --lightest-navy: #d6dfe7;
+    --navy-shadow: rgba(24, 44, 66, 0.12);
+    --dark-slate: #6b7c8e;
+    --slate: #4a5a6b;
+    --light-slate: #55657a;
+    --lightest-slate: #142030;
+    --white: #0f1a28;
+    --green: #0d8574;
+    --green-tint: rgba(13, 133, 116, 0.1);
+  }
   html body { font-size: ${p => p.content.theme.fontSize}px; }
   #about { max-width: ${p => p.content.about.width}px; }
   #research { max-width: ${p => p.content.research.width}px; }
