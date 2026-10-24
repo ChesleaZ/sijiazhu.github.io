@@ -28,14 +28,39 @@ const StyledProjectsSection = styled.section`
     font-size: clamp(24px, 5vw, var(--fz-heading));
   }
 
+  .publication-years {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 40px;
+  }
+
+  .publication-year-group + .publication-year-group {
+    margin-top: 44px;
+  }
+
+  .publication-year-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 0 16px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-lg);
+    font-weight: 400;
+
+    &:after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: var(--lightest-navy);
+    }
+  }
+
   .publication-list {
     ${({ theme }) => theme.mixins.resetList};
     display: flex;
     flex-direction: column;
     gap: 14px;
-    width: 100%;
-    max-width: 900px;
-    margin-top: 40px;
   }
 `;
 
@@ -60,7 +85,7 @@ const StyledProject = styled.li`
   .project-inner {
     ${({ theme }) => theme.mixins.boxShadow};
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     column-gap: 20px;
     align-items: start;
     position: relative;
@@ -68,13 +93,6 @@ const StyledProject = styled.li`
     border-radius: var(--border-radius);
     background-color: var(--light-navy);
     transition: var(--transition);
-  }
-
-  .project-year {
-    padding-top: 3px;
-    color: var(--green);
-    font-family: var(--font-mono);
-    font-size: var(--fz-sm);
   }
 
   .project-title {
@@ -144,25 +162,10 @@ const StyledProject = styled.li`
 
   @media (max-width: 600px) {
     .project-inner {
-      grid-template-columns: minmax(0, 1fr) auto;
-      row-gap: 6px;
+      column-gap: 12px;
       padding: 20px;
     }
 
-    .project-year {
-      grid-column: 1 / 2;
-      grid-row: 1;
-      padding-top: 0;
-    }
-
-    .project-links {
-      grid-column: 2 / 3;
-      grid-row: 1;
-    }
-
-    .project-body {
-      grid-column: 1 / -1;
-    }
   }
 `;
 
@@ -170,16 +173,23 @@ const Projects = () => {
   const { config, edit, preview } = useSite();
   const publications = config.publications.items;
 
-  // Show every publication, in the order they are listed in the site config (newest first).
-  const projectsToShow = publications.map((publication, index) => ({ ...publication, index }));
+  // Group publications by year, keeping the order they are listed in the site config (newest first).
+  const yearGroups = [];
+  publications.forEach((publication, index) => {
+    const year = String(publication.year || '').trim() || 'Other';
+    let group = yearGroups.find(g => g.year === year);
+    if (!group) {
+      group = { year, items: [] };
+      yearGroups.push(group);
+    }
+    group.items.push({ ...publication, index });
+  });
 
   const projectInner = publication => {
-    const { year, title, authors, venue, url, index } = publication;
+    const { title, authors, venue, url, index } = publication;
 
     return (
       <div className="project-inner">
-        <div className="project-year">{year}</div>
-
         <div className="project-body">
           <h3 className="project-title">
             {url ? (
@@ -212,11 +222,18 @@ const Projects = () => {
     <StyledProjectsSection id="publications">
       <h2 {...edit('publications.title')}>{config.publications.title}</h2>
 
-      <ul className="publication-list">
-        {projectsToShow.map(publication => (
-          <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>
+      <div className="publication-years">
+        {yearGroups.map(group => (
+          <section className="publication-year-group" key={group.year}>
+            <h3 className="publication-year-heading">{group.year}</h3>
+            <ul className="publication-list">
+              {group.items.map(publication => (
+                <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>
+              ))}
+            </ul>
+          </section>
         ))}
-      </ul>
+      </div>
     </StyledProjectsSection>
   );
 };
