@@ -5,6 +5,11 @@ import { Layout, Projects } from '@components';
 
 const StyledMainContainer = styled.main`
   counter-reset: section;
+  padding-top: 130px;
+
+  @media (max-width: 768px) {
+    padding-top: 110px;
+  }
 `;
 
 const PublicationsPage = ({ location }) => (
