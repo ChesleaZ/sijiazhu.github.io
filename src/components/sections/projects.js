@@ -6,9 +6,6 @@ import { useSite } from '../../context/site';
 // Author name to highlight in each publication's author list.
 const MY_NAME = 'S. Zhu';
 
-// Publications from this year on are listed under "Current research".
-const CURRENT_FROM_YEAR = 2026;
-
 const highlightName = authors => {
   if (!authors || !authors.includes(MY_NAME)) {
     return authors;
@@ -54,7 +51,7 @@ const StyledProjectsSection = styled.section`
     margin: 0 0 12px;
     color: var(--green);
     font-family: var(--font-mono);
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
 
     &:after {
@@ -145,10 +142,6 @@ const StyledProject = styled.li`
     font-size: 15px;
     font-style: italic;
     line-height: 1.5;
-
-    .project-year {
-      font-style: normal;
-    }
   }
 
   .project-links {
@@ -186,19 +179,20 @@ const Projects = () => {
   const { config, edit, preview } = useSite();
   const publications = config.publications.items;
 
-  // Split publications into current work and earlier work, keeping config order (newest first).
-  const yearGroups = [
-    { year: 'Current research', items: [] },
-    { year: 'Earlier work', items: [] },
-  ];
+  // Group publications by year, keeping the order they are listed in the site config (newest first).
+  const yearGroups = [];
   publications.forEach((publication, index) => {
-    const isCurrent = parseInt(publication.year, 10) >= CURRENT_FROM_YEAR;
-    yearGroups[isCurrent ? 0 : 1].items.push({ ...publication, index });
+    const year = String(publication.year || '').trim() || 'Other';
+    let group = yearGroups.find(g => g.year === year);
+    if (!group) {
+      group = { year, items: [] };
+      yearGroups.push(group);
+    }
+    group.items.push({ ...publication, index });
   });
-  const groupsToShow = yearGroups.filter(group => group.items.length > 0);
 
   const projectInner = publication => {
-    const { year, title, authors, venue, url, index } = publication;
+    const { title, authors, venue, url, index } = publication;
 
     return (
       <div className="project-inner">
@@ -216,10 +210,7 @@ const Projects = () => {
           <p className="project-authors" {...edit('publications.items.' + index + '.authors')}>
             {preview ? authors : highlightName(authors)}
           </p>
-          <p className="project-venue">
-            <span {...edit('publications.items.' + index + '.venue')}>{venue}</span>
-            {year && <span className="project-year">{', '}{year}</span>}
-          </p>
+          <p className="project-venue" {...edit('publications.items.' + index + '.venue')}>{venue}</p>
         </div>
 
         <div className="project-links">
@@ -238,7 +229,7 @@ const Projects = () => {
       <h2 {...edit('publications.title')}>{config.publications.title}</h2>
 
       <div className="publication-years">
-        {groupsToShow.map(group => (
+        {yearGroups.map(group => (
           <section className="publication-year-group" key={group.year}>
             <h3 className="publication-year-heading">{group.year}</h3>
             <ul className="publication-list">
