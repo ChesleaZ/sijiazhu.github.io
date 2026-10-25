@@ -15,8 +15,8 @@
     a { color: var(--accent); text-underline-offset: 3px; }
     header, main, footer { width: min(720px, calc(100% - 40px)); margin-inline: auto; }
     header { display: flex; justify-content: space-between; align-items: baseline; padding-block: 28px; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; }
-    header .name { color: var(--ink); font-weight: 600; text-decoration: none; }
-    header nav a { margin-left: 18px; }
+    header .back { color: var(--accent); text-decoration: none; }
+    header .back:hover, header .back:focus-visible { text-decoration: underline; }
     main { padding-block: 36px 56px; }
     h1 { margin: 0 0 10px; font-size: clamp(28px, 4.5vw, 38px); line-height: 1.2; font-weight: normal; }
     .byline { margin: 0 0 36px; color: var(--muted); font-size: 16px; }
@@ -32,8 +32,7 @@
 </head>
 <body>
   <header>
-    <a class="name" href="../../">Sijia Zhu</a>
-    <nav aria-label="Site navigation"><a href="../../research/">Research</a><a href="../../publications/">Publications</a></nav>
+    <a class="back" href="../../research/">&larr; Research</a>
   </header>
   <main>
     <article>
