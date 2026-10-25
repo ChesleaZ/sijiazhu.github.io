@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
 import ScienceBackdrop from './science-backdrop';
 import styled, { ThemeProvider } from 'styled-components';
-import { Head, Loader, Nav, Social, Email, Footer } from '@components';
+import { Head, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
 import { SiteProvider, pageForPath } from '../context/site';
 
@@ -23,48 +22,8 @@ const StyledContent = styled.div`
   }
 `;
 
-// Play the intro logo animation only once per browser session.
-const INTRO_KEY = 'sz-intro-played';
-let introPlayedThisLoad = false;
-const hasPlayedIntro = () => {
-  if (introPlayedThisLoad) {
-    return true;
-  }
-  try {
-    return window.sessionStorage.getItem(INTRO_KEY) === '1';
-  } catch (e) {
-    return false;
-  }
-};
-const markIntroPlayed = () => {
-  introPlayedThisLoad = true;
-  try {
-    window.sessionStorage.setItem(INTRO_KEY, '1');
-  } catch (e) {
-    // Storage can be unavailable (e.g. private mode); the in-memory flag still covers in-site navigation.
-  }
-};
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
-
 const Layout = ({ children, location }) => {
-  // The site is served under a path prefix (/sijiazhu.github.io/), so compare against the prefixed root.
-  const normalize = path => (path || '/').replace(/\/+$/, '') || '/';
-  const isHome = [normalize('/'), normalize(withPrefix('/'))].includes(normalize(location.pathname));
   const page = pageForPath(location.pathname);
-  const [isLoading, setIsLoading] = useState(isHome);
-  const [animateIntro, setAnimateIntro] = useState(isHome);
-
-  useIsomorphicLayoutEffect(() => {
-    if (!isHome) {
-      return;
-    }
-    if (hasPlayedIntro()) {
-      setIsLoading(false);
-      setAnimateIntro(false);
-    } else {
-      markIntroPlayed();
-    }
-  }, []);
 
   // Sets target="_blank" rel="noopener noreferrer" on external links
   const handleExternalLinks = () => {
@@ -80,10 +39,6 @@ const Layout = ({ children, location }) => {
   };
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-
     if (location.hash) {
       const id = location.hash.substring(1); // location.hash without the '#'
       setTimeout(() => {
@@ -96,7 +51,7 @@ const Layout = ({ children, location }) => {
     }
 
     handleExternalLinks();
-  }, [isLoading, location.hash]);
+  }, [location.hash]);
 
   return (
     <SiteProvider>
@@ -110,21 +65,17 @@ const Layout = ({ children, location }) => {
             Skip to Content
           </a>
 
-          {isLoading && isHome ? (
-            <Loader finishLoading={() => setIsLoading(false)} />
-          ) : (
-            <StyledContent className={'page-' + page}>
-              <ScienceBackdrop page={pageForPath(location.pathname)} />
-              <Nav isHome={animateIntro} />
-              <Social isHome={animateIntro} />
-              <Email isHome={animateIntro} />
+          <StyledContent className={'page-' + page}>
+            <ScienceBackdrop page={pageForPath(location.pathname)} />
+            <Nav isHome={false} />
+            <Social isHome={false} />
+            <Email isHome={false} />
 
-              <div id="content">
-                {children}
-                <Footer isHome={page === 'home'} />
-              </div>
-            </StyledContent>
-          )}
+            <div id="content">
+              {children}
+              <Footer isHome={page === 'home'} />
+            </div>
+          </StyledContent>
         </ThemeProvider>
       </div>
     </SiteProvider>
