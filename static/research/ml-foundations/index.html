@@ -25,6 +25,9 @@
     figure { margin: 28px 0 32px; }
     figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 2px; }
     figcaption { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    h3 { margin: 32px 0 8px; font-size: 19px; font-weight: normal; font-style: italic; }
+    article > ol:not(.refs) { padding-left: 22px; }
+    article > ol:not(.refs) li { margin-bottom: 10px; }
     .refs { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
     footer { padding-block: 20px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
     @media (max-width: 540px) { body { font-size: 17px; } main { padding-top: 20px; } }
@@ -40,24 +43,65 @@
       <h1>Mathematical Foundations of Machine Learning under Uncertainty</h1>
       <p class="byline">Undergraduate research, 2023&ndash;2025.</p>
 
-      <p>Many learning problems have to work with information that is vague or only partly known: a patient's symptoms only partly match a disease, or a pixel sits between two regions of an image. Fuzzy sets and their extensions describe each element by how strongly it belongs, does not belong, or is undecided. During my undergraduate studies I worked on the basic tools needed to learn from this kind of data: ways to measure how different two uncertain objects are, and clustering methods built on top of those measures.</p>
+      <h2>Motivation</h2>
+      <p>Much of the data a learning system sees is not clean or certain. A patient's symptoms only partly match a disease, an expert can be unsure between two ratings, and a pixel can lie on the border between two regions of an image. Fuzzy sets describe this kind of information by giving each element a degree of membership. Newer extensions go further. Picture fuzzy sets add a degree of neutrality, Fermatean fuzzy sets allow a wider range of membership and non-membership values, and complex-valued versions add a second, periodic component.</p>
+      <p>Almost every method that works with such data, whether for classification, clustering or decision making, depends on one basic question: how different are two uncertain objects? When I started this work, many of these newer set types had no good answer. Some had no distance measure at all. The measures that did exist sometimes gave counter-intuitive results, for example calling two clearly different sets identical, or did not satisfy the basic properties a distance should have.</p>
 
+      <h2>What I contributed</h2>
       <figure>
         <img src="overview.png" alt="Three panels: points inside a triangle whose corners are membership, neutrality and non-membership; paired bar charts of two fuzzy sets A and B labelled with a distance d(A,B) and divergence D alpha; and a scatter plot of three soft clusters with their centres." width="1650" height="585">
-        <figcaption>Uncertain information is described by degrees of membership, neutrality and non-membership (left). Distance and divergence measures compare two such sets (middle), and these comparisons drive clustering and decision making (right).</figcaption>
+        <figcaption>The common thread. Uncertain information (left) is compared with distance and divergence measures (middle), and these comparisons drive clustering and decisions (right).</figcaption>
       </figure>
-
-      <h2>Distance and divergence measures</h2>
-      <p>Picture fuzzy sets, Fermatean fuzzy sets and their complex-valued versions each describe uncertainty in a slightly different way, and the usual distances do not always behave sensibly on them. I proposed new distance measures and &alpha;-divergence measures for these settings, checked that they satisfy the properties a distance or divergence should have, and compared them with existing measures on examples where the older ones give counter-intuitive answers. One of these papers gives a single parametric divergence operator that covers several earlier measures as special cases.</p>
-
-      <h2>Clustering</h2>
-      <p>The same question, how far apart two objects are, sits at the centre of clustering. I worked on c-means type algorithms that learn a weight for each feature automatically, so that uninformative features count less, and applied them to colour image segmentation.</p>
+      <p>My work built these measures and then put them to use.</p>
+      <ol>
+        <li><strong>Distances for complex picture fuzzy sets.</strong> Building on the Hellinger distance, I proposed a family of distance measures for complex picture fuzzy sets and proved that they are bounded, non-degenerate and symmetric, and that they satisfy the triangle inequality.</li>
+        <li><strong>&alpha;-divergences for picture and interval-valued picture fuzzy sets.</strong> I proposed &alpha;-divergence measures for both settings, proved their basic properties and showed how several special cases relate to known divergences.</li>
+        <li><strong>A unified divergence operator for Fermatean fuzzy sets.</strong> This is one parametric operator that models membership, non-membership and hesitation together. The Jensen&ndash;Shannon divergence, the Hellinger distance and the &chi;&sup2;-divergence all appear as special cases.</li>
+        <li><strong>Distances for complex Fermatean fuzzy sets.</strong> I proposed new distance measures for this setting.</li>
+        <li><strong>Feature-weighted clustering.</strong> These are c-means type algorithms that learn a weight for each feature automatically, so that less informative features count less.</li>
+      </ol>
+      <p>In each paper I compared the new measures with existing ones on numerical examples, focusing on the cases where older measures fail to tell objects apart.</p>
 
       <h2>Applications</h2>
-      <p>I tested these methods on pattern recognition, medical diagnosis, multi-criteria decision making and image segmentation problems.</p>
+      <p>A measure is only useful if it leads to better decisions, so I tested each one on concrete tasks. The figures below illustrate how each task uses a distance or divergence. They are schematic sketches, not results copied from the papers.</p>
 
-      <h2>Looking back</h2>
-      <p>This work taught me to think carefully about what a measure of similarity or information should satisfy before using it. That question carried over into my current research, where I study how much biological signal a learned representation actually recovers.</p>
+      <h3>Pattern recognition</h3>
+      <p>Each known pattern is described by a fuzzy set. A new, unlabelled sample is assigned to the pattern it is closest to. A good measure has to separate patterns that are similar but not the same, which is exactly where several earlier measures broke down.</p>
+      <figure>
+        <img src="app-pattern.png" alt="An unknown sample B connected to three known patterns; the line to pattern P2 is shortest and highlighted, so B is assigned to P2." width="916" height="460" loading="lazy">
+        <figcaption>Pattern recognition: the unknown sample <em>B</em> is assigned to the pattern with the smallest distance.</figcaption>
+      </figure>
+
+      <h3>Medical diagnosis</h3>
+      <p>Patients and diseases are both described by their symptoms, with degrees of presence, absence and uncertainty. The distance from each patient to each disease gives a diagnosis: the disease with the smallest distance.</p>
+      <figure>
+        <img src="app-diagnosis.png" alt="A grid of four patients by five diseases shaded by distance; the closest disease for each patient is boxed." width="1011" height="515" loading="lazy">
+        <figcaption>Medical diagnosis: each patient is matched to the closest disease (boxed). Illustrative values.</figcaption>
+      </figure>
+
+      <h3>Clustering</h3>
+      <p>With a reliable divergence between every pair of objects, hierarchical clustering merges the most similar objects first. Cutting the tree at a chosen level gives the clusters.</p>
+      <figure>
+        <img src="app-clustering.png" alt="A dendrogram of twelve objects A1 to A12 cut at a dashed line into three coloured clusters." width="948" height="477" loading="lazy">
+        <figcaption>Hierarchical clustering based on pairwise divergences, cut into three clusters.</figcaption>
+      </figure>
+
+      <h3>Colour image segmentation</h3>
+      <p>Segmentation is clustering of pixels. In a colour image, some colour channels separate regions better than others. The feature-weighted c-means methods learn how much each channel should count, which makes the segmentation more robust to noise.</p>
+      <figure>
+        <img src="app-segmentation.png" alt="A noisy synthetic beach scene, its segmentation into sky, sea and sand regions, and a bar chart of learned weights for the red, green and blue channels." width="1316" height="430" loading="lazy">
+        <figcaption>Feature-weighted fuzzy c-means on a noisy synthetic image, with the learned weight for each colour channel. A small demonstration I ran for this page.</figcaption>
+      </figure>
+
+      <h3>Decision making</h3>
+      <p>In multi-attribute decision making, several alternatives are rated by experts on several criteria, often with hesitation. Each alternative is ranked by how close it is to an ideal solution and how far it is from the worst one.</p>
+      <figure>
+        <img src="app-decision.png" alt="Four alternatives plotted against two criteria, each connected to an ideal point and a worst point." width="984" height="492" loading="lazy">
+        <figcaption>Decision making: alternatives are ranked by their distances to the ideal and the worst solution.</figcaption>
+      </figure>
+
+      <h2>Conclusion</h2>
+      <p>Across these papers the lesson was the same. Before using a measure of similarity or information, it pays to ask what properties it should have and to check that it actually has them. Measures built this way gave more reliable answers in pattern recognition, diagnosis, clustering, segmentation and decision making than measures that were not. The same question carried over into my current research, where I study how much biological signal a learned representation actually recovers from noisy single-cell data.</p>
 
       <h2>Papers</h2>
       <ol class="refs">
