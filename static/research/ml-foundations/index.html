@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mathematical Foundations of Machine Learning under Uncertainty | Sijia Zhu</title>
+  <meta name="description" content="Sijia Zhu's undergraduate research on distance and divergence measures for fuzzy sets and on fuzzy clustering.">
+  <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/research/ml-foundations/">
+  <script>try{if(localStorage.getItem('sz-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+  <style>
+    :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #a9b6c4; --accent: #7ad8c7; --line: #26394b; }
+    :root[data-theme=light] { color-scheme: light; --paper: #f7f9fb; --ink: #142030; --muted: #4a5a6b; --accent: #0d8574; --line: #d6dfe7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.75; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    header, main, footer { width: min(720px, calc(100% - 40px)); margin-inline: auto; }
+    header { display: flex; justify-content: space-between; align-items: baseline; padding-block: 28px; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; }
+    header .name { color: var(--ink); font-weight: 600; text-decoration: none; }
+    header nav a { margin-left: 18px; }
+    main { padding-block: 36px 56px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4.5vw, 38px); line-height: 1.2; font-weight: normal; }
+    .byline { margin: 0 0 36px; color: var(--muted); font-size: 16px; }
+    h2 { margin: 44px 0 10px; font-size: 22px; font-weight: normal; }
+    p { margin: 0 0 16px; }
+    figure { margin: 28px 0 32px; }
+    figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 2px; }
+    figcaption { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    .refs { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+    footer { padding-block: 20px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    @media (max-width: 540px) { body { font-size: 17px; } main { padding-top: 20px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="name" href="../../">Sijia Zhu</a>
+    <nav aria-label="Site navigation"><a href="../../research/">Research</a><a href="../../publications/">Publications</a></nav>
+  </header>
+  <main>
+    <article>
+      <h1>Mathematical Foundations of Machine Learning under Uncertainty</h1>
+      <p class="byline">Undergraduate research, 2023&ndash;2025.</p>
+
+      <p>Many learning problems have to work with information that is vague or only partly known: a patient's symptoms only partly match a disease, or a pixel sits between two regions of an image. Fuzzy sets and their extensions describe each element by how strongly it belongs, does not belong, or is undecided. During my undergraduate studies I worked on the basic tools needed to learn from this kind of data: ways to measure how different two uncertain objects are, and clustering methods built on top of those measures.</p>
+
+      <figure>
+        <img src="overview.png" alt="Three panels: points inside a triangle whose corners are membership, neutrality and non-membership; paired bar charts of two fuzzy sets A and B labelled with a distance d(A,B) and divergence D alpha; and a scatter plot of three soft clusters with their centres." width="1650" height="585">
+        <figcaption>Uncertain information is described by degrees of membership, neutrality and non-membership (left). Distance and divergence measures compare two such sets (middle), and these comparisons drive clustering and decision making (right).</figcaption>
+      </figure>
+
+      <h2>Distance and divergence measures</h2>
+      <p>Picture fuzzy sets, Fermatean fuzzy sets and their complex-valued versions each describe uncertainty in a slightly different way, and the usual distances do not always behave sensibly on them. I proposed new distance measures and &alpha;-divergence measures for these settings, checked that they satisfy the properties a distance or divergence should have, and compared them with existing measures on examples where the older ones give counter-intuitive answers. One of these papers gives a single parametric divergence operator that covers several earlier measures as special cases.</p>
+
+      <h2>Clustering</h2>
+      <p>The same question, how far apart two objects are, sits at the centre of clustering. I worked on c-means type algorithms that learn a weight for each feature automatically, so that uninformative features count less, and applied them to colour image segmentation.</p>
+
+      <h2>Applications</h2>
+      <p>I tested these methods on pattern recognition, medical diagnosis, multi-criteria decision making and image segmentation problems.</p>
+
+      <h2>Looking back</h2>
+      <p>This work taught me to think carefully about what a measure of similarity or information should satisfy before using it. That question carried over into my current research, where I study how much biological signal a learned representation actually recovers.</p>
+
+      <h2>Papers</h2>
+      <ol class="refs">
+        <li>Z. Liu, S. Zhu, et al. <a href="https://doi.org/10.1016/j.ins.2024.121310">New distance measures of complex Fermatean fuzzy sets with applications in decision making and clustering problems</a>. <em>Information Sciences</em>, 2025.</li>
+        <li>S. Zhu, Z. Liu, S. Letchmunan, H. Qiu. <a href="https://doi.org/10.1016/j.engappai.2025.110768">Auto feature weighted c-means type clustering methods for color image segmentation</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2025.</li>
+        <li>S. Zhu, Z. Liu, et al. <a href="https://doi.org/10.1007/s12190-024-02293-z">Novel distance measures on complex picture fuzzy environment: applications in pattern recognition, medical diagnosis and clustering</a>. <em>Journal of Applied Mathematics and Computing</em>, 2025.</li>
+        <li>Z. Liu, S. Zhu, et al. <a href="https://doi.org/10.32604/cmes.2025.072352">A unified parametric divergence operator for Fermatean fuzzy environment and its application in machine learning and intelligent decision-making</a>. <em>Computer Modeling in Engineering &amp; Sciences</em>, 2025.</li>
+        <li>S. Zhu, Z. Liu, et al. <a href="https://doi.org/10.1016/j.engappai.2024.109041">Novel &alpha;-divergence measures on picture fuzzy sets and interval-valued picture fuzzy sets</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2024.</li>
+      </ol>
+    </article>
+  </main>
+  <footer><a href="../../research/">&larr; Back to Research</a></footer>
+</body>
+</html>
