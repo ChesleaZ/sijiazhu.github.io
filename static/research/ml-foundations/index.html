@@ -74,8 +74,8 @@
         </table>
       </div>
       <figure>
-        <img src="overview.png" alt="Three panels: points inside a triangle whose corners are membership, neutrality and non-membership; paired bar charts of two fuzzy sets A and B labelled with a distance d(A,B) and divergence D alpha; and a scatter plot of three soft clusters with their centres." width="1650" height="585">
-        <figcaption>The common thread. Uncertain information (left) is compared with distance and divergence measures (middle), and these comparisons drive clustering and decisions (right).</figcaption>
+        <img src="overview.png" alt="Three panels: points inside a triangle with corners mu, eta and nu; paired bars of two fuzzy sets A and B being compared by a distance d(A,B); and three soft clusters with their centres." width="2201" height="742">
+        <figcaption>The common thread. Each element of uncertain data has degrees of membership (&mu;), neutrality (&eta;) and non-membership (&nu;) (left). A distance or divergence compares two such sets (middle), and these comparisons drive clustering and decisions (right).</figcaption>
       </figure>
 
       <h2>Applications</h2>
@@ -85,23 +85,23 @@
       <p class="uses">Papers [1], [2], [4]</p>
       <p>Each known pattern is a fuzzy set, and a new sample is assigned to the closest pattern. The hard cases are patterns that are similar but not identical, which is exactly where earlier measures could not separate them.</p>
       <figure class="narrow">
-        <img src="app-pattern.png" alt="An unknown sample B connected to three known patterns; the line to pattern P2 is shortest and highlighted, so B is assigned to P2." width="916" height="460" loading="lazy">
-        <figcaption>The unknown sample <em>B</em> is assigned to the pattern with the smallest distance.</figcaption>
+        <img src="app-pattern.png" alt="An unknown sample B connected to three known patterns; the line to pattern P2 is shortest and highlighted, so B is assigned to P2." width="1222" height="614" loading="lazy">
+        <figcaption>An unknown sample <em>B</em> is assigned to the pattern with the smallest distance, here <em>P</em><sub>2</sub>.</figcaption>
       </figure>
 
       <h3>Medical diagnosis</h3>
       <p class="uses">Paper [2]</p>
       <p>Patients and diseases are both described by symptoms, each with degrees of presence, absence and uncertainty. The diagnosis for a patient is the disease at the smallest distance.</p>
       <figure class="narrow">
-        <img src="app-diagnosis.png" alt="A grid of four patients by five diseases shaded by distance; the closest disease for each patient is boxed." width="1011" height="515" loading="lazy">
-        <figcaption>Each patient is matched to the closest disease (boxed). Illustrative values.</figcaption>
+        <img src="app-diagnosis.png" alt="A grid of four patients by five diseases shaded by distance; the closest disease for each patient is boxed." width="1349" height="687" loading="lazy">
+        <figcaption>Darker cells mean a smaller distance between patient and disease. The boxed cell in each row is the diagnosis. Illustrative values.</figcaption>
       </figure>
 
       <h3>Clustering</h3>
       <p class="uses">Papers [1], [2], [3], [4]</p>
       <p>Given a reliable divergence between every pair of objects, hierarchical clustering merges the most similar objects first, and cutting the tree gives the clusters.</p>
       <figure class="narrow">
-        <img src="app-clustering.png" alt="A dendrogram of twelve objects A1 to A12 cut at a dashed line into three coloured clusters." width="948" height="477" loading="lazy">
+        <img src="app-clustering.png" alt="A dendrogram of twelve objects A1 to A12 cut at a dashed line into three coloured clusters." width="1264" height="636" loading="lazy">
         <figcaption>Hierarchical clustering on pairwise divergences, cut into three clusters.</figcaption>
       </figure>
 
@@ -109,16 +109,16 @@
       <p class="uses">Paper [5]</p>
       <p>Segmentation is clustering of pixels, and some colour channels separate regions better than others. Learning a weight for each channel lets the algorithm rely on the informative ones, which makes it more robust to noise.</p>
       <figure>
-        <img src="app-segmentation.png" alt="A noisy synthetic beach scene, its segmentation into sky, sea and sand regions, and a bar chart of learned weights for the red, green and blue channels." width="1316" height="430" loading="lazy">
-        <figcaption>Feature-weighted fuzzy c-means on a noisy synthetic image, with the learned weight for each colour channel. A small demonstration I ran for this page.</figcaption>
+        <img src="app-segmentation.png" alt="A noisy synthetic beach scene, its segmentation into sky, sea and sand regions, and a bar chart of learned weights for the red, green and blue channels." width="1755" height="574" loading="lazy">
+        <figcaption>Feature-weighted fuzzy c-means on a noisy synthetic image, with the learned weight for each colour channel.</figcaption>
       </figure>
 
       <h3>Decision making</h3>
       <p class="uses">Papers [1], [3], [4]</p>
       <p>When experts rate several alternatives on several criteria, often with hesitation, each alternative can be ranked by how close it is to an ideal solution and how far from the worst one.</p>
       <figure class="narrow">
-        <img src="app-decision.png" alt="Four alternatives plotted against two criteria, each connected to an ideal point and a worst point." width="984" height="492" loading="lazy">
-        <figcaption>Alternatives ranked by their distances to the ideal and to the worst solution.</figcaption>
+        <img src="app-decision.png" alt="Four alternatives plotted against two criteria, each connected to an ideal point and a worst point." width="1264" height="656" loading="lazy">
+        <figcaption>Alternatives <em>a</em><sub>1</sub>&ndash;<em>a</em><sub>4</sub> are ranked by how close they are to the ideal solution and how far from the worst one.</figcaption>
       </figure>
 
       <h2>Conclusion</h2>
