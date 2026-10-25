@@ -107,10 +107,10 @@
 
       <h3>Colour image segmentation</h3>
       <p class="uses">Paper [5]</p>
-      <p>Segmentation is clustering of pixels, and some colour channels separate regions better than others. Learning a weight for each channel lets the algorithm rely on the informative ones, which makes it more robust to noise.</p>
+      <p>Segmentation is clustering of pixels. Real images are noisy and their regions are not cleanly separated, and some colour features separate regions better than others. Learning a weight for each feature lets the algorithm rely on the informative ones, which makes it more robust to noise.</p>
       <figure>
-        <img src="app-segmentation.png" alt="A noisy synthetic beach scene, its segmentation into sky, sea and sand regions, and a bar chart of learned weights for the red, green and blue channels." width="1755" height="574" loading="lazy">
-        <figcaption>Feature-weighted fuzzy c-means on a noisy synthetic image, with the learned weight for each colour channel.</figcaption>
+        <img src="app-segmentation.png?v=2" alt="Left: a noisy microscope image of colon tissue with brown-stained glands and blue nuclei. Right: its fuzzy c-means segmentation into strongly stained, weakly stained, nuclei and background regions." width="1828" height="829" loading="lazy">
+        <figcaption>Fuzzy c-means on a noisy immunohistochemistry image of colon tissue (scikit-image sample data), separating stained glands, nuclei and background. My methods build on this kind of clustering by also learning a weight for each feature.</figcaption>
       </figure>
 
       <h3>Decision making</h3>
