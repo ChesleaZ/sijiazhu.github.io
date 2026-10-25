@@ -25,9 +25,16 @@
     figure { margin: 28px 0 32px; }
     figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 2px; }
     figcaption { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
-    h3 { margin: 32px 0 8px; font-size: 19px; font-weight: normal; font-style: italic; }
-    article > ol:not(.refs) { padding-left: 22px; }
-    article > ol:not(.refs) li { margin-bottom: 10px; }
+    .lead { font-size: 19px; }
+    h3 { margin: 36px 0 6px; font-size: 19px; font-weight: normal; }
+    .uses { margin: 0 0 10px; color: var(--muted); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 13px; letter-spacing: .02em; }
+    figure.narrow { max-width: 600px; margin-inline: auto; }
+    .table-wrap { margin: 24px 0 28px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; line-height: 1.5; }
+    th, td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-weight: 500; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+    td:first-child { color: var(--muted); white-space: nowrap; }
+    .refs li { margin-bottom: 6px; }
     .refs { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
     footer { padding-block: 20px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
     @media (max-width: 540px) { body { font-size: 17px; } main { padding-top: 20px; } }
@@ -40,75 +47,91 @@
   <main>
     <article>
       <h1>Mathematical Foundations of Machine Learning under Uncertainty</h1>
-      <p class="byline">Undergraduate research, 2023&ndash;2025.</p>
+      <p class="byline">Undergraduate research, 2023&ndash;2025. Five papers.</p>
+
+      <p class="lead">Learning from vague or incomplete information starts with one question: how different are two uncertain objects? During my undergraduate studies I built new ways to answer it for several modern models of uncertainty, proved that they behave as a distance or divergence should, and used them for recognition, diagnosis, clustering, image segmentation and decision making.</p>
 
       <h2>Motivation</h2>
-      <p>Much of the data a learning system sees is not clean or certain. A patient's symptoms only partly match a disease, an expert can be unsure between two ratings, and a pixel can lie on the border between two regions of an image. Fuzzy sets describe this kind of information by giving each element a degree of membership. Newer extensions go further. Picture fuzzy sets add a degree of neutrality, Fermatean fuzzy sets allow a wider range of membership and non-membership values, and complex-valued versions add a second, periodic component.</p>
-      <p>Almost every method that works with such data, whether for classification, clustering or decision making, depends on one basic question: how different are two uncertain objects? When I started this work, many of these newer set types had no good answer. Some had no distance measure at all. The measures that did exist sometimes gave counter-intuitive results, for example calling two clearly different sets identical, or did not satisfy the basic properties a distance should have.</p>
+      <p>Real data is rarely clean. A patient's symptoms only partly match a disease, an expert hesitates between two ratings, and a pixel sits on the border between two regions. Fuzzy sets handle this by giving each element a degree of membership. Later models add more detail. Intuitionistic fuzzy sets add a degree of non-membership. Picture fuzzy sets add neutrality. Pythagorean and Fermatean fuzzy sets relax the constraint on membership and non-membership, so they can describe evaluations that the earlier models cannot (figure below). Complex-valued versions add a second, periodic component.</p>
+      <figure class="narrow">
+        <img src="motivation.png" alt="Unit square of membership against non-membership with three nested regions: below the line mu plus nu equals one for intuitionistic fuzzy sets, below the quarter circle for Pythagorean, and below the curve mu cubed plus nu cubed equals one for Fermatean. The point (0.8, 0.7) lies only in the Fermatean region." width="952" height="599">
+        <figcaption>Each model allows a larger range of membership and non-membership values. The pair (0.8, 0.7) cannot be expressed by the first two models but can by a Fermatean fuzzy set.</figcaption>
+      </figure>
+      <p>Every richer model needs its own way to compare objects, and that is where the gap was. Some of these models had no distance measure at all. Others had measures that gave counter-intuitive answers, for example treating two clearly different sets as equally close, or that did not satisfy the basic properties of a distance. Any classifier, clustering method or decision rule built on such a measure inherits the problem.</p>
 
-      <h2>What I contributed</h2>
+      <h2>Contributions</h2>
+      <p>Across five papers I proposed new distance and divergence measures, proved their properties, and compared them with existing measures on the cases where the older ones fail.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Paper</th><th>Setting</th><th>What I proposed</th></tr></thead>
+          <tbody>
+            <tr><td>[1] 2024</td><td>Picture and interval-valued picture fuzzy sets</td><td>&alpha;-divergence measures; non-negativity, non-degeneracy and symmetry, with links to known divergences</td></tr>
+            <tr><td>[2] 2025</td><td>Complex picture fuzzy sets</td><td>Hellinger-based distance measures; boundedness, symmetry and the triangle inequality</td></tr>
+            <tr><td>[3] 2025</td><td>Complex Fermatean fuzzy sets</td><td>New distance measures</td></tr>
+            <tr><td>[4] 2025</td><td>Fermatean fuzzy sets</td><td>One parametric divergence operator that contains the Jensen&ndash;Shannon divergence, the Hellinger distance and the &chi;&sup2;-divergence as special cases</td></tr>
+            <tr><td>[5] 2025</td><td>Colour images</td><td>c-means clustering that learns a weight for each feature automatically</td></tr>
+          </tbody>
+        </table>
+      </div>
       <figure>
         <img src="overview.png" alt="Three panels: points inside a triangle whose corners are membership, neutrality and non-membership; paired bar charts of two fuzzy sets A and B labelled with a distance d(A,B) and divergence D alpha; and a scatter plot of three soft clusters with their centres." width="1650" height="585">
         <figcaption>The common thread. Uncertain information (left) is compared with distance and divergence measures (middle), and these comparisons drive clustering and decisions (right).</figcaption>
       </figure>
-      <p>My work built these measures and then put them to use.</p>
-      <ol>
-        <li><strong>Distances for complex picture fuzzy sets.</strong> Building on the Hellinger distance, I proposed a family of distance measures for complex picture fuzzy sets and proved that they are bounded, non-degenerate and symmetric, and that they satisfy the triangle inequality.</li>
-        <li><strong>&alpha;-divergences for picture and interval-valued picture fuzzy sets.</strong> I proposed &alpha;-divergence measures for both settings, proved their basic properties and showed how several special cases relate to known divergences.</li>
-        <li><strong>A unified divergence operator for Fermatean fuzzy sets.</strong> This is one parametric operator that models membership, non-membership and hesitation together. The Jensen&ndash;Shannon divergence, the Hellinger distance and the &chi;&sup2;-divergence all appear as special cases.</li>
-        <li><strong>Distances for complex Fermatean fuzzy sets.</strong> I proposed new distance measures for this setting.</li>
-        <li><strong>Feature-weighted clustering.</strong> These are c-means type algorithms that learn a weight for each feature automatically, so that less informative features count less.</li>
-      </ol>
-      <p>In each paper I compared the new measures with existing ones on numerical examples, focusing on the cases where older measures fail to tell objects apart.</p>
 
       <h2>Applications</h2>
-      <p>A measure is only useful if it leads to better decisions, so I tested each one on concrete tasks. The figures below illustrate how each task uses a distance or divergence. They are schematic sketches, not results copied from the papers.</p>
+      <p>A measure is only useful if it leads to better decisions, so each one was tested on concrete tasks. The sketches below show how each task uses a distance or divergence. They illustrate the idea and are not result figures from the papers.</p>
 
       <h3>Pattern recognition</h3>
-      <p>Each known pattern is described by a fuzzy set. A new, unlabelled sample is assigned to the pattern it is closest to. A good measure has to separate patterns that are similar but not the same, which is exactly where several earlier measures broke down.</p>
-      <figure>
+      <p class="uses">Papers [1], [2], [4]</p>
+      <p>Each known pattern is a fuzzy set, and a new sample is assigned to the closest pattern. The hard cases are patterns that are similar but not identical, which is exactly where earlier measures could not separate them.</p>
+      <figure class="narrow">
         <img src="app-pattern.png" alt="An unknown sample B connected to three known patterns; the line to pattern P2 is shortest and highlighted, so B is assigned to P2." width="916" height="460" loading="lazy">
-        <figcaption>Pattern recognition: the unknown sample <em>B</em> is assigned to the pattern with the smallest distance.</figcaption>
+        <figcaption>The unknown sample <em>B</em> is assigned to the pattern with the smallest distance.</figcaption>
       </figure>
 
       <h3>Medical diagnosis</h3>
-      <p>Patients and diseases are both described by their symptoms, with degrees of presence, absence and uncertainty. The distance from each patient to each disease gives a diagnosis: the disease with the smallest distance.</p>
-      <figure>
+      <p class="uses">Paper [2]</p>
+      <p>Patients and diseases are both described by symptoms, each with degrees of presence, absence and uncertainty. The diagnosis for a patient is the disease at the smallest distance.</p>
+      <figure class="narrow">
         <img src="app-diagnosis.png" alt="A grid of four patients by five diseases shaded by distance; the closest disease for each patient is boxed." width="1011" height="515" loading="lazy">
-        <figcaption>Medical diagnosis: each patient is matched to the closest disease (boxed). Illustrative values.</figcaption>
+        <figcaption>Each patient is matched to the closest disease (boxed). Illustrative values.</figcaption>
       </figure>
 
       <h3>Clustering</h3>
-      <p>With a reliable divergence between every pair of objects, hierarchical clustering merges the most similar objects first. Cutting the tree at a chosen level gives the clusters.</p>
-      <figure>
+      <p class="uses">Papers [1], [2], [3], [4]</p>
+      <p>Given a reliable divergence between every pair of objects, hierarchical clustering merges the most similar objects first, and cutting the tree gives the clusters.</p>
+      <figure class="narrow">
         <img src="app-clustering.png" alt="A dendrogram of twelve objects A1 to A12 cut at a dashed line into three coloured clusters." width="948" height="477" loading="lazy">
-        <figcaption>Hierarchical clustering based on pairwise divergences, cut into three clusters.</figcaption>
+        <figcaption>Hierarchical clustering on pairwise divergences, cut into three clusters.</figcaption>
       </figure>
 
       <h3>Colour image segmentation</h3>
-      <p>Segmentation is clustering of pixels. In a colour image, some colour channels separate regions better than others. The feature-weighted c-means methods learn how much each channel should count, which makes the segmentation more robust to noise.</p>
+      <p class="uses">Paper [5]</p>
+      <p>Segmentation is clustering of pixels, and some colour channels separate regions better than others. Learning a weight for each channel lets the algorithm rely on the informative ones, which makes it more robust to noise.</p>
       <figure>
         <img src="app-segmentation.png" alt="A noisy synthetic beach scene, its segmentation into sky, sea and sand regions, and a bar chart of learned weights for the red, green and blue channels." width="1316" height="430" loading="lazy">
         <figcaption>Feature-weighted fuzzy c-means on a noisy synthetic image, with the learned weight for each colour channel. A small demonstration I ran for this page.</figcaption>
       </figure>
 
       <h3>Decision making</h3>
-      <p>In multi-attribute decision making, several alternatives are rated by experts on several criteria, often with hesitation. Each alternative is ranked by how close it is to an ideal solution and how far it is from the worst one.</p>
-      <figure>
+      <p class="uses">Papers [1], [3], [4]</p>
+      <p>When experts rate several alternatives on several criteria, often with hesitation, each alternative can be ranked by how close it is to an ideal solution and how far from the worst one.</p>
+      <figure class="narrow">
         <img src="app-decision.png" alt="Four alternatives plotted against two criteria, each connected to an ideal point and a worst point." width="984" height="492" loading="lazy">
-        <figcaption>Decision making: alternatives are ranked by their distances to the ideal and the worst solution.</figcaption>
+        <figcaption>Alternatives ranked by their distances to the ideal and to the worst solution.</figcaption>
       </figure>
 
       <h2>Conclusion</h2>
-      <p>Across these papers the lesson was the same. Before using a measure of similarity or information, it pays to ask what properties it should have and to check that it actually has them. Measures built this way gave more reliable answers in pattern recognition, diagnosis, clustering, segmentation and decision making than measures that were not. The same question carried over into my current research, where I study how much biological signal a learned representation actually recovers from noisy single-cell data.</p>
+      <p>The lesson that runs through these papers is simple. Before using a measure of similarity or information, decide what properties it must have and prove that it has them. Measures built this way gave consistent answers in all five kinds of tasks, including the cases where older measures did not.</p>
+      <p>The same question shapes my current research. In single-cell representation learning I ask how much biological signal a learned representation actually recovers, which again comes down to choosing and justifying the right measure of information.</p>
 
       <h2>Papers</h2>
       <ol class="refs">
-        <li>Z. Liu, S. Zhu, et al. <a href="https://doi.org/10.1016/j.ins.2024.121310">New distance measures of complex Fermatean fuzzy sets with applications in decision making and clustering problems</a>. <em>Information Sciences</em>, 2025.</li>
-        <li>S. Zhu, Z. Liu, S. Letchmunan, H. Qiu. <a href="https://doi.org/10.1016/j.engappai.2025.110768">Auto feature weighted c-means type clustering methods for color image segmentation</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2025.</li>
-        <li>S. Zhu, Z. Liu, et al. <a href="https://doi.org/10.1007/s12190-024-02293-z">Novel distance measures on complex picture fuzzy environment: applications in pattern recognition, medical diagnosis and clustering</a>. <em>Journal of Applied Mathematics and Computing</em>, 2025.</li>
-        <li>Z. Liu, S. Zhu, et al. <a href="https://doi.org/10.32604/cmes.2025.072352">A unified parametric divergence operator for Fermatean fuzzy environment and its application in machine learning and intelligent decision-making</a>. <em>Computer Modeling in Engineering &amp; Sciences</em>, 2025.</li>
-        <li>S. Zhu, Z. Liu, et al. <a href="https://doi.org/10.1016/j.engappai.2024.109041">Novel &alpha;-divergence measures on picture fuzzy sets and interval-valued picture fuzzy sets</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2024.</li>
+        <li><strong>S. Zhu</strong>, Z. Liu, G. Ulutagay, M. Deveci, D. Pamucar. <a href="https://doi.org/10.1016/j.engappai.2024.109041">Novel &alpha;-divergence measures on picture fuzzy sets and interval-valued picture fuzzy sets</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2024.</li>
+        <li><strong>S. Zhu</strong>, Z. Liu, S. Letchmunan, G. Ulutagay, K. Ullah. <a href="https://doi.org/10.1007/s12190-024-02293-z">Novel distance measures on complex picture fuzzy environment: applications in pattern recognition, medical diagnosis and clustering</a>. <em>Journal of Applied Mathematics and Computing</em>, 2025.</li>
+        <li>Z. Liu, <strong>S. Zhu</strong>, T. Senapati, M. Deveci, D. Pamucar, R. R. Yager. <a href="https://doi.org/10.1016/j.ins.2024.121310">New distance measures of complex Fermatean fuzzy sets with applications in decision making and clustering problems</a>. <em>Information Sciences</em>, 2025.</li>
+        <li>Z. Liu, <strong>S. Zhu</strong>, et al. <a href="https://doi.org/10.32604/cmes.2025.072352">A unified parametric divergence operator for Fermatean fuzzy environment and its application in machine learning and intelligent decision-making</a>. <em>Computer Modeling in Engineering &amp; Sciences</em>, 2025.</li>
+        <li><strong>S. Zhu</strong>, Z. Liu, S. Letchmunan, H. Qiu. <a href="https://doi.org/10.1016/j.engappai.2025.110768">Auto feature weighted c-means type clustering methods for color image segmentation</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2025.</li>
       </ol>
     </article>
   </main>
