@@ -53,8 +53,8 @@
 
       <h2>Motivation</h2>
       <p>Real data is rarely clean. A patient's symptoms only partly match a disease, an expert hesitates between two ratings, and a pixel sits on the border between two regions. Fuzzy sets handle this by giving each element a degree of membership. Later models add more detail. Intuitionistic fuzzy sets add a degree of non-membership. Picture fuzzy sets add neutrality. Pythagorean and Fermatean fuzzy sets relax the constraint on membership and non-membership, so they can describe evaluations that the earlier models cannot (figure below). Complex-valued versions add a second, periodic component.</p>
-      <figure class="narrow">
-        <img src="motivation.png" alt="Unit square of membership against non-membership with three nested regions: below the line mu plus nu equals one for intuitionistic fuzzy sets, below the quarter circle for Pythagorean, and below the curve mu cubed plus nu cubed equals one for Fermatean. The point (0.8, 0.7) lies only in the Fermatean region." width="952" height="599">
+      <figure>
+        <img src="motivation.png?v=3" alt="Unit square of membership against non-membership with three nested regions: below the line mu plus nu equals one for intuitionistic fuzzy sets, below the quarter circle for Pythagorean, and below the curve mu cubed plus nu cubed equals one for Fermatean. The point (0.8, 0.7) lies only in the Fermatean region." width="1600" height="800">
         <figcaption>Each model allows a larger range of membership and non-membership values. The pair (0.8, 0.7) cannot be expressed by the first two models but can by a Fermatean fuzzy set.</figcaption>
       </figure>
       <p>Every richer model needs its own way to compare objects, and that is where the gap was. Some of these models had no distance measure at all. Others had measures that gave counter-intuitive answers, for example treating two clearly different sets as equally close, or that did not satisfy the basic properties of a distance. Any classifier, clustering method or decision rule built on such a measure inherits the problem.</p>
@@ -84,24 +84,24 @@
       <h3>Pattern recognition</h3>
       <p class="uses">Papers [1], [2], [4]</p>
       <p>Each known pattern is a fuzzy set, and a new sample is assigned to the closest pattern. The hard cases are patterns that are similar but not identical, which is exactly where earlier measures could not separate them.</p>
-      <figure class="narrow">
-        <img src="app-pattern.png?v=2" alt="An unknown sample B connected to three known patterns; the line to pattern P2 is shortest and highlighted, so B is assigned to P2." width="880" height="680" loading="lazy">
+      <figure>
+        <img src="app-pattern.png?v=3" alt="An unknown sample B connected to three known patterns; the line to pattern P2 is shortest and highlighted, so B is assigned to P2." width="1600" height="800" loading="lazy">
         <figcaption>An unknown sample <em>B</em> is assigned to the pattern with the smallest distance, here <em>P</em><sub>2</sub>.</figcaption>
       </figure>
 
       <h3>Medical diagnosis</h3>
       <p class="uses">Paper [2]</p>
       <p>Patients and diseases are both described by symptoms, each with degrees of presence, absence and uncertainty. The diagnosis for a patient is the disease at the smallest distance.</p>
-      <figure class="narrow">
-        <img src="app-diagnosis.png" alt="A grid of four patients by five diseases shaded by distance; the closest disease for each patient is boxed." width="1349" height="687" loading="lazy">
+      <figure>
+        <img src="app-diagnosis.png?v=3" alt="A grid of four patients by five diseases shaded by distance; the closest disease for each patient is boxed." width="1600" height="800" loading="lazy">
         <figcaption>Darker cells mean a smaller distance between patient and disease. The boxed cell in each row is the diagnosis. Illustrative values.</figcaption>
       </figure>
 
       <h3>Clustering</h3>
       <p class="uses">Papers [1], [2], [3], [4]</p>
       <p>Given a reliable divergence between every pair of objects, hierarchical clustering merges the most similar objects first, and cutting the tree gives the clusters.</p>
-      <figure class="narrow">
-        <img src="app-clustering.png" alt="A dendrogram of twelve objects A1 to A12 cut at a dashed line into three coloured clusters." width="1264" height="636" loading="lazy">
+      <figure>
+        <img src="app-clustering.png?v=3" alt="A dendrogram of twelve objects A1 to A12 cut at a dashed line into three coloured clusters." width="1600" height="800" loading="lazy">
         <figcaption>Hierarchical clustering on pairwise divergences, cut into three clusters.</figcaption>
       </figure>
 
@@ -109,15 +109,15 @@
       <p class="uses">Paper [5]</p>
       <p>Segmentation is clustering of pixels. Real images are noisy and their regions are not cleanly separated, and some colour features separate regions better than others. Learning a weight for each feature lets the algorithm rely on the informative ones, which makes it more robust to noise.</p>
       <figure>
-        <img src="app-segmentation.png?v=2" alt="Left: a noisy microscope image of colon tissue with brown-stained glands and blue nuclei. Right: its fuzzy c-means segmentation into strongly stained, weakly stained, nuclei and background regions." width="1828" height="829" loading="lazy">
+        <img src="app-segmentation.png?v=3" alt="Left: a noisy microscope image of colon tissue with brown-stained glands and blue nuclei. Right: its fuzzy c-means segmentation into strongly stained, weakly stained, nuclei and background regions." width="1600" height="800" loading="lazy">
         <figcaption>Fuzzy c-means on a noisy immunohistochemistry image of colon tissue (scikit-image sample data), separating stained glands, nuclei and background. My methods build on this kind of clustering by also learning a weight for each feature.</figcaption>
       </figure>
 
       <h3>Decision making</h3>
       <p class="uses">Papers [1], [3], [4]</p>
       <p>When experts rate several alternatives on several criteria, often with hesitation, each alternative can be ranked by how close it is to an ideal solution and how far from the worst one.</p>
-      <figure class="narrow">
-        <img src="app-decision.png" alt="Four alternatives plotted against two criteria, each connected to an ideal point and a worst point." width="1264" height="656" loading="lazy">
+      <figure>
+        <img src="app-decision.png?v=3" alt="Four alternatives plotted against two criteria, each connected to an ideal point and a worst point." width="1600" height="800" loading="lazy">
         <figcaption>Alternatives <em>a</em><sub>1</sub>&ndash;<em>a</em><sub>4</sub> are ranked by how close they are to the ideal solution and how far from the worst one.</figcaption>
       </figure>
 
