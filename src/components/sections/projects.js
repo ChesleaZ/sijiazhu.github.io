@@ -97,8 +97,21 @@ const StyledProject = styled.li`
     position: relative;
     padding: 22px 26px;
     border-radius: var(--border-radius);
+    border: 1px solid transparent;
     background-color: var(--light-navy);
+    cursor: pointer;
     transition: var(--transition);
+  }
+
+  &:hover .project-inner,
+  &:focus-within .project-inner {
+    border-color: var(--green);
+    box-shadow: 0 18px 40px -26px var(--green);
+  }
+
+  &:hover .project-title a,
+  &:focus-within .project-title a {
+    color: var(--green);
   }
 
   .project-title {
@@ -110,16 +123,14 @@ const StyledProject = styled.li`
     a {
       position: static;
 
+      /* Stretch the title link over the whole card so the card is clickable. */
       &:before {
         content: '';
         display: block;
         position: absolute;
-        z-index: 0;
-        pointer-events: none;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
+        z-index: 1;
+        inset: 0;
+        border-radius: inherit;
       }
     }
   }
@@ -145,6 +156,8 @@ const StyledProject = styled.li`
   }
 
   .project-links {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     margin-right: -7px;
