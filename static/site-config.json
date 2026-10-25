@@ -225,6 +225,23 @@
         ],
         "image": "research/t2d-pathways/overview.png",
         "detailUrl": "research/t2d-pathways/"
+      },
+      {
+        "institution": "Undergraduate Research",
+        "role": "",
+        "topic": "Mathematical Foundations of Machine Learning under Uncertainty",
+        "tags": [
+          "Fuzzy set theory",
+          "Distance & divergence measures",
+          "Fuzzy clustering"
+        ],
+        "bullets": [
+          "Proposed distance and divergence measures for picture, Fermatean and complex fuzzy sets.",
+          "Developed feature-weighted c-means clustering methods for image segmentation.",
+          "Applied these methods to pattern recognition, medical diagnosis and decision making."
+        ],
+        "image": "research/ml-foundations/overview.png",
+        "detailUrl": "research/ml-foundations/"
       }
     ],
     "academicItems": [
