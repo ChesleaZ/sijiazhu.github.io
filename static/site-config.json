@@ -314,10 +314,10 @@
     "items": [
       {
         "year": 2026,
-        "title": "Random Matrix Scaling Laws in Single-Cell Representation Learning",
-        "venue": "Manuscript under review",
-        "status": "Under review",
-        "authors": "S. Zhu, J. Hu, G. Gowri, A. M. Klein, R. Ma",
+        "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
+        "venue": "Submitted to Cell",
+        "status": "Submitted",
+        "authors": "Sijia Zhu, Jingyuan Hu, Gokul Gowri, Allon M. Klein, Rong Ma",
         "keywords": [
           "Single-cell representation learning",
           "Scaling laws",
@@ -331,13 +331,27 @@
         "title": "Bayesian Hierarchical Modeling and Clustering for Malignant Cancer Diagnosis",
         "venue": "Bayesian Analysis",
         "status": "Under review",
-        "authors": "S. Zhu, J. Ma, Z. Liu",
+        "authors": "Sijia Zhu, Jonathon Ma, Zhe Liu",
         "keywords": [
           "Bayesian modeling",
           "Clustering",
           "Medical diagnosis"
         ],
         "url": "https://absj.org/index.php/absj/article/view/114",
+        "selected": true
+      },
+      {
+        "year": 2026,
+        "title": "A Sequential Multiple Assignment Randomized Trial to Identify Optimal Treatment Regimes for Metastatic Renal Cell Carcinoma",
+        "venue": "Submitted to Journal of Clinical Oncology, August 9, 2026",
+        "status": "Submitted",
+        "authors": "Pavlos Msaouel, Yanxun Xu, Peter F. Thall, Sijia Zhu, et al.",
+        "keywords": [
+          "Clinical trial design",
+          "Dynamic treatment regimes",
+          "Renal cell carcinoma"
+        ],
+        "url": "",
         "selected": true
       },
       {
@@ -523,7 +537,7 @@
   },
   "paper": {
     "eyebrow": "Research paper",
-    "title": "Random Matrix Scaling Laws in Single-Cell Representation Learning",
+    "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
     "authors": "Sijia Zhu, Jingyuan Hu, Gokul Gowri, Allon M. Klein*, and Rong Ma**",
     "status": "Submitted to Cell",
     "overviewTitle": "Research overview",
