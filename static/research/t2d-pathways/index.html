@@ -37,12 +37,12 @@
   <main>
     <article>
       <h1>Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters</h1>
-      <p class="byline">Broad Institute of MIT and Harvard, with Kenneth Westerman and Miriam Udler. Ongoing.</p>
+      <p class="byline">Broad Institute of MIT and Harvard<br>Supervisors: <a href="https://westerman-lab.github.io/">Prof. Kenneth Westerman</a> and <a href="https://www.udlerlab.org/">Prof. Miriam Udler</a></p>
 
-      <p>Genetic clustering of type 2 diabetes (T2D) groups risk variants by how they relate to metabolic traits, and the resulting cluster scores are often read as distinct disease mechanisms. In this project I ask how far those clusters can be trusted, and whether biological pathways give a more stable way to describe the same genetic signal. All analyses use data from the All of Us Research Program.</p>
+      <p>Genetic clustering of type 2 diabetes (T2D) groups risk variants by how they relate to metabolic traits, and the resulting cluster scores are often read as distinct disease mechanisms. In this project I ask how far those clusters can be trusted, and whether biological pathways give a more stable way to describe the same genetic signal.</p>
 
       <h2>Background</h2>
-      <p>The published cluster definitions (Kim et al. 2023, Smith et al. 2024, Suzuki et al. 2024) depend on the population, the traits used for clustering and the clustering method. The labels also have to be interpreted after the fact. Pathway polygenic scores take the opposite route: genes are mapped to annotated pathways ahead of time, so the features stay fixed across studies and can be compared across tissues and diseases.</p>
+      <p>The published cluster definitions (<a href="https://doi.org/10.1007/s00125-022-05848-6">Kim et al. 2023</a>, <a href="https://doi.org/10.1038/s41591-024-02865-3">Smith et al. 2024</a>, <a href="https://doi.org/10.1038/s41586-024-07019-6">Suzuki et al. 2024</a>) depend on the population, the traits used for clustering and the clustering method. The labels also have to be interpreted after the fact. Pathway polygenic scores take the opposite route: genes are mapped to annotated pathways ahead of time, so the features stay fixed across studies and can be compared across tissues and diseases.</p>
 
       <h2>Approach</h2>
       <p>I computed the published cluster scores in All of Us, and built tissue-specific Reactome pathway scores from GTEx v8 expression prediction models. I then used ridge regression to reconstruct each cluster score from the pathway scores. This gives three versions of the same genetic information (original cluster scores, pathway scores, and pathway-reconstructed cluster scores) that I compare throughout.</p>
@@ -68,13 +68,6 @@
 
       <h2>Open questions</h2>
       <p>These results are preliminary and not yet peer reviewed. Two things I would most like to understand better are how much the pathway associations depend on a few individual genes, and what the different coronary artery disease pattern reflects.</p>
-
-      <h2>References</h2>
-      <ol class="refs">
-        <li>Kim H. et al. High-throughput genetic clustering of type 2 diabetes loci reveals heterogeneous mechanistic pathways of metabolic disease. <em>Diabetologia</em>, 2023.</li>
-        <li>Smith K. et al. Multi-ancestry polygenic mechanisms of type 2 diabetes. <em>Nature Medicine</em>, 2024.</li>
-        <li>Suzuki K. et al. Genetic drivers of heterogeneity in type 2 diabetes pathophysiology. <em>Nature</em>, 2024.</li>
-      </ol>
     </article>
   </main>
   <footer><a href="../../research/">&larr; Back to Research</a></footer>
