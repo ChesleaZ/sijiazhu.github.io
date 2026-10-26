@@ -217,7 +217,7 @@ const defaults = {
         "detailUrl": "",
         "institution": "Harvard T.H. Chan School of Public Health",
         "role": "Student Researcher",
-        "topic": "Scaling Laws in Single-Cell Representation Learning",
+        "topic": "Scaling Laws of Biological Information: From Single-Cell Representations to AI Models",
         "tags": [
           "Single-cell multi-omics",
           "Random Matrix Theory",
