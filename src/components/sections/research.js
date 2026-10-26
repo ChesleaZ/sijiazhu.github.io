@@ -150,6 +150,13 @@ const StyledResearchSection = styled.section`
       height: auto;
     }
 
+    &.frameless {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background-color: transparent;
+    }
+
     @media (max-width: 760px) {
       max-width: 320px;
     }
@@ -259,6 +266,8 @@ const Research = () => {
             const imageSrc = image ? withPrefix('/' + image.replace(/^\/+/, '')) : '';
             // Projects with a detail page show only title, figure and keywords; the full write-up lives on the detail page.
             const compact = Boolean(detailHref);
+            // Images saved as *transparent.png sit directly on the card, without the white frame.
+            const frameless = /transparent\.png$/i.test(image || '');
             return (
               <li
                 className={'research-card' + (imageSrc ? ' has-image' : '') + (compact ? ' compact' : '')}
@@ -291,7 +300,7 @@ const Research = () => {
                   </ul>
                 </div>
                 {imageSrc && (
-                  <a className="research-figure" href={detailHref || imageSrc} aria-label={'Open ' + topic}>
+                  <a className={'research-figure' + (frameless ? ' frameless' : '')} href={detailHref || imageSrc} aria-label={'Open ' + topic}>
                     <img src={imageSrc} alt={'Overview figure for ' + topic} loading="lazy" />
                   </a>
                 )}
