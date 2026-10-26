@@ -333,7 +333,7 @@ const defaults = {
     "items": [
       {
         "year": 2026,
-        "title": "Random Matrix Scaling Laws in Single-Cell Representation Learning",
+        "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
         "venue": "Manuscript under review",
         "status": "Under review",
         "authors": "S. Zhu, J. Hu, G. Gowri, A. M. Klein, R. Ma",
@@ -636,7 +636,7 @@ const defaults = {
   },
   "paper": {
     "eyebrow": "Research paper",
-    "title": "Random Matrix Scaling Laws in Single-Cell Representation Learning",
+    "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
     "authors": "S. Zhu, J. Hu, G. Gowri, A. M. Klein, and R. Ma",
     "status": "Manuscript under review",
     "overviewTitle": "Research overview",
