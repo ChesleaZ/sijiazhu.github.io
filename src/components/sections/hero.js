@@ -3,7 +3,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { StaticImage } from 'gatsby-plugin-image';
 import { useSite } from '../../context/site';
 import styled from 'styled-components';
-import { navDelay, loaderDelay } from '@utils';
+import { loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
@@ -230,21 +230,13 @@ const StyledHeroPhoto = () => (
 );
 
 const Hero = () => {
-  const [isMounted, setIsMounted] = useState(false);
+  // Render the hero immediately (no delayed fade-in) so the page does not flash on load.
+  const isMounted = true;
   const [typedTopic, setTypedTopic] = useState('');
   const prefersReducedMotion = usePrefersReducedMotion();
   const { config, edit } = useSite();
   const settings = config.home;
   const editText = key => edit('home.' + key);
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    const timeout = setTimeout(() => setIsMounted(true), navDelay);
-    return () => clearTimeout(timeout);
-  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (prefersReducedMotion || !isMounted) {
