@@ -1,6 +1,6 @@
 ---
 date: '3'
-title: 'Pathway-Independent Genetic Signals in T2D Clusters'
+title: 'From Genetic Clusters to Biological Pathways in Type 2 Diabetes'
 cover: './cover.png'
 personalized: true
 tech:
