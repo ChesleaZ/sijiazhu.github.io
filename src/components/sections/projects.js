@@ -3,20 +3,46 @@ import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { useSite } from '../../context/site';
 
-// Author name to highlight in each publication's author list.
-const MY_NAME = 'S. Zhu';
+// Author names to highlight in each publication's author list.
+const MY_NAMES = /(Sijia Zhu|S\. Zhu)/;
 
 const highlightName = authors => {
-  if (!authors || !authors.includes(MY_NAME)) {
+  if (!authors || !MY_NAMES.test(authors)) {
     return authors;
   }
-  const parts = authors.split(MY_NAME);
-  return parts.map((part, i) => (
-    <React.Fragment key={i}>
-      {part}
-      {i < parts.length - 1 && <strong className="my-name">{MY_NAME}</strong>}
-    </React.Fragment>
-  ));
+  return authors.split(MY_NAMES).map((part, i) =>
+    i % 2 === 1 ? (
+      <strong className="my-name" key={i}>
+        {part}
+      </strong>
+    ) : (
+      <React.Fragment key={i}>{part}</React.Fragment>
+    ),
+  );
+};
+
+// Show the journal name in the venue line in the accent colour.
+// "Submitted to Cell" -> "Submitted to " + [Cell]; "Journal, date" -> [Journal] + ", date".
+const VENUE_PREFIX = /^(Submitted to |Under review at |Accepted at |Accepted in )/i;
+
+const formatVenue = venue => {
+  if (!venue || /^manuscript\b/i.test(venue)) {
+    return venue;
+  }
+  const prefixMatch = venue.match(VENUE_PREFIX);
+  const prefix = prefixMatch ? prefixMatch[0] : '';
+  const rest = venue.slice(prefix.length);
+  // Split off a trailing date such as ", August 9, 2026" (journal names can contain commas).
+  const dateMatch = rest.match(/^(.*?)(,\s+(?:[A-Z][a-z]+\s+\d{1,2},\s+)?\d{4}.*)$/);
+  const journal = dateMatch ? dateMatch[1] : rest;
+  const suffix = dateMatch ? dateMatch[2] : '';
+  return (
+    <>
+      {prefix}
+      <span className="venue-journal">{journal}</span>
+      {suffix}
+    </>
+  );
 };
 
 const StyledProjectsSection = styled.section`
@@ -153,6 +179,12 @@ const StyledProject = styled.li`
     font-size: 15px;
     font-style: italic;
     line-height: 1.5;
+
+    .venue-journal {
+      color: var(--green);
+      font-style: normal;
+      font-weight: 600;
+    }
   }
 
   .project-links {
@@ -223,7 +255,9 @@ const Projects = () => {
           <p className="project-authors" {...edit('publications.items.' + index + '.authors')}>
             {preview ? authors : highlightName(authors)}
           </p>
-          <p className="project-venue" {...edit('publications.items.' + index + '.venue')}>{venue}</p>
+          <p className="project-venue" {...edit('publications.items.' + index + '.venue')}>
+            {preview ? venue : formatVenue(venue)}
+          </p>
         </div>
 
         <div className="project-links">
