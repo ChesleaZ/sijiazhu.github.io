@@ -9,10 +9,14 @@ import { useSite } from '../../context/site';
 const StyledResearchSection = styled.section`
   max-width: 960px;
 
+  padding-top: 0;
+
+  /* Match the Publication page heading: centred, same size and position. */
   .section-heading {
     margin: 0 0 24px;
     color: var(--lightest-slate);
-    font-size: clamp(28px, 4vw, 38px);
+    font-size: clamp(24px, 5vw, var(--fz-heading));
+    text-align: center;
   }
 
   .experience-group:not(:last-of-type) {
