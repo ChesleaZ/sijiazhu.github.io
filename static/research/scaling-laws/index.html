@@ -40,37 +40,35 @@
       <h1>Scaling Laws in Single-Cell Representation Learning</h1>
       <p class="byline">Harvard T.H. Chan School of Public Health<br>Supervisors: <a href="https://sites.google.com/site/rongmastat/home">Prof. Rong Ma</a> and <a href="https://kleinlab.bio/">Prof. Allon Klein</a></p>
 
-      <h2>Summary</h2>
-
-      <h3>The question</h3>
-      <p>Single-cell technologies generate diverse molecular profiles across cell types, biological conditions, and perturbations, yet how much biological information is gained by collecting more data remains difficult to predict. Across diverse single-cell data representations that summarize variation among cells or genes, we observe systematic scaling of biological information recovery with cell number and molecular depth, but the rigorous theoretical foundations remain elusive.</p>
+      <h3 style="margin-top:0">The question</h3>
+      <p>Single-cell sequencing reveals cellular diversity and changes in cell state across physiological conditions, disease, and experimental perturbations. To interpret these high-dimensional, noisy measurements, we turn them into representations of relationships among cells or genes, from linear projections to single-cell foundation models. The field keeps building larger atlases and perturbation screens, expecting that more data will reveal more biology. Yet how much biological information is gained by collecting more data, and when returns begin to diminish, remains difficult to predict. Across diverse representations, we observe systematic scaling of biological information recovery with cell number and molecular depth, but the rigorous theoretical foundations remain elusive.</p>
       <figure>
         <a href="framework.png" target="_blank" rel="noopener"><img src="framework.png" alt="Framework: multimodal single-cell RNA data X(n, U, B) is mapped by linear, manifold-learning, neural-network and foundation-model methods to representations H_X; information I(H_X(U, n, B), H_Y) is measured against biological targets: ADT, ATAC, cell type and stimulation." width="2000" height="463"></a>
         <figcaption>Thirty representation methods in four families are applied to RNA data with varying molecular depth <em>U</em>, cell number <em>n</em> and batch number <em>B</em>. We measure how much information each representation carries about biological targets.</figcaption>
       </figure>
 
       <h3>A theory of single-cell scaling</h3>
-      <p>We introduce a unified framework based on Random Matrix Theory that derives a broad class of single-cell scaling laws and characterizes how factors such as signal strength, noise, molecular depth, sample size, and batch effects determine recovery thresholds and information ceilings.</p>
+      <p>Several factors act together. More cells improve estimation of shared expression patterns, while more UMIs per cell reduce molecular sampling noise. Batch structure mixes technical with biological variation, and the measurement quality required depends on the biological question. We develop a unified scaling-law framework based on random matrix theory that explains and predicts how biological information recovery scales with cell number, UMI depth, and technical batch structure. The framework characterizes recovery thresholds, scaling rates, and information ceilings, and it accounts for differences across representations and biological targets: cell populations, developmental trajectories, gene coexpression networks, and differential expression.</p>
       <figure>
         <a href="scaling.png" target="_blank" rel="noopener"><img src="scaling.png" alt="Scaling curves of information I(RNA, ADT), I(RNA, ATAC), I(RNA, Cell type) and I(RNA, Stimulation) against median RNA UMI (top row) and number of cells (bottom row) for PCA, UMAP, scVI, scGPT and Geneformer; fitted laws extrapolate toward an information ceiling." width="2000" height="717"></a>
         <figcaption>Information recovery as a function of molecular depth (top) and cell number (bottom). Points are observed values, solid lines are fitted scaling laws, dashed lines extrapolate them, and <em>I</em><sub>&infin;</sub> marks the information ceiling. Click to enlarge.</figcaption>
       </figure>
 
       <h3>Scaling in AI pretraining</h3>
-      <p>We further extend this framework to representation learning and AI pretraining, showing how training-data scale and test-data quality jointly shape information recovery, including in models that translate cellular measurements into text.</p>
+      <p>In machine learning, scaling laws that link performance to data, model size, and compute have guided model development and resource allocation. How they extend to single-cell foundation models remains open, since downstream gains can plateau after pretraining on only a fraction of the available data. We extend our framework to AI pretraining and to multimodal models that connect cellular representations with large language models. This shows how pretraining scale, model choice, and test-data quality shape biological information recovery, including in the generated text.</p>
       <figure>
         <a href="cell-to-text.png" target="_blank" rel="noopener"><img src="cell-to-text.png" alt="A: cell-to-text framework in which a single-cell foundation model pretrained on n cells feeds cell-to-text adapters and a language model. B: example answers about cell type, tissue and disease, which become correct as the number of pretraining cells grows." width="2000" height="488"></a>
         <figcaption>(A) Foundation-model representations are passed through cell-to-text adapters into a language model. (B) The same questions answered by models pretrained on more cells: answers shift from wrong (red) to correct (green).</figcaption>
       </figure>
 
       <h3>From scaling laws to experimental design</h3>
-      <p>Finally, to translate these predictions into data-collection strategies, we use scaling laws fitted to pilot data to guide experimental design, identifying cell-number and sequencing-depth combinations that meet specified information requirements or maximize information under a fixed budget. Applied to systemic lupus erythematosus data, this approach guides experimental design for recovering disease-associated signals. We further apply this design strategy to perturbation screens, guiding the collection of informative training data for virtual-cell models.</p>
+      <p>Information recovery also depends on how an experiment allocates its resources across cell number, sequencing depth, and technical batches. We extrapolate scaling laws fitted to pilot data to guide this choice. In a systemic lupus erythematosus (SLE) study, we identify the cell-number and sequencing-depth combination that minimizes cost for a specified information target. In a perturbation screen, we maximize information recovery under a fixed budget, guiding the collection of training data for virtual-cell models.</p>
       <figure>
         <a href="design.png" target="_blank" rel="noopener"><img src="design.png" alt="A: pilot-based design pipeline for SLE: select pilot donors, run pilot scRNA-seq, fit scaling laws and select a design (s*, R*), reanalyze all donors, recover biology. B: information-retention surfaces over cells per donor and reads per cell. C: feasible region with the minimum-budget design." width="1856" height="856"></a>
         <figcaption>(A) Pilot-based design for systemic lupus erythematosus. (B) Scaling laws fitted to the pilot are extrapolated over cells per donor and reads per cell. (C) The design that meets both global and local information requirements at minimum budget.</figcaption>
       </figure>
 
-      <p>Together, these results provide a quantitative basis for predicting the biological information gained from additional experimental, sequencing, and pretraining resources.</p>
+      <p>Scaling laws turn &ldquo;how much data is enough?&rdquo; into a question that can be answered before the data are collected, providing a foundation for predicting biological information gains, evaluating representation quality, and guiding resource allocation across single-cell experiments and AI modeling.</p>
 
       <h2>Paper</h2>
       <p><a href="../../papers/single-cell-scaling/">Random Matrix Scaling Laws in Single-Cell Representation Learning</a>. S. Zhu, J. Hu, G. Gowri, A. M. Klein, R. Ma. Manuscript under review.</p>
