@@ -212,7 +212,7 @@
       {
         "institution": "Broad Institute of MIT and Harvard",
         "role": "Research Assistant",
-        "topic": "Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters",
+        "topic": "From Genetic Clusters to Biological Pathways in Type 2 Diabetes",
         "tags": [
           "Type 2 diabetes",
           "Polygenic scores",
@@ -223,7 +223,7 @@
           "Constructing individual-level cluster-specific scores from variant-level disease clusters and comparing them with pathway-based pPGS derived from Reactome and KEGG.",
           "Studying whether residual cluster signals can reveal novel or cross-pathway disease mechanisms."
         ],
-        "image": "research/t2d-pathways/overview.png",
+        "image": "research/t2d-pathways/card-transparent.png",
         "detailUrl": "research/t2d-pathways/"
       },
       {
