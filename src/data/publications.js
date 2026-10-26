@@ -1,7 +1,7 @@
 const publications = [
   {
     year: 2026,
-    title: 'Random Matrix Scaling Laws in Single-Cell Representation Learning',
+    title: 'Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal',
     venue: 'Manuscript under review',
     status: 'Under review',
     authors: 'S. Zhu, J. Hu, G. Gowri, A. M. Klein, R. Ma',
