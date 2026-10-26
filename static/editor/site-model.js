@@ -200,7 +200,7 @@ const defaults = {
         "detailUrl": "",
         "institution": "Massachusetts General Hospital",
         "role": "Student Researcher",
-        "topic": "Pathway-Independent Genetic Signals in Type 2 Diabetes Clusters",
+        "topic": "From Genetic Clusters to Biological Pathways in Type 2 Diabetes",
         "tags": [
           "Type 2 diabetes",
           "Polygenic scores",
