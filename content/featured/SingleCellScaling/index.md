@@ -1,6 +1,6 @@
 ---
 date: '1'
-title: 'Scaling Laws in Single-Cell Representation Learning'
+title: 'Scaling Laws of Biological Information: From Single-Cell Representations to AI Models'
 cover: './cover.png'
 personalized: true
 tech:
