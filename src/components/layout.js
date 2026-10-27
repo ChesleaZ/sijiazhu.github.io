@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ScienceBackdrop from './science-backdrop';
 import styled, { ThemeProvider } from 'styled-components';
-import { Head, Nav, Social, Email, Footer } from '@components';
+import { Head, Nav, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
 import { SiteProvider, pageForPath } from '../context/site';
 
@@ -100,7 +100,6 @@ const Layout = ({ children, location }) => {
           <StyledContent className={'page-' + page + (intro ? ' intro' : '')}>
             <ScienceBackdrop page={pageForPath(location.pathname)} />
             <Nav isHome={false} />
-            <Social isHome={false} />
             <Email isHome={false} />
 
             <div id="content">
