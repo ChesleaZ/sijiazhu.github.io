@@ -45,6 +45,15 @@ const formatVenue = venue => {
   );
 };
 
+// Degree stage shown next to each publication year.
+const degreeForYear = year => {
+  const value = Number(year);
+  if (!value) {
+    return '';
+  }
+  return value >= 2026 ? 'Master' : 'Undergraduate';
+};
+
 const StyledProjectsSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -86,6 +95,13 @@ const StyledProjectsSection = styled.section`
       height: 1px;
       background-color: var(--lightest-navy);
     }
+  }
+
+  .publication-year-label {
+    margin-left: -6px;
+    color: var(--slate);
+    font-size: 18px;
+    font-weight: 400;
   }
 
   .publication-list {
@@ -278,7 +294,12 @@ const Projects = () => {
       <div className="publication-years">
         {yearGroups.map(group => (
           <section className="publication-year-group" key={group.year}>
-            <h3 className="publication-year-heading">{group.year}</h3>
+            <h3 className="publication-year-heading">
+              {group.year}
+              {degreeForYear(group.year) && (
+                <span className="publication-year-label">({degreeForYear(group.year)})</span>
+              )}
+            </h3>
             <ul className="publication-list">
               {group.items.map(publication => (
                 <StyledProject key={publication.index}>{projectInner(publication)}</StyledProject>

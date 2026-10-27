@@ -24,9 +24,12 @@ const StyledHeroSection = styled.section`
     padding-top: calc(var(--nav-height) + 18px);
   }
 
+  /* Keep the text and photo together near the centre of wide screens. */
   @media (min-width: 1100px) {
-    grid-template-columns: minmax(0, 700px) minmax(240px, var(--hero-photo-width, 340px));
-    gap: clamp(40px, 5vw, 72px);
+    width: min(1000px, 100%);
+    margin-inline: auto;
+    grid-template-columns: minmax(0, 560px) minmax(240px, var(--hero-photo-width, 340px));
+    gap: clamp(48px, 6vw, 96px);
     padding: calc(var(--nav-height) + 24px) 0 80px;
   }
 
@@ -40,9 +43,9 @@ const StyledHeroSection = styled.section`
     min-width: 0;
 
     @media (min-width: 1100px) {
-      justify-self: end;
+      justify-self: start;
       width: 100%;
-      max-width: 700px;
+      max-width: 560px;
     }
   }
 
@@ -81,7 +84,7 @@ const StyledHeroSection = styled.section`
 
   @media (min-width: 1100px) {
     &.photo-left {
-      grid-template-columns: minmax(240px, var(--hero-photo-width, 340px)) minmax(0, 700px);
+      grid-template-columns: minmax(240px, var(--hero-photo-width, 340px)) minmax(0, 560px);
     }
     &.photo-left .hero-photo-slot { order: -1; }
   }
