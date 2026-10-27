@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scaling Laws of Biological Information: From Single-Cell Representations to AI Models | Sijia Zhu</title>
+  <meta name="description" content="Sijia Zhu's project on how data scale and quality shape what single-cell foundation models learn.">
+  <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/research/scaling-laws/">
+  <script>try{if(localStorage.getItem('sz-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+  <style>
+    :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #a9b6c4; --accent: #7ad8c7; --line: #26394b; }
+    :root[data-theme=light] { color-scheme: light; --paper: #f7f9fb; --ink: #142030; --muted: #4a5a6b; --accent: #0d8574; --line: #d6dfe7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.75; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    header, main, footer { width: min(720px, calc(100% - 40px)); margin-inline: auto; }
+    header { display: flex; justify-content: space-between; align-items: baseline; padding-block: 28px; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; }
+    header .back { color: var(--accent); text-decoration: none; }
+    header .back:hover, header .back:focus-visible { text-decoration: underline; }
+    main { padding-block: 36px 56px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4.5vw, 38px); line-height: 1.2; font-weight: normal; }
+    .byline { margin: 0 0 36px; color: var(--muted); font-size: 16px; }
+    h3 { margin: 36px 0 8px; font-size: 19px; font-weight: normal; font-style: italic; }
+    h2 { margin: 44px 0 10px; font-size: 22px; font-weight: normal; }
+    p { margin: 0 0 16px; }
+    figure { margin: 28px 0 36px; }
+    figure a { display: block; cursor: zoom-in; }
+    figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 2px; }
+    figcaption { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    footer { padding-block: 20px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    @media (max-width: 540px) { body { font-size: 17px; } main { padding-top: 20px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../../research/">&larr; Research</a>
+  </header>
+  <main>
+    <article>
+      <h1>Scaling Laws of Biological Information: From Single-Cell Representations to AI Models</h1>
+      <p class="byline">Harvard T.H. Chan School of Public Health<br>Supervisors: <a href="https://sites.google.com/site/rongmastat/home">Prof. Rong Ma</a> and <a href="https://kleinlab.bio/">Prof. Allon Klein</a></p>
+
+      <h3 style="margin-top:0">The question</h3>
+      <p>Single-cell sequencing reveals cellular diversity and changes in cell state across physiological conditions, disease, and experimental perturbations. To interpret these high-dimensional, noisy measurements, we turn them into representations of relationships among cells or genes, from linear projections to single-cell foundation models. The field keeps building larger atlases and perturbation screens, expecting that more data will reveal more biology. Yet how much biological information is gained by collecting more data, and when returns begin to diminish, remains difficult to predict. Across diverse representations, we observe systematic scaling of biological information recovery with cell number and molecular depth, but the rigorous theoretical foundations remain elusive.</p>
+      <figure>
+        <a href="framework.png" target="_blank" rel="noopener"><img src="framework.png" alt="Framework: multimodal single-cell RNA data X(n, U, B) is mapped by linear, manifold-learning, neural-network and foundation-model methods to representations H_X; information I(H_X(U, n, B), H_Y) is measured against biological targets: ADT, ATAC, cell type and stimulation." width="2000" height="463"></a>
+        <figcaption>Thirty representation methods in four families are applied to RNA data with varying molecular depth <em>U</em>, cell number <em>n</em> and batch number <em>B</em>. We measure how much information each representation carries about biological targets.</figcaption>
+      </figure>
+
+      <h3>A theory of single-cell scaling</h3>
+      <p>Several factors act together. More cells improve estimation of shared expression patterns, while more UMIs per cell reduce molecular sampling noise. Batch structure mixes technical with biological variation, and the measurement quality required depends on the biological question. We develop a unified scaling-law framework based on random matrix theory that explains and predicts how biological information recovery scales with cell number, UMI depth, and technical batch structure. The framework characterizes recovery thresholds, scaling rates, and information ceilings, and it accounts for differences across representations and biological targets: cell populations, developmental trajectories, gene coexpression networks, and differential expression.</p>
+      <figure>
+        <a href="scaling.png" target="_blank" rel="noopener"><img src="scaling.png" alt="Scaling curves of information I(RNA, ADT), I(RNA, ATAC), I(RNA, Cell type) and I(RNA, Stimulation) against median RNA UMI (top row) and number of cells (bottom row) for PCA, UMAP, scVI, scGPT and Geneformer; fitted laws extrapolate toward an information ceiling." width="2000" height="717"></a>
+        <figcaption>Information recovery as a function of molecular depth (top) and cell number (bottom). Points are observed values, solid lines are fitted scaling laws, dashed lines extrapolate them, and <em>I</em><sub>&infin;</sub> marks the information ceiling. Click to enlarge.</figcaption>
+      </figure>
+
+      <h3>Scaling in AI pretraining</h3>
+      <p>In machine learning, scaling laws that link performance to data, model size, and compute have guided model development and resource allocation. How they extend to single-cell foundation models remains open, since downstream gains can plateau after pretraining on only a fraction of the available data. We extend our framework to AI pretraining and to multimodal models that connect cellular representations with large language models. This shows how pretraining scale, model choice, and test-data quality shape biological information recovery, including in the generated text.</p>
+      <figure>
+        <a href="cell-to-text.png?v=2" target="_blank" rel="noopener"><img src="cell-to-text.png?v=2" alt="A: cell-to-text framework in which a single-cell foundation model pretrained on n cells feeds cell-to-text adapters and a language model. B: example answers about cell type, tissue and disease, which become correct as the number of pretraining cells grows." width="2000" height="485"></a>
+        <figcaption>(A) Foundation-model representations are passed through cell-to-text adapters into a language model. (B) The same questions answered by models pretrained on more cells: answers shift from wrong (red) to correct (green).</figcaption>
+      </figure>
+
+      <h3>From scaling laws to experimental design</h3>
+      <p>Information recovery also depends on how an experiment allocates its resources across cell number, sequencing depth, and technical batches. We extrapolate scaling laws fitted to pilot data to guide this choice. In a systemic lupus erythematosus (SLE) study, we identify the cell-number and sequencing-depth combination that minimizes cost for a specified information target. In a perturbation screen, we maximize information recovery under a fixed budget, guiding the collection of training data for virtual-cell models.</p>
+      <figure>
+        <a href="design.png" target="_blank" rel="noopener"><img src="design.png" alt="A: pilot-based design pipeline for SLE: select pilot donors, run pilot scRNA-seq, fit scaling laws and select a design (s*, R*), reanalyze all donors, recover biology. B: information-retention surfaces over cells per donor and reads per cell. C: feasible region with the minimum-budget design." width="1856" height="856"></a>
+        <figcaption>(A) Pilot-based design for systemic lupus erythematosus. (B) Scaling laws fitted to the pilot are extrapolated over cells per donor and reads per cell. (C) The design that meets both global and local information requirements at minimum budget.</figcaption>
+      </figure>
+
+      <p>Scaling laws turn &ldquo;how much data is enough?&rdquo; into a question that can be answered before the data are collected, providing a foundation for predicting biological information gains, evaluating representation quality, and guiding resource allocation across single-cell experiments and AI modeling.</p>
+
+      <h2>Paper</h2>
+      <p><a href="../../papers/single-cell-scaling/">Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal</a>. S. Zhu, J. Hu, G. Gowri, A. M. Klein, R. Ma. Submitted to <em>Cell</em>.</p>
+    </article>
+  </main>
+  <footer><a href="../../research/">&larr; Back to Research</a></footer>
+</body>
+</html>

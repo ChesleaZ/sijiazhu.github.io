@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mathematical Foundations of Machine Learning under Uncertainty | Sijia Zhu</title>
+  <meta name="description" content="Sijia Zhu's undergraduate research on distance and divergence measures for fuzzy sets and on fuzzy clustering.">
+  <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/research/ml-foundations/">
+  <script>try{if(localStorage.getItem('sz-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+  <style>
+    :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #a9b6c4; --accent: #7ad8c7; --line: #26394b; }
+    :root[data-theme=light] { color-scheme: light; --paper: #f7f9fb; --ink: #142030; --muted: #4a5a6b; --accent: #0d8574; --line: #d6dfe7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.75; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    header, main, footer { width: min(720px, calc(100% - 40px)); margin-inline: auto; }
+    header { display: flex; justify-content: space-between; align-items: baseline; padding-block: 28px; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; }
+    header .back { color: var(--accent); text-decoration: none; }
+    header .back:hover, header .back:focus-visible { text-decoration: underline; }
+    main { padding-block: 36px 56px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4.5vw, 38px); line-height: 1.2; font-weight: normal; }
+    .byline { margin: 0 0 36px; color: var(--muted); font-size: 16px; }
+    h2 { margin: 44px 0 10px; font-size: 22px; font-weight: normal; }
+    p { margin: 0 0 16px; }
+    figure { max-width: 560px; margin: 32px auto 36px; }
+    figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 2px; }
+    figcaption { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    .lead { font-size: 19px; }
+    h3 { margin: 36px 0 6px; font-size: 19px; font-weight: normal; }
+    .uses { margin: 0 0 10px; color: var(--muted); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 13px; letter-spacing: .02em; }
+    .table-wrap { margin: 24px 0 28px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; line-height: 1.5; }
+    th, td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-weight: 500; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+    td:first-child { color: var(--muted); white-space: nowrap; }
+    .refs li { margin-bottom: 6px; }
+    .refs { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+    footer { padding-block: 20px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    @media (max-width: 540px) { body { font-size: 17px; } main { padding-top: 20px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../../research/">&larr; Research</a>
+  </header>
+  <main>
+    <article>
+      <h1>Mathematical Foundations of Machine Learning under Uncertainty</h1>
+      <p class="byline">Undergraduate research, 2023&ndash;2025. Five papers.</p>
+
+      <p class="lead">Learning from vague or incomplete information starts with one question: how different are two uncertain objects? During my undergraduate studies I built new ways to answer it for several modern models of uncertainty, proved that they behave as a distance or divergence should, and used them for recognition, diagnosis, clustering, image segmentation and decision making.</p>
+
+      <h2>Motivation</h2>
+      <p>Real data is rarely clean. A patient's symptoms only partly match a disease, an expert hesitates between two ratings, and a pixel sits on the border between two regions. Fuzzy sets handle this by giving each element a degree of membership. Later models add more detail. Intuitionistic fuzzy sets add a degree of non-membership. Picture fuzzy sets add neutrality. Pythagorean and Fermatean fuzzy sets relax the constraint on membership and non-membership, so they can describe evaluations that the earlier models cannot (figure below). Complex-valued versions add a second, periodic component.</p>
+      <figure>
+        <img src="motivation.png?v=3" alt="Unit square of membership against non-membership with three nested regions: below the line mu plus nu equals one for intuitionistic fuzzy sets, below the quarter circle for Pythagorean, and below the curve mu cubed plus nu cubed equals one for Fermatean. The point (0.8, 0.7) lies only in the Fermatean region." width="1600" height="800">
+        <figcaption>Each model allows a larger range of membership and non-membership values. The pair (0.8, 0.7) cannot be expressed by the first two models but can by a Fermatean fuzzy set.</figcaption>
+      </figure>
+      <p>Every richer model needs its own way to compare objects, and that is where the gap was. Some of these models had no distance measure at all. Others had measures that break down on hard cases. In one pattern-recognition example from paper [1], several existing measures give an unknown sample exactly the same distance to two different patterns, so they cannot decide between them, while the new &alpha;-divergences tell the two apart. Any classifier, clustering method or decision rule built on such a measure inherits the problem.</p>
+
+      <h2>Contributions</h2>
+      <p>A fundamental challenge in machine learning is how to quantify the difference between two uncertain objects. In five papers, we developed new divergence measures for uncertain data and established their theoretical properties. We then provided a mathematical foundation for applications in pattern recognition, medical diagnosis, clustering, image segmentation and decision-making.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Paper</th><th>Contribution</th><th>Applications</th></tr></thead>
+          <tbody>
+            <tr><td>[1] 2024</td><td>&alpha;-divergences for picture and interval-valued picture fuzzy sets</td><td>Pattern recognition, decision-making, clustering</td></tr>
+            <tr><td>[2] 2025</td><td>Hellinger-based distances for complex picture fuzzy sets</td><td>Pattern recognition, medical diagnosis, clustering</td></tr>
+            <tr><td>[3] 2025</td><td>Distance measures for complex Fermatean fuzzy sets</td><td>Material recognition, decision-making, clustering</td></tr>
+            <tr><td>[4] 2025</td><td>A unified divergence for Fermatean fuzzy sets</td><td>Pattern classification, clustering, decision-making</td></tr>
+            <tr><td>[5] 2025</td><td>Feature-weighted c-means clustering</td><td>Benchmark datasets, colour image segmentation</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure>
+        <img src="overview.png" alt="Three panels: points inside a triangle with corners mu, eta and nu; paired bars of two fuzzy sets A and B being compared by a distance d(A,B); and three soft clusters with their centres." width="2201" height="742">
+        <figcaption>The common thread. Each element of uncertain data has degrees of membership (&mu;), neutrality (&eta;) and non-membership (&nu;) (left). A distance or divergence compares two such sets (middle), and these comparisons drive clustering and decisions (right).</figcaption>
+      </figure>
+
+      <h2>Applications</h2>
+      <p>A measure is only useful if it leads to better decisions, so each one was tested on concrete tasks. The clustering and image segmentation figures come from the papers; the others are sketches of how each task uses a distance or divergence.</p>
+
+      <h3>Pattern recognition</h3>
+      <p class="uses">Papers [1], [2], [4]</p>
+      <p>Each known pattern is a fuzzy set, and a new sample is assigned to the closest pattern. In paper [4], an unknown building material is classified into one of four known material classes. Almost all of the 24 operators we compared pick the same class, but ours separates it most clearly from the alternatives.</p>
+      <figure>
+        <img src="app-pattern.png?v=3" alt="An unknown sample B connected to three known patterns; the line to pattern P2 is shortest and highlighted, so B is assigned to P2." width="1600" height="800" loading="lazy">
+        <figcaption>An unknown sample <em>B</em> is assigned to the pattern with the smallest distance, here <em>P</em><sub>2</sub>.</figcaption>
+      </figure>
+
+      <h3>Medical diagnosis</h3>
+      <p class="uses">Paper [2]</p>
+      <p>Patients and diseases are both described by symptoms, each with degrees of presence, absence and uncertainty. The diagnosis for a patient is the disease at the smallest distance.</p>
+      <figure>
+        <img src="app-diagnosis.png?v=3" alt="A grid of four patients by five diseases shaded by distance; the closest disease for each patient is boxed." width="1600" height="800" loading="lazy">
+        <figcaption>Darker cells mean a smaller distance between patient and disease. The boxed cell in each row is the diagnosis. Illustrative values.</figcaption>
+      </figure>
+
+      <h3>Clustering</h3>
+      <p class="uses">Papers [1], [2], [3], [4]</p>
+      <p>Given a reliable distance between every pair of objects, hierarchical clustering merges the most similar objects first, and cutting the tree at a chosen level gives the clusters. In paper [3], eight geographical environments, such as earthquake zones, coastal regions and deserts, are grouped by eight building-performance criteria.</p>
+      <figure>
+        <img src="real-clustering.png" alt="Clustering tree of eight environments C1 to C8, with merge levels between 0.9544 and 0.9867 marked on the vertical axis." width="1600" height="800" loading="lazy">
+        <figcaption>Clustering tree of the eight environments C<sub>1</sub>&ndash;C<sub>8</sub> built from our distance measure. Cutting at a lower level gives fewer, larger clusters. From paper [3].</figcaption>
+      </figure>
+
+      <h3>Colour image segmentation</h3>
+      <p class="uses">Paper [5]</p>
+      <p>Segmentation is clustering of pixels. Standard c-means methods treat every feature as equally important and use Euclidean distance, which is sensitive to noise. In paper [5] I developed four c-means methods that learn a weight for each feature, as a vector or a matrix, use a non-Euclidean distance, and constrain the product of the weights rather than their sum, so no extra parameters are needed. We tested them on 13 benchmark datasets and on colour photos, using a deep-learning segmentation (SegNet) as the reference.</p>
+      <figure>
+        <img src="seg-grid.png" alt="Three rows of photos (a goose, an elephant and a bird). Each row shows the original photo and its segmentation by AHCM, AFCM and the proposed MWAFCM." width="1218" height="1048" loading="lazy">
+        <figcaption>Segmentations of three photos by two existing methods (AHCM and AFCM) and our matrix-weighted fuzzy c-means (MWAFCM). From paper [5].</figcaption>
+      </figure>
+
+      <h3>Decision making</h3>
+      <p class="uses">Papers [1], [3], [4]</p>
+      <p>When experts rate several alternatives on several criteria, often with hesitation, the divergence turns those ratings into a ranking. In paper [4], four blockchain platforms are ranked on six criteria. Our model ranks Solana first, which agrees with FFS-TOPSIS, a widely used method.</p>
+      <figure>
+        <img src="app-decision.png?v=3" alt="Four alternatives plotted against two criteria, each connected to an ideal point and a worst point." width="1600" height="800" loading="lazy">
+        <figcaption>Alternatives <em>a</em><sub>1</sub>&ndash;<em>a</em><sub>4</sub> are ranked by how close they are to the ideal solution and how far from the worst one.</figcaption>
+      </figure>
+
+      <h2>Conclusion</h2>
+      <p>The lesson that runs through these papers is simple. Before using a measure of similarity or information, decide what properties it must have and prove that it has them. Measures built this way gave consistent answers in all five kinds of tasks, including the cases where older measures did not.</p>
+      <p>The same question shapes my current research. In single-cell representation learning I ask how much biological signal a learned representation actually recovers, which again comes down to choosing and justifying the right measure of information.</p>
+
+      <h2>Papers</h2>
+      <ol class="refs">
+        <li><strong>S. Zhu</strong>, Z. Liu, G. Ulutagay, M. Deveci, D. Pamucar. <a href="https://doi.org/10.1016/j.engappai.2024.109041">Novel &alpha;-divergence measures on picture fuzzy sets and interval-valued picture fuzzy sets</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2024.</li>
+        <li><strong>S. Zhu</strong>, Z. Liu, S. Letchmunan, G. Ulutagay, K. Ullah. <a href="https://doi.org/10.1007/s12190-024-02293-z">Novel distance measures on complex picture fuzzy environment: applications in pattern recognition, medical diagnosis and clustering</a>. <em>Journal of Applied Mathematics and Computing</em>, 2025.</li>
+        <li>Z. Liu, <strong>S. Zhu</strong>, T. Senapati, M. Deveci, D. Pamucar, R. R. Yager. <a href="https://doi.org/10.1016/j.ins.2024.121310">New distance measures of complex Fermatean fuzzy sets with applications in decision making and clustering problems</a>. <em>Information Sciences</em>, 2025.</li>
+        <li>Z. Liu, <strong>S. Zhu</strong>, et al. <a href="https://doi.org/10.32604/cmes.2025.072352">A unified parametric divergence operator for Fermatean fuzzy environment and its application in machine learning and intelligent decision-making</a>. <em>Computer Modeling in Engineering &amp; Sciences</em>, 2025.</li>
+        <li><strong>S. Zhu</strong>, Z. Liu, S. Letchmunan, H. Qiu. <a href="https://doi.org/10.1016/j.engappai.2025.110768">Auto feature weighted c-means type clustering methods for color image segmentation</a>. <em>Engineering Applications of Artificial Intelligence</em>, 2025.</li>
+      </ol>
+    </article>
+  </main>
+  <footer><a href="../../research/">&larr; Back to Research</a></footer>
+</body>
+</html>

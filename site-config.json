@@ -1,0 +1,627 @@
+{
+  "version": 2,
+  "theme": {
+    "background": "#0b1220",
+    "text": "#e6edf4",
+    "muted": "#b2c0d0",
+    "accent": "#7ad8c7",
+    "surface": "#111d2e",
+    "fontSize": 20,
+    "cardRadius": 10
+  },
+  "home": {
+    "greeting": "Hello, my name is",
+    "name": "Sijia Zhu.",
+    "prefix": "My research explores",
+    "topics": [
+      "AI for biology",
+      "biological foundation models",
+      "multimodal learning for biology",
+      "cell-to-text generation"
+    ],
+    "photoSide": "right",
+    "photoWidth": 340,
+    "titleSize": 64,
+    "topicSize": 43,
+    "backgroundEnabled": true,
+    "backgroundOpacity": 36,
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 40.3,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0.9
+      },
+      "surface": {
+        "x": 0,
+        "y": -6.4
+      },
+      "umap": {
+        "x": -40.9,
+        "y": -16.3
+      },
+      "objective": {
+        "x": -22.2,
+        "y": 0
+      },
+      "attention": {
+        "x": -0.1,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "backgroundTitle": "Background",
+    "backgroundGroups": [
+      {
+        "institution": "Johns Hopkins University",
+        "details": [
+          "M.S. in Applied Mathematics and Statistics"
+        ],
+        "advisorLabel": "Advisor:",
+        "advisors": [
+          {
+            "name": "Prof. Yanxun Xu",
+            "url": "https://www.ams.jhu.edu/~yxu70/"
+          }
+        ]
+      },
+      {
+        "institution": "Harvard T.H. Chan School of Public Health",
+        "details": [
+          "Visiting Student in Biostatistics"
+        ],
+        "advisorLabel": "Advisors:",
+        "advisors": [
+          {
+            "name": "Prof. Rong Ma",
+            "url": "https://sites.google.com/site/rongmastat/home"
+          },
+          {
+            "name": "Prof. Allon Klein",
+            "url": "https://kleinlab.bio/"
+          }
+        ]
+      },
+      {
+        "institution": "Broad Institute of MIT and Harvard",
+        "details": [
+          "Research Assistant"
+        ],
+        "advisorLabel": "Advisors:",
+        "advisors": [
+          {
+            "name": "Prof. Kenneth Westerman",
+            "url": "https://westerman-lab.github.io/"
+          },
+          {
+            "name": "Prof. Miriam Udler",
+            "url": "https://www.udlerlab.org/"
+          }
+        ]
+      }
+    ],
+    "educationTitle": "",
+    "education": [
+      "M.S. in Applied Mathematics and Statistics— Johns Hopkins University",
+      "Visiting Student in Biostatistics — Harvard T.H. Chan School of Public Health"
+    ],
+    "researchExperienceTitle": "",
+    "researchExperience": [
+      "Research Assistant — Broad Institute of MIT and Harvard",
+      "Research Assistant — Johns Hopkins University",
+      "Teaching Assistant — Johns Hopkins University"
+    ],
+    "skillsLabel": "Skills",
+    "skills": [
+      "Python",
+      "PyTorch",
+      "R",
+      "Representation Learning",
+      "Scaling Laws",
+      "Single-cell Analysis"
+    ],
+    "researchInterestsTitle": "Research Interests",
+    "interests": [
+      {
+        "title": "AI for Biology.",
+        "description": "I am interested in biological foundation models, representation learning, and multimodal generative AI. My work focuses on learning cellular representations from single-cell data and connecting them with biological knowledge and natural language for interpretation."
+      },
+      {
+        "title": "Statistical Machine Learning.",
+        "description": "I am interested in high-dimensional inference, scaling laws, and survival analysis. My work examines how data scale and quality shape information recovery from noisy biological data to guide experimental design. I also develop survival analysis methods for clinical studies."
+      }
+    ],
+    "paragraphs": [
+      "My research interests lie in AI for Science, particularly biological foundation models, representation learning, and multimodal generative AI for biology. I am also interested in statistical machine learning, high-dimensional inference, and scaling laws."
+    ],
+    "width": 1000,
+    "photoVisible": false,
+    "photoSide": "right",
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "research": {
+    "heading": "Research",
+    "academicHeading": "Academic",
+    "items": [
+      {
+        "institution": "Harvard T.H. Chan School of Public Health",
+        "role": "Research Assistant",
+        "topic": "Scaling Laws of Biological Information: From Single-Cell Representations to AI Models",
+        "tags": [
+          "Single-cell multi-omics",
+          "Random Matrix Theory",
+          "Representation learning"
+        ],
+        "bullets": [
+          "Applying Random Matrix Theory to derive mutual-information-based measures for biological signal recovery in single-cell multi-omics data.",
+          "Developing theoretical scaling laws for cell number, sequencing depth, and batch effects in single-cell data.",
+          "Conducting real-data analyses to evaluate how representation learning embeddings recover biological information."
+        ],
+        "image": "research/scaling-laws/card-transparent.png",
+        "detailUrl": "research/scaling-laws/"
+      },
+      {
+        "institution": "Broad Institute of MIT and Harvard",
+        "role": "Research Assistant",
+        "topic": "From Genetic Clusters to Biological Pathways in Type 2 Diabetes",
+        "tags": [
+          "Type 2 diabetes",
+          "Polygenic scores",
+          "Genetic clustering"
+        ],
+        "bullets": [
+          "Investigating whether data-driven genetic clusters in type 2 diabetes capture biological information beyond curated pathway-based polygenic scores.",
+          "Constructing individual-level cluster-specific scores from variant-level disease clusters and comparing them with pathway-based pPGS derived from Reactome and KEGG.",
+          "Studying whether residual cluster signals can reveal novel or cross-pathway disease mechanisms."
+        ],
+        "image": "research/t2d-pathways/card-transparent.png",
+        "detailUrl": "research/t2d-pathways/"
+      },
+      {
+        "institution": "Undergraduate Research",
+        "role": "",
+        "topic": "Mathematical Foundations of Machine Learning under Uncertainty",
+        "tags": [
+          "Fuzzy set theory",
+          "Distance & divergence measures",
+          "Fuzzy clustering"
+        ],
+        "bullets": [
+          "Proposed distance and divergence measures for picture, Fermatean and complex fuzzy sets.",
+          "Developed feature-weighted c-means clustering methods for image segmentation.",
+          "Applied these methods to pattern recognition, medical diagnosis and decision making."
+        ],
+        "image": "research/ml-foundations/cover.png",
+        "detailUrl": "research/ml-foundations/"
+      }
+    ],
+    "academicItems": [
+      {
+        "title": "Teaching Assistant",
+        "institution": "Johns Hopkins University",
+        "details": [
+          "Bayesian Statistics",
+          "Time Series Analysis"
+        ]
+      },
+      {
+        "title": "Peer Reviewer",
+        "institution": "Academic Service",
+        "details": [
+          "Current Medical Imaging",
+          "CMC-Computers, Materials & Continua",
+          "Journal of Intelligent & Fuzzy Systems",
+          "Journal of Computer Science",
+          "Journal of Fuzzy Logic and Modeling in Engineering"
+        ]
+      }
+    ],
+    "width": 960,
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "publications": {
+    "title": "Publication",
+    "archiveLabel": "View all",
+    "archiveTitle": "All Publications",
+    "archiveDescription": "Complete publication list",
+    "columns": 3,
+    "width": 1000,
+    "items": [
+      {
+        "year": 2026,
+        "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
+        "venue": "Submitted to Cell",
+        "status": "Submitted",
+        "authors": "Sijia Zhu, Jingyuan Hu, Gokul Gowri, Allon M. Klein, Rong Ma",
+        "keywords": [
+          "Single-cell representation learning",
+          "Scaling laws",
+          "Random matrix theory"
+        ],
+        "url": "https://chesleaz.github.io/sijiazhu.github.io/papers/single-cell-scaling/",
+        "selected": true
+      },
+      {
+        "year": 2026,
+        "title": "Bayesian Hierarchical Modeling and Clustering for Malignant Cancer Diagnosis",
+        "venue": "Bayesian Analysis",
+        "status": "Under review",
+        "authors": "Sijia Zhu, Jonathon Ma, Zhe Liu",
+        "keywords": [
+          "Bayesian modeling",
+          "Clustering",
+          "Medical diagnosis"
+        ],
+        "url": "https://absj.org/index.php/absj/article/view/114",
+        "selected": true
+      },
+      {
+        "year": 2026,
+        "title": "A Sequential Multiple Assignment Randomized Trial to Identify Optimal Treatment Regimes for Metastatic Renal Cell Carcinoma",
+        "venue": "Submitted to Journal of Clinical Oncology, August 9, 2026",
+        "status": "Submitted",
+        "authors": "Pavlos Msaouel, Yanxun Xu, Peter F. Thall, Sijia Zhu, et al.",
+        "keywords": [
+          "Clinical trial design",
+          "Dynamic treatment regimes",
+          "Renal cell carcinoma"
+        ],
+        "url": "",
+        "selected": true
+      },
+      {
+        "year": 2025,
+        "title": "New Distance Measures of Complex Fermatean Fuzzy Sets with Applications in Decision Making and Clustering Problems",
+        "venue": "Information Sciences",
+        "status": "Published",
+        "authors": "Z. Liu, S. Zhu, T. Senapati, M. Deveci, D. Pamucar, R. R. Yager",
+        "keywords": [
+          "Fuzzy sets",
+          "Decision making",
+          "Clustering"
+        ],
+        "url": "https://doi.org/10.1016/j.ins.2024.121310",
+        "selected": true
+      },
+      {
+        "year": 2025,
+        "title": "Auto Feature Weighted c-Means Type Clustering Methods for Color Image Segmentation",
+        "venue": "Engineering Applications of Artificial Intelligence",
+        "status": "Published",
+        "authors": "S. Zhu, Z. Liu, S. Letchmunan, H. Qiu",
+        "keywords": [
+          "Clustering",
+          "Image segmentation",
+          "Feature weighting"
+        ],
+        "url": "https://doi.org/10.1016/j.engappai.2025.110768",
+        "selected": true
+      },
+      {
+        "year": 2025,
+        "title": "Novel Distance Measures on Complex Picture Fuzzy Environment: Applications in Pattern Recognition, Medical Diagnosis and Clustering",
+        "venue": "Journal of Applied Mathematics and Computing",
+        "status": "Published",
+        "authors": "S. Zhu, Z. Liu, S. Letchmunan, G. Ulutagay, K. Ullah",
+        "keywords": [
+          "Pattern recognition",
+          "Medical diagnosis",
+          "Clustering"
+        ],
+        "url": "https://doi.org/10.1007/s12190-024-02293-z",
+        "selected": true
+      },
+      {
+        "year": 2025,
+        "title": "A Unified Parametric Divergence Operator for Fermatean Fuzzy Environment and Its Application in Machine Learning and Intelligent Decision-Making",
+        "venue": "Computer Modeling in Engineering & Sciences",
+        "status": "Published",
+        "authors": "Z. Liu, S. Zhu, Y. Huang, T. Senapati, X. Li, W. Mbasso, H. D. Dhumras, et al.",
+        "keywords": [
+          "Fermatean fuzzy sets",
+          "Machine learning",
+          "Decision making"
+        ],
+        "url": "https://doi.org/10.32604/cmes.2025.072352",
+        "selected": false
+      },
+      {
+        "year": 2024,
+        "title": "Novel alpha-Divergence Measures on Picture Fuzzy Sets and Interval-Valued Picture Fuzzy Sets",
+        "venue": "Engineering Applications of Artificial Intelligence",
+        "status": "Published",
+        "authors": "S. Zhu, Z. Liu, G. Ulutagay, M. Deveci, D. Pamucar",
+        "keywords": [
+          "Divergence measures",
+          "Picture fuzzy sets"
+        ],
+        "url": "https://doi.org/10.1016/j.engappai.2024.109041",
+        "selected": false
+      },
+      {
+        "year": 2024,
+        "title": "ProNet: Adaptive Retinal Vessel Segmentation Algorithm Based on Improved UperNet Network",
+        "venue": "CMC-Computers, Materials & Continua",
+        "status": "Published",
+        "authors": "S. Zhu, P. Wang, K. Shen",
+        "keywords": [
+          "Medical imaging",
+          "Retinal segmentation",
+          "Deep learning"
+        ],
+        "url": "https://doi.org/10.32604/cmc.2023.045506",
+        "selected": false
+      }
+    ],
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "intro": "I’m applying to PhD programs for Fall 2027 in AI for biology and statistical machine learning. I’d love to hear about research opportunities or collaborations. Feel free to reach out by email.",
+    "width": 680,
+    "links": [
+      {
+        "label": "Email",
+        "url": "mailto:szhu62@jhu.edu",
+        "icon": "email"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/sijia-zhu-66862a307/",
+        "icon": "linkedin"
+      },
+      {
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/citations?user=hN1J4bUAAAAJ&hl=en",
+        "icon": "scholar"
+      }
+    ],
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "paper": {
+    "eyebrow": "Research paper",
+    "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
+    "authors": "Sijia Zhu, Jingyuan Hu, Gokul Gowri, Allon M. Klein*, and Rong Ma**",
+    "status": "Submitted to Cell",
+    "overviewTitle": "Research overview",
+    "paragraphs": [],
+    "availabilityTitle": "Preprint",
+    "availabilityText": "Coming soon. The preprint link will be posted here once it is available.",
+    "preprintLabel": "Read the preprint",
+    "preprintURL": "",
+    "width": 900,
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "archive": {
+    "backgroundEnabled": true,
+    "backgroundOpacity": 12,
+    "backgroundAnimated": true,
+    "backgroundPositions": {
+      "network": {
+        "x": 0,
+        "y": 0
+      },
+      "cells": {
+        "x": 0,
+        "y": 0
+      },
+      "surface": {
+        "x": 0,
+        "y": 0
+      },
+      "umap": {
+        "x": 0,
+        "y": 0
+      },
+      "objective": {
+        "x": 0,
+        "y": 0
+      },
+      "attention": {
+        "x": 0,
+        "y": 0
+      },
+      "robot": {
+        "x": 0,
+        "y": 0
+      },
+      "tubes": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  }
+}
