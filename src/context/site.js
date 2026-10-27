@@ -53,7 +53,6 @@ const SiteStyle = createGlobalStyle`
   html.site-preview [data-sr-id] { visibility: visible !important; opacity: 1 !important; transform: none !important; }
   [data-edit-path][contenteditable='true']:hover { outline: 1px dashed var(--green); outline-offset: 4px; }
   [data-edit-path][contenteditable='true']:focus { outline: 1px solid var(--green); outline-offset: 4px; }
-  .site-edit-entry { display: block; width: fit-content; margin: 0 auto 24px; font: 11px var(--font-mono); color: var(--slate); opacity: .7; }
 `;
 
 export const pageForPath = path => {
@@ -121,7 +120,3 @@ export const SiteProvider = ({ children }) => {
 SiteProvider.propTypes = { children: PropTypes.node.isRequired };
 export const useSite = () => useContext(Context);
 
-export const EditPageLink = ({ page }) => (
-  <a className="site-edit-entry" href={withPrefix('/editor/?page=' + encodeURIComponent(page))}>编辑本页 · Edit this page</a>
-);
-EditPageLink.propTypes = { page: PropTypes.string.isRequired };
