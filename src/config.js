@@ -1,12 +1,7 @@
 module.exports = {
   email: 'szhu62@jhu.edu',
 
-  socialMedia: [
-    {
-      name: 'GitHub',
-      url: 'https://github.com/ChesleaZ',
-    },
-  ],
+  socialMedia: [],
 
   navLinks: [
     {
