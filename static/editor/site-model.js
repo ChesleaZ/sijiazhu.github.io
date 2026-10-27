@@ -637,15 +637,12 @@ const defaults = {
   "paper": {
     "eyebrow": "Research paper",
     "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
-    "authors": "S. Zhu, J. Hu, G. Gowri, A. M. Klein, and R. Ma",
-    "status": "Manuscript under review",
+    "authors": "Sijia Zhu, Jingyuan Hu, Gokul Gowri, Allon M. Klein, and Rong Ma",
+    "status": "Submitted to Cell",
     "overviewTitle": "Research overview",
-    "paragraphs": [
-      "This work studies how cell number, sequencing depth, and batch structure shape biological information recovery in single-cell representation learning. It connects a random matrix theory framework with empirical evaluation of single-cell representations, including scVI, Geneformer, and scGPT.",
-      "A further focus is experimental design under fixed budgets: how to balance cell number and sequencing depth when collecting single-cell data. Applications include systemic lupus erythematosus (SLE) and Perturb-seq datasets."
-    ],
-    "availabilityTitle": "Manuscript availability",
-    "availabilityText": "The manuscript is currently under review. A link to the preprint will be added here when it becomes publicly available.",
+    "paragraphs": [],
+    "availabilityTitle": "Preprint",
+    "availabilityText": "Coming soon. The preprint link will be posted here once it is available.",
     "preprintLabel": "Read the preprint",
     "preprintURL": "",
     "width": 900,

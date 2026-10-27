@@ -44,6 +44,7 @@
       if (preview) p.contentEditable = 'true';
       overview.appendChild(p);
     });
+    overview.hidden = data.paragraphs.length === 0;
     const preprint = document.getElementById('preprint-link');
     preprint.hidden = !data.preprintURL;
     preprint.textContent = data.preprintLabel;
