@@ -14,15 +14,18 @@ const StyledMainContainer = styled.main`
   #home { flex: 1; min-height: 0; width: 100%; padding: 0; }
 
   @media (min-width: 900px) {
+    /* Keep the text and photo together near the centre of the screen. */
     #home {
-      max-width: 1180px;
-      grid-template-columns: minmax(0, 1.6fr) minmax(220px, .9fr);
-      gap: clamp(32px, 4vw, 64px);
+      max-width: 1000px;
+      margin-inline: auto;
+      justify-content: center;
+      grid-template-columns: minmax(0, 560px) minmax(220px, var(--hero-photo-width, 340px));
+      gap: clamp(48px, 6vw, 96px);
     }
     #home .hero-content { width: 100%; max-width: none; justify-self: start; }
     #home .hero-photo-slot { order: 0; justify-self: center; }
     #home .hero-photo { width: min(var(--hero-photo-width, 340px), 31vw, calc(100svh - 220px)); }
-    #home.photo-left { grid-template-columns: minmax(220px, .9fr) minmax(0, 1.6fr); }
+    #home.photo-left { grid-template-columns: minmax(220px, var(--hero-photo-width, 340px)) minmax(0, 560px); }
     #home.photo-left .hero-photo-slot { order: -1; }
   }
   @media (max-width: 899px) {
