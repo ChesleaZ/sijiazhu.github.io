@@ -1,0 +1,19 @@
+{
+  "greeting": "Hello, my name is",
+  "name": "Sijia Zhu.",
+  "prefix": "My research explores",
+  "topics": [
+    "statistical machine learning for biology",
+    "high-dimensional statistics",
+    "foundation models for single-cell biology",
+    "multimodal learning for biology",
+    "trustworthy AI for clinical research"
+  ],
+  "background": "#0b1220",
+  "text": "#e6edf4",
+  "accent": "#7ad8c7",
+  "photoSide": "right",
+  "photoWidth": 340,
+  "titleSize": 64,
+  "topicSize": 43
+}

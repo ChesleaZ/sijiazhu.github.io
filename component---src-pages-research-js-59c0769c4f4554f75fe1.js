@@ -1,0 +1,2 @@
+(self.webpackChunksijia_personal_site=self.webpackChunksijia_personal_site||[]).push([[236],{9374:function(e,n,t){"use strict";t.r(n);var a=t(7294),i=t(9),r=t(4736),l=i.ZP.main.withConfig({displayName:"research__StyledMainContainer",componentId:"pg83w5-0"})(["counter-reset:section;padding-top:130px;@media (max-width:768px){padding-top:110px;}"]);n.default=function(e){var n=e.location;return a.createElement(r.Ar,{location:n},a.createElement(l,null,a.createElement(r.A9,null)))}}}]);
+//# sourceMappingURL=component---src-pages-research-js-59c0769c4f4554f75fe1.js.map
