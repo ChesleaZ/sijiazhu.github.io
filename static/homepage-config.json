@@ -3,10 +3,11 @@
   "name": "Sijia Zhu.",
   "prefix": "My research explores",
   "topics": [
-    "AI for biology",
-    "biological foundation models",
+    "statistical machine learning for biology",
+    "high-dimensional statistics",
+    "foundation models for single-cell biology",
     "multimodal learning for biology",
-    "cell-to-text generation"
+    "trustworthy AI for clinical research"
   ],
   "background": "#0b1220",
   "text": "#e6edf4",
