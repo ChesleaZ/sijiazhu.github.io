@@ -1,12 +1,12 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const model = require('../static/editor/site-model.js');
-test('Keeps all existing publications, research entries, and manuscript status unchanged', () => {
+test('Keeps publication and research entries and sets the paper page to Preprint', () => {
   const site = model.normalize(model.defaults);
   assert.deepEqual(site, model.defaults);
   assert.equal(site.publications.items.length, 15);
   assert.equal(site.research.items.length, 4);
-  assert.equal(site.paper.status, 'Manuscript under review');
+  assert.equal(site.paper.status, 'Preprint');
 });
 test('Editing About does not modify the home page or publication records', () => {
   const site = model.clone(model.defaults);

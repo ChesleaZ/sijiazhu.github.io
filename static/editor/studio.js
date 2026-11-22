@@ -117,7 +117,13 @@ function renderControls() {
     el('controls').appendChild(artworkControls());
     const textHeading = document.createElement('h2'); textHeading.textContent = '文字与布局'; el('controls').appendChild(textHeading);
   }
-  Object.keys(template).filter(field => !backgroundKeys.includes(field) && field !== 'backgroundPositions' && !(dataPage === 'about' && ['skillsLabel', 'skills', 'educationTitle', 'education', 'researchExperienceTitle', 'researchExperience', 'paragraphs'].includes(field))).forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
+  const hiddenFields = {
+    about: ['skillsLabel', 'skills', 'educationTitle', 'education', 'researchExperienceTitle', 'researchExperience', 'paragraphs'],
+    paper: ['eyebrow', 'availabilityText', 'preprintLabel', 'preprintURL'],
+  };
+  Object.keys(template)
+    .filter(field => !backgroundKeys.includes(field) && field !== 'backgroundPositions' && !hiddenFields[dataPage]?.includes(field))
+    .forEach(field => el('controls').appendChild(createField(dataPage + '.' + field, template[field])));
   el('controls').querySelectorAll('details').forEach(node => { node.open = open.has(node.dataset.itemPath); });
   el('controls').parentElement.scrollTop = scrollTop;
   el('page').value = page; sendArtworkMode();

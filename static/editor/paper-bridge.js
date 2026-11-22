@@ -3,8 +3,8 @@
   const model = window.SiteContentModel;
   const preview = new URLSearchParams(location.search).get('preview') === '1' && parent !== window;
   const selectors = {
-    eyebrow: '.eyebrow', title: '#paper-title', authors: '.authors', status: '.status',
-    overviewTitle: '#overview-title', availabilityTitle: '#availability-title', availabilityText: '.availability p',
+    title: '#paper-title', authors: '.authors', status: '.status',
+    overviewTitle: '#overview-title', availabilityTitle: '#availability-title',
   };
   const svgNS = 'http://www.w3.org/2000/svg';
   const backdrop = document.createElement('div');
@@ -29,14 +29,15 @@
     backdrop.style.setProperty('--science-opacity', data.backgroundOpacity / 100);
     backdrop.dataset.animated = String(data.backgroundAnimated && data.backgroundOpacity > 0);
     document.body.style.fontSize = theme.fontSize + 'px';
-    document.querySelectorAll('header, main, footer').forEach(el => el.style.width = 'min(' + data.width + 'px, calc(100% - 48px))');
-    document.querySelector('.availability').style.borderRadius = theme.cardRadius + 'px';
+    document.documentElement.style.setProperty('--content-width', data.width + 'px');
+    document.documentElement.style.setProperty('--reader-radius', theme.cardRadius + 'px');
     for (const [field, selector] of Object.entries(selectors)) {
       const node = document.querySelector(selector);
       node.textContent = data[field];
       node.dataset.editPath = 'paper.' + field;
       if (preview) node.contentEditable = 'true';
     }
+    document.querySelector('.author-note').hidden = !data.authors.includes('†');
     const overview = document.querySelector('.overview');
     overview.querySelectorAll('p').forEach(node => node.remove());
     data.paragraphs.forEach((text, index) => {
@@ -45,10 +46,6 @@
       overview.appendChild(p);
     });
     overview.hidden = data.paragraphs.length === 0;
-    const preprint = document.getElementById('preprint-link');
-    preprint.hidden = !data.preprintURL;
-    preprint.textContent = data.preprintLabel;
-    if (data.preprintURL) preprint.href = data.preprintURL; else preprint.removeAttribute('href');
     document.title = data.title + ' | Sijia Zhu';
   }
   window.addEventListener('message', event => {

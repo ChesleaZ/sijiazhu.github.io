@@ -636,13 +636,15 @@ const defaults = {
   },
   "paper": {
     "eyebrow": "Research paper",
-    "title": "Scaling Laws Predict How Much Biological Information Single-Cell Data Can Reveal",
-    "authors": "Sijia Zhu, Jingyuan Hu, Gokul Gowri, Allon M. Klein, and Rong Ma",
-    "status": "Submitted to Cell",
+    "title": "Scaling laws predict how much biological information single-cell data can reveal",
+    "authors": "Sijia Zhu†, Jingyuan Hu†, Gokul Gowri, Allon M. Klein, and Rong Ma",
+    "status": "Preprint",
     "overviewTitle": "Research overview",
-    "paragraphs": [],
-    "availabilityTitle": "Preprint",
-    "availabilityText": "Coming soon. The preprint link will be posted here once it is available.",
+    "paragraphs": [
+      "How much more biological information can we recover by profiling more cells or sequencing them more deeply? We use random matrix theory to predict these gains and show how the resulting scaling laws can guide single-cell experimental design and AI pretraining."
+    ],
+    "availabilityTitle": "Preprint reader",
+    "availabilityText": "",
     "preprintLabel": "Read the preprint",
     "preprintURL": "",
     "width": 900,
