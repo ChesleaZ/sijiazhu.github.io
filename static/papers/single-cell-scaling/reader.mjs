@@ -140,14 +140,14 @@ async function startReader() {
     if (index === zoomIndex) return;
     const active = sheets[current - 1].sheet;
     const oldBox = active.getBoundingClientRect();
-    const readingLine = toolbar.getBoundingClientRect().bottom + 8;
+    const readingLine = toolbar.getBoundingClientRect().bottom + 22;
     const offset = Math.max(0, readingLine - oldBox.top);
+    const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    const anchor = atEnd ? readingLine - 8 : oldBox.top + offset;
     zoomIndex = index;
     resizePages();
-    if (oldBox.top < readingLine) {
-      const newBox = active.getBoundingClientRect();
-      window.scrollBy(0, newBox.top + (offset / oldBox.height) * newBox.height - readingLine);
-    }
+    const newBox = active.getBoundingClientRect();
+    window.scrollBy(0, newBox.top + (offset / oldBox.height) * newBox.height - anchor);
     updateControls();
   }
 
