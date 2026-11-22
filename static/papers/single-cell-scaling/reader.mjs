@@ -39,6 +39,7 @@ async function startReader() {
   let zoomIndex = 0;
   let pageWidth = 0;
   let frame = 0;
+  let zoomFrame = 0;
 
   function updateControls() {
     if (document.activeElement !== pageNumber) pageNumber.value = current;
@@ -124,11 +125,14 @@ async function startReader() {
 
   function resizePages() {
     pageWidth = Math.max(1, Math.floor(pagesElement.clientWidth * zoomLevels[zoomIndex]));
+    const scrollbarSpace = zoomIndex === 0 ? 0 : 20;
     pagesElement.style.setProperty('--pdf-page-width', `${pageWidth}px`);
+    pagesElement.style.setProperty('--pdf-sheet-height', `${pageWidth * height / width + scrollbarSpace}px`);
     scheduleUpdate();
   }
 
   function goToPage(number) {
+    cancelAnimationFrame(zoomFrame);
     current = Math.min(pdf.numPages, Math.max(1, number));
     pageNumber.value = current;
     sheets[current - 1].sheet.scrollIntoView({ block: 'start', inline: 'nearest' });
@@ -138,7 +142,8 @@ async function startReader() {
 
   function changeZoom(index) {
     if (index === zoomIndex) return;
-    const active = sheets[current - 1].sheet;
+    cancelAnimationFrame(zoomFrame);
+    const active = sheets[current - 1].page;
     const oldBox = active.getBoundingClientRect();
     const readingLine = toolbar.getBoundingClientRect().bottom + 22;
     const offset = Math.max(0, readingLine - oldBox.top);
@@ -146,8 +151,12 @@ async function startReader() {
     const anchor = atEnd ? readingLine - 8 : oldBox.top + offset;
     zoomIndex = index;
     resizePages();
-    const newBox = active.getBoundingClientRect();
-    window.scrollBy(0, newBox.top + (offset / oldBox.height) * newBox.height - anchor);
+    const restorePosition = () => {
+      const newBox = active.getBoundingClientRect();
+      window.scrollTo(0, window.scrollY + newBox.top + (offset / oldBox.height) * newBox.height - anchor);
+    };
+    restorePosition();
+    zoomFrame = requestAnimationFrame(restorePosition);
     updateControls();
   }
 
