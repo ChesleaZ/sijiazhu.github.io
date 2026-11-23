@@ -46,18 +46,3 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     },
   });
 };
-
-exports.onPostBuild = () => {
-  const fs = require('fs');
-  const { createHash } = require('crypto');
-  const partsDirectory = path.join(__dirname, '.preprint-transfer');
-  const parts = fs.readdirSync(partsDirectory).sort().map((name) =>
-    fs.readFileSync(path.join(partsDirectory, name))
-  );
-  const pdf = Buffer.concat(parts);
-  const digest = createHash('sha256').update(pdf).digest('hex');
-  if (digest !== '6573c5a680d544112e912ed24427068747280fc18b056270a7e53e4e2f48a52f') {
-    throw new Error('The assembled preprint does not match the uploaded PDF.');
-  }
-  fs.writeFileSync(path.join(__dirname, 'public/papers/single-cell-scaling/preprint.pdf'), pdf);
-};
