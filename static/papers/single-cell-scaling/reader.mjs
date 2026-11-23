@@ -7,7 +7,8 @@ const next = document.getElementById('pdf-next');
 const zoomOut = document.getElementById('pdf-zoom-out');
 const zoomIn = document.getElementById('pdf-zoom-in');
 const zoomReset = document.getElementById('pdf-zoom-reset');
-const zoomLevels = [1, 1.25, 1.5, 2, 2.5];
+const zoomLevels = [0.5, 0.67, 0.8, 1, 1.25, 1.5, 2, 2.5];
+const fitToWidthIndex = zoomLevels.indexOf(1);
 
 async function startReader() {
   const { getDocument, GlobalWorkerOptions, TextLayer } = await import('./pdfjs/pdf.min.mjs');
@@ -36,7 +37,8 @@ async function startReader() {
   message.hidden = true;
 
   let current = 1;
-  let zoomIndex = 0;
+  let pageAtEnd = null;
+  let zoomIndex = fitToWidthIndex;
   let pageWidth = 0;
   let frame = 0;
   let zoomFrame = 0;
@@ -113,10 +115,13 @@ async function startReader() {
         clearPage(record);
       }
     }
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
-      current = pdf.numPages;
-    }
+    if (isAtDocumentEnd()) current = pageAtEnd ?? pdf.numPages;
+    else pageAtEnd = null;
     updateControls();
+  }
+
+  function isAtDocumentEnd() {
+    return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
   }
 
   function scheduleUpdate() {
@@ -124,8 +129,9 @@ async function startReader() {
   }
 
   function resizePages() {
-    pageWidth = Math.max(1, Math.floor(pagesElement.clientWidth * zoomLevels[zoomIndex]));
-    const scrollbarSpace = zoomIndex === 0 ? 0 : 20;
+    const zoom = zoomLevels[zoomIndex];
+    pageWidth = Math.max(1, Math.floor(pagesElement.clientWidth * zoom));
+    const scrollbarSpace = zoom > 1 ? 20 : 0;
     pagesElement.style.setProperty('--pdf-page-width', `${pageWidth}px`);
     pagesElement.style.setProperty('--pdf-sheet-height', `${pageWidth * height / width + scrollbarSpace}px`);
     scheduleUpdate();
@@ -134,6 +140,8 @@ async function startReader() {
   function goToPage(number) {
     cancelAnimationFrame(zoomFrame);
     current = Math.min(pdf.numPages, Math.max(1, number));
+    // Several pages can fit at the bottom of the viewport when zoomed out.
+    pageAtEnd = current;
     pageNumber.value = current;
     sheets[current - 1].sheet.scrollIntoView({ block: 'start', inline: 'nearest' });
     updateControls();
@@ -143,16 +151,17 @@ async function startReader() {
   function changeZoom(index) {
     if (index === zoomIndex) return;
     cancelAnimationFrame(zoomFrame);
-    const active = sheets[current - 1].page;
+    const currentSheet = sheets[current - 1];
+    const active = currentSheet.page;
     const oldBox = active.getBoundingClientRect();
     const readingLine = toolbar.getBoundingClientRect().bottom + 22;
     const offset = Math.max(0, readingLine - oldBox.top);
-    const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-    const anchor = atEnd ? readingLine - 8 : oldBox.top + offset;
+    const anchor = isAtDocumentEnd() ? readingLine - 8 : oldBox.top + offset;
     zoomIndex = index;
     resizePages();
     const restorePosition = () => {
       const newBox = active.getBoundingClientRect();
+      pageAtEnd = currentSheet.number;
       window.scrollTo(0, window.scrollY + newBox.top + (offset / oldBox.height) * newBox.height - anchor);
     };
     restorePosition();
@@ -173,7 +182,7 @@ async function startReader() {
   pageNumber.addEventListener('blur', () => { pageNumber.value = current; });
   zoomOut.addEventListener('click', () => changeZoom(zoomIndex - 1));
   zoomIn.addEventListener('click', () => changeZoom(zoomIndex + 1));
-  zoomReset.addEventListener('click', () => changeZoom(0));
+  zoomReset.addEventListener('click', () => changeZoom(fitToWidthIndex));
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   new ResizeObserver(resizePages).observe(pagesElement, { box: 'border-box' });
   resizePages();
