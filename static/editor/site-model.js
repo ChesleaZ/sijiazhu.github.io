@@ -138,12 +138,12 @@ const defaults = {
     "researchInterestsTitle": "Research Interests",
     "interests": [
       {
-        "title": "AI for Biology.",
-        "description": "I am interested in biological foundation models, representation learning, and multimodal generative AI. My work focuses on learning cellular representations from single-cell data and connecting them with biological knowledge and natural language for interpretation."
+        "title": "Statistical Machine Learning.",
+        "description": "I am interested in high-dimensional statistics and the foundations of machine learning, especially how data scale and quality affect learning and inference."
       },
       {
-        "title": "Statistical Machine Learning.",
-        "description": "I am interested in high-dimensional inference, scaling laws, and survival analysis. My work examines how data scale and quality shape information recovery from noisy biological data to guide experimental design. I also develop survival analysis methods for clinical studies."
+        "title": "AI for Science.",
+        "description": "I am interested in developing AI methods for scientific discovery, with a focus on foundation models and multimodal learning for biology."
       }
     ],
     "paragraphs": [
