@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scaling laws predict how much biological information single-cell data can reveal | Sijia Zhu</title>
+  <meta name="description" content="Read the full preprint on how cell number and sequencing depth shape biological information recovery in single-cell data.">
+  <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/papers/single-cell-scaling/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Scaling laws predict how much biological information single-cell data can reveal">
+  <meta property="og:description" content="Read the full preprint and learn how scaling laws guide single-cell experimental design.">
+  <meta property="og:url" content="https://chesleaz.github.io/sijiazhu.github.io/papers/single-cell-scaling/">
+  <link rel="stylesheet" href="./reader.css?v=4">
+  <script>try{if(localStorage.getItem('sz-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+  <style>
+    :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #b2c0d0; --accent: #7ad8c7; --line: #26394b; --surface: #111d2e; }
+    :root[data-theme=light] { color-scheme: light; --paper: #f7f9fb; --ink: #142030; --muted: #4a5a6b; --accent: #0d8574; --line: #d6dfe7; --surface: #fff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.7; }
+    main { width: min(var(--content-width, 900px), calc(100% - 32px)); margin-inline: auto; padding-block: 8px 16px; }
+    @media (max-width: 540px) { main { width: calc(100% - 16px); } }
+    @media print { main { width: 100%; padding: 0; } }
+  </style>
+</head>
+<body>
+  <main aria-label="Preprint reader">
+    <div class="pdf-toolbar" role="group" aria-label="PDF reading controls" hidden>
+      <div class="pdf-controls" role="group" aria-label="Page navigation">
+        <button id="pdf-previous" type="button" aria-label="Previous page" title="Previous page">‹</button>
+        <span class="pdf-page-number">
+          <input id="pdf-page-number" type="text" inputmode="numeric" pattern="[0-9]*" value="1" aria-label="Page number">
+          <span aria-hidden="true">/</span>
+          <span id="pdf-page-count"></span>
+        </span>
+        <button id="pdf-next" type="button" aria-label="Next page" title="Next page">›</button>
+      </div>
+      <div class="pdf-controls" role="group" aria-label="Zoom">
+        <button id="pdf-zoom-out" type="button" aria-label="Zoom out" title="Zoom out">−</button>
+        <button id="pdf-zoom-reset" type="button" aria-label="Fit to width" title="Fit to width">100%</button>
+        <button id="pdf-zoom-in" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+      </div>
+    </div>
+    <p class="pdf-message" id="pdf-message" role="status">Loading preprint…</p>
+    <div id="pdf-pages" class="pdf-pages"></div>
+    <noscript>
+      <style>#pdf-message { display: none; }</style>
+      <object class="pdf-fallback" data="./preprint.pdf?v=8063255" type="application/pdf" aria-label="Preprint PDF">
+        <p>Your browser needs JavaScript to display the preprint on this page.</p>
+      </object>
+    </noscript>
+  </main>
+  <script src="../../editor/site-model.js?v=inline-preprint-20261121"></script>
+  <script src="../../editor/paper-bridge.js?v=reader-only"></script>
+  <script type="module" src="./reader.mjs?v=5"></script>
+</body>
+</html>

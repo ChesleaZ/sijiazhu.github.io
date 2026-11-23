@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Genetic Clusters to Biological Pathways in Type 2 Diabetes | Sijia Zhu</title>
+  <meta name="description" content="Sijia Zhu's project on interpreting type 2 diabetes genetic clusters with tissue-specific Reactome pathway scores in All of Us.">
+  <link rel="canonical" href="https://chesleaz.github.io/sijiazhu.github.io/research/t2d-pathways/">
+  <script>try{if(localStorage.getItem('sz-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+  <style>
+    :root { color-scheme: dark; --paper: #0b1220; --ink: #e6edf4; --muted: #a9b6c4; --accent: #7ad8c7; --line: #26394b; }
+    :root[data-theme=light] { color-scheme: light; --paper: #f7f9fb; --ink: #142030; --muted: #4a5a6b; --accent: #0d8574; --line: #d6dfe7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.75; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    header, main, footer { width: min(720px, calc(100% - 40px)); margin-inline: auto; }
+    header { display: flex; justify-content: space-between; align-items: baseline; padding-block: 28px; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; }
+    header .back { color: var(--accent); text-decoration: none; }
+    header .back:hover, header .back:focus-visible { text-decoration: underline; }
+    main { padding-block: 36px 56px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4.5vw, 38px); line-height: 1.2; font-weight: normal; }
+    .byline { margin: 0 0 36px; color: var(--muted); font-size: 16px; }
+    h2 { margin: 44px 0 10px; font-size: 22px; font-weight: normal; }
+    p { margin: 0 0 16px; }
+    figure { margin: 28px 0 32px; }
+    figure a { display: block; cursor: zoom-in; }
+    figure img { display: block; width: 100%; height: auto; background: #fff; border-radius: 2px; }
+    figcaption { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    .refs { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+    footer { padding-block: 20px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    @media (max-width: 540px) { body { font-size: 17px; } main { padding-top: 20px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../../research/">&larr; Research</a>
+  </header>
+  <main>
+    <article>
+      <h1>From Genetic Clusters to Biological Pathways in Type 2 Diabetes</h1>
+      <p class="byline">Broad Institute of MIT and Harvard<br>Supervisors: <a href="https://westerman-lab.github.io/">Prof. Kenneth Westerman</a> and <a href="https://www.udlerlab.org/">Prof. Miriam Udler</a></p>
+
+      <p>Genetic clustering of type 2 diabetes (T2D) groups risk variants by how they relate to metabolic traits. The resulting cluster scores are often read as distinct disease mechanisms, and they are increasingly discussed as a route to more precise care. In this project we ask how far those clusters can be trusted, and whether biological pathways give a more stable way to describe the same genetic signal.</p>
+
+      <h2>Approach</h2>
+      <p>The published cluster definitions (<a href="https://doi.org/10.1007/s00125-022-05848-6">Kim et al. 2023</a>, <a href="https://doi.org/10.1038/s41591-024-02865-3">Smith et al. 2024</a>, <a href="https://doi.org/10.1038/s41586-024-07019-6">Suzuki et al. 2024</a>) depend on the population, the traits used for clustering and the clustering method, and their labels have to be interpreted after the fact. Pathway polygenic scores take the opposite route: genes are mapped to annotated pathways ahead of time, so the features stay fixed across studies and can be compared across tissues and diseases.</p>
+      <p>We computed the published cluster scores in All of Us, and built tissue-specific Reactome pathway scores from GTEx v8 expression prediction models. We then used ridge regression to reconstruct each cluster score from the pathway scores. This gives three versions of the same genetic information (original cluster scores, pathway scores, and pathway-reconstructed cluster scores) that we compare throughout.</p>
+
+      <h2>Clusters shift with their definition</h2>
+      <p>The same participant can land in quite different places depending on which study&rsquo;s definition is used (Figure 1).</p>
+      <figure>
+        <a href="fig-cross-study.png" target="_blank" rel="noopener"><img src="fig-cross-study.png" alt="Left: one participant's Obesity and Liver/lipid cluster scores under the Kim, Smith and Suzuki definitions, plotted as three separated points. Right: histograms of the distance between definitions across all participants." width="1400" height="729" loading="lazy"></a>
+        <figcaption>Figure 1. The same participant under three published cluster definitions (left), and how far apart the definitions place participants in general (right).</figcaption>
+      </figure>
+      <p>Even within a single framework, assignments depend on which traits go into the clustering. Removing adiposity traits moved 38.5% of Lipodystrophy 1 participants to another cluster, and 17.5% of participants overall. Removing liver biomarkers reassigned 54.6% (Figure 2).</p>
+      <figure>
+        <a href="fig-within-study.png" target="_blank" rel="noopener"><img src="fig-within-study.png" alt="Left: Sankey diagram showing that after removing adiposity traits, 61.5% of the 9,979 Lipodystrophy 1 participants stay in that cluster while most others move to the Obesity cluster. Right: percentage of held-out participants reassigned when different trait groups are removed or added, from 10.2% without glycemic traits to 58.8% with added C-peptide, SHBG and Lp(a)." width="1394" height="565" loading="lazy"></a>
+        <figcaption>Figure 2. Where Lipodystrophy 1 participants go when adiposity traits are removed (left), and how many participants are reassigned when each trait group is removed or added (right).</figcaption>
+      </figure>
+
+      <h2>Pathways reveal shared biology</h2>
+      <p>Lipodystrophy 1 and 2 are driven by different leading variants, but three of their top five pathways are the same: leptin signaling, signal attenuation and growth hormone receptor signaling, all in visceral adipose tissue (Figure 3).</p>
+      <figure>
+        <a href="overview.png" target="_blank" rel="noopener"><img src="overview.png" alt="Bar charts for the Lipodystrophy 1 and 2 clusters showing their top five variants and their top five pathway scores, with leptin signaling, signal attenuation and growth hormone receptor signaling in visceral adipose shared by both." width="1100" height="791" loading="lazy"></a>
+        <figcaption>Figure 3. Top variants (left) and top pathway&ndash;tissue scores (right) for the two lipodystrophy clusters.</figcaption>
+      </figure>
+
+      <h2>Pathway scores keep clinical signal</h2>
+      <p>Smith et al. showed that adjusting for the lipodystrophy scores narrows the difference in T2D risk between East Asian and European ancestry at the same BMI. The pathway-reconstructed scores reproduce this (Figure 4).</p>
+      <figure>
+        <a href="fig-bmi-t2d.png" target="_blank" rel="noopener"><img src="fig-bmi-t2d.png" alt="Three panels of predicted T2D probability against BMI for five ancestry groups: without adjustment, adjusted for the original lipodystrophy scores, and adjusted for the pathway-reconstructed scores." width="1400" height="430" loading="lazy"></a>
+        <figcaption>Figure 4. Predicted T2D probability across BMI by genetic ancestry, without adjustment and after adjusting for the original or pathway-reconstructed lipodystrophy scores.</figcaption>
+      </figure>
+      <p>Other outcomes are less consistent. Neither the cluster scores nor the pathway scores improved prediction of retinopathy or neuropathy over a clinical baseline. For coronary artery disease, the original and reconstructed scores behaved differently (Figure 5).</p>
+      <figure>
+        <a href="fig-bmi-cad.png" target="_blank" rel="noopener"><img src="fig-bmi-cad.png" alt="Three panels of predicted probability of recorded coronary atherosclerosis against BMI for five ancestry groups: without adjustment, adjusted for the original lipodystrophy scores, and adjusted for the pathway-reconstructed scores." width="1400" height="460" loading="lazy"></a>
+        <figcaption>Figure 5. Predicted probability of recorded coronary atherosclerosis across BMI by genetic ancestry, with the same three adjustments as Figure 4.</figcaption>
+      </figure>
+
+      <h2>Open questions</h2>
+      <p>These results are preliminary and not yet peer reviewed. Two things we would most like to understand better are how much the pathway associations depend on a few individual genes, and what the different coronary artery disease pattern reflects.</p>
+    </article>
+  </main>
+  <footer><a href="../../research/">&larr; Back to Research</a></footer>
+</body>
+</html>

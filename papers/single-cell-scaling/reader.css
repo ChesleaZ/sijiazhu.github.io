@@ -1,0 +1,164 @@
+.pdf-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 1px 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--reader-radius, 8px);
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.pdf-toolbar[hidden] {
+  display: none;
+}
+
+.pdf-controls,
+.pdf-page-number {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pdf-toolbar button,
+.pdf-toolbar input {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font: inherit;
+  text-align: center;
+  min-height: 40px;
+}
+
+.pdf-toolbar button {
+  min-width: 38px;
+  padding-inline: 6px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.pdf-toolbar button:enabled:hover {
+  border-color: var(--line);
+  color: var(--accent);
+}
+
+.pdf-toolbar button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.pdf-toolbar :is(button, input):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.pdf-toolbar input {
+  width: 2.5em;
+  border-color: var(--line);
+}
+
+#pdf-zoom-reset {
+  min-width: 3.5em;
+  font-size: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.pdf-pages {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  overflow-anchor: none;
+}
+
+.pdf-sheet {
+  block-size: var(--pdf-sheet-height);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scroll-margin-top: 52px;
+}
+
+.pdf-page {
+  position: relative;
+  margin-inline: auto;
+  width: var(--pdf-page-width, 100%);
+  aspect-ratio: var(--pdf-page-ratio);
+  background: #fff;
+  color: #202632;
+}
+
+.pdf-page canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pdf-message {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--reader-radius, 8px);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.pdf-page-error {
+  padding: 1rem;
+}
+
+.pdf-fallback {
+  width: 100%;
+  height: 75vh;
+}
+
+/* Text positioning follows the PDF.js TextLayer styles (Apache-2.0). */
+.textLayer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  line-height: 1;
+  text-align: initial;
+  transform-origin: 0 0;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+}
+
+.textLayer :is(span, br) {
+  position: absolute;
+  color: transparent;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0 0;
+}
+
+.textLayer > :not(.markedContent),
+.textLayer .markedContent span:not(.markedContent) {
+  --font-height: 0;
+  --rotate: 0deg;
+  --scale-x: 1;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+
+.textLayer .markedContent {
+  display: contents;
+}
+
+.textLayer ::selection {
+  background: rgb(34 115 207 / 28%);
+}
+
+@media (max-width: 360px) {
+  .pdf-toolbar { padding-inline: 4px; gap: 2px; }
+  .pdf-controls { gap: 2px; }
+  .pdf-toolbar button { min-width: 32px; }
+}
