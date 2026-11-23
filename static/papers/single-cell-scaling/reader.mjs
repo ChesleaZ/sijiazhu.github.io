@@ -14,7 +14,7 @@ async function startReader() {
   const { getDocument, GlobalWorkerOptions, TextLayer } = await import('./pdfjs/pdf.min.mjs');
   GlobalWorkerOptions.workerSrc = new URL('./pdfjs/pdf.worker.min.mjs', import.meta.url).href;
   const pdf = await getDocument({
-    url: new URL('./preprint.pdf', import.meta.url).href,
+    url: new URL('./preprint.pdf?v=8063255', import.meta.url).href,
     isEvalSupported: false,
   }).promise;
   const firstPage = await pdf.getPage(1);
